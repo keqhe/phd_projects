@@ -1,0 +1,22 @@
+\subsection{Implications}
+
+
+A subset of our findings highlight 
+problems with the firm\-ware on OpenFlow switches:
+e.g., rule insertion latencies are 3ms with \BroadcomOne, which is significantly higher than the 
+update rate that TCAM hardware natively supports~\cite{estan:private}. 
+We believe near term work will reduce such issues, as indicated by
+improved latencies in \BroadcomThree. 
+However, given that software will continue to bridge 
+control and data planes in SDN switches, we remain skeptical whether 
+latencies will ever reach what hardware can natively support.
+
+
+Our measurements also reveal root causes of latency that appear to be
+fundamentally entrenched in hardware design: e.g., rules 
+must be organized in the TCAM in a priority order for correct and efficient matching; 
+also, \packetin, \flowmod, and \packetout messages must contend for limited
+bus bandwidth between a switch's CPU and ASIC. Unless the hardware
+significantly changes, we believe the latencies we identify
+will continue to manifest in next generation switches.  
+

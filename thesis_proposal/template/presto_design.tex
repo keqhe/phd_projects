@@ -1,0 +1,235 @@
+\subsection{Design}
+\label{sec:presto-design}
+
+This section presents the design of Presto by detailing
+the sender, the receiver, and how the network
+adapts in the case of failures and asymmetry.
+
+\begin{figure}[!t]
+        \centering
+  \includegraphics[width=0.55\textwidth,height=0.17\textwidth]{./figures/presto/macro/macro_evaluation_topology_refined.pdf}
+        \caption{Our testbed: 2-tier Clos network with 16 hosts.}
+        \label{macro_evaluation_topology}
+\end{figure}
+
+\subsubsection{Sender}
+
+
+\tightparagraph{Global Load Balancing at the Network Edge}
+In Presto, a centralized controller is employed to collect the
+network topology and disseminate corresponding load balancing information to the edge vSwitches. 
+The goal of this design is to ensure the vSwitches, as a whole, can load balance the network
+in an even fashion, but without requiring an individual vSwitch to have detailed information
+about the network topology, updated traffic matrices or strict coordination amongst senders.
+ At a high level, the controller partitions
+the network into a set of multiple spanning trees. Then, the controller
+assigns each vSwitch a unique forwarding label in each spanning tree.
+By having the vSwitches partition traffic over these spanning trees in a fine-grained
+manner, the network can load balance traffic in a near-optimal fashion.
+
+The process of creating spanning trees is made simple by employing multi-stage Clos
+networks commonly found in datacenters. For example, in a 2-tier Clos network
+with $\nu$ spine switches, the controller can easily allocate $\nu$ disjoint spanning
+trees by having each spanning tree route through a unique spine switch. Figure~\ref{macro_evaluation_topology}
+shows an example with four spine switches and four corresponding disjoint spanning trees.
+When there are $\gamma$ links between each spine and leaf switch in a 2-tier Clos network,
+the controller can allocate $\gamma$ spanning trees per spine switch.
+Note that 2-tier Clos networks are scalable because they easily support a large number
+of hosts with only a few high density spine switches~\cite{alizadeh2014conga}.
+In general, the controller ensures links in the network are equally covered
+by the allocated spanning trees.
+Once the spanning trees are created, the controller assigns a unique forwarding label
+for each vSwitch in every spanning tree and installs them into the network.
+Forwarding labels can be implemented in a variety of ways using
+technologies commonly deployed to forward on labels,
+such as MPLS~\cite{casado2012fabric}, VXLAN~\cite{alizadeh2014conga,koponen2014network}, 
+or IP encapsulation~\cite{cao2013drb}. 
+In Presto,
+label switching is implemented with shadow MACs~\cite{shadow-mac}. 
+Shadow MACs implement label-switching for commodity Ethernet by using the 
+destination MAC address as an opaque forwarding label that can easily be 
+installed in L2 tables. 
+Each vSwitch is assigned one shadow MAC per spanning tree.
+Note Shadow MACs are extremely scalable on
+existing chipsets because they utilize the large L2 forwarding table. For example,
+Trident II-based switches~\cite{bcm-smart-table} have 288k L2 table entries and 
+thus 8-way multipathing (\ie{}, each vSwitch has 8 disjoint spanning trees)
+can scale up to 36,000 physical servers.
+
+
+\tightparagraph{Load Balancing at the Sender}
+After the controller installs the shadow MAC forwarding rules into the network, it creates a mapping
+from each physical destination MAC address to a list of corresponding shadow MAC addresses. These mappings
+provide a way to send traffic to a specific destination over different spanning trees. 
+The mappings are pushed from the controller to each vSwitch in the network, either on-demand or preemptively.
+In Presto, the vSwitch on the sender monitors outgoing traffic (\ie{}, maintains a per-flow counter in the datapath) 
+and rewrites the destination MAC
+address with one of the corresponding shadow MAC addresses.
+The vSwitch assigns the same shadow MAC address to all consecutive segments until the 64 KB limit is reached.
+In order to load balance the network effectively, the vSwitch 
+iterates through destination shadow MAC addresses in a round-robin fashion. 
+This allows the edge vSwitch to load balance over the network in a very fine-grained fashion.
+
+Sending each 64 KB worth of flowcells over a different path in the network can cause reordering and must
+be carefully addressed.
+To assist with reordering at the receiver (Presto's mechanisms for combatting reordering are detailed in the next section), 
+the sender also includes a sequentially increasing {\em flowcell ID} into each segment.
+For example, 
+in our setup the controller installs forwarding rules solely on the destination MAC address.
+ARP is handled in a centralized manner, so
+the source MAC address can be used to hold the flowcell ID. Other options are possible, 
+\eg{}, some schemes include load balancing metadata in the reserved bits of the 
+VXLAN header~\cite{presto-nvo3}.\footnote{In our
+implementation, TCP options hold the flowcell ID for simplicity and ease of debugging.}
+Note that since the flowcell ID and the shadow MAC address are modified before a segment is handed to the NIC,
+the TSO algorithm in the NIC replicates these values to all derived MTU-sized packets.
+
+\begin{algorithm}[t]
+\caption{Pseudo-code of Presto GRO {\tt flush} function}
+\label{alg:gro}
+\begin{algorithmic}[1]
+%\REQUIRE $n \geq 0 \vee x \neq 0$
+%\ENSURE $y = x^n$
+\FOR{each flow f}
+\FOR{$S \in f.{\tt segment\_list}$}
+%\STATE f = getFlow(S)
+\IF{f.lastFlowcell == getFlowcell(S)}
+\STATE f.expSeq $\leftarrow$ max(f.expSeq, S.endSeq)
+\STATE pushUp(S)
+\ELSIF{getFlowcell(S) $>$ f.lastFlowcell}
+\IF{f.expSeq == S.startSeq}
+\STATE f.lastFlowcell $\leftarrow$ getFlowcell(S)
+\STATE f.expSeq $\leftarrow$ S.endSeq
+\STATE pushUp(S)
+\ELSIF{timeout(S)}
+\STATE f.lastFlowcell $\leftarrow$ getFlowcell(S)
+\STATE f.expSeq $\leftarrow$ S.endSeq
+\STATE pushUp(S)
+\ENDIF
+\ELSE
+\STATE pushUp(S)
+\ENDIF
+\ENDFOR
+\ENDFOR
+\end{algorithmic}
+\end{algorithm}
+
+\subsubsection{Receiver}
+The main challenge at the receiver is dealing with reordering that can occur when different flowcells
+are sent over different paths. The high level goal of our receiver implementation is
+to mitigate the effects of the small segment flooding problem by (i) not so aggressively pushing
+up segments if they cannot be merged with an incoming packet and (ii) ensuring that segments
+pushed up are delivered in order.
+
+\tightparagraph{Mitigating Small Segment Flooding} Let's use Figure~\ref{gro-break} as a motivating example 
+on how to combat the small segment flooding problem. Say a polling event has occurred, and the driver retrieves
+9 packets from the NIC ($P_0$-$P_8$). The driver calls the GRO handler, which tries to merge consecutive packets
+into larger segments. The first three packets ($P_0$-$P_2$) are merged into a segment, call it $S_1$ (note: in practice
+$S_1$ already contains in order packets received before $P_0$).
+When $P_5$ arrives, a new segment $S_2$, containing $P_5$, should be created. Instead of pushing up $S_1$ (as is done currently),
+both segments should be kept.
+Then, when $P_3$ is received, it can be merged into $S_1$. Similarly, $P_6$ can be merged into $S_2$. This process
+can continue until $P_4$ is merged into $S_1$. At this point, the gap between the original out-of-order reception ($P_2$-$P_5$)
+ has been filled, and $S_1$ can be pushed up and $S_2$ can continue to grow. This means the size of the segments being pushed up is increased,
+and TCP is not exposed to reordering.
+
+The current default GRO algorithm works as follows. An interrupt by the NIC causes the driver to poll
+(multiple) packets from the NIC's ring buffer. The driver calls the GRO handler on the received batch
+of packets. GRO keeps a simple doubly linked list, called {\tt gro\_list}, that contains 
+segments, with a flow having at most one segment in the list. When packets for a flow are
+received in-order, each packet can be merged into the flow's preexisting segment. When a packet
+cannot be merged, such as with reordering, the corresponding segment is pushed up (ejected from the
+linked list and pushed up the networking stack) and a new segment is created from the packet. 
+This process is continued until all packets in the batch are serviced. At the end 
+of the polling event, a {\tt flush} function is called that pushes up all segments in the
+{\tt gro\_list}.
+
+Our GRO algorithm makes the following high-level changes. First, multiple segments can be
+kept per flow, and each flow contains a doubly linked list of its segments (called {\tt segment\_list}). 
+To ensure the merging process is fast each linked list is kept in a hash table (keyed on flow).
+When an incoming packet cannot be merged with any existing segment, the existing
+segments are kept and a new segment is created from the packet.
+New segments are added to the head of the linked list so that merging subsequent packets is typically $\mathcal{O}(1)$.
+When the merging is completed over all packets in the batch, the {\tt flush} function is called. 
+The {\tt flush} function decides whether to push segments up or to keep them. Segments may 
+be kept so reordered packets still in flight have enough time to arrive and can then be placed in order
+before being pushed up. 
+Reordering can cause the linked lists to become slightly out-of-order, so
+at the beginning of {\tt flush} an insertion sort is run to help easily decide if segments are in order.
+
+The pseudo-code of our {\tt flush} function is presented in Algorithm~\ref{alg:gro}.
+For each flow, our algorithm keeps track of the next expected in-order
+sequence number ({\tt f.expSeq}) and the corresponding flowcell ID
+of the most recently received in-order sequence number ({\tt f.lastFlowcell}).
+The {\tt flush} function iterates over 
+the sorted segments ($S$), from lowest sequence number to highest sequence number, in the {\tt segment\_list} (line 2).
+The rest of the code is presented in the subsections that follow.
+
+
+\tightparagraph{How to Differentiate Loss from Reordering?} 
+In the case of no loss or reordering, our algorithm keeps pushing up segments and updating state. Lines 3-5
+deal with segments from the same flowcell ID, so we just need to update {\tt f.expSeq} each time. Lines 
+6-10 represent the case when the current flowcell ID is fully received and we start to receive the
+next flowcell ID. The problem, however, is when there is 
+a gap that appears between the sequence numbers of the segments. When a gap is encountered,
+it isn't clear if it is caused from reordering or from loss. If the gap is due to reordering,
+our algorithm should be conservative and try to wait to receive the packets that "fill in the gap" 
+before pushing segments up to TCP. If the gap is due to loss, however, then we should push up the 
+segments immediately so that TCP can react to the loss as quickly as possible.
+
+To solve this problem, we leverage the fact that all packets carrying the same flowcell ID traverse the 
+same path and should be in order.
+This means incoming sequence numbers can be monitored to check for
+gaps. A sequence number gap within the same flowcell ID is assumed to be a loss, and not reordering,
+so those packets are pushed up immediately (lines 3-5).
+Note that because a flowcell consists of many packets (a 64KB flowcell consists
+of roughly 42 1500 byte packets), when there is a loss, it is likely that it occurs within flowcell boundaries. 
+The corner case, when a gap occurs on the flowcell boundary, leads us to the next design question.
+
+\tightparagraph{How to Handle Gaps at Flowcell Boundaries?}
+When a gap is detected in sequence numbers at flowcell boundaries, it is not clear if the gap is due
+to loss or reordering. Therefore, the segment should be held long enough to
+handle reasonable amounts of reordering, but not so long that TCP cannot respond
+to loss promptly. Previous approaches that deal with reordering typically employ a large static
+timeout (10ms)~\cite{cao2013drb}. 
+Setting the timeout artificially high can handle reordering, but hinders TCP when the gap is
+due to loss. 
+Setting a lower timeout is difficult because it depends on many dynamic factors such as delays between
+segments at the sender, amount of network congestion in different paths, and traffic patterns (multiple flows 
+received at the same NIC affect inter-arrival time). 
+As a result, we devise an adaptive timeout scheme, which monitors recent reordering events and sets a dynamic timeout value accordingly.
+Presto tracks cases when there is reordering, but no loss, on flowcell boundaries and keeps an exponentially-weighted
+moving average ($EWMA$) over these times. Presto then applies a timeout of $\alpha * EWMA$ to a segment when a gap is 
+detected on flowcell boundaries. 
+Here $\alpha$ is an empirical parameter that allows for timeouts to grow. As a further optimization, if a segment
+has timed out, but a packet has been merged into that segment in the last $\frac{1}{\beta} * EWMA$ time interval, then 
+the segment is still held in hopes of preventing reordering. We find $\alpha$ and $\beta$
+work over a wide range of parameters and set both of them to 2 in our experiments. A timeout firing is dealt with in lines 11-15.
+
+
+\subsubsection{Failure Handling and Asymmetry}
+When failures occur, Presto relies on the controller to update the forwarding
+behavior of the affected vSwitches. The controller can simply prune the spanning
+trees that are affected by the failure, or more generally enforce a weighted
+scheduling algorithm over the spanning trees.
+Weighting allows for Presto to evenly distribute traffic over an asymmetric topology.
+Path weights can be implemented in a simple fashion by duplicating shadow MACs used in
+the vSwitch's round robin scheduling algorithm.
+For example, assume we have three paths in total ($p_1$, $p_2$ and $p_3$) and their updated weights are 0.25, 0.5 and 0.25 respectively.
+Then the controller can send the sequence of $p_1$, $p_2$, $p_3$, $p_2$ to the vSwitch, which
+can then schedule traffic over this sequence in a round robin fashion to realize the new path weights.
+This way of approximating path weights in the face of network
+asymmetry is similar to WCMP~\cite{zhou2014wcmp}, but instead of having to change switch firmware and use
+scarce on-chip SRAM/TCAM entries, we can push the weighted load balancing entirely to the network edge.
+
+As an added optimization, Presto can leverage any fast failover features that 
+the network supports, such as BGP fast external failover, MPLS fast reroute, or OpenFlow failover groups. Fast failover detects port failure and can move corresponding traffic
+to a predetermined backup port.
+\footnote{Hardware failover latency ranges from several to 
+tens of milliseconds}
+This ensures traffic is moved away from the failure rapidly and the network
+remains connected when redundant links are available.
+Moving to backup links causes imbalance in the network,
+so Presto relies on the controller learning of the network change, computing weighted multipath schedules, and
+disseminating the schedules to the vSwitches. 
+

@@ -1,0 +1,798 @@
+@inproceedings{paxson1997end,
+  title={{End-to-end Internet Packet Dynamics}},
+  author={Paxson, Vern},
+  booktitle={ACM SIGCOMM Computer Communication Review},
+  year={1997},
+}
+
+@misc{amazon-aws,
+  Howpublished = {\url{https://aws.amazon.com/}},
+  key = {{Amazon Web Services}},
+  Title = {{Amazon Web Services}},
+}
+
+@misc{amazon-route53,
+  Howpublished = {\url{https://aws.amazon.com/route53/}},
+  key = {{Amazon Route 53}},
+  Title = {{Amazon Route 53}},
+}
+
+@misc{microsoft-azure,
+  Howpublished = {\url{https://azure.microsoft.com/en-us/?b=16.33}},
+  key = {{Microsoft Azure}},
+  Title = {{Microsoft Azure}},
+}
+
+@misc{ibm-softlayer,
+  Howpublished = {\url{http://www.softlayer.com/}},
+  key = {{IBM SoftLayer}},
+  Title = {{IBM SoftLayer}},
+}
+
+@misc{ibm-bluemix,
+  Howpublished = {\url{http://www.ibm.com/cloud-computing/bluemix/}},
+  key = {{IBM Bluemix}},
+  Title = {{IBM Bluemix}},
+}
+
+@misc{google-compute,
+  Howpublished = {\url{https://cloud.google.com/compute/}},
+  key = {{Google Compute Engine}},
+  Title = {{Google Compute Engine}},
+}
+
+@misc{cloud-market2020,
+  Howpublished = {\url{http://www.cloudcomputingmarket.com/}},
+  key = {{Cloud Computing Market}},
+  Title = {{Cloud Computing Market}},
+}
+
+@inproceedings{fattree,
+  title={A scalable, commodity data center network architecture},
+  author={Al-Fares, Mohammad and Loukissas, Alexander and Vahdat, Amin},
+  booktitle={SIGCOMM},
+  year={2008},
+}
+
+@inproceedings{vl2,
+  title={VL2: a scalable and flexible data center network},
+  author={Greenberg, Albert and Hamilton, James R and Jain, Navendu and Kandula, Srikanth and Kim, Changhoon and Lahiri, Parantap and Maltz, David A and Patel, Parveen and Sengupta, Sudipta},
+  booktitle={SIGCOMM},
+  year={2009},
+}
+
+@inproceedings{guo2009bcube,
+  title={BCube: a high performance, server-centric network architecture for modular data centers},
+  author={Guo, Chuanxiong and Lu, Guohan and Li, Dan and Wu, Haitao and Zhang, Xuan and Shi, Yunfeng and Tian, Chen and Zhang, Yongguang and Lu, Songwu},
+  booktitle={SIGCOMM},
+  year={2009},
+}
+
+@inproceedings{guo2008dcell,
+  title={Dcell: a scalable and fault-tolerant network structure for data centers},
+  author={Guo, Chuanxiong and Wu, Haitao and Tan, Kun and Shi, Lei and Zhang, Yongguang and Lu, Songwu},
+  booktitle={SIGCOMM},
+  year={2008},
+}
+
+@inproceedings{liu2013f10,
+  title={F10: A Fault-Tolerant Engineered Network.},
+  author={Liu, Vincent and Halperin, Daniel and Krishnamurthy, Arvind and Anderson, Thomas E},
+  booktitle={NSDI},
+  year={2013}
+}
+
+@inproceedings{niranjan2009portland,
+  title={Portland: a scalable fault-tolerant layer 2 data center network fabric},
+  author={Niranjan Mysore, Radhika and Pamboris, Andreas and Farrington, Nathan and Huang, Nelson and Miri, Pardis and Radhakrishnan, Sivasankar and Subramanya, Vikram and Vahdat, Amin},
+  booktitle={SIGCOMM},
+  year={2009},
+}
+
+@techreport{mahalingam2014vxlan,
+  title={Virtual extensible local area network (VXLAN): A framework for overlaying virtualized layer 2 networks over layer 3 networks},
+  author={Mahalingam, Mallik and Dutt, D and Duda, Kenneth and Agarwal, Puneet and Kreeger, Lawrence and Sridhar, T and Bursell, Mike and Wright, Chris},
+  year={2014}
+}
+
+@article{sridharan2011nvgre,
+  title={NVGRE: Network virtualization using generic routing encapsulation},
+  author={Sridharan, M and Greenberg, A and Venkataramiah, N and Wang, Y and Duda, K and Ganga, I and Lin, G and Pearson, M and Thaler, P and Tumuluri, C},
+  journal={IETF draft},
+  year={2011}
+}
+
+@inproceedings{pfaff2009extending,
+  title={Extending Networking into the Virtualization Layer.},
+  author={Pfaff, Ben and Pettit, Justin and Amidon, Keith and Casado, Martin and Koponen, Teemu and Shenker, Scott},
+  booktitle={Hotnets},
+  year={2009}
+}
+
+@inproceedings{pfaff2015design,
+  title={The design and implementation of Open vSwitch},
+  author={Pfaff, Ben and Pettit, Justin and Koponen, Teemu and Jackson, Ethan J and Zhou, Andy and Rajahalme, Jarno and Gross, Jesse and Wang, Alex and Stringer, Jonathan and Shelar, Pravin and others},
+  booktitle={NSDI},
+  year={2015}
+}
+
+@inproceedings{koponen2014network,
+  title={Network virtualization in multi-tenant datacenters},
+  author={Koponen, Teemu and Amidon, Keith and Balland, Peter and Casado, Mart{\'\i}n and Chanda, Anupam and Fulton, Bryan and Ganichev, Igor and Gross, Jesse and Gude, Natasha and Ingram, Paul and others},
+  booktitle={NSDI},
+  year={2014}
+}
+
+@inproceedings{jain2013b4,
+  title={B4: Experience with a globally-deployed software defined WAN},
+  author={Jain, Sushant and Kumar, Alok and Mandal, Subhasree and Ong, Joon and Poutievski, Leon and Singh, Arjun and Venkata, Subbaiah and Wanderer, Jim and Zhou, Junlan and Zhu, Min and others},
+  booktitle={SIGCOMM},
+  year={2013},
+}
+
+@inproceedings{hong2013achieving,
+  title={Achieving high utilization with software-driven WAN},
+  author={Hong, Chi-Yao and Kandula, Srikanth and Mahajan, Ratul and Zhang, Ming and Gill, Vijay and Nanduri, Mohan and Wattenhofer, Roger},
+  booktitle={SIGCOMM},
+  year={2013},
+}
+
+@inproceedings{kumar2015bwe,
+  title={BwE: Flexible, Hierarchical Bandwidth Allocation for WAN Distributed Computing},
+  author={Kumar, Alok and Jain, Sushant and Naik, Uday and Raghuraman, Anand and Carlin, Bj{\"o}rn and Amarandei-Stavila, Mihai and Robin, Mathieu and Siganporia, Aspi and Stuart, Stephen and Vahdat, Amin},
+  booktitle={SIGCOMM},
+  year={2015},
+}
+
+@inproceedings{al2010hedera,
+  title={Hedera: Dynamic Flow Scheduling for Data Center Networks.},
+  author={Al-Fares, Mohammad and Radhakrishnan, Sivasankar and Raghavan, Barath and Huang, Nelson and Vahdat, Amin},
+  booktitle={NSDI},
+  year={2010}
+}
+
+@inproceedings{benson2011microte,
+  title={Microte: The case for fine-grained traffic engineering in data centers},
+  author={Benson, Theophilus and Anand, Ashok and Akella, Aditya and Zhang, Ming},
+  booktitle={CoNEXT},
+  year={2011},
+}
+
+@inproceedings{rasley2014planck,
+  title={Planck: millisecond-scale monitoring and control for commodity networks},
+  author={Rasley, Jeff and Stephens, Brent and Dixon, Colin and Rozner, Eric and Felter, Wes and Agarwal, Kanak and Carter, John and Fonseca, Rodrigo},
+  booktitle={SIGCOMM},
+  year={2014},
+}
+
+@inproceedings{alizadeh2014conga,
+  title={CONGA: Distributed congestion-aware load balancing for datacenters},
+  author={Alizadeh, Mohammad and Edsall, Tom and Dharmapurikar, Sarang and Vaidyanathan, Ramanan and Chu, Kevin and Fingerhut, Andy and Matus, Francis and Pan, Rong and Yadav, Navindra and Varghese, George and others},
+  booktitle={SIGCOMM},
+  year={2014},
+}
+
+@inproceedings{alizadeh2011dctcp,
+  title={Data center tcp (dctcp)},
+  author={Alizadeh, Mohammad and Greenberg, Albert and Maltz, David A and Padhye, Jitendra and Patel, Parveen and Prabhakar, Balaji and Sengupta, Sudipta and Sridharan, Murari},
+  booktitle={SIGCOMM},
+  year={2011},
+}
+
+@inproceedings{alizadeh2012hull,
+  title={Less is more: trading a little bandwidth for ultra-low latency in the data center},
+  author={Alizadeh, Mohammad and Kabbani, Abdul and Edsall, Tom and Prabhakar, Balaji and Vahdat, Amin and Yasuda, Masato},
+  booktitle={NSDI},
+  year={2012},
+}
+
+@inproceedings{mittal2015timely,
+  title={TIMELY: RTT-based congestion control for the datacenter},
+  author={Mittal, Radhika and Dukkipati, Nandita and Blem, Emily and Wassel, Hassan and Ghobadi, Monia and Vahdat, Amin and Wang, Yaogong and Wetherall, David and Zats, David and others},
+  booktitle={SIGCOMM},
+  year={2015},
+}
+
+@inproceedings{zhu2015rdma,
+  title={Congestion Control for Large-Scale RDMA Deployments},
+  author={Zhu, Yibo and Eran, Haggai and Firestone, Daniel and Guo, Chuanxiong and Lipshteyn, Marina and Liron, Yehonatan and Padhye, Jitendra and Raindel, Shachar and Yahia, Mohamad Haj and Zhang, Ming},
+  booktitle={SIGCOMM},
+  year={2015},
+}
+
+@inproceedings{flach2013reducing,
+  title={Reducing web latency: the virtue of gentle aggression},
+  author={Flach, Tobias and Dukkipati, Nandita and Terzis, Andreas and Raghavan, Barath and Cardwell, Neal and Cheng, Yuchung and Jain, Ankur and Hao, Shuai and Katz-Bassett, Ethan and Govindan, Ramesh},
+  booktitle={SIGCOMM},
+  year={2013},
+}
+
+@inproceedings{he2013next,
+  title={Next stop, the cloud: Understanding modern web service deployment in EC2 and Azure},
+  author={He, Keqiang and Fisher, Alexis and Wang, Liang and Gember, Aaron and Akella, Aditya and Ristenpart, Thomas},
+  booktitle={IMC},
+  year={2013},
+}
+
+@inproceedings{dc-mptcp,
+        Author = {Raiciu, Costin and Barre, Sebastien and Pluntke, Christopher and Greenhalgh, Adam and Wischik, Damon and Handley, Mark},
+        Booktitle = {SIGCOMM},
+        Title = {Improving Datacenter Performance and Robustness with Multipath TCP},
+        Year = {2011}
+}
+
+@inproceedings{zats2012detail,
+  title={DeTail: Reducing the Flow Completion Time Tail in Datacenter Networks},
+  author={Zats, David and Das, Tathagata and Mohan, Prashanth and Borthakur, Dhruba and Katz, Randy},
+  booktitle={SIGCOMM},
+  year={2012},
+}
+
+@inproceedings{packetspray,
+  title={On the Impact of Packet Spraying in Data Center Networks},
+  author={Dixit, Advait and Prakash, Pawan and Hu, Y Charlie and Kompella, Ramana Rao},
+  booktitle={INFOCOM},
+  year={2013},
+}
+
+@inproceedings{cao2013drb,
+  title={Per-packet Load-balanced, Low-latency Routing for Clos-based Data Center Networks},
+  author={Cao, Jiaxin and Xia, Rui and Yang, Pengkun and Guo, Chuanxiong and Lu, Guohan and Yuan, Lihua and Zheng, Yixin and Wu, Haitao and Xiong, Yongqiang and Maltz, Dave},
+  booktitle={CoNEXT},
+  year={2013},
+}
+
+@inproceedings{zhou2014wcmp,
+  title={WCMP: Weighted Cost Multipathing for Improved Fairness in Data Centers},
+  author={Zhou, Junlan and Tewari, Malveeka and Zhu, Min and Kabbani, Abdul and Poutievski, Leon and Singh, Arjun and Vahdat, Amin},
+  booktitle={EuroSys},
+  year={2014},
+}
+
+@book{juniper-vcf,
+  title={Juniper QFX5100 Series: A Comprehensive Guide to Building Next-Generation Networks},
+  author={Douglas Richard Hanks},
+  year={2014},
+  publisher={" O'Reilly Media, Inc."}
+}
+
+@inproceedings{flowlet,
+  title={Harnessing TCPs Burstiness using Flowlet Switching},
+  author={Sinha, Shan and Kandula, Srikanth and Katabi, Dina},
+  booktitle={HotNets},
+  year={2004}
+}
+
+@inproceedings{he2015presto,
+  title={Presto: Edge-based Load Balancing for Fast Datacenter Networks},
+  author={He, Keqiang and Rozner, Eric and Agarwal, Kanak and Felter, Wes and Carter, John and Akella, Aditya},
+  booktitle={SIGCOMM},
+  year={2015},
+}
+
+@inproceedings{heller2010elastictree,
+  title={ElasticTree: Saving Energy in Data Center Networks.},
+  author={Heller, Brandon and Seetharaman, Srinivasan and Mahadevan, Priya and Yiakoumis, Yiannis and Sharma, Puneet and Banerjee, Sujata and McKeown, Nick},
+  booktitle={NSDI},
+  year={2010}
+}
+
+@inproceedings{liu2013zupdate,
+  title={zUpdate: Updating data center networks with zero loss},
+  author={Liu, Hongqiang Harry and Wu, Xin and Zhang, Ming and Yuan, Lihua and Wattenhofer, Roger and Maltz, David},
+  booktitle={SIGCOMM},
+  year={2013},
+}
+
+@inproceedings{koponen2010onix,
+  title={Onix: A Distributed Control Platform for Large-scale Production Networks.},
+  author={Koponen, Teemu and Casado, Martin and Gude, Natasha and Stribling, Jeremy and Poutievski, Leon and Zhu, Min and Ramanathan, Rajiv and Iwata, Yuichiro and Inoue, Hiroaki and Hama, Takayuki and others},
+  booktitle={OSDI},
+  year={2010}
+}
+
+@inproceedings{he2015measuring,
+  title={Measuring control plane latency in SDN-enabled switches},
+  author={He, Keqiang and Khalid, Junaid and Gember-Jacobson, Aaron and Das, Sourav and Prakash, Chaithan and Akella, Aditya and Li, Li Erran and Thottan, Marina},
+  booktitle={Proceedings of the 1st ACM SIGCOMM Symposium on Software Defined Networking Research},
+  year={2015},
+}
+
+@inproceedings{he2015latency,
+ author = {He, Keqiang and Khalid, Junaid and Das, Sourav and Gember-Jacobson, Aaron and Prakash, Chaithan and Akella, Aditya and Li, Li Erran and Thottan, Marina},
+ title = {Latency in Software Defined Networks: Measurements and Mitigation Techniques},
+ booktitle = {SIGMETRICS},
+ year = {2015},
+}
+
+@article{wu2013ictcp,
+  title={ICTCP: incast congestion control for TCP in data-center networks},
+  author={Wu, Haitao and Feng, Zhenqian and Guo, Chuanxiong and Zhang, Yongguang},
+  journal={IEEE/ACM Transactions on Networking (TON)},
+  year={2013},
+}
+
+@misc{wiredarticle,
+  author = {Robert McMillan},
+  title = {Amazon's Secretive Cloud Carries 1 Percent of the Internet},
+  key = {Amazon's Secretive Cloud Carries 1 Percent of the Internet},
+  year = 2012,
+  howpublished = {\url{http://www.wired.com/wiredenterprise/2012/04/amazon-cloud/}},
+}
+
+@misc{AWSoutage2011,
+ title = {EC2 US-East Disruption},
+ key = {EC2 US-East Disruption},
+ howpublished = {\url{http://aws.amazon.com/message/65648/}}
+}
+
+@misc{AWSoutageOct2012,
+ title = {EC2 US-East Service Event},
+ key = {EC2 US-East Service Event},
+ howpublished = {\url{https://aws.amazon.com/message/680342/}}
+} 
+
+@misc{wsjarticle,
+  author = {J. Schectman},
+  title = {Netflix Amazon Outage Shows Any Company Can Fail},
+  key = {Netflix Amazon Outage Shows Any Company Can Fail},
+  Year = {2012},
+  howpublished = {\url{http://blogs.wsj.com/cio/2012/12/27/netflix-amazon-outage-shows-any-company-can-fail/}}
+}
+
+@misc{netflixoutage,
+ title={Post-Mortem of October 22, 2012 AWS Degradation},
+ key = {Post-Mortem of October 22, 2012 AWS Degradation},
+ author = {J. Edberg},
+ howpublished = {\url{http://techblog.netflix.com/2012/10/post-mortem-of-october-222012-aws.html}}
+}
+
+@inproceedings{li2010cloudcmp,
+  title={CloudCmp: comparing public cloud providers},
+  author={Li, Ang and Yang, Xiaowei and Kandula, Srikanth and Zhang, Ming},
+  booktitle={IMC},
+  year={2010},
+}
+
+@inproceedings{li2011cloudprophet,
+  title={CloudProphet: towards application performance prediction in cloud},
+  author={Li, Ang and Zong, Xuanran and Kandula, Srikanth and Yang, Xiaowei and Zhang, Ming},
+  booktitle={ACM SIGCOMM Computer Communication Review},
+  year={2011},
+}
+
+@inproceedings{drago2012inside,
+  title={Inside dropbox: understanding personal cloud storage services},
+  author={Drago, Idilio and Mellia, Marco and M Munafo, Maurizio and Sperotto, Anna and Sadre, Ramin and Pras, Aiko},
+  booktitle={IMC},
+  year={2012},
+}
+
+@misc{deepfield,
+    author = {Craig Labovitz},
+    title = {How Big is Amazon's Cloud?},
+    key = {How Big is Amazon's Cloud?},
+    year = 2012,
+    howpublished = {\url{http://deepfield.net/blog}}
+}
+
+@misc{alex_topdomains,
+    title = {Alexa Top Domains},
+    key = {Alexa Top Domains},
+    howpublished = {\url{http://alexa.com/topsites}}
+}
+
+@inproceedings{ristenpart2009hey,
+  title={Hey, you, get off of my cloud: exploring information leakage in third-party compute clouds},
+  author={Ristenpart, Thomas and Tromer, Eran and Shacham, Hovav and Savage, Stefan},
+  booktitle={Proceedings of the 16th ACM conference on Computer and communications security},
+  year={2009},
+}
+
+@misc{planetlab,
+    title = {PlanetLab},
+    key = {PlanetLab},
+    howpublished = {\url{http://planet-lab.org/}}
+}
+
+@inproceedings{judd2015dctcp,
+ author = {Judd, Glenn},
+ title = {Attaining the Promise and Avoiding the Pitfalls of TCP in the Datacenter},
+ booktitle = {NSDI},
+ year = {2015},
+}
+
+@inproceedings{tcp-bolt,
+  title={Practical DCB for improved data center networks},
+  author={Stephens, Brent and Cox, Alan L and Singla, Anubhav and Carter, Jenny and Dixon, Colin and Felter, Wes},
+  booktitle={INFOCOM},
+  year={2014},
+}
+
+@inproceedings{kabbani2014flowbender,
+  title={FlowBender: Flow-level Adaptive Routing for Improved Latency and Throughput in Datacenter Networks},
+  author={Kabbani, Abdul and Vamanan, Balajee and Hasan, Jahangir and Duchene, Fabien},
+  booktitle={CoNEXT},
+  year={2014},
+}
+
+@inproceedings{perry2014fastpass,
+  title={Fastpass: A centralized zero-queue datacenter network},
+  author={Perry, Jonathan and Ousterhout, Amy and Balakrishnan, Hari and Shah, Devavrat and Fugal, Hans},
+  booktitle={SIGCOMM},
+  year={2014},
+}
+
+@inproceedings{chen2009incast,
+  title={Understanding TCP incast throughput collapse in datacenter networks},
+  author={Chen, Yanpei and Griffith, Rean and Liu, Junda and Katz, Randy H and Joseph, Anthony D},
+  booktitle={Proceedings of the 1st ACM workshop on Research on enterprise networking},
+  year={2009},
+}
+
+@inproceedings{vasudevan2009safe,
+  title={Safe and effective fine-grained TCP retransmissions for datacenter communication},
+  author={Vasudevan, Vijay and Phanishayee, Amar and Shah, Hiral and Krevat, Elie and Andersen, David G and Ganger, Gregory R and Gibson, Garth A and Mueller, Brian},
+  booktitle={SIGCOMM},
+  year={2009},
+}
+
+@inproceedings{lee2015accurate,
+  title={Accurate latency-based congestion feedback for datacenters},
+  author={Lee, Changhyun and Park, Chunjong and Jang, Keon and Moon, Sue and Han, Dongsu},
+  booktitle={USENIX ATC},
+  volume={15},
+  year={2015}
+}
+
+@inproceedings{curtis2011devoflow,
+  title={DevoFlow: Scaling flow management for high-performance networks},
+  author={Curtis, Andrew R and Mogul, Jeffrey C and Tourrilhes, Jean and Yalagandula, Praveen and Sharma, Puneet and Banerjee, Sujata},
+  booktitle={SIGCOMM},
+  year={2011},
+}
+
+@inproceedings{rotsos2012oflops,
+  title={OFLOPS: An open framework for OpenFlow switch evaluation},
+  author={Rotsos, Charalampos and Sarrar, Nadi and Uhlig, Steve and Sherwood, Rob and Moore, Andrew W},
+  booktitle={Passive and Active Measurement},
+  year={2012},
+}
+
+@inproceedings{huang2013high,
+  title={High-fidelity switch models for software-defined network emulation},
+  author={Huang, Danny Yuxing and Yocum, Kenneth and Snoeren, Alex C},
+  booktitle={Proceedings of the second ACM SIGCOMM workshop on Hot topics in software defined networking},
+  year={2013},
+}
+
+@inproceedings{yu2011scalable,
+  title={Scalable flow-based networking with DIFANE},
+  author={Yu, Minlan and Rexford, Jennifer and Freedman, Michael J and Wang, Jia},
+  booktitle={SIGCOMM},
+  year={2011},
+}
+
+@inproceedings{moshref2013vcrib,
+  title={vcrib: Virtualized rule management in the cloud},
+  author={Moshref, Masoud and Yu, Minlan and Sharma, Abhishek and Govindan, Ramesh},
+  booktitle={NSDI},
+  year={2013}
+}
+
+@inproceedings{jin2014dynamic,
+  title={Dynamic scheduling of network updates},
+  author={Jin, Xin and Liu, Hongqiang Harry and Gandhi, Rohan and Kandula, Srikanth and Mahajan, Ratul and Zhang, Ming and Rexford, Jennifer and Wattenhofer, Roger},
+  booktitle={SIGCOMM},
+  year={2014},
+}
+
+@inproceedings{patel2013ananta,
+  title={Ananta: Cloud scale load balancing},
+  author={Patel, Parveen and Bansal, Deepak and Yuan, Lihua and Murthy, Ashwin and Greenberg, Albert and Maltz, David A and Kern, Randy and Kumar, Hemant and Zikos, Marios and Wu, Hongyu and others},
+  booktitle={SIGCOMM},
+  year={2013},
+}
+
+@misc{ms-rsc,
+        Howpublished = {\url{http://technet.microsoft.com/en-us/library/hh997024.aspx}},
+        key = {Receive Segment Coalescing (RSC)},
+        Title = {Receive Segment Coalescing (RSC)},
+}
+
+@inproceedings{grossman2005large,
+  title={Large Receive Offload Implementation in Neterion 10GbE Ethernet Driver},
+  author={Grossman, Leonid},
+  booktitle={Linux Symposium},
+  year={2005}
+}
+
+@misc{amazon-peek,
+        Author = {Timothy Prickett Morgan },
+        Howpublished = {\url{http://www.enterprisetech.com/2014/11/14/rare-peek-massive-scale-aws/}},
+        Title = {A Rare Peek Into The Massive Scale of AWS},
+	key = {A Rare Peek Into The Massive Scale of AWS},
+        Year = {2014}
+}
+
+@inproceedings{bullettrains,
+        Author = {Rishi Kapoor and Alex C. Snoeren and Geoffrey M. Voelker and George Porter},
+        Booktitle = {CoNEXT},
+        Title = {Bullet Trains: A Study of NIC Burst Behavior at Microsecond Timescales},
+        Year = {2013}
+}
+
+@inproceedings{kandula2009nature,
+  title={The Nature of Data Center Traffic: Measurements \& Analysis},
+  author={Kandula, Srikanth and Sengupta, Sudipta and Greenberg, Albert and Patel, Parveen and Chaiken, Ronnie},
+  booktitle={IMC},
+  year={2009},
+}
+
+@inproceedings{Benson10,
+        Author = {Benson, Theophilus and Akella, Aditya and Maltz, David A.},
+        Booktitle = {IMC},
+        Title = {Network Traffic Characteristics of Data Centers in the Wild},
+        Year = {2010}
+}
+
+@article{leung2007overview,
+  title={An Overview of Packet Reordering in Transmission Control Protocol (TCP): Problems, Solutions, and Challenges},
+  author={Leung, Ka-Cheong and Li, Victor OK and Yang, Daiqin},
+  journal={Parallel and Distributed Systems, IEEE Transactions on},
+  year={2007},
+}
+
+@inproceedings{rr-tcp,
+  title={RR-TCP: A Reordering-robust TCP with DSACK},
+  author={Zhang, Ming and Karp, Brad and Floyd, Sally and Peterson, Larry},
+  booktitle={ICNP},
+  year={2003},
+}
+
+@article{blanton2002making,
+  title={On Making TCP More Robust to Packet Reordering},
+  author={Blanton, Ethan and Allman, Mark},
+  journal={ACM SIGCOMM Computer Communication Review},
+  year={2002},
+}
+
+@INPROCEEDINGS{tcp-pr,
+    author = {Stephan Bohacek and João P. Hespanha and Junsoo Lee and Chansook Lim and Katia Obraczka},
+    title = {TCP-PR: TCP for Persistent Packet Reordering},
+    booktitle = {ICDCS},
+    year = {2003},
+    pages = {222--231}
+}
+
+@inproceedings{optimize-tcp-receive,
+  title={Optimizing TCP Receive Performance},
+  author={Menon, Aravind and Zwaenepoel, Willy},
+  booktitle={USENIX Annual Technical Conference},
+  year={2008},
+}
+
+@article{mogul1997eliminating,
+  title={Eliminating Receive Livelock in An Interrupt-driven Kernel},
+  author={Mogul, Jeffrey C and Ramakrishnan, KK},
+  journal={ACM Transactions on Computer Systems},
+  year={1997}
+}
+
+@book{understanding-linux-network,
+  title={Understanding Linux Network Internals},
+  author={Benvenuti, Christian},
+  year={2006},
+  publisher={" O'Reilly Media, Inc."}
+}
+
+@inproceedings{casado2012fabric,
+  title={Fabric: A Retrospective on Evolving SDN},
+  author={Casado, Martin and Koponen, Teemu and Shenker, Scott and Tootoonchian, Amin},
+  booktitle={HotSDN},
+  year={2012},
+}
+
+@inproceedings{shadow-mac,
+  title={Shadow MACs: Scalable Label-switching for Commodity Ethernet},
+  author={Agarwal, Kanak and Dixon, Colin and Rozner, Eric and Carter, John},
+  booktitle={HotSDN},
+  year={2014},
+}
+
+@misc{bcm-smart-table,
+        Author = {Sujal Das},
+        Howpublished = {\url{http://www.broadcom.com/collateral/wp/StrataXGS_SmartSwitch-WP101-R.pdf}},
+        Month = {July},
+        Title = {Smart-Table Technology---Enabling Very Large Server, Storage Nodes and Virtual Machines to Scale Using Flexible Network Infrastructure Topologies},
+        Year = {2012}
+}
+
+@misc{presto-nvo3,
+        Author = {{H. Chen and W. Song}},
+        Howpublished = {{Internet-Draft}. \url{https://tools.ietf.org/html/draft-chen-nvo3-load-banlancing-00}},
+        Month = {October},
+        Title = {{Load Balancing without Packet Reordering in NVO3}},
+        Year = {2014}
+}
+
+@article{openflow,
+ author = {McKeown, Nick and Anderson, Tom and Balakrishnan, Hari and Parulkar, Guru and Peterson, Larry and Rexford, Jennifer and Shenker, Scott and Turner, Jonathan},
+ title = {OpenFlow: Enabling Innovation in Campus Networks},
+ journal={ACM SIGCOMM Computer Communication Review},
+ year = {2008},
+}
+
+@inproceedings{pktgen,
+  title={Pktgen the Linux Packet Generator},
+  author={Olsson, Robert},
+  booktitle={Ottawa Linux Symposium},
+  year={2005}
+}
+
+@article{estan:private,
+ title = {Private communication with Cristian Estan},
+ key = {Private communication with Cristian Estan},
+}
+
+@inproceedings{qazi2013simple,
+  title={SIMPLE-fying middlebox policy enforcement using SDN},
+  author={Qazi, Zafar Ayyub and Tu, Cheng-Chun and Chiang, Luis and Miao, Rui and Sekar, Vyas and Yu, Minlan},
+  booktitle={SIGCOMM},
+  year={2013},
+}
+
+@inproceedings{reitblatt2012abstractions,
+  title={Abstractions for network update},
+  author={Reitblatt, Mark and Foster, Nate and Rexford, Jennifer and Schlesinger, Cole and Walker, David},
+  booktitle={SIGCOMM},
+  year={2012},
+}
+
+@inproceedings{mahajan2013consistent,
+  title={On consistent updates in software defined networks},
+  author={Mahajan, Ratul and Wattenhofer, Roger},
+  booktitle={Proceedings of the Twelfth ACM Workshop on Hot Topics in Networks},
+  year={2013},
+}
+
+@misc{ec2iprange,
+    title = {EC2 Public IP Ranges},
+    key = {EC2 Public IP Ranges},
+    howpublished = {\url{https://forums.aws.amazon.com/ann.jspa?annID=1528}}
+}
+
+@misc{azureiprange,
+    title = {Azure Datacenter IP Ranges},
+    key = {Azure Datacenter IP Ranges},
+    howpublished = {\url{http://microsoft.com/en-us/download/details.aspx?id=29840}}
+}
+
+@misc{dnsmap,
+    title = {Passive DNS Network Mapper},
+    key = {Passive DNS Network Mapper},
+    howpublished = {\url{http://code.google.com/p/dnsmap/}}
+}
+
+@misc{knock,
+    title = {Knock},
+    key = {Knock},
+    howpublished = {\url{http://code.google.com/p/knock}}
+}
+
+@INPROCEEDINGS{paxson1998bro,
+  author = {Paxson, Vern},
+  title = {Bro: A System for Detecting Detwork Intruders in Real-Time},
+  booktitle = {USENIX Security Symposium (SSYM)},
+  year = {1998},
+}
+
+@inproceedings{agarwal2010endre,
+  title={EndRE: An End-System Redundancy Elimination Service for Enterprises.},
+  author={Agarwal, Bhavish and Akella, Aditya and Anand, Ashok and Balachandran, Athula and Chitnis, Pushkar and Muthukrishnan, Chitra and Ramjee, Ramachandran and Varghese, George},
+  booktitle={NSDI},
+  year={2010}
+}
+
+@misc{cloudflare,
+    title = {CloudFlare CDN},
+    key = {CloudFlare CDN},
+    howpublished = {\url{http://cloudflare.com}}
+}
+
+@inproceedings{benson2010network,
+  title={Network traffic characteristics of data centers in the wild},
+  author={Benson, Theophilus and Akella, Aditya and Maltz, David A},
+  booktitle={IMC},
+  year={2010},
+}
+
+@misc{alexawebinfo,
+    title = {Alexa Web Information Service},
+    key = {Alexa Web Information Service},
+    howpublished = {\url{http://aws.amazon.com/awis/}}
+}
+
+@misc{AWSoutageDec2012,
+ title = {Amazon ELB Service Event in the US-East Region},
+ key = {Amazon ELB Service Event in the US-East Region},
+ howpublished = {\url{http://aws.amazon.com/message/680587/}}
+}
+
+@inproceedings{akella2003empirical,
+  title={An Empirical Evaluation of Wide-area Internet Bottlenecks},
+  author={Akella, Aditya and Seshan, Srinivasan and Shaikh, Anees},
+  booktitle={IMC},
+  year={2003},
+}
+
+@inproceedings{teixeira2004dynamics,
+  title={Dynamics of Hot-potato Routing in IP Networks},
+  author={Teixeira, Renata and Shaikh, Aman and Griffin, Tim and Rexford, Jennifer},
+  booktitle={ACM SIGMETRICS Performance Evaluation Review},
+  year={2004},
+}
+
+@inproceedings{krishnan2009moving,
+  title={Moving beyond End-to-End Path Information to Optimize CDN Performance},
+  author={Krishnan, Rupa and Madhyastha, Harsha V and Srinivasan, Sridhar and Jain, Sushant and Krishnamurthy, Arvind and Anderson, Thomas and Gao, Jie},
+  booktitle={IMC},
+  year={2009},
+}
+
+@inproceedings{farley:gaming:socc:2012,
+  title={More for Your Money: Exploiting Performance Heterogeneity in Public Clouds},
+  author={Farley, Benjamin and Juels, Ari and Varadarajan, Venkatanathan and Ristenpart, Thomas and Bowers, Kevin D and Swift, Michael M},
+  booktitle={Proceedings of the Third ACM Symposium on Cloud Computing},
+  year={2012},
+}
+
+@inproceedings{akella2004multihoming,
+  title={Multihoming Performance Benefits: An Experimental Evaluation of Practical Enterprise Strategies},
+  author={Akella, Aditya and Seshan, Srinivasan and Shaikh, Anees},
+  booktitle={USENIX Annual Technical Conference, General Track},
+  year={2004}
+}
+
+@misc{cloudmeasuredata,
+    title = {Cloud Measurement Data},
+    key = {Cloud Measurement Data},
+    howpublished = {\url{http://pages.cs.wisc.edu/~keqhe/cloudmeasure_datasets.html}}
+}
+
+@misc{intel_dpdk,
+  title={Data Plane Development Kit},
+  key = {Data Plane Development Kit},
+  Howpublished = {\url{http://dpdk.org}},
+}
+
+@inproceedings{rizzo2012netmap,
+  title={netmap: A Novel Framework for Fast Packet I/O.},
+  author={Rizzo, Luigi},
+  booktitle={USENIX Annual Technical Conference},
+  year={2012}
+}
+
+@inproceedings{radhakrishnan2014senic,
+  title={{SENIC: Scalable NIC for End-host Rate Limiting}},
+  author={Radhakrishnan, Sivasankar and Geng, Yilong and Jeyakumar, Vimalkumar and Kabbani, Abdul and Porter, George and Vahdat, Amin},
+  booktitle={NSDI},
+  year={2014}
+}
+
+
+@inproceedings{singh2015jupiter,
+  title={{Jupiter Rising: A Decade of Clos Topologies and Centralized Control in Google's Datacenter Network}},
+  author={Singh, Arjun and Ong, Joon and Agarwal, Amit and Anderson, Glen and Armistead, Ashby and Bannon, Roy and Boving, Seb and Desai, Gaurav and Felderman, Bob and Germano, Paulie and others},
+  booktitle={SIGCOMM},
+  year={2015},
+}
+
+@article{clos1953study,
+  title={A Study of Non-Blocking Switching Networks},
+  author={Clos, Charles},
+  journal={Bell System Technical Journal},
+  year={1953},
+}
+
+

@@ -1,0 +1,65 @@
+\section{Latency Measurements}\label{sec-measure}
+
+
+In this section, we systematically measure in/outbound latencies to
+understand what factors contribute to high latencies. We generate a variety
+of workloads to isolate specific factors, and we use production switches from
+\numVendors vendors, running switch software with support for OpenFlow
+1.0~\cite{openflow} or, if available, OpenFlow 1.3, to highlight the
+generality of our observations and to understand how software evolution
+impacts latencies.\footnote{When using OpenFlow 1.3 firmware, we
+only leverage features also available in OpenFlow 1.0 for an apples-to-apples comparison.} 
+Henceforth, we refer to the \numCombos hardware and software combinations
+(\tabref{switch_para}) as \Intel, \BroadcomOne, \BroadcomThree, and \IBM.
+To ensure we are experimenting in the optimal regimes for each switch, we take
+into account factors such as flow table capacity and support for \packetin.
+
+%An important first step to taming in/outbound latencies is to
+%understand the various factors that affect them 
+%within the SDN switch. We conduct a variety of measurements aimed at
+%carefully isolating these factors. To draw general observation, we use
+%three types of commercial switch platforms (\tabref{switch_para}).
+%To ensure that we are experimenting in the optimal regimes for the different
+%switches we take into account switch specifics such as maximum flow table sizes
+%as well as support for priority in rule set up. 
+
+%We also make the distinction on the types of rule tables supported by the
+%different switches.  
+%1) Broadcom 956846K, 
+%2) Intel FM6000 (model IZ1), 
+%and 3) HP Procurve 8212zl.
+%The specific details for each switch are shown in 
+%\keqhe{Broadcom switch can only support proactive rule insertions while Intel
+%and HP switch can support both proactive and reactive rule insertions.} 
+\begin{table}
+\centering
+\small
+\begin{tabular}{|l|c|c|c|c|c|}
+\hline
+\bf Model & \bf CPU & \bf RAM & \tabincell{c}{\bf OF\\\bf Ver.} 
+    & \tabincell{c}{\bf Flow\\\bf Table Size} & \bf Ifaces\\ 
+\hline
+\tabincell{l}{Intel\\FM6000} &  2Ghz & 2GB & 1.0 & 4096 
+    & \tabincell{c}{40x10G\\+ 4x40G} \\ 
+\hline
+\multirow{2}{*}{\tabincell{l}{Broadcom \\956846K}} & \multirow{2}{*}{1Ghz} 
+    & \multirow{2}{*}{1GB} & 1.0 & 896 
+    & \multirow{2}{*}{\tabincell{c}{14x10G\\+ 4x40G}}\\ 
+\cline{4-5}
+& & & 1.3 & 1792 (ACL tbl) & \\
+\hline
+\tabincell{l}{IBM\\G8264} &  ? & ? & 1.0 & 750
+    & \tabincell{c}{48x10G \\+ 4x40G} \\ 
+\hline
+%\tabincell{c}{HP Procurve \\8212zl} & 666Mhz & 256MB & $\approx$1000 & Modularity \\ \hline
+%\hline
+\end{tabular}
+\topcompactcaption{Switch specifications}{\label{switch_para}}
+\end{table}
+
+%%\marina{We need a table with specific details of the switch - Switch type, Processor RAM, Data plane capacity, Max Flow table size, hardware and software tables, support for prioity, statistics gathering support}
+
+\input{measure_method_sosr}
+\input{measure_packet_sosr}
+\input{measure_flowmod_sosr}
+\input{measure_summary_sosr}

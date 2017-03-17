@@ -1,0 +1,65 @@
+
+\section{Presto: Edge-based Load Balancing for Fast Datacenter Networks}
+\label{presto}
+
+\subsection{What is Presto?}
+Presto is
+a new load balancing scheme for data center networks. 
+It utilizes the software edge (virtual switch in the hypervisor) and 
+TCP offloading features (TCP Segmentation Offload and Generic Receive Offload) 
+to achieve near-perfect traffic load balancing on symmetric 
+networks (e.g., 2-tier Clos) with very little CPU overhead.
+This work makes the following contributions:
+\begin{enumerate}
+
+\item We design and implement a system, called Presto, that near-optimally load balances
+links in the network. We show that such a system can be built with no changes to the transport
+layer or network hardware, and scales to 10+ Gbps networking speeds.
+%Presto
+%improves throughput, latency and fairness in the network and reduces flow completion time tail latencies
+%for mice flows.
+%\item We show that such a system can be built with no changes to the transport
+%layer or within network hardware. Unlike previous approaches with similar design goals~\cite{drb}, we
+%ensure our approach scales to network speeds higher than 1 Gbps.
+Our approach makes judicious use of middleware
+already implemented in most hypervisors today: Open vSwitch and the TCP receive offload engine in the OS
+(Generic Receive Offload, GRO, in the Linux kernel).
+\footnote{Also known as Receive Segment Coalescing (RSC)~\cite{ms-rsc}, 
+or in hardware, Large Receive Offload (LRO)~\cite{grossman2005large}}
+
+\item We uncover the importance of GRO on performance when packets are reordered.
+At network speeds of 10+ Gbps, current GRO algorithms are unable to sustain line rate under
+severe reordering due to extreme computational overhead, and hence
+per-packet load-balancing approaches~\cite{cao2013drb,packetspray} need to be reconsidered. We
+improve GRO to prevent reordering while ensuring computational overhead is limited.
+%Our scheme can distinguish loss from reordering and adapt to prevailing network conditions.
+%These techniques are criticial to ensure we minimize the time waiting for lost packets, while
+%being robust against exposing reordering to higher network layers.
+We argue
+GRO is the most natural place to handle reordering because it can mask
+reordering in a light-weight manner while simultaneously limiting CPU overhead by having a direct impact
+on the segment sizes pushed up the networking stack.
+%Need to sell this more: this is the only place we should really do it because it has
+%direct impact on packet sizes, and thus CPU overhead. We also need to talk about mechanisms
+%we create to distinguish loss from reordering.
+
+\item Presto achieves near-optimal load balancing in a proactive manner. For that, it leverages symmetry in
+the network topology to ensure that all paths between a pair of hosts are equally congested.
+However, asymmetries can arise due to failures. We demonstrate Presto can recover from network failures and adapt to asymmetric
+network topologies using a combination of fast failover and weighted multipathing at the network edge.
+
+\item Finally, we evaluate Presto on a real 10 Gbps testbed. Our experiments show Presto
+outperforms existing load balancing schemes (including flowlet switching, ECMP, MPTCP) and
+is able to track the performance of a single, non-blocking switch (an optimal case) within a few percentage points
+over a variety of workloads, including trace-driven. Presto improves throughput, latency and fairness in the network and
+also reduces the flow completion time tail for mice flows.
+
+\end{enumerate}
+
+
+\input{presto_background}
+\input{presto_design}
+\input{presto_implementation}
+\input{presto_microbenchmarks}
+\input{presto_eval}
+%\input{presto_conclusion}

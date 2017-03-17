@@ -1,0 +1,15 @@
+#presto default: init:600, multi:2, div:2
+#presto fairness optimal seen:  init:500, multi:1, div:2, we call it presto_better
+#flow count (or oversubscription ratio), ecmp, presto, mptcp;; ecmp(ejr), presto(ejr), mptcp (ejr);; presto (better), presto(better, ejr); mptcp-rerun, mptcp-rerun-ejr
+#mptcp shows quite similar fairness in three settings(vary, fix4 and fix8; here we use fix8 to plot) 
+1.5 	0.884501 0.967349 0.931967  	0.799553 0.966770 0.930695 	0.975741 0.975445	0.962953 0.952615
+2   	0.833989 0.911797 0.951271 	0.767134 0.902117 0.949359	0.945317 0.942777	0.941045 0.939911
+2.5 	0.779506 0.890745 0.968956	0.738935 0.884906 0.968651	0.938811 0.936252	0.930401 0.926899
+3   	0.709673 0.893849 0.971977	0.671114 0.887766 0.971693	0.927432 0.925020	0.946139 0.943840
+3.5 	0.746691 0.843076 0.980710	0.718761 0.830652 0.980604	0.910841 0.902247	0.948115 0.947401
+4	0.740380 0.853677 0.981306	0.705011 0.845982 0.981122	0.942713 0.941674	0.960536 0.959913
+
+
+##rerun presto data at ratio 0.5
+#new data : khe  ejr  0.938811 0.936252
+#old data (better column): khe ejr 0.854815 0.844548

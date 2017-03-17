@@ -1,0 +1,45 @@
+\begin{algorithm}
+\footnotesize
+\DontPrintSemicolon
+% \KwData{$G$: RDG with nodes annotated with next hop label, 
+%	$H$: a bound of rule count for core switches,
+%	$H_{core}$: the maximum number of rules any edge switch 
+%           can offload to a core switch}
+% \KwResult{$P$: partition set for next hops, initially empty}
+%  \tcc{traverse reverse edges}
+  %$N$ = min($H$, $H\_core$)\;
+%  $G'$ = reverse($G$)\; 
+    \SetKw{KwIn}{in}
+    \SetKw{KwOr}{or}
+    \SetKw{KwAnd}{and}
+    \SetKwFunction{reverseBFS}{reverseBFS}
+    \SetKwFunction{isLeaf}{isLeaf}
+    \SetKwFunction{ruleCount}{ruleCount}
+    \SetKwFunction{children}{children}
+    \ForEach{$R$ \KwIn \reverseBFS{$G$}}{
+%  \tcc{$R$ is the current node}
+  $i$ = label($R$)\;
+  \uIf{\isLeaf{$R$}}{
+	 \uIf{\ruleCount{$P_i$} $> H_{down}$ \KwOr \ruleCount{$S_i$} $>H$} {
+		$P_{root}$ += $R$\;
+         }
+         \Else{
+             $P_i$ += $R$\;
+	 }
+   }
+%   \tcc{$R$ depends on rules with more than one distinct label}
+   \Else{
+       \uIf{$\forall$ \children{$R$} $\in P_i$ \KwAnd
+           \ruleCount{$P_i$} $> H_{down}$ \KwAnd \ruleCount{$S_i$} $>H$} {
+             $P_i$ += $R$\;
+           }
+         \Else{
+	    	$P_{root}$ += $R$\;
+	 }
+   }
+ }
+ \caption{Rule Partition}
+ \label{alg:partition}
+\end{algorithm}
+
+

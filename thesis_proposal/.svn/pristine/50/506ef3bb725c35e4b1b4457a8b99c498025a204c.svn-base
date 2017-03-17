@@ -1,0 +1,7 @@
+#get reordered segments. have to multiply percentage by 2 b/c of how tshark
+# says packets are reordered.
+for i in `echo 3 4 7 8 10`; do 
+	echo $i; 
+	tshark -Y "ip.dst == 10.2.1.1 && tcp.analysis.out_of_order" -r result-official_gro_final_500us-S10-f8-eth2-TCPDUMP1-PROTpresto-$i/tcpdump.pcap | wc; 
+	tshark -Y "ip.dst == 10.2.1.1" -r result-official_gro_final_500us-S10-f8-eth2-TCPDUMP1-PROTpresto-$i/tcpdump.pcap | wc; 
+done

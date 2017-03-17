@@ -1,0 +1,25 @@
+presto has two modes , ecmp and shadow
+this micro test tries to show how different they are
+
+topology: 2 layer clos, 4 sender , 4 receiver, 4 paths
+nuttcp, over 10 seconds per run, 20 runs
+sockperf, 100 msec interval, 20 runs
+ 
+in terms of tput :
+
+arly188:compare_ecmp_shadow hek$ cat presto_ecmp_1/run00*/dcn* |grep RTT | awk '{s+=$7}END{print s/NR}'
+9307.32
+
+
+
+RERUN::::
+%%%%NOTE this following is incorrect, it seems,
+arly188:compare_ecmp_shadow hek$ cat presto_shadow_1/run00*/dcn* |grep RTT | awk '{s+=$7}END{print s/NR}'
+9273.15
+
+in terms of latency (RTT via sockperf). see figure
+
+
+RERUN ECMP:::
+
+

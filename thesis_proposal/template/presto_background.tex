@@ -1,0 +1,197 @@
+\subsection{Design Decisions and Challenges}
+\label{sec:presto-background}
+
+In Presto, we make several design choices to 
+build a highly robust and scalable system that provides near optimal load 
+balancing without requiring changes to the transport layer or switch hardware. We 
+now discuss our design decisions.
+
+
+\subsubsection{Design Decisions}
+
+\tightparagraph{Load Balancing in the Soft Edge} A key design decision in Presto 
+is to implement the functionality in the soft edge (\ie, the vSwitch and hypervisor) of 
+the network. 
+The vSwitch occupies a unique position in the networking stack 
+in that it can easily modify packets without requiring any changes to customer VMs or transport layers.
+Functionality built into the vSwitch can be made aware of the underlying hardware offload
+features presented by the NIC and OS, meaning it can be fast.
+Furthermore, an open, software-based approach prevents extra hardware cost and vendor 
+lock-in, and allows for simplified network management. 
+These criteria are important for providers today~\cite{amazon-peek}.
+Thanks to projects like Open vSwitch, 
+soft-switching platforms are now fast, mature, open source, adopted widely, remotely 
+configurable, SDN-enabled, and feature-rich~\cite{pfaff2009extending,
+koponen2014network}. Presto is built on these 
+platforms.
+
+\tightparagraph{Reactive vs Proactive Load Balancing} The second major design decision in 
+Presto is to use a proactive approach to congestion management. Bursty 
+behavior in datacenter workloads can create transient congestion issues that must be reacted to 
+before switch buffers overflow to prevent loss (timescales range from hundreds of microseconds 
+to ~4 ms~\cite{rasley2014planck}). This requirement renders most of the centralized reactive schemes ineffective
+as they are often too slow to react to any but the largest network events,~\eg{}, link failures. 
+Furthermore, centralized schemes can hurt performance when rerouting
+flows using stale information.
+Distributed reactive schemes like MPTCP~\cite{dc-mptcp} and 
+CONGA~\cite{alizadeh2014conga} can respond to congestion at faster timescales, but have a high barrier to deployment.
+Furthermore, distributed reactive schemes must take great care to avoid oscillations.
+Presto takes a proactive, correct-by-design approach to congestion management. 
+That is, if small, uniform portions of traffic are equally
+balanced over a symmetric network topology, then we don't need to 
+be reactive to congestion.
+Presto is only reactive to network events such as link failures. Fortunately, 
+the higher timescales of the reactive feedback loops are sufficient in these scenarios. 
+
+\tightparagraph{Load Balancing Granularity} ECMP has been shown to be 
+ineffective at load balancing the network, and thus many schemes advocate 
+load balancing at a finer granularity than a 
+flow~\cite{cao2013drb,alizadeh2014conga,juniper-vcf,packetspray}. 
+A key factor impacting the choice of granularity is operating at high speed. 
+Operating at 10+ Gbps incurs great computational overhead, and therefore host-based load balancing schemes
+must be fast, light-weight and take advantage of optimizations provided in the networking stack.
+For example, per-packet load balancing techniques~\cite{cao2013drb} cannot be
+employed at the network edge because TSO does not work on a per-packet
+basis. TSO, commonly supported in OSes and NICs, allows for large TCP segments (typically 64 KB in size)
+to be passed down the networking stack to the NIC. The NIC breaks the segments into MTU-sized packets and copies and computes
+header data, such as sequence numbers and checksums. When TSO is disabled, a host incurs 100\% CPU utilization and can only achieve
+around 5.5 Gbps~\cite{bullettrains}. Therefore, per-packet schemes are unlikely to scale to fast networks without hardware support.
+Limiting overhead by increasing the MTU is difficult because
+VMs, switches, and routers must all be configured appropriately, and traffic
+leaving the datacenter must use normal 1500 byte packets. 
+Furthermore, per-packet schemes~\cite{cao2013drb,packetspray} are likely to
+introduce significant reordering into the network.
+
+\begin{figure}[t]
+        \centering
+  \includegraphics[width=0.55\textwidth]{./figures/presto/flowlets/histo.pdf}
+        \caption{Stacked histogram of flowlet sizes (in MB) for a 1 GB {\tt scp} file transfer. We vary the number of {\tt nuttcp} background flows and
+                denote them as {\em Competing Flows}. The size of each flowlet is shown within each bar, and flowlets
+                are created whenever there is a 500 $\mu$s delay between segments. The top 10 flowlet sizes are shown here.
+                We also analyzed the results of a 1 GB {\tt nuttcp}, {\tt ftp}, and a simple custom client/server transfer and found them
+                to be similar. }
+        \label{micro_flowlet_size}
+\end{figure}
+
+
+Another possibility is to load balance on flowlets~\cite{alizadeh2014conga,juniper-vcf}.  
+A flow is comprised of a series of bursts, and a flowlet is created when
+the inter-arrival time between two packets in a flow exceeds a threshold inactivity timer.  
+In practice, inactivity timer values are between 100-500 $\mu$s~\cite{alizadeh2014conga}. 
+These values intend to strike a good balance between load balancing on a sub-flow level 
+and acting as a buffer to limit reordering between flowlets.
+Flowlets are derived from traffic patterns at the sender, and in practice this
+means the distribution of flowlet sizes is not uniform. To analyze flowlet sizes, a simple experiment is shown in Figure~\ref{micro_flowlet_size}. 
+We connect a sender and a receiver to a single switch and start an {\tt scp} transfer designed to 
+emulate an elephant flow. Meanwhile, other senders are hooked up to the same switch and
+send to the same receiver. We vary the number of these competing flows and show a stacked histogram of 
+the top 10 flowlet sizes for a 1 GB {\tt scp} transfer with a 500 $\mu$s inactivity timer. 
+The graph shows flowlet sizes can be quite large, with more than half the transfer being attributed
+to a single flowlet for up to 3 competing flows. Using a smaller inactivity timer, such 100$\mu$s, helps (90\% of flowlet sizes are 114KB or less), but
+does not prevent a long tail: 0.1\% of flowlets are larger than 1 MB, with the largest ranging from 2.1-20.5 MB.
+Collisions on large flowlet sizes can lead to congestion.
+The second problem with flowlets is that small inactivity thresholds, such as 100 $\mu$s, can lead to significant reordering.
+Not only does this impact TCP performance (profiled in \secref{sec:presto-eval}), 
+but it also needlessly 
+breaks small flows into several flowlets. With only one flow in the network, we found a 50 KB
+mice flow was broken into 4-5 flowlets on average. Small flows typically do not need to be
+load balanced on a sub-flow level and need not be exposed to reordering.
+
+
+The shortcomings of the previous approaches lead us to reconsider on what granularity
+load balancing should occur. 
+Ideally, sub-flow load balancing should be done on near uniform sizes.
+Also, the unit of load balancing should be small to
+allow for fine-grained load balancing, but not so small as to break small flows into 
+many pieces or as to be a significant computational burden. As a result, we
+propose load balancing on 64 KB units of data we call {\em flowcells}. Flowcells
+have a number of advantages. First, the maximum segment size supported by TSO
+is 64 KB, so flowcells provide a natural interface to high speed optimizations provided
+by the NIC and OS and can scale to fast networking speeds. Second, an overwhelming fraction of mice flows are less than 64 KB in size
+ and thus do not have to worry about reordering~\cite{benson10,vl2,kandula2009nature}.
+Last, since most bytes in datacenter networks originate from elephant flows~\cite{kandula2009nature,benson10,alizadeh2011dctcp},
+this ensures that a significant portion of datacenter traffic is routed on uniform
+sizes. While promising, this approach must combat reordering to be effective. 
+Essentially we make a trade-off: we provide line rate load balancing in the most effective
+manner as to avoid congestion and then handle reordering head-on at the receiver.
+
+\tightparagraph{End-to-End vs Per-Hop Multipathing}
+The last design consideration is whether multipathing should be done on a local, per-hop level (\eg{}, ECMP), or
+on a global, end-to-end level. In Presto, we choose the latter: pre-configured end-to-end paths
+are allocated in the network and path selection (and thus multipathing) is realized by having the network edge
+place flowcells onto these paths. 
+Presto can be used to load-balance in an ECMP style per-hop manner but the choice of end-to-end 
+multipathing provides additional benefits due to greater control on how flowcells are mapped to
+paths. Per-hop multipathing can be inefficient
+under asymmetric topologies~\cite{zhou2014wcmp}, and load-balancing on a global end-to-end level can allow
+for weighted scheduling at vSwitch to rebalance traffic. This is especially important when failure occurs.
+The second benefit is that flowcells can be assigned over multiple paths very evenly
+by iterating over paths in a round-robin, rather than randomized, fashion. 
+
+\subsubsection{Reordering Challenges}
+Due to the impact of fine-grained, flowcell-based load balancing, Presto must account for reordering. Here, we 
+highlight reordering challenges. The next section shows how Presto deals with these concerns.
+
+\tightparagraph{Reordering's Impact on TCP} The impact of reordering on TCP is well-studied~\cite{leung2007overview,paxson1997end}. 
+Duplicate acknowledgments caused by reordering
+can cause TCP to move to a more conservative sender state and reduce the sender's congestion window.
+Relying on parameter tuning, such as adjusting the DUP-ACK threshold, is not ideal because 
+increasing the DUP-ACK threshold increases the time to recover from real loss. Other TCP settings
+such as Forward Acknowledgement (FACK) assume un-acked bytes in the SACK are lost and degrade
+performance under reordering. 
+A scheme that introduces reordering should not rely on careful configuration of TCP parameters
+because (i) it is hard to find a single set of parameters that work effectively over multiple 
+scenarios and (ii) datacenter tenants should not be forced to constantly tune their networking stacks.
+Finally, many reordering-robust variants of TCP have been proposed~\cite{rr-tcp,blanton2002making,tcp-pr}, but
+as we will show, GRO becomes ineffective under reordering. Therefore, reordering should
+be handled below the transport layer.
+
+\tightparagraph{Computational Bottleneck of Reordering}
+Akin to TSO, Generic Receive Offload (GRO) mitigates the computational burden of receiving
+1500 byte packets at 10 Gbps. GRO is implemented in the kernel of the hypervisor
+and its handler is called directly by the NIC driver. It is responsible
+for aggregating packets into larger segments that are pushed up to OVS and the TCP/IP stack.
+Because modern CPUs use aggressive prefetching, the cost of receiving
+TCP data is now dominated by per-packet, rather than per-byte, operations.
+As shown by Menon~\cite{optimize-tcp-receive},  the majority of this overhead comes from
+buffer management and other routines not related to protocol processing, and therefore 
+significant computational overhead can be avoided by aggregating "raw" packets from
+the NIC into a single {\tt sk\_buff}.\footnote{Refer to~\cite{optimize-tcp-receive} for detailed study and explanation}
+Essentially, spending a few cycles to aggregate packets within GRO creates less segments for
+TCP and prevents having to use substantially more cycles at higher layers in the networking stack.
+
+To better understand the problems reordering causes, a brief description of  
+the TCP receive chain in Linux follows. First, interrupt coalescing
+essentially allows the NIC to create an interrupt for a batch of packets~\cite{mogul1997eliminating,understanding-linux-network},
+which prompts the driver to poll the packets into an aggregation queue. Next, the driver
+invokes the GRO handler, located in the kernel, which
+{\em merges} the packets into larger segments. The merging continues,
+possibly across many polling events, until a segment
+reaches a threshold size, a certain age, or cannot be combined with the incoming packet. Then, the
+combined, larger segment is {\em pushed up} to the rest of the TCP/IP networking stack. The GRO process is
+done on a per-flow level. With GRO disabled, throughput drops to around
+5.7-7.1 Gbps and CPU utilization spikes to 100\% (\secref{sec:presto-eval} and~\cite{bullettrains}). 
+Receive offload algorithms, whether in hardware 
+(LRO)~\cite{grossman2005large} or in software (GRO), are usually
+{\em stateless} to make them fast: no state is kept beyond the segment being merged.
+
+
+\begin{figure}[t]
+        \centering
+  \includegraphics[width=0.55\textwidth]{./figures/presto/gro-design/gro-break.pdf}
+        \caption{GRO pushes up small segments ($S_i$) during reordering.}
+        \label{gro-break}
+\end{figure}
+
+
+We now uncover how GRO breaks down in the face of reordering. Figure~\ref{gro-break} shows the impact of reordering on GRO.  Reordering does not allow the segment to grow: each reordered packet cannot be merged with the existing segment, and thus the previously created segment must be pushed up. With extreme reordering, GRO is effectively disabled because small MTU-sized segments are constantly pushed up. This causes (i) severe computational overhead and (ii) TCP to be exposed to significant amounts of reordering. We term this the {\em small segment flooding} problem.
+
+Determining where to combat the reordering problem has not previously taken the small segment flooding problem into account.  Using a reordering buffer to deal with reordered packets is a common solution (\eg{}, TCP does this, other works re-sort in a shim layer below TCP~\cite{cao2013drb}), but a buffer implemented above GRO cannot prevent small segment flooding.  Implementing a buffer below GRO means that the NIC must be changed, which is (i) expensive and cumbersome to update and (ii) unlikely to help combat reordering over multiple interrupts.
+
+In our system, the buffer is implemented in the GRO layer itself.  We argue this is a natural location because GRO can
+directly control segment sizes while simultaneously limiting the impact of reordering. 
+Furthermore, GRO can still be applied on packets pushed up from LRO, which means hardware doesn't have to be modified
+or made complex.
+Implementing a better GRO has multiple challenges. The algorithm should be fast and light-weight to scale to fast networking speeds. Furthermore, an ideal scheme should be able to distinguish loss from reordering.  When a gap in sequence numbers is detected (\eg{}, when $P_5$ is received after $P_2$ in Figure~\ref{gro-break}), it is not obvious if this gap is caused from loss or reordering.  If the gap is due to reordering, GRO should not push segments up in order to try to wait to receive the missing gap and merge the missing packets into a preestablished segment.  If the gap is due to loss, however, then GRO should immediately push up the segments to allow TCP to react to the loss as fast as possible. Ideally, an updated GRO algorithm should ensure TCP does not perform any worse than a scheme with no reordering. Finally, the scheme should adapt to prevailing network conditions, traffic patterns and application demands.
+
+

@@ -1,0 +1,14 @@
+\section{Conclusion}
+Today's datacenters host a variety of VMs (virtual machines) in order to
+support a diverse set of tenant services. Datacenter operators
+typically invest significant resources in optimizing their network fabric,
+but they cannot control one of the most important components of 
+avoiding congestion: TCP's congestion control algorithm in the VM. In this paper,
+we present a technology that allows administrators to regain control over arbitrary tenant TCP stacks by enforcing congestion
+control in the vSwitch. Our scheme, called~\acdc{} TCP, requires no 
+changes to VMs or network hardware. Our approach is scalable, light-weight,
+flexible and provides a policing mechanism to deal with non-conforming flows.
+In our evaluation the CPU overhead is less than~\crs{one percentage point} and our scheme 
+is shown to effectively enforce an administrator-defined congestion control
+algorithm over a variety of tenant TCP stacks.
+

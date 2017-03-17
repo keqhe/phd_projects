@@ -1,0 +1,57 @@
+\section{Mitigating the Latency of\newline Programming network state}
+
+The success of many SDN applications hinges on their ability to quickly
+program network state. For example:
+
+\minisection{WAN Failover}
+When WAN failures occur, an SDN application may want to quickly compute new
+paths for flows traversing failed nodes or links, while simultaneously
+rerouting other high/low priority flows to avoid hot-spots~\cite{swan}.
+However, this requires significant updates to network state at multiple
+switches. The longer these updates take, the longer traffic is subject to
+congestion and loss. We find that outbound latencies can inflate failure
+response time by $\approx$ 20s (\secref{s:evaluation}). 
+
+%\minisection{Failover}
+%It is possible that SDN can help mitigate the network-wide impact of
+%failures in wide-area networks, reducing both downtime and congestion
+%without requiring significant over provisioning. When failures occur,
+%the SDN management application can quickly compute new paths for flows
+%traversing failed nodes or links, while also simultaneously rerouting
+%other high/low priority flows so as to avoid hot-spots~\cite{swan}.
+%However, this requires significant updates to network state at
+%multiple network switches. The longer these updates take, the longer
+%the effect of failure is felt in the form of congestion and drops. We
+%find that outbound latencies can inflate the time by nearly 20s
+%(\secref{s:evaluation}) putting into question SDN's applicability to
+%this scenario. 
+
+\minisection{Intra-Datacenter Traffic Engineering} 
+To eliminate hot\-spots and maximize data center performance, an SDN
+application may want to reroute traffic subsets at fine
+timescales~\cite{hedera}. For example, MicroTE~\cite{microte} leverages the
+fact that a significant fraction of ToR-to-ToR traffic (ToR is ``top-of-rack''
+switch) is predictable on short time-scales of 1-2s. Thus, MicroTE
+frequently computes and updates routes at ToR switches.
+% The computed routes may only be effective for 1-2s after which a new sets of
+% routes may be more optimal. 
+Unfortunately, outbound latencies can cause these updates to take up to 0.5s 
+(\secref{s:evaluation}), so traffic that is predictable on 1s timescales is 
+optimally routed only half the time.
+%Thus, latencies in installing routes can significantly undermine MicroTE's
+%effectiveness. Indeed, we find that updating a set of routes at a ToR switch
+%in MicroTE can take as long as 0.5s on some SDN switches
+%(\secref{s:evaluation}). 
+
+To mitigate the impact of outbound latency, and support the needs of these
+and other SDN apps, we propose three immediately deployable
+techniques: flow engineering (\FE), rule offload (\RO), and rule reordering
+(\RR). This section discusses these techniques in detail; we
+evaluate them in \secref{s:evaluation}.
+
+\input{floweng_sigmetrics}
+\input{offload_sigmetrics}
+%\input{multipath}
+\input{insertion}
+
+% LocalWords:  TCAMs OpenFlow SDK ACLs Mazu Broadcom

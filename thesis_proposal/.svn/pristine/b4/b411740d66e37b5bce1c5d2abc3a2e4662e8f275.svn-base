@@ -1,0 +1,140 @@
+\section{Related Work}
+\label{related}
+
+We summarize the related work on improving data center/cloud network's \emph{performance} below. 
+We focus on the following categories of works: 
+1)traffic engineering and load balancing within the data center to 
+meet throughput and latency demands of the cloud-hosted workloads, 
+2)congestion control and transport protocols to mitigate the extent of network congestion 
+and reduce network latency and 3)improving end-users' Internet access to cloud-hosted services.
+
+{\bf Traffic Engineering and Load Balancing in Datacenters}
+MPTCP~\cite{dc-mptcp} is a transport protocol that uses subflows to
+transmit over multiple paths.
+Transport layer solutions such as MPTCP require widespread adoption and are difficult to
+enforce in multi-tenant datacenters where customers often deploy
+customized virtual machines (VMs).
+CONGA~\cite{alizadeh2014conga} and Juniper VCF~\cite{juniper-vcf} 
+employ congestion-aware flowlet switching~\cite{flowlet} on
+specialized switch chipsets to effectively load balance the network.
+CONGA~\cite{alizadeh2014conga} and Juniper VCF~\cite{juniper-vcf}
+need to replace the edge switches in the data center.
+RPS~\cite{packetspray} and DRB~\cite{cao2013drb} perform 
+per-packet load balancing on symmetric 1 Gbps networks
+at the switch and end-host, respectively.
+Per-packet load balancing can incur significant end-host overhead for DRB
+if not resorting to jumbo frames.
+Packet reordering problem is not well considered in both RPS and DRB.
+RPS and DRB may perform worse than ECMP in case of topology asymmetry.
+Hedera~\cite{al2010hedera}, 
+MicroTE~\cite{benson2011microte} and Planck~\cite{rasley2014planck} 
+use centralized traffic engineering to
+reroute traffic based on network conditions.
+Fastpass~\cite{perry2014fastpass} employs a centralized arbiter to
+schedule path selection for each packet.
+Centralized schemes are fundamentally reactive to congestion, and are
+very coarse-grained due to the large time constraints of their control
+loops~\cite{al2010hedera}, require extra network
+infrastructure~\cite{rasley2014planck} or 
+suffer from a single point of failure~\cite{perry2014fastpass}.
+FlowBender~\cite{kabbani2014flowbender} reroutes flows when congestion is detected by end-hosts 
+but network congestion already happened before FlowBender can react to it.
+
+{\bf Congestion Control and Transport Protocols in Datacenters}
+DeTail~\cite{zats2012detail} is a cross-layer network stack designed to 
+reduce the tail of flow completion times.
+DCTCP~\cite{alizadeh2011dctcp} is a transport protocol that uses the portion of marked packets
+by ECN to adaptively adjust TCP's congestion window to reduce switch buffer occupancy.
+Thus, DCTCP can reduce flow completion time.
+HULL~\cite{alizadeh2012hull} uses Phantom Queues and congestion notifications to 
+cap link utilization and prevent congestion.
+~\cite{vasudevan2009safe} advocates to reduce TCP $RTO_{min}$ 
+(200 ms in default in Linux) value to fine-grained values 
+(sub-millisecond level) to solve the TCP incast problem~\cite{chen2009incast}. 
+ICTCP~\cite{wu2013ictcp} proposes to monitor TCP throughputs at the receiver side and 
+adaptively adjust the TCP receiver window size to reduce TCP throughput 
+and avoid packet drops caused by TCP incast congestion.
+TCP-Bolt~\cite{tcp-bolt} identifies three serious performance issues in 
+lossless Ethernet: large buffering delays, TCP throughput unfairness and 
+head-of-line blocking. The authors of TCP-Bolt 
+propose a variant of DCTCP (DCTCP without slow start to 
+best utilize the benefits of lossless Ethernet) to solve the three key performance issues.
+DCQCN~\cite{zhu2015rdma} also attacks the large buffering delay, 
+TCP unfairness and head-of-line blocking problems in lossless Ethernet, 
+but DCQCN works for a slightly different scenario: 
+Remote Direct Memory Access (RDMA) over drop-free 
+IP-routed networks and 40Gbps line-rate for 
+highly demanding application. 
+Similar to TCP-Bolt, DCQCN applies DCTCP-like congestion control 
+and switch marking to lossless network to solve the three 
+above mentioned performance issues.
+DCQCN is implemented on Mellanox NICs to 
+reduce CPU overhead to meet the high speed (40G) requirement. 
+TIMELY~\cite{mittal2015timely} and DX~\cite{lee2015accurate} 
+revisit the possibility of using RTT to 
+perform congestion control for data center networks. The conventional wisdom 
+is that RTT-based congestion control is not suitable for 
+data center networks because of its low latency characteristic. 
+However, with modern network interface cards (NICs), it is possible to use 
+hardware timestamps provided by the NIC to get 
+accurate RTT measurement to perform congestion control for the data centers. 
+
+\iffalse 
+{\bf Applying SDN Techniques to Improve the Performance of Data Center Networks}
+B4~\cite{jain2013b4}, SWAN~\cite{hong2013achieving} and 
+BwE~\cite{kumar2015bwe} are a series of proposals 
+that apply the software-defined networking (SDN) technique to improve 
+link utilization for inter-DC networks or data center WANs. 
+SDN is a good fit for data center WAN optimization because 
+a logically centralized controller has the global view of network 
+resources and traffic demands. Therefore, SDN technique can 
+naturally maximize the average link utilization.  
+A key research point that is less explored in 
+SDN domain is ``how fast we can reprogram the switch’s data plane 
+and whether the existing switches can react fast enough to 
+meet the requirements of proposed control programs''. 
+Devoflow~\cite{curtis2011devoflow} shows that the rate of statistics
+gathering is limited by the size of the flow table and that statistics
+gathering negatively impacts flow setup rate. More recently, two
+studies~\cite{rotsos2012oflops,huang2013high} provide a more in-depth look into
+switch performance across various vendors.  In~\cite{rotsos2012oflops}, the
+authors evaluate 3 commercial switches and observed that switching
+performance is vendor specific and depends on applied operations,
+forwarding table management, and firmware. In ~\cite{huang2013high}, the
+authors also study 3 commercial switches (HP Procurve, Fulcrum,
+Quanta) and found that delay distributions were distinct, mainly due
+to variable control delays.
+Some studies have considered approaches to mitigate the overhead of SDN
+rule matching and processing. DevoFlow~\cite{curtis2011devoflow} presents
+a rule cloning solution which reduces the number of controller
+requests being made by the switch by having the controller set up
+rules on aggregate or elephant flows. 
+DIFANE~\cite{yu2011scalable} reduces flow set up latency by splitting
+pre-installed wild card rules among multiple switches and therefore
+all decisions are still made in the data plane. 
+vCrib~\cite{moshref2013vcrib} automatically partitions and places rules at both hypervisors and
+switches, but their goal is to reduce computational load on the
+host hypervisor, while we wish to reduce path setup latency by enabling fast
+parallel execution of updates.
+Lastly, Dionysus~\cite{jin2014dynamic} optimally schedules a set of rule updates
+while maintaining desirable consistency properties (e.g., no loops and no
+blackholes).
+\fi
+
+{\bf Improving End-users' Internet Access to Cloud-hosted Services}
+Reducing the latency for Internet end-users' access to the 
+cloud-hosted services is critical to revenue.~\cite{flach2013reducing} observes that TCP's timeout-driven 
+recovery causes web transfers take 5 time longer than average. 
+Based on this observation, it proposes three kinds of loss recovery 
+schemes to reduce the web access latency. Their experiments show that 
+they can cut the average latency by 23\% and 99th percentile latency by 47\%. 
+Ananta~\cite{patel2013ananta} proposes a software-based load balancer to 
+load balance the north-south traffic (\ie{}, the traffic between 
+Internet users and the services in the cloud) such that the users 
+requests can be distributed properly among a large set of servers 
+and user access latency is reduced.
+Amazon Route 53~\cite{amazon-route53} is a DNS system and it 
+can direct the end-users’ requests to the services 
+running in Amazon AWS. Route 53 has the ability to direct the requests to 
+the servers with the least latency to the end-users so it 
+can help improve user experience. 

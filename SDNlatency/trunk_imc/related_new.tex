@@ -1,0 +1,117 @@
+\section{Related Work}
+\label{sec:related}
+% Recently there has been several publications that attempt to characterize the
+% performance of commercially available Openflow switches and proposed solutions
+% to circumvent these performance issues. In the context of the work presented
+% here we survey prior work on performance studies of commercial switches and
+% from a solution perspective we provide the context for two solutions: Rule
+% offloading and Multipath routing. 
+
+A few prior studies have considered SDN switch performance. However, 
+they either focus on narrow issues, do not offer
+sufficient in-depth explanations for observed performance issues, or do
+not explore implications on applications that require tight
+control of latency.  Devoflow~\cite{devoflow} showed that the rate of statistics
+gathering is limited by the size of the flow table and that statistics
+gathering negatively impacts flow setup rate.  More recently, two
+studies~\cite{oflops,ucsdpaper} provided a more in-depth look into
+switch performance across various vendors.  In~\cite{oflops}, the
+authors evaluate 3 commercial switches and observed that switching
+performance is vendor specific and depends on applied operations,
+forwarding table management, and firmware. In ~\cite{ucsdpaper}, the
+authors also studied 3 commercial switches (HP Procurve, Fulcrum,
+Quanta) and found that delay distributions were distinct, mainly due
+to variable control delays.  Our work is complementary with, and more
+general, than these results. We provide in-depth characterization of the impact of
+rule priority structures. We also provide
+low-level explanations of the latency causes.
+
+% However all of the above work was limited in
+% scope and only addressed control path delays \cite{ucsdpaper}, impact
+% of statistics gathering \cite{devoflow} and the performance of general
+% openflow command operations \cite{oflops}. In our work we design a
+% measurement set up that is similar to the one used in \cite{ucsd} and
+% attempt to comprehensively characterize the different components of
+% the flow set up latency on commercially available Broadcom and Intel
+% switch platforms.
+
+% One of the first papers to evaluate the performance of a commercial switch was
+% Devoflow\cite{devoflow}.  
+% The evaluation was done on the HP Procurve 5406z1 switch and the study was
+% aimed primarily at analyzing the various factors that  
+% impact statistics gathering within the switch. The authors show that currently
+% Openflow switches are the primary bottleneck to support the necessary  
+% flow set up and statistics gathering rates for a typical data center network. 
+% It was observed that 
+
+% OFLOPS \cite{oflops} describes a software framework that can be used to
+% evaluate the performance of Openflow switches. More recently \cite{ucsdpaper}
+% designed a software openflow switch emulator. Both the OFLOPS framework and
+% the switch emulator work conducted benchmarking  
+% studies on openflow switch performance. The OFLOPS framework was used to
+% evaluate 3 commercial switches and the authors observed that switching
+% performance is vendor specific and depends on applied operations, forwarding
+% table management and firmware. The \cite{ucsd} work also showed that for 3
+% commercial switches (HP Procurve, Fulcrum, Quanta) there was distinct delay
+% distributions that are due to control path delays.  However all of the above
+% work was limited in scope and only addressed control path delays
+% \cite{ucsdpaper}, impact of statistics gathering \cite{devoflow} and the
+% performance of general openflow command operations \cite{oflops}. In our work
+% we design a measurement set up that is similar to the one used in \cite{ucsd}
+% and attempt to comprehensively characterize the different components of the
+% flow set up latency on commercially available Broadcom and Intel switch
+% platforms.  
+
+% To address the performance issues of the switches several solutions have been
+% proposed. Some approaches are implemented in the control plane or hypervisor  
+% \cite{Cassado}\cite{Seawall} while others primarily involve the data plane.
+
+% Our measurement study clearly shows that the solution choice in the data plane
+% is not trivial since  
+% the switch is the performance bottleneck. Here we focus on data plane related
+% solutions to reduce flow set up latencies.  
+Some studies have consider approaches to mitigate the overhead of SDN
+rule matching and processing. DevoFlow~\cite{devoflow} presents
+a rule cloning solution which reduces the number of controller
+requests being made by the switch by having the controller set up
+rules on aggregate or elephant flows. Mazu's techniques are largely
+complementary to this. 
+% A clone flag is used to indicate if the flow rule should remain
+               % as an aggregate in the flow table or 
+% if it needs to be split into microflows. The ability to split into microflows
+% allows greater visibility into  
+% these flows from a management perspective while at the same time reducing the
+% number of rule set up requests to the controller. The action part of the flow
+% table in the switch can also implement explicit multipath routing and rapid
+% rerouting by manipulating the  
+% rule priorities within the switch. These proposed solutions were evaluated
+% using simulation studies and show some promise but requires modifications to
+% current switch operations. Our measurement study suggests that the
+% implementation of these approaches on  
+% current switches especially the use of priorities may further impact switch performance. 
+DIFANE \cite{difane} reduces flow set up latency by splitting
+pre-installed wild card rules among multiple switches and therefore
+all decisions are still made in the data plane.  However this approach does not
+apply for the kind of applications we are targeting that need to make fast,
+frequent updates/modifications to data plane state. 
+%\aditya{keqiang: check this}
+% reduces the global visibility of flow states and the statistics needed
+% for flow management.  \marina{add a sentence about why our rule
+%   offload and multipath can still maintain global vissibility of the
+%   network}. 
+vCrib~\cite{minlanvcrib} automatically partitions and places rules at both hypervisors and
+switches, but their goal is to reduce computational load on the
+host hypervisor, while we wish to reduce path setup latency by enabling fast
+parallel execution of updates.
+% \marina{add a sentence about how our rule space partition and placement is
+% different from Vcrib,  
+% in terms of reducing the number of rules per partition and number of
+% partitions}.  
+Lastly, Dionysus~\cite{dionysus} optimally schedules a set of rule updates 
+while maintaining desirable consistency properties (e.g., no loops and no
+blackholes). Dionysus assumes the target network state is given, while Mazu
+computes a target network state that spreads rule updates among more switches
+in order to increase parallelism. Thus, we believe that Dionysus and Mazu are
+complementary.
+
+% LocalWords:  SDN Devoflow Procurve Mazu's DIFANE pre hypervisors hypervisor

@@ -1,0 +1,9 @@
+Sep 25, 2015
+
+settings: RTO_min = 10 ms for all TCPs. RWND_INIT=5MSS, RWND_STEP=3/4MSS. MTU=9K, with ovs-dctcp
+
+tcpreno: TCP RENO 
+tcpcubic: TCP CUBIC
+dctcp: DCTCP, clear ECE
+dctcp_keepECE{none,2,3}: DCTCP, keep ECE
+cubic_ECN{none,2}: CUBIC+ECN, clear ECE 

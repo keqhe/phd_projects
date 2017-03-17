@@ -1,0 +1,32 @@
+\section{Conclusion}
+\label{sec:conclusion}
+Critical SDN applications such as fast failover and fine-grained traffic engineering demand
+tight interaction between switch control and data planes. However, our
+measurements across four OpenFlow-based switches show that the
+latencies underlying the generation of control messages (\packetin's)
+and execution of control operations (\flowmod's) can be quite high, and
+variable. We find that the underlying causes are linked both to
+software inefficiencies, as well as pathological interactions between
+switch hardware properties (shared resources and how forwarding rules
+are organized) and the control operation workload (the order of
+operations issues, and concurrent switch activities). 
+Our measurement study highlights the need of careful design of next generation switch silicon 
+and software in order to fully utilize the power of SDN.
+Finally, to mitigate the
+challenges these latencies create for SDN in supporting critical
+management applications, we present three measurement-driven techniques.
+% (1) \emph{flow engineering}, a
+%mechanism to allow management applications to take path setup latency
+%as a second objective, and, (2) {\em rule offloading}, which computes
+%strategies for opportunistically offloading portions of forwarding
+%state to be installed at a switch to other switches downstream from
+%it. 
+Our evaluation shows that these mechanisms can tame flow setup
+latencies effectively, thereby enabling SDN-based control of critical
+applications.
+
+% are very effective. As part of our
+% future work, we would like to incorporate the Mazu framework in controller
+% platforms such as Floodlight.
+
+% LocalWords:  SDN failover Mazu

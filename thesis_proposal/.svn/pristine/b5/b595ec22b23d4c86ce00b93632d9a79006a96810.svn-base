@@ -1,0 +1,71 @@
+\begin{tabular}{|c|r|c|r|c|r|c|r|} \hline
+\multicolumn{4}{|c|}{Capture 1} & \multicolumn{4}{|c|}{Capture 2}\\
+\multicolumn{2}{|c|}{EC2} & \multicolumn{2}{|c|}{Azure} & \multicolumn{2}{|c|}{EC2} & \multicolumn{2}{|c|}{Azure} \\
+\hline
+Common Name & traffic  & Common Name & traffic & Common Name & traffic & Common Name & traffic \\ \hline
+dropbox.com & 592G (83.8\%) & msn.com & 10G (1.49 \%) & dropbox.com & 7G (18.22 \%) & atdmt.com & 3G (7.99 \%) \\
+netflix.com & 8G (1.1 \%) & microsoft.com & 7G (1.1 \%) & bitcasa.com & 2G (7.3 \%) & live.com & 1G (3.75 \%) \\
+sharefile.com & 3G (0.52 \%) & live.com & 7G (0.999 \%) &  netflix.com & 2G (6.13 \%) & microsoft.com & 284M (0.72 \%) \\
+zoolz.com & 3G (0.45 \%) & mesh.com & 4G (0.64 \%) & simcity.com & 1G (3.79 \%) & livefilestore.com & 84M (0.21 \%) \\
+vimeo.com & 2G (0.32 \%) & virtualearth.net & 2G (0.31 \%) & netflix.net & 100M (0.25 \%) & windowsphone.com & 46M (0.12 \%) \\
+foursquare.com &  2G (0.31 \%) & windowsphone.com & 2G (0.29 \%) & kickstarter.com & 55M (0.14 \%) & mesh.com & 43M (0.11 \%) \\
+sourcefire.com & 1G (0.27 \%) & windowsphone-int.com & 2G (0.29 \%) & dmtry.com & 41M (0.1 \%) & msn.com & 31M (0.08 \%) \\
+copperegg.com & 1G (0.21 \%) & hotmail.com & 1G (0.19 \%) & illumina.com & 39M (0.10 \%) & windows.net & 9M (0.02 \%) \\
+zynga.com & 1G (0.15 \%) & windows.net & 1G (0.16 \%) & soundcloud.com & 38M (0.09 \%) & virtualearth.net & 8M (0.02 \%) \\
+syncplicity.com &  816M (0.12 \%) & atdmt.com & 1G (0.15 \%) & dsusw.net & 33M (0.08 \%) & tmocce.com & 7M (0.02 \%) \\
+\hline
+\end{tabular}
+
+
+%cap1 ec2  : 114002073112 total https traffic without dropbox
+%afisher@isengard:/mnt/ssdtmp/afishertmp/cloudmeasure/code/scripts/flowanalysis$ sort -t, -k 2,2n cap1_ec2_domain_grp.csv | tail -11 | tac
+%dropbox.com,592990796103,592G,83.875074548
+%,36009665937,36G,5.09335631305
+%netflix.com,8092280433,8G,1.14460566512
+%sharefile.com,3645592150,3G,0.515647654841
+%zoolz.com,3153990746,3G,0.446113515898
+%vimeo.com,2262259091,2G,0.319983296792
+%foursquare.com,2186212733,2G,0.30922698491
+%sourcefire.com,1905451265,1G,0.269514919877
+%copperegg.com,1485972355,1G,0.210182085238
+%zynga.com,1058475332,1G,0.149715135483
+%syncplicity.com,816910862,816M,0.115547256213
+
+%cap1 azure
+%,12728496847,12G,1.80037131932
+%msn.com,10506799424,10G,1.48612523287
+%microsoft.com,7791130870,7G,1.10200982347
+%live.com,7067041146,7G,0.999591573511
+%mesh.com,4532503163,4G,0.641096022373
+%virtualearth.net,2206836360,2G,0.312144076142
+%windowsphone.com,2041597948,2G,0.288772070681
+%windowsphone-int.com,2041379752,2G,0.288741208135
+%hotmail.com,1360088123,1G,0.192376498013
+%windows.net,1131908588,1G,0.160101839394
+%atdmt.com,1041886040,1G,0.147368677305
+
+%Cap2 ec2
+%,17855273957,17G,44.912862528
+%dropbox.com,7243096172,7G,18.2191650172
+%bitcasa.com,2907930545,2G,7.31456067956
+%netflix.com,2436386722,2G,6.12844710049
+%simcity.com,1508338497,1G,3.79404985466
+%netflix.net,100889005,100M,0.25377454432
+%kickstarter.com,55399588,55M,0.139351212753
+%dmtry.com,41207184,41M,0.103651873089
+%illumina.com,39686859,39M,0.0998276725817
+%soundcloud.com,38156986,38M,0.0959794551923
+%dsusw.net,33602573,33M,0.0845233596175
+
+%Cap2 azure
+%atdmt.com,3176692119,3G,7.99059912371
+%,1601761763,1G,4.02904520186
+%live.com,1492087771,1G,3.75317304568
+%microsoft.com,284448001,284M,0.71549582471
+%livefilestore.com,84640322,84M,0.212902874269
+%windowsphone.com,46396904,46M,0.116706009446
+%mesh.com,43710300,43M,0.109948169918
+%msn.com,31605597,31M,0.0795001990222
+%windows.net,9902191,9M,0.0249078084257
+%virtualearth.net,8436210,8M,0.0212203039225
+%tmocce.com,7917914,7M,0.0199165906862

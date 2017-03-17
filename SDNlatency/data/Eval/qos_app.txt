@@ -1,0 +1,4 @@
+"No" "Base Case" "FE" "FE + Rule Offload"
+"Low Load" 4536.8 1692.8 657.0
+"Medium Load" 10489.7 4991.6 2145.25
+"High Load" 17457.5 9535.0 4169.0

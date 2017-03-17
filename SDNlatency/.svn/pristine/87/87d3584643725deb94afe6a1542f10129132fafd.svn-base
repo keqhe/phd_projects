@@ -1,0 +1,28 @@
+Rate 10:
+total rules inserted successfully: 765
+total delay for these rules: 114446.44
+avg rule insertion delay: 149.603189542
+max rule insertion delay: 1446.048
+min rule insertion delay: 5.287
+
+Rate 20:
+total rules inserted successfully: 765
+total delay for these rules: 2661010.648
+avg rule insertion delay: 3478.4452915
+max rule insertion delay: 16299.134
+min rule insertion delay: 4.353
+
+Rate 30:
+total rules inserted successfully: 765
+total delay for these rules: 5052182.445
+avg rule insertion delay: 6604.16005882
+max rule insertion delay: 24993.309
+min rule insertion delay: 3.951
+
+Rate 50:
+total rules inserted successfully: 765
+total delay for these rules: 7798606.28
+avg rule insertion delay: 10194.2565752
+max rule insertion delay: 33370.577
+min rule insertion delay: 4.584
+

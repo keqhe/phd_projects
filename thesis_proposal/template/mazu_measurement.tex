@@ -1,0 +1,45 @@
+\subsection{Latency Measurements}
+\label{mazu-measure}
+
+In this section, we systematically measure in/outbound latencies to
+understand what factors contribute to high latencies. We generate a variety
+of workloads to isolate specific factors, and we use production switches from
+\numVendors vendors, running switch software with support for OpenFlow
+1.0~\cite{openflow} or, if available, OpenFlow 1.3, to highlight the
+generality of our observations and to understand how software evolution
+impacts latencies.\footnote{When using OpenFlow 1.3 firmware, we
+only leverage features also available in OpenFlow 1.0 for an apples-to-apples comparison.} 
+Henceforth, we refer to the \numCombos hardware and software combinations
+(\tabref{switch_para}) as \Intel, \BroadcomOne, \BroadcomThree, and \IBM.
+To ensure we are experimenting in the optimal regimes for each switch, we take
+into account factors such as flow table capacity and support for \packetin.
+
+\begin{table}
+\centering
+\small
+\begin{tabular}{|l|c|c|c|c|c|}
+\hline
+\bf Model & \bf CPU & \bf RAM & \tabincell{c}{\bf OF\\\bf Ver.} 
+    & \tabincell{c}{\bf Flow\\\bf Table Size} & \bf Ifaces\\ 
+\hline
+\tabincell{l}{Intel\\FM6000} &  2Ghz & 2GB & 1.0 & 4096 
+    & \tabincell{c}{40x10G\\+ 4x40G} \\ 
+\hline
+\multirow{2}{*}{\tabincell{l}{Broadcom \\956846K}} & \multirow{2}{*}{1Ghz} 
+    & \multirow{2}{*}{1GB} & 1.0 & 896 
+    & \multirow{2}{*}{\tabincell{c}{14x10G\\+ 4x40G}}\\ 
+\cline{4-5}
+& & & 1.3 & 1792 (ACL tbl) & \\
+\hline
+\tabincell{l}{IBM\\G8264} &  ? & ? & 1.0 & 750
+    & \tabincell{c}{48x10G \\+ 4x40G} \\ 
+\hline
+\end{tabular}
+\caption{Switch specifications}{\label{switch_para}}
+\end{table}
+
+
+\input{mazu_measure_method_sosr}
+\input{mazu_measure_packet_sosr}
+\input{mazu_measure_flowmod_sosr}
+\input{mazu_measure_summary_sosr}

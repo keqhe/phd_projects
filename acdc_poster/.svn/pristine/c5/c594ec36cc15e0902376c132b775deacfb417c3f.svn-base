@@ -1,0 +1,5 @@
+sockperf_dcn4-dcn7:
+dumbbell 10/5=2Gbps, cubic, rate limiting at 2Gbps
+
+sockperf_dcn5-dcn7
+dctcp, dumbbell, no rate limiting

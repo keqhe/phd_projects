@@ -1,0 +1,32 @@
+\section{Latency Measurements}\label{sec-measure}
+
+\begin{figure}
+\subfloat[with flow\_mod/pkt\_out \label{fig:intel_inbound_test3}]
+  {\includegraphics[width=.45\linewidth]{./figs/jan27_intel_inbound_with_pktout_flowmod_rate200.pdf}}
+\subfloat[w/o flow\_mod/pkt\_out \label{fig:intel_inbound_test3_wo}]
+  {\includegraphics[width=.45\linewidth]{./figs/jan27_intel_inbound_wo_pktout_flowmod.pdf}}
+\topcompactcaption{Inbound delay on Intel switch, flow arrival rate = 200/s}
+\label{fig:inbound-1}
+\end{figure}
+
+
+\begin{figure*}[!tb]
+\centering
+\subfloat[burst size 100, same priority\label{fig:bcm_burst_100_same_pri}]
+  {\includegraphics[width=.24\linewidth]{./figs/jan27_bcm_add_same_burst_100.pdf}}\hfill
+\subfloat[burst size 200, same priority\label{fig:bcm_burst_200_same_pri}]
+  {\includegraphics[width=.24\linewidth]{./figs/jan27_bcm_add_same_burst_200.pdf}}\hfill
+\subfloat[burst size 100, incr. priority\label{fig:bcm_burst_100_incr_pri}]
+  {\includegraphics[width=.24\linewidth]{./figs/jan27_bcm_add_incr_burst_100.pdf}}\hfill
+\subfloat[burst size 200, incr. priority\label{fig:bcm_burst_200_incr_pri}]
+  {\includegraphics[width=.24\linewidth]{./figs/jan27_bcm_add_incr_burst_200.pdf}}
+\topcompactcaption{\BroadcomOne per-rule insertion latency}
+\label{fig:priority-broadcom-insert}
+\end{figure*}
+
+We conduct measurements on four types of switches from three vendors---Broadcom 956846K with OpenFlow 1.0 firmware (\BroadcomOne) and 
+OpenFlow 1.3 firmware (\BroadcomThree), Intel FM6000 (\Intel) and IBM G8264 (\IBM).
+We craft our experiments
+to ensure the latency impact of various factors can be measured directly from the data plane with the exception of packet\_in generation latency.
+\input{measure_packet_imc}
+\input{measure_flowmod_imc}

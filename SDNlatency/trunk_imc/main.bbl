@@ -1,0 +1,128 @@
+\begin{thebibliography}{10}
+
+\bibitem{netprotect}
+Hp network protector sdn application.
+\newblock \url{http://bit.ly/SAWTj1}.
+
+\bibitem{estan:private}
+{Private communication with Cristian Estan}.
+
+\bibitem{fattree-sigcomm08}
+Al-Fares et~al.
+\newblock {A Scalable, Commodity Data Center Network Architecture}.
+\newblock In {\em SIGCOMM}, 2008.
+
+\bibitem{hedera}
+Al-Fares et~al.
+\newblock {Hedera: Dynamic Flow Scheduling for Data Center Networks}.
+\newblock In {\em NSDI}, 2010.
+
+\bibitem{microte}
+Benson et~al.
+\newblock {MicroTE: Fine Grained Traffic Engineering for Data Centers}.
+\newblock In {\em CoNEXT}, 2011.
+
+\bibitem{rethinking}
+Casado et~al.
+\newblock {Rethinking Enterprise Network Control}.
+\newblock {\em IEEE/ACM Trans. Netw.}, 2009.
+
+\bibitem{devoflow}
+Curtis et~al.
+\newblock {DevoFlow: Scaling Flow Management for High-performance Networks}.
+\newblock In {\em SIGCOMM}, 2011.
+
+\bibitem{elastictree}
+Heller et~al.
+\newblock {ElasticTree: Saving Energy in Data Center Networks.}
+\newblock In {\em NSDI}, 2010.
+
+\bibitem{swan}
+Hong et~al.
+\newblock {Achieving High Utilization with Software-driven WAN}.
+\newblock In {\em SIGCOMM}, 2013.
+
+\bibitem{MorleyMobisys2012}
+Huang et~al.
+\newblock {A Close Examination of Performance and Power Characteristics of 4G
+  LTE Networks}.
+\newblock In {\em MobiSys}, 2012.
+
+\bibitem{ucsdpaper}
+Huang et~al.
+\newblock {High-fidelity Switch Models for Software-defined Network Emulation}.
+\newblock In {\em HotSDN}, 2013.
+
+\bibitem{b4}
+Jain et~al.
+\newblock {B4: Experience with A Globally-deployed Software Defined WAN}.
+\newblock In {\em SIGCOMM}, 2013.
+
+\bibitem{softcell}
+Jin et~al.
+\newblock {SoftCell: Scalable and Flexible Cellular Core Network Architecture}.
+\newblock In {\em CoNEXT}, 2013.
+
+\bibitem{onix}
+Koponen et~al.
+\newblock {Onix: A Distributed Control Platform for Large-scale Production
+  Networks}.
+\newblock In {\em OSDI}, 2010.
+
+\bibitem{zupdate}
+Liu et~al.
+\newblock {zUpdate: Updating Data Center Networks with Zero Loss}.
+\newblock In {\em SIGCOMM}, 2013.
+
+\bibitem{mahajan13:hotnets}
+Mahajan et~al.
+\newblock {On Consistent Updates in Software Defined Networks}.
+\newblock In {\em HotNets}, 2013.
+
+\bibitem{openflow}
+McKeown et~al.
+\newblock {OpenFlow: Enabling Innovation in Campus Networks}.
+\newblock {\em ACM SIGCOMM Computer Communication Review}, 2008.
+
+\bibitem{minlanvcrib}
+Moshref et~al.
+\newblock {Scalable Rule Management for Data Centers}.
+\newblock In {\em NSDI}, 2012.
+
+\bibitem{pktgen}
+Olsson et~al.
+\newblock {Pktgen the Linux Packet Generator}.
+\newblock In {\em Proceedings of the Linux Symposium, Ottawa, Canada}, 2005.
+
+\bibitem{ananta}
+Patel et~al.
+\newblock {Ananta: Cloud Scale Load Balancing}.
+\newblock In {\em SIGCOMM}, 2013.
+
+\bibitem{simple}
+Qazi et~al.
+\newblock {SIMPLE-fying Middlebox Policy Enforcement Using SDN}.
+\newblock In {\em SIGCOMM}, 2013.
+
+\bibitem{one-shot}
+Reitblatt et~al.
+\newblock Abstractions for network update.
+\newblock In {\em SIGCOMM}, 2012.
+
+\bibitem{oflops}
+Rotsos et~al.
+\newblock {Oflops: An Open Framework for Openflow Switch Evaluation}.
+\newblock In {\em PAM}, 2012.
+
+\bibitem{difane}
+Yu~et~al.
+\newblock {Scalable Flow-based Networking with DIFANE}.
+\newblock In {\em SIGCOMM}, 2010.
+
+\bibitem{dionysus}
+Xin Jin, Hongqiang Liu, Rohan Gandhi, Srikanth Kandula, Ratul Mahajan, Jennifer
+  Rexford, Roger Wattenhofer, and Ming Zhang.
+\newblock Dionysus: Dynamic scheduling of network updates.
+\newblock In {\em SIGCOMM}, 2014.
+
+\end{thebibliography}

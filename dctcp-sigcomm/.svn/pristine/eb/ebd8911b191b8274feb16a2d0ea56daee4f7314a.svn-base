@@ -1,0 +1,126 @@
+\subsection{Macrobenchmarks}
+\label{macro}
+
+\begin{figure*}[!htb]
+        \centering
+        \begin{subfigure}[b]{0.45\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/macro_benchmarks/macro_4stride/stride4_mice16KB_fct.pdf}
+                \caption{mice flow completion times.}
+                \label{macro_4stride_mice_fct}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.45\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/macro_benchmarks/macro_4stride/stride4_big512MB_fct.pdf}
+                \caption{background flow completion times.}
+                \label{macro_4stride_background_fct}
+        \end{subfigure}
+        \caption{CDF of both mice flows and background flows' FCTs in concurrent stride workload.}
+        \label{macro_4stride_fct}
+\end{figure*}
+
+\begin{figure*}[!htb]
+        \centering
+        \begin{subfigure}[b]{0.45\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/macro_benchmarks/shuffle_17hosts/shuffle_mice16KB_fct.pdf}
+                \caption{mice flow completion times.}
+                \label{macro_shuffle_mice_fct}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.45\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/macro_benchmarks/shuffle_17hosts/shuffle_big512MB_fct.pdf}
+                \caption{background flow completion times.}
+                \label{macro_shuffle_background_fct}
+        \end{subfigure}
+        \caption{CDF of both mice flows and background flows' FCTs in shuffle workload.}
+        \label{macro_shuffle_fct}
+\end{figure*}
+
+\begin{figure*}[!htb]
+        \centering
+        \begin{subfigure}[b]{0.45\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/macro_benchmarks/trace-driven/trace_driven_workload_dctcp_senders5.pdf}
+                \caption{web-search workload.}
+                \label{trace-driven-searching-fct}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.45\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/macro_benchmarks/trace-driven/trace_driven_workload_conga_senders5.pdf}
+                \caption{data-mining workload.}
+                \label{trace-driven-data-mining-fct}
+        \end{subfigure}
+        \caption{CDF of mice flow's (<10KB) FCT in web-search and data-mining workloads.}
+        \label{macro-trace-driven-fct}
+\end{figure*}
+
+
+
+
+To better understand \acdc{}'s benefits for real TCP applications, 
+we wrote TCP
+client/server programs to measure flow completion times.
+First, TCP clients establish long-lived TCP connections with TCP servers. 
+Then each client program sends messages with proper sizes and intervals, 
+either sampled from a distribution (trace-driven) or take user-specified parameters.
+
+\tightparagraph{Concurrent stride workload}
+First, we run a concurrent stride workload---17 servers are attached to a single 10Gbps switch.
+Each server $i$ sends 512MB data to servers [$i+1$, $i+4$]\%17.
+In other words, each server sends 4 concurrent flows and receives 4 concurrent flows.
+Once an elephant flow is finished, the next one is started immediately.
+These elephant flows are used to emulate the background traffic.
+At the same time, each server $i$
+builds a long-lived TCP connection with server $(i+8)\%17$ and sends short messages
+of size 16KB every 100 milliseconds. The experiments for each setting last for 10 mintues.
+Flow completion times for both mice flow (16KB) and background flow (512MB) are shown 
+in Figure~\ref{macro_4stride_fct}. For mice flows, at 50$^{th}$ percentile (i.e., median), DCTCP and \acdc{} 
+reduces flow completion time by 77\% and 76\% respectively. 
+At 99$^{th}$ percentile, DCTCP and \acdc{} reduces flow completion time by 84\% and 85\% respectively. 
+At 99.9$^{th}$ percentile, DCTCP and \acdc{} reduces flow completion time by 91\% and 93\% respectively.
+For background flows, DCTCP and \acdc{} offer similar completion times. 
+Default has longer tail completion times because its throughput fairness is not as 
+good as DCTCP and \acdc{} and a fraction of flows get less throughput and finish slower.
+
+
+\tightparagraph{Shuffle workload}
+Second, we run a shuffle workload. 
+To start the background traffic, each server sends 512MB data to 
+every other server in random order in the testbed. 
+One sender sends to at most 2 receivers at the same time. 
+On each server, once a 512 MB data transfer is finished, the next one is started immediately until 
+all of the data transfers are finished. 
+So in each round, around 139GB data is shuffled. To measure the impact on mice flows, 
+we let server $i$ send short message of fixed size 16KB to server $(i+8)$\%17 
+every 100 milliseconds.
+We run shuffle workload for 30 runs.
+We show both the background and mice flow's flow completion times in Figure~\ref{macro_shuffle_fct}.
+For mice flows, at 50$^{th}$ percentile, DCTCP and \acdc{} reduce flow completion times by 
+72\% and 71\% respectively compared with Default. 
+At 99$^{th}$ percentile, DCTCP and \acdc{} reduce flow completion times 
+by 20\% and 48\% respectively. At 99.9th percentile, DCTCP and \acdc{} 
+reduce flow completion times by 55\% and 73\% respectively.
+For background elephant flows, Default, DCTCP and \acdc{} have almost identical performance.
+
+\tightparagraph{Trace-driven workloads}
+Finally, we run trace-driven workloads to understand how \acdc{} can help reduce flow completion time for realistic workloads. 
+Each physical host in the testbed starts 5 concurrent TCP client processes and 5 concurrent server processes.
+Each client process builds a long-lived TCP connection with every other server process in our testbed.
+For each message, the TCP client process sends to a randomly picking 
+(host, TCP server process) pair, except for the TCP server processes located on the 
+same host as the TCP client, as fast as it can to saturate the network.
+The flow sizes are sampled from two empirical workloads---web-search workload~\cite{alizadeh2011data}
+and data-mining workload~\cite{greenberg2009vl2,alizadeh2014conga} whose flow size distribution is more heavier at the tail.
+For each experiment setting, we run it for 10 minutes and we gathered the flow completion times (FCTs) for tens of millions of flows.
+Figure~\ref{macro-trace-driven-fct} shows the flow completion time CDF for mice flows (whose size is smaller than 10KB) 
+in both web-search workload and data-mining workload.
+In the web-search workload, at 50$^{th}$ percentile, 
+DCTCP and \acdc{} reduce flow completion times by 77\% and 76\% respective. 
+At 99$^{th}$ percentile, DCTCP and \acdc{} reduce flow completion times by 65\% and 57\% respective. 
+At 99.9$^{th}$ percentile, DCTCP and \acdc{} reduce flow completion times by 50\% and 55\% respective.
+In the data-mining workload, at 50$^{th}$ percentile, DCTCP and \acdc{} reduce 
+flow completion times by 72\% and 73\% respective. 
+At 99$^{th}$ percentile, DCTCP and \acdc{} reduce flow completion times by 41\% and 48\% respective. 
+At 99.9$^{th}$ percentile, DCTCP and \acdc{} reduce flow completion times by 36\% and 53\% respective.  
+In both workloads, DCTCP and \acdc{} can improve the fraction of mice flows that can be finished in 1 millisecond significantly.

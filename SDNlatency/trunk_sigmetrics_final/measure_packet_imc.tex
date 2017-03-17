@@ -1,0 +1,31 @@
+\subsection{Inbound Latency}
+\label{s:measure_inbound}
+
+
+%To measure inbound latency, we generate
+%traffic such that \packetin events are generated at a certain rate (i.e., we
+%create packets for new flows at a fixed rate).
+Representative results for inbound latency are shown in
+\figsref{fig:intel_inbound_test3}{fig:intel_inbound_test3_wo}, respectively,
+for the Intel FM6000 switch. For the first experiment, we see that the inbound latency is quite
+variable with a mean of 8.33ms, a median of 0.73ms, and a standard deviation
+of 31.34ms. For the second experiment, the inbound delay is lower (mean of 
+1.72ms, median of 0.67ms) and less variable (standard deviation of 6.09ms). 
+We also observe that inbound latency depends on the \packetin rate: e.g., in
+first experiment the mean is 3.32 ms for 100 flows/s (not shown) vs. 8.33ms
+for 200 flows/s (\figref{fig:intel_inbound_test3}). Our conversations with the switch vendor suggest that
+the limited bus bandwidth between the ASIC and switch CPU is the primary
+factor contributing to inbound latency.
+
+\iffalse
+The only difference between the two experiments is that in the former case
+the switch CPU must process \flowmod and \packetout messages, and send
+forwarding entries and outbound packets across the PCIe bus to the ASIC, in
+addition to generating \packetin messages. As such, we observe that the CPU
+usage is higher when the switch is handling concurrent OpenFlow operations and
+generating more \packetin messages (\tabref{fig:inbound-cpu}). However, since
+the Intel switch features a powerful CPU (\tabref{switch_para}), plenty of
+CPU capacity remains. Our conversations with the switch vendor suggest that
+the limited bus bandwidth between the ASIC and switch CPU is the primary
+factor contributing to inbound latency. 
+\fi

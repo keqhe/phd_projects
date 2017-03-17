@@ -1,0 +1,65 @@
+\section{Introduction}
+\label{intro}
+
+Multi-tenant datacenters are a crucial component of today's computing ecosystem. Large providers, such as Amazon, Microsoft, IBM and Rackspace, support
+a diverse set of customers, applications and systems through their public cloud offerings. These offerings are successful in 
+part because they can provide efficient performance to a wide-class of applications running on a diverse set of platforms. Virtual
+Machines (VMs) play a key role in supporting this diversity by allowing customers to run applications in a wide variety of 
+operating systems and configurations.
+
+And while the flexibility of VMs allows customers to easily move a vast array of applications into the cloud, that same flexibility inhibits the 
+amount of control a cloud provider can yield over VM behavior. For example, a cloud provider may be able to enforce virtual networks or rate-limiting
+on a tenant VM, but it cannot control the TCP/IP stack running on the VM. As the TCP/IP stack considerably impacts overall network performance, it 
+is interesting that cloud providers cannot exert a fine-grained level of control over one of the most important components in the networking stack.
+
+Without having control over the VM TCP/IP stack, datacenter networks remain at the mercy of inefficient, out-dated or misconfigured TCP/IP stacks. TCP
+behavior, specifically congestion control, has been widely studied and many issues have come to light when its behavior is not optimized. For example,
+network congestion caused by non-optimzed stacks can lead to loss, increased latency and reduced throughput. As revenue increasingly is tied to 
+strict latency and bandwidth requirements from workloads such as big data analytics and search (XXX), public cloud providers must ensure their
+network fabrics can provide tight service-level agreements and deadlines required by customer applications.
+
+Thankfully, recent advances in optimizing TCP stacks for datacenter environments have shown that both high throughput and low latency can be 
+achieved through novel TCP congestion control algorithms. Works such as DCTCP and Timely (and others) show great promise in providing high
+bandwidth and low latency by ensuring that network queues in switches do not fill up. And while these stacks are deployed in many of today's 
+datacenters (judd, dctcp, google reference?), ensuring that a vast majority of VMs within a public datacenter will update their TCP stacks
+to this new technology is a daunting, if not impossible task.
+
+In this paper, we explore how operators can regain control of TCP's congestion control, regardless of whether or not the TCP stack
+is running in a VM. Our aim is to allow a public cloud provider to utilize advanced TCP stacks, such as DCTCP, without having
+any control on the VM or requiring any changes in network hardware. We propose implementing congestion control in the virtual switch
+(vSwitch) running on each server. Implementing congestion control within a vSwitch has several advantages. First, vSwitches can easily
+monitor and modify all traffic passing through them. Furthermore, vSwitches can naturally enforce a congestion window determined by 
+a congestion control algorithm running within the vSwitch. Today vSwitch technology is mature and robust, allowing for a fast, scalable,
+and highly-available framework for regaining control over the network. Since vSwitch technology supports software-defined networking (say OVS),
+implementing congestion control within the vSwitch can also naturally support advanced congestion control algorithms, such as centralized 
+or proactive schemes (cite). XXX likely remove last sentence?
+
+Implementing congestion control within the vSwitch has numerous challenges, however. First, great care must be taken to ensure computational
+overhead is low. As per-flow state must be kept by a congestion control algorithm, the solution must also scale in the number of flows. Furthermore,
+TCP stacks running in the VMs may not support features needed by an advanced congestion control algorithm, such as Explicit Congestion Notificaiton (ECN). 
+XXX Think of more? Need precise control over traffic to avoid congestion? TCP stack is complicated, so must ensure that simplified logic is ported
+to vSwitch?
+
+In this paper, we present~\acdc, a new technology that implements TCP congestion control within a vSwitch in order to ensure VM
+TCP performance cannot impact the network in an adverse way. Our scheme provides the following benefits. First,~\acdc allows for 
+administrators to enforce a unified, network-wide congestion control algorithm. When using congestion control algorithms tuned for 
+datacenter environments, this allows for high throughput and low latency, regardless of congestion control algorithms VMs use. Second,
+our system mitigates the impact of varying TCP stacks running on the same fabric. This allows for improved TCP fairness within the network, and additionally
+allows for the co-existence of both ECN and non-ECN capable flows in a seamless manner. Our scheme is easy to implement, lightweight, scalable and flexible, 
+meaning it is compatible with any TCP variant implemented within a VM. 
+
+The contributions of this paper are as follows (XXX, yuck for now):
+\begin{enumerate}
+\item The argument of moving congestion control into the vSwitch in order to regain control over the TCP/IP stack implemented in
+the VM. 
+\item Prototype implementation to show our scheme is effective. We show how to easily obtain the necessary information
+for doing TCP congestion control within the vSwitch and show how to easily influence the TCP stack of the VM in order
+to adhere to an intended congestion control algorithm.
+\item A large set of results, mostly focusing on a case study of implementing DCTCP within the vSwitch. We show~\acdc 
+can track the performance of DCTCP extremely closely in manner scenarios (XXX say some numbers here?).
+\end{enumerate}
+
+The outline of the paper is as follows. Background and motivation in Section XXX. Design in Section XXX. Implementation
+and results in Sections XXx and XXX, respectively. Related work in Section XXX. Discussion in Section XXX. An finally conclude
+in Section XXXX. 
+

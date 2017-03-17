@@ -1,0 +1,24 @@
+\section{Design}
+\label{design}
+
+
+\begin{figure}[t]
+        \centering
+        \begin{subfigure}[b]{0.225\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/new_enforce/new_tput_cwnd_rwnd_cubic_15k.pdf}
+                \caption{MTU = 1500 B}
+                \label{effectiveness_15k}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.225\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/new_enforce/new_tput_cwnd_rwnd_cubic_9k.pdf}
+                \caption{MTU = 9000 B}
+                \label{effectiveness_9k}
+        \end{subfigure}
+        \caption{Using TCP receive window (RWND) can effectively control throughput. 
+		Experiments are conducted on a 10G testbed. TCP CUBIC but Reno shows similar results.
+		Linux 3.18.0. We control maximal RWND value by modifying the receiver's advertised window size in TCP ACKs
+		in the Open vSwitch. We control maximal CWND by specifying ``snd\_cwnd\_clamp" value in Linux TCP.}
+        \label{rwnd_effectiveness}
+\end{figure}

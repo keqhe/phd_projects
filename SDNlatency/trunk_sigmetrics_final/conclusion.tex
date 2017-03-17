@@ -1,0 +1,15 @@
+\section{Conclusion}
+\label{sec:conclusion}
+
+Our measurements across four OpenFlow-based switches show
+that the latencies underlying the generation of control messages
+(pkt\_in’s) and execution of control operations (flow\_mod’s) can
+be quite high, and variable. We find that the underlying causes
+are linked both to software inefficiencies, as well as pathological
+interactions between switch hardware properties (shared resources
+and how forwarding rules are organized) and the control operation
+workload (the order of operations issues, and concurrent switch
+activities). Finally, to mitigate the challenges these latencies create
+for SDN in supporting critical management applications, we
+present three measurement-driven techniques. Our evaluation shows
+that these mechanisms can tame flow setup latencies effectively.

@@ -1,0 +1,6 @@
+
+	         50th TCP RTT       99th          99.9th
+All cubic        3457us             3864us        3934us
+5CCs             3382us             3923us        4000us
+5CCs with ours   146us              246us         306us
+all DCTCP        147us              249us         317us

@@ -1,0 +1,238 @@
+\relax 
+\citation{openflow,rethinking}
+\citation{swan,b4,ananta,simple,elastictree,softcell,zupdate,microte}
+\citation{microte}
+\citation{softcell}
+\citation{onix}
+\citation{ucsdpaper,oflops}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}}
+\newlabel{sec-intro}{{1}{1}}
+\citation{openflow}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Background and Motivation}{2}}
+\newlabel{sec-motivation}{{2}{2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Schematic of an OpenFlow switch. We also show the factors contributing to inbound and outbound latency\relax }}{2}}
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{openflow_switch_delay}{{1}{2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Components of Latency}{2}}
+\citation{softcell}
+\citation{MorleyMobisys2012}
+\citation{netprotect}
+\citation{swan}
+\citation{microte}
+\citation{hedera}
+\citation{openflow}
+\citation{pktgen}
+\citation{oflops}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Motivating Applications}{3}}
+\newlabel{s:apps}{{2.2}{3}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Switch specifications\relax }}{3}}
+\newlabel{switch_para}{{1}{3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Measurement experiment setup. \relax }}{3}}
+\newlabel{experiment_setup}{{2}{3}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Latency Measurements}{3}}
+\newlabel{sec-measure}{{3}{3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Measurement Methodology}{3}}
+\citation{ucsdpaper}
+\newlabel{fig:intel_inbound_test3}{{3a}{4}}
+\newlabel{sub@fig:intel_inbound_test3}{{(a)}{a}}
+\newlabel{fig:intel_inbound_test3_wo}{{3b}{4}}
+\newlabel{sub@fig:intel_inbound_test3_wo}{{(b)}{b}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces {\bf  Inbound delay} on {\bf  Intel\xspace  }, flow arrival rate = 200/s\relax }}{4}}
+\newlabel{fig:inbound-1}{{3}{4}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {with flow\_mod/pkt\_out }}}{4}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {w/o flow\_mod/pkt\_out }}}{4}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces CPU usage on Intel\xspace  \relax }}{4}}
+\newlabel{fig:inbound-cpu}{{2}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Dissecting Inbound Latency}{4}}
+\newlabel{s:measure_inbound}{{3.2}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Dissecting Outbound Delay}{4}}
+\newlabel{s:outbound_meas}{{3.3}{4}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.1}Insertion Latency}{4}}
+\newlabel{s:meas_insert}{{3.3.1}{4}}
+\newlabel{fig:bcm_burst_100_same_pri}{{4a}{5}}
+\newlabel{sub@fig:bcm_burst_100_same_pri}{{(a)}{a}}
+\newlabel{fig:bcm_burst_200_same_pri}{{4b}{5}}
+\newlabel{sub@fig:bcm_burst_200_same_pri}{{(b)}{b}}
+\newlabel{fig:bcm_burst_100_incr_pri}{{4c}{5}}
+\newlabel{sub@fig:bcm_burst_100_incr_pri}{{(c)}{c}}
+\newlabel{fig:bcm_burst_200_incr_pri}{{4d}{5}}
+\newlabel{sub@fig:bcm_burst_200_incr_pri}{{(d)}{d}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces {\bf  BCM-1.0\xspace  } priority per-rule {\bf  insert} latency\relax }}{5}}
+\newlabel{fig:priority-broadcom-insert}{{4}{5}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {burst size 100, same priority}}}{5}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {burst size 200, same priority}}}{5}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {burst size 100, incr. priority}}}{5}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {burst size 200, incr. priority}}}{5}}
+\newlabel{fig:intel_burst_800_incr_pri}{{5a}{5}}
+\newlabel{sub@fig:intel_burst_800_incr_pri}{{(a)}{a}}
+\newlabel{fig:intel_burst_800_decr_pri}{{5b}{5}}
+\newlabel{sub@fig:intel_burst_800_decr_pri}{{(b)}{b}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces {\bf  Intel} priority per-rule {\bf  insert} \relax }}{5}}
+\newlabel{fig:priority-intel-insert}{{5}{5}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {burst size 800, incr. priority}}}{5}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {burst size 800, decr. priority}}}{5}}
+\citation{estan:private}
+\newlabel{fig:bcm_outbound_two_pri_high_low_burstB}{{6a}{6}}
+\newlabel{sub@fig:bcm_outbound_two_pri_high_low_burstB}{{(a)}{a}}
+\newlabel{fig:bcm_outbound_two_pri_low_high_burstB}{{6b}{6}}
+\newlabel{sub@fig:bcm_outbound_two_pri_low_high_burstB}{{(b)}{b}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Overall completion time on {\bf  BCM-1.0\xspace  }. Initial table occupancy is S high (low) priority rules; insert a burst of low (high) priority rules. Averaged over 5 runs. \relax }}{6}}
+\newlabel{fig:burst-completion-time}{{6}{6}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {insert low priority rules into\newline a table with high priority rules}}}{6}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {insert high priority rules into a table with low priority rules}}}{6}}
+\newlabel{fig:bcm_mod_same_burst_100}{{7a}{6}}
+\newlabel{sub@fig:bcm_mod_same_burst_100}{{(a)}{a}}
+\newlabel{fig:bcm_mod_same_burst_200}{{7b}{6}}
+\newlabel{sub@fig:bcm_mod_same_burst_200}{{(b)}{b}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces {\bf  BCM-1.0\xspace  } per-rule {\bf  mod.} latency, same priority\relax }}{6}}
+\newlabel{fig:occupancy-broadcom-modify}{{7}{6}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {100 rules in table }}}{6}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {200 rules in table }}}{6}}
+\newlabel{fig:bcm_mod_incr_burst_100}{{8a}{6}}
+\newlabel{sub@fig:bcm_mod_incr_burst_100}{{(a)}{a}}
+\newlabel{fig:bcm_mod_decr_burst_100}{{8b}{6}}
+\newlabel{sub@fig:bcm_mod_decr_burst_100}{{(b)}{b}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces {\bf  BCM-1.0\xspace  } priority per-rule {\bf  modification} latency\relax }}{6}}
+\newlabel{fig:priority-broadcom-modify}{{8}{6}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {burst size 100, incr. priority}}}{6}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {burst size 100, decr. priority}}}{6}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.2}Modification Latency}{6}}
+\citation{ucsdpaper,oflops}
+\citation{estan:private}
+\newlabel{fig:bcm_del_same_burst_100}{{9a}{7}}
+\newlabel{sub@fig:bcm_del_same_burst_100}{{(a)}{a}}
+\newlabel{fig:bcm_del_same_burst_200}{{9b}{7}}
+\newlabel{sub@fig:bcm_del_same_burst_200}{{(b)}{b}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces  {\bf  BCM-1.0\xspace  } per-rule {\bf  del.} latency, same priority\relax }}{7}}
+\newlabel{fig:occupancy-broadcom-deletion}{{9}{7}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {100 rules in table }}}{7}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {200 rules in table }}}{7}}
+\newlabel{fig:intel_del_same_burst_100}{{10a}{7}}
+\newlabel{sub@fig:intel_del_same_burst_100}{{(a)}{a}}
+\newlabel{fig:intel_del_same_burst_200}{{10b}{7}}
+\newlabel{sub@fig:intel_del_same_burst_200}{{(b)}{b}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces {\bf  Intel\xspace  } per-rule {\bf  del.} latency, same priority\relax }}{7}}
+\newlabel{fig:occupancy-intel-deletion}{{10}{7}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {100 rules in table}}}{7}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {200 rules in table }}}{7}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.3}Deletion Latency}{7}}
+\newlabel{fig:bcm_del_incr_burst_100}{{11a}{7}}
+\newlabel{sub@fig:bcm_del_incr_burst_100}{{(a)}{a}}
+\newlabel{fig:bcm_del_decr_burst_100}{{11b}{7}}
+\newlabel{sub@fig:bcm_del_decr_burst_100}{{(b)}{b}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces {\bf  BCM-1.0\xspace  } priority per-rule {\bf  del.} latency, B=100\relax }}{7}}
+\newlabel{fig:priority-broadcom-deletion}{{11}{7}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {increasing priority}}}{7}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {decreasing priority}}}{7}}
+\newlabel{fig:intel_del_incr_burst_100}{{12a}{7}}
+\newlabel{sub@fig:intel_del_incr_burst_100}{{(a)}{a}}
+\newlabel{fig:intel_del_decr_burst_100}{{12b}{7}}
+\newlabel{sub@fig:intel_del_decr_burst_100}{{(b)}{b}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces {\bf  Intel} priority per-rule {\bf  del.} latency, B=100\relax }}{7}}
+\newlabel{fig:priority-intel-deletion}{{12}{7}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {increasing priority}}}{7}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {decreasing priority}}}{7}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.4}Impact of concurrent switch CPU jobs}{7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Implications}{7}}
+\newlabel{fig:bcm_polling_table0_burst100}{{13a}{7}}
+\newlabel{sub@fig:bcm_polling_table0_burst100}{{(a)}{a}}
+\newlabel{fig:bcm_polling_table500_burst100}{{13b}{7}}
+\newlabel{sub@fig:bcm_polling_table500_burst100}{{(b)}{b}}
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Impact of polling on {\bf  BCM-1.0\xspace  }, B=100\relax }}{7}}
+\newlabel{fig:polling}{{13}{7}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {init. table occupancy 0}}}{7}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {init. table occupancy 500}}}{7}}
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Mazu framework\relax }}{8}}
+\newlabel{fig:framework}{{14}{8}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Mazu Overview}{8}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Handling Inbound Delay}{8}}
+\newlabel{s:inbound}{{5}{8}}
+\citation{swan,simple,minlanvcrib}
+\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Flow engineering example, assuming Broadcom. NL = “N” low priority rules; NH = “H” high priority rules; capacity = 1000 rules. Ingress and egress tables are empty\relax }}{9}}
+\newlabel{fig:flow_eng}{{15}{9}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Minimizing Outbound Delay}{9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Flow Engineering}{9}}
+\newlabel{s:floweng}{{6.1}{9}}
+\citation{microte}
+\citation{swan,b4}
+\citation{minlanvcrib}
+\citation{minlanvcrib}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Rule Offload}{10}}
+\newlabel{s:offload}{{6.2}{10}}
+\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces Rule offloading example\relax }}{10}}
+\newlabel{fig:rule-offload}{{16}{10}}
+\citation{one-shot}
+\citation{mahajan13:hotnets}
+\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces  Recursive Rule Partition Algorithm\relax }}{11}}
+\newlabel{prog:rule-offload}{{17}{11}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Rule Reordering}{11}}
+\newlabel{s:optimal}{{6.3}{11}}
+\citation{microte}
+\citation{one-shot}
+\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces  Peak \%CPU utilization for different {\em  packet\_in}\xspace  generation rate \relax }}{12}}
+\newlabel{peakCPU}{{18}{12}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Evaluation}{12}}
+\newlabel{s:evaluation}{{7}{12}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Inbound Latency}{12}}
+\newlabel{s:eval_inbound}{{7.1}{12}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Outbound Latency}{12}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.2.1}Failover in a Tunneled WAN}{12}}
+\newlabel{s:fe_eval}{{7.2.1}{12}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Workloads used in simulation\relax }}{12}}
+\newlabel{qosTable}{{3}{12}}
+\citation{microte}
+\citation{fattree-sigcomm08}
+\citation{devoflow}
+\citation{oflops,ucsdpaper}
+\citation{oflops}
+\citation{ucsdpaper}
+\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces Worst case flow setup time of affected flows in the failover scenario with BCM-1.0\xspace  switches\relax }}{13}}
+\newlabel{failoverResults}{{19}{13}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.2.2}Two-level Responsive Traffic Engineering}{13}}
+\newlabel{qos_Results}{{20a}{13}}
+\newlabel{sub@qos_Results}{{(a)}{a}}
+\newlabel{qos_intelResults}{{20b}{13}}
+\newlabel{sub@qos_intelResults}{{(b)}{b}}
+\@writefile{lof}{\contentsline {figure}{\numberline {20}{\ignorespaces Worst case flow set up time in the two level traffic engineering scenario\relax }}{13}}
+\newlabel{qosResults}{{20}{13}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Latency on BCM-1.0\xspace switch  }}}{13}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {Latency on Intel\xspace switch  }}}{13}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.2.3}MicroTE}{13}}
+\@writefile{toc}{\contentsline {section}{\numberline {8}Related Work}{13}}
+\newlabel{sec:related}{{8}{13}}
+\citation{devoflow}
+\citation{difane}
+\citation{minlanvcrib}
+\citation{dionysus}
+\bibstyle{plain}
+\bibdata{refs}
+\bibcite{netprotect}{1}
+\bibcite{estan:private}{2}
+\bibcite{fattree-sigcomm08}{3}
+\bibcite{hedera}{4}
+\bibcite{microte}{5}
+\bibcite{rethinking}{6}
+\bibcite{devoflow}{7}
+\bibcite{elastictree}{8}
+\bibcite{swan}{9}
+\bibcite{MorleyMobisys2012}{10}
+\bibcite{ucsdpaper}{11}
+\bibcite{b4}{12}
+\bibcite{softcell}{13}
+\bibcite{onix}{14}
+\bibcite{zupdate}{15}
+\bibcite{mahajan13:hotnets}{16}
+\bibcite{openflow}{17}
+\bibcite{minlanvcrib}{18}
+\bibcite{pktgen}{19}
+\bibcite{ananta}{20}
+\bibcite{simple}{21}
+\bibcite{one-shot}{22}
+\bibcite{oflops}{23}
+\@writefile{lof}{\contentsline {figure}{\numberline {21}{\ignorespaces Flow setup time of MicroTE with and without RO in a Fat Tree (k=8) topology\relax }}{14}}
+\newlabel{microteResults}{{21}{14}}
+\@writefile{toc}{\contentsline {section}{\numberline {9}Conclusion}{14}}
+\newlabel{sec:conclusion}{{9}{14}}
+\@writefile{toc}{\contentsline {section}{\numberline {10}References}{14}}
+\bibcite{difane}{24}
+\bibcite{dionysus}{25}

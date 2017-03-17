@@ -1,0 +1,9 @@
+Sep 26, 2015
+
+verify that OVS-DCTCP can aslo work with MTU 1500
+
+dctcp5flows: DCTCP, official OVS, TRO_min = 10ms
+dctcp5flows2: another 5 runs
+
+ovsdctcp5flows: CUBIC, OVS-DCTCP, RTO_min = 10ms, RWND_INIT = 5MSS, RWND_STEP=MSS
+ovsdctcp5flows2: another 5 runs

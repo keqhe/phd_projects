@@ -1,0 +1,15 @@
+Dec 9, 2015
+
+so, on 1 single switch (means load balancing is perfect)
+we use two traces: dctcp paper's trace (based on brent's techniques) and conga's data mining workload
+
+the number of senders on each server is 3 and 5.
+
+Summary results are in:
+
+percentile.dctcp.senders3
+percentile.dctcp.senders5
+
+percentile.conga.senders3
+percentile.conga.senders5
+

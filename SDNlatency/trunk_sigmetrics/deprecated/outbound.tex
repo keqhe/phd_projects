@@ -1,0 +1,119 @@
+\section{Mitigating the Latency of programming network state}
+
+\iffalse
+
+\aditya{the following three may have to go earlier} 
+
+Recall the 4 steps O1--O4 taken by a switch to process \flowmod
+messages described in \S\ref{s:motivation}. Although TCAMs support far
+lower update rates than reads, updates (step O4) are still quite fast:
+typically each rule write takes well under a fraction of a
+millisecond. However, the non-trivial latencies we observe when
+inserting a burst of equal priority rules (where we see each rule
+insertion taking >2ms on average) indicate that the impact of steps O1
+and O2 appear to be significant. Our conversations with switch vendors
+indicate that software implementations have gotten more
+optimized\footnote{Early implementations of OpenFlow switches were far
+  worse; e.g., the SDK to the underlying chip in first generation
+  OpenFlow switches was never meant to be used to quickly add ACLs to
+  the chip. Rule insert latencies were 10ms or even higher as a
+  result}, but they appear to still be quite far from optimal.
+
+Our measurements with rules having priorities show that step O3 has a
+significant impact on latency. Even if switch software implementations
+improve, the latency imposed due to the memory chip and its SDK are
+likely to remain significant.
+
+%Finally, we note that depending on the switch implementation, it is likely that
+%there may be additional steps involved whose latency impact is not captured by
+%our work. 
+
+Will software implementations improve in the near future such that
+rule update rates improve and latencies in steps 1 and 2 disappear? We
+don't believe so: switch vendors will not put in the software effort
+to get update rates up unless they see them as a
+differentiator. Customers continue to make purchase decisions mostly
+based on line speeds and perhaps flow table sizes, and hence they will
+not get high update rates.  \aditya{the above text can go toward end
+  of section 3, or it can be taken out completely if it seems like it
+  is underplaying our contributions.}.
+
+\fi
+
+% To some extent, this has been optimized in recent switches.
+
+% When a switch receive multiple rules to install in a batch, it may undertake additional steps. These include: 1.1) Commonly used memories, e.g., TCAMs, support update/writes at a much slower rate than reads.
+
+% Our measurements indicate that while 1.1 does not impact latencies, 2.1 and 2.2 do have a telling effect. 
+
+\iffalse
+We describe three Mazu modules for overcoming outbound
+latencies. 
+% The central requirement for our techniques is that they
+% must be applicable to a variety of management of applications as
+% generically as possible. This allows our techniques to be implemented
+% as a library that application can freely leverage to manage the impact
+% of outbound delays without significant changes to application logic.
+% The key insight underlying all our approaches is to modulate the input 
+% provided to a switch such that rule installation latency is minimized 
+% given the underlying latency causes.
+Our approaches deal mainly with rule insertions. To
+handle rule deletions and modifications, we leverage the
+following key ideas based on our measurement results: 
+
+1. {\em Avoid
+  deleting rules:} Rule deletions are expensive across
+all the platforms we measured. Thus, {\em we try to avoid rule deletion}.
+Instead, we simply let them time out (and insert higher priority rules
+to supersede them as needed). 
+
+2. {\em
+  Avoid modifying rules for Broadcom}: Our measurements with both
+Broadcom switches showed that modifying a rule is more expensive than
+inserting a new rule.
+% (the former incurs the cost of potentially
+% reshuffling the entire existing set of rules at the switch, whereas
+% the latter only displaces lower priority rules)
+Therefore, we {\em always insert} a new rule $R'$ for a flow at a switch instead
+of modifying the existing $R$ to $R'$. We ensure $R'$ is of higher priority than $R$
+but lower priority than any $R''$ that overlaps with $R'$ and is
+higher priority than $R$. We simply let $R$ expire (similar to
+above). A nice side-effect of this is that rule priorities
+generally ``stay high'', resulting in lower rule displacements from
+future insertions compared to modifying rules (as only higher priority
+rules can cause displacements in Broadcom). For the Intel switch,
+%and insertion costs are identical, 
+modification latency is small and independent of rule priorities in the flow table, so
+no such provision needs to be made.
+
+
+\fi
+% \subsection{Overview}
+
+% We propose three techniques
+% that can be applied individually or in tandem. These are shown in Figure XXX.
+
+
+% It helps mitigate the unknown
+% impact of additional steps a switch may take. Its
+% effectiveness can be enhanced by using it in combination with the
+% rest of the techniques. \aditya{may need to reword this}  
+
+% a set of application-dependent techniques 
+
+% Outbound delay are impacted by queuing, TCAM reordering and switch firmware
+% processing. To avoid excessive queuing delay, the controller can avoid picking
+% switches with a large number of outstanding flow\_mod messages. TCAM reordering
+% is affected by the rule priorities. To avoid excessive reording delay, we can
+% leverage multiple tables in a single switch or multiple switches so that each
+% TCAM table will only be installed with rules that have a small number of
+% priorities. Due to the asynchrony between the controller state and switch state
+% and the blackbox nature of switch firmware, some portion of outbound delay will
+% not be predictable. We handle this by setting up multiple paths in parallel.
+
+\input{floweng}
+\input{offload}
+%\input{multipath}
+\input{insertion}
+
+% LocalWords:  TCAMs OpenFlow SDK ACLs Mazu Broadcom

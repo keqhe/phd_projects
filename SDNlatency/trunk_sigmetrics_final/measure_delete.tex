@@ -1,0 +1,9 @@
+\subsubsection{Deletion Latency}
+
+For BCM-1.0, BCM-1.3, Intel and IBM, deletion latency is not affected
+by the priorities of rules in the table or the order of deletion.
+However, deletion delay is affected by table occupancy---it decreases with rule number 
+in all the switches we measured. Thus we infer that deletion is incurring TCAM reordering.
+%We also observe that processing rule timeouts at the switch does not
+%noticeably impact \flowmod operations. 
+

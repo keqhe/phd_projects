@@ -1,0 +1,45 @@
+spawn telnet 10.82.64.4 62
+Trying 10.82.64.4...
+Connected to 10.82.64.4 62.
+Escape character is '^]'.
+
+IBM Networking Operating System RackSwitch G8264.
+
+
+Enter  password: 
+
+RS G8264>
+Sep 25 23:03:33 192.168.49.50 NOTICE  mgmt: admin(admin) login from host 10.82.0.1
+enable
+
+Enable privilege granted.
+RS G8264#configure terminal
+Enter configuration commands, one per line.  End with Ctrl/Z.
+RS G8264(config)#show interface port 62 interface-counters
+------------------------------------------------------------------
+Interface statistics for port 62:
+                     ifHCIn Counters       ifHCOut Counters
+Octets:                    501617128           116978812242
+UcastPkts:                   7750924               13532943
+BroadcastPkts:                   406                     94
+MulticastPkts:                  2940                    223
+FlowCtrlPkts:                      0                      0
+PriFlowCtrlPkts:                   0                      0
+Discards:                          0                      0
+Errors:                            0                      0
+
+
+Ingress Discard reasons:                   Egress Discard reasons:
+
+VLAN Discards:                     0       HOL-blocking Discards:              0
+Filter Discards:                   0       MMU Discards:                       0
+Policy Discards:                   0       Cell Error Discards:                0
+Non-Forwarding State:              0       MMU Aging Discards:                 0
+IBP/CBP Discards:                  0       Other Discards:                     0
+
+Empty Egress Portmap:           1083 *
+* Check for "HOL-blocking" discards on associated egress ports
+
+RS G8264(config)#exit
+RS G8264#exit
+Connection closed by foreign host.

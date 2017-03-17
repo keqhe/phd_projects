@@ -1,0 +1,8 @@
+Flow 1: arldcn3  to arldcn5
+Flow 2: arldcn 7 to arldcn9
+
+Everything "official"
+
+Started flow 1 and then ten seconds later, started flow 2. Used nuttcp for traffic generation.
+
+Diamond topolgy, with both flows taking the same path through the diamond.

@@ -1,0 +1,108 @@
+
+\begin{table}
+\begin{scriptsize}
+\begin{tabular}{c|l}
+Notation & Meaning \\
+\hline
+$S$ & Set of all switches
+\\$S_{ToR}$ & Set of all ToR switches
+\\$\tau_{u}$ & Maximum number of flow entries in the switch $u \forall u \in S$
+\\$E$ & Set of all physical links (between two adjacent devices)
+\\$C_e$ & capacity of individual links $\forall e \in E$
+\\$F_{uv}$ & set of all flows from $u$ to $v$ where $u,v \in S$
+\\$P_{uv}$ & Set of paths from device $u$ to device $v$
+\\$K _{uv}$ & Number of paths from device $u$ to $v$ where $u,v \in S$ 
+\\$P^k _{uv}$ & Set of links of $k^{th}$ path from device $u$ to $v$ where $u,v \in S$
+\\$T ^f _{uv}$ & Traffic volume from $u$ to $v$ of flow $f$ where $u,v \in S$
+\\$util$ & maximum link utilization
+\\$I ^{fk} _{uv}$ & Indicator variable denoting that flow $f$ from $u$ to $v$  takes the $k^{th}$ path.
+\\$cost$ & maximum cost of rule installation at any switch
+\\$M$ & priority of all new rules being inserted
+\\$L_s(M)$ & number of rules at switch $s$ of priority lower than $M$
+\\ $a$ & cost of installing a rule it has same priority as rules in table
+\\ $b$ & constant factor used in modeling rule displacement cost.
+\end{tabular}
+\label{tab:notation1}
+\caption{Notation used in flow engineering formulation.}
+\end{scriptsize}
+\end{table}
+
+We explain how flow engineering works for simple traffic engineering SDN
+application. We represent
+the network as a graph \textit{G
+  = (V,E)}, where each node is a switch (or a PoP) and each edge is a physical link (or virtual tunnel). Given a traffic matrix, the application attempts to route it such that the maximum link utilization is minimized. Upon computing routes, the application determines the rules to be installed at individual switches. 
+
+For simplicity, we assume that all the rules to be inserted are of the same priority $M$.  We also assume that the control application knows how many rules in each switch have priority lower than $M$, i.e., $L_s(M)$. This can be easily tracked based on history of rule insertions. The notation we use is shown in Table~\ref{tab:notation1}.
+
+
+{\bf Step 1 - Network Objective:} In the first step we minimize the
+maximum link utilization. Let $T ^f _{uv}$ be the traffic volume
+ of flow \textit{f} between $(u,v)$, $P^k _{uv}$ be the set of links on
+the $k^{th}$ path between (\textit{u,v}). We use a
+binary indicator variable $I ^{fk} _{uv}$ to show whether the flow $f$
+is on path $k$ or not.  $K _{uv}$ denotes the number of equal hop
+length paths between $(u,v)$. 
+
+We have the following capacity constraint: 
+
+% Following are our two
+% constraints. First, The total traffic volume from an edge should not
+% exceed its $C_e$ times the link utilization limit, $util$. 
+
+\begin{scriptsize}	
+\begin{equation*}
+    \sum _{u,v \in S_{ToR},~f \in F_{uv},~k  \in P_{uv}~s.t.~e \in P^k _{uv}} T ^f _{uv} *  I^{fk}_{uv} \leq util \times C_e 
+\end{equation*}
+\end{scriptsize}	
+	
+The following ensures each flow $f$ takes a single path:	
+
+\begin{equation*}
+    \sum _{k  \in P_{uv}} I^{fk}_{uv} = 1 ,\quad \quad \forall u,v \in S_{ToR},~ f \in F_{uv}
+\end{equation*}
+ 
+The objective is to minimize the \textit{util}. Note that we do not
+compute paths in this step, just the value of the objective function;
+suppose the optimal value is $util^*$.
+
+{\bf Step 2 - New Rule Objective:} In second step, we select routes
+so as to minimize the rule installation latencies at any
+switch. We allow some slack wrt meeting the utilization objective; denote it by
+$\delta$. While the second constraint above remains, the capacity
+constraint changes to:
+ 
+% First,  traffic traversing from an edge $e$ does not exceed the $C_e$ multipled by 1 $+$ $\delta$ times the $util^*$. $util^*$ is the maximum link utilization we got from the step 1, and  $\delta$ defines an upper limit on maximum link utilization.
+
+\begin{scriptsize}
+\begin{equation*}
+    \sum _{u,v \in S_{ToR},~f \in F_{uv},~k  \in P_{uv}~s.t.~e \in P^k _{uv}} T ^f _{uv} *  I^{fk}_{uv} \leq (1 + \delta) \times util^* \times C_e 
+\end{equation*}
+\end{scriptsize}
+
+% We have a similar constraint as above for   Second constraint is same as step 1.\\
+  
+% \begin{equation*}
+%       \sum _{k  \in P_{uv}} I^{fk}_{uv} = 1 ,\quad \quad \forall u,v \in S_{ToR},~ f \in F_{uv}
+% \end{equation*}
+ % \begin{alignat*}{2}
+  %                     & latency = a * entries + c \\
+   %                    \text{   where }a \text{ and }c\text{ are constant}\\ 
+  %\end{alignat*}
+
+When a rule installed at a switch cause existing lower priority rules to be displaced, we incur a cost that grows linearly with the number of displaced rules, i.e., $b * L_s(M)$, where $b$ is a constant. This cost adds up linearly when a burst of rules is installed. When the burst of rules installed all have the same priority as rules already in the table, we incur a smaller fixed cost per rule, denoted by $a$. Based on this, we track the total cost of rule installation at a switch as follows:
+%  for each rule installed at the switch, we incur a cost of we incur a co
+% here, we assign a weight ``$a$'' to the number of rules installed and a weight ``$b$'' to the number of rules that need rearrangement:
+\aditya{need to make sure we have justification for
+  this linear function. provide constants based on measurements.}
+
+\begin{scriptsize}
+\begin{equation*}
+                       \sum_{u,v \in S_{ToR}, ~f \in F_{uv}, ~k \in
+                         P_{uv} ~s.t.~ s\in P^k_{uv} } max(a, b * L_s(M)) I^{fk}_{uv}  +
+                       \leq cost \quad \quad \forall s \in S
+\end{equation*}
+\end{scriptsize}
+
+The objective is to minimize $cost$.   
+  
+

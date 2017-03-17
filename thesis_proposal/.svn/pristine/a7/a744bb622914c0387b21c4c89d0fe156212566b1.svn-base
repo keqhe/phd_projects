@@ -1,0 +1,12 @@
+\begin{tabular}{|l|r|r|r|r|r|r|r|} 
+\hline
+& \multicolumn{3}{|c|}{Open}&\multicolumn{3}{|c|}{Closed} & \\ 
+Provider &\multicolumn{1}{|c|}{80}& \multicolumn{1}{|c|}{443} &\multicolumn{1}{|c|}{both} &\multicolumn{1}{|c|}{80}& \multicolumn{1}{|c|}{443}&\multicolumn{1}{|c|}{both} & \multicolumn{1}{|c|}{Total} \\ 
+\hline
+\hline
+Azure & 52,913 & 26,199 & 16,126 & 4,224 & 4,347 & 3,028 & 291,424 \\ \hline
+%Azure & 79112 & 26199 & 8571 & 4347 & 291424 \\ \hline
+%EC2 & 790472 & 250492 & 371504 & 250719 & 2703360 \\ \hline
+EC2 & 539,980 & 250,492 & 220,382 &120,785 & 250,719 & 73,935 & 2,609,101 \\ 
+\hline 
+\end{tabular}

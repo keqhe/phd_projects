@@ -1,0 +1,64 @@
+\begin{abstract}
+  Timely interaction between an SDN controller and switches is crucial
+  to many SDN applications such as fast rerouting during link
+   failure and reactive path setup for latency-sensitive
+  flows. However, our measurement study using three types of production SDN switches 
+  %two vendor platforms\keqhe{three SDN switches}
+  shows that the interaction latencies such as rule installation time
+  are significant. This is due to both software implementation
+  inefficiencies and fundamental traits of underlying hardware. Simulations
+ based on our measurements show that the high latencies render SDN incapable of supporting key control applications.
+ To systematically overcome the latencies and achieve responsive control, we develop a system called
+ Mazu. Mazu eliminates some components of latency, and mitigates others, via a mixture of clever techniques, including offloading certain tasks to proxies, engineering route computations and reordering rules to minimize per-switch update latencies, and spreading rules across switches to enable network-wide parallel updates. Controlled simulations and testbed
+  experiments show that our techniques can reduce the latency to update network state by almost 5X, making SDN-based control suitably responsive for critical management applications.
+%  helping a variety of stringent control applications.
+%   \li{add some results numbers when available}
+
+\iffalse
+  Achieving responsive and efficient network control using SDN relies
+  crucially on the underlying network quickly executing key
+  interactions with the controller, such as generating messages or
+  installing controller-provided rules. Even if individual switches
+  impose undue latencies during such interactions, the logically
+  central view and global control in SDN can facilitate simple schemes
+  to mitigate them and limit the impact on management applications. To
+  inform the design of such mitigation schemes, we conduct a
+  measurement study of latencies involved in key switch interactions
+  with an SDN controller across three vendor platforms. We find that
+  the latencies are significant, and can arise both due to software
+  implementation inefficiencies as well as fundamental traits of
+  underlying hardware. To overcome the latencies and achieve
+  responsive control, we develop three general techniques: physical
+  decoupling of switch-side functionality in processing SDN messages
+  to/from the switch; workload engineering to spread rule updates
+  across paths and within a path in order to cut down installation
+  latency by executing parallel updates; and multipath probing to
+  account for unpredictable latency variation from switch actions that
+  cannot be directly controlled. Controlled simulations and testbed
+  experiments show that our techniques can effectively mitigate
+  latencies and help a variety of stringent control applications.  \fi
+  \iffalse Achieving responsive and efficient network control using
+  SDN relies crucially on the underlying network quickly executing key
+  interactions with the controller, such as generating messages or
+  installing controller-provided rules. Even if individual switches
+  impose undue latencies during such interactions, the logically
+  central view and global control in SDN can facilitate simple schemes
+  to mitigate them and limit the impact on management applications. To
+  inform the design of such mitigation schemes, we conduct a
+  measurement study of latencies involved in key switch interactions
+  with an SDN controller across three vendor platforms. We find that
+  the latencies are significant, and can arise both due to software
+  implementation inefficiencies as well as fundamental traits of
+  underlying hardware. To overcome the latencies and achieve
+  responsive control, we develop three general techniques: physical
+  decoupling of switch-side functionality in processing SDN messages
+  to/from the switch; workload engineering to spread rule updates
+  across paths and within a path in order to cut down installation
+  latency by executing parallel updates; and multipath probing to
+  account for unpredictable latency variation from switch actions that
+  cannot be directly controlled. Controlled simulations and testbed
+  experiments show that our techniques can effectively mitigate
+  latencies and help a variety of stringent control applications.  \fi
+\end{abstract}
+
+% LocalWords:  SDN Mazu middlebox TCAM multipath

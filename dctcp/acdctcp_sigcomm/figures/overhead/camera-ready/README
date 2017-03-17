@@ -1,0 +1,4 @@
+combined: data from both oct 6 and oct 7 (all runs, b/c sometimes mulitple directories in each folder)
+
+
+for f in `echo 100 500 1000 5000 10000`; do echo flows $f; cat monitor_cpu_oct6/acd*-$f//run00*/cpustat-dcn8.txt monitor_cpu_oct7_20runs/acd*-$f/run*/cpustat-dcn8.txt |grep Aver | awk '{s+=$NF}END{print 100-s/NR}'; done

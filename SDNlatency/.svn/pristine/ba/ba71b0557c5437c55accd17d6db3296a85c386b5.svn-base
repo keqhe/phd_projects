@@ -1,0 +1,12 @@
+\subsubsection{Modification Latency}
+
+We observe that the per-rule modification latency on \BroadcomOne and \IBM is 
+impacted purely by table occupancy, not by rule priority structure.
+Conversations with Broadcom indicated that TCAM modification should ideally be fast and independent of table size,
+so the underlying cause appears to be less optimized switch software in \BroadcomOne.
+For \BroadcomThree and \Intel, the per-rule modification delay 
+%is 1 ms respectively 
+is independent of rule priority, table occupancy, and burst size;
+\BroadcomThree's per-rule modification delay is 2X higher than insertion.
+%Indeed, our measurements with \BroadcomThree show that this issue has (at least partly) been fixed.
+

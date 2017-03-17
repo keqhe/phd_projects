@@ -1,0 +1,203 @@
+\section{Background and Motivation}
+\label{background}
+In this section, we first give a brief background of congestion 
+control in datacenter environments. Then we motivate the benefits of moving congestion
+control into the vSwitch. Finally, we discuss how~\acdc{} fits into the scope of a class of related schemes, bandwidth
+allocation. 
+
+\subsection{Datacenter Transport}
+Today's datacenters host many intensive applications like search,
+advertising, analytics and retail that require high bandwidth and low latency.
+%Large tail latencies often violate the tight timing constraints required by SLAs at scale, and
+%have been shown to impact customer experience, result in
+%revenue loss~\cite{alizadeh2011data,dean2013tail}, and degrade application performance~\cite{jang2015silo,qjump}.
+%Tail latencies are often caused by network congestion.
+%The latency of traversing a single switch, NIC and OS network stack is 10--30$\mu$s,
+%2.5--32$\mu$s and 15$\mu$s respectively, but a congested port
+%on a network switch can consume significant shared memory, causing orders-of-magnitude
+%higer latency~\cite{rumble2011s}.
+Congestion is caused by many reasons such as imperfect load balancing~\cite{al2010hedera},
+network upgrades, failures or oversubscription and its occurance in
+datacenters today is not rare. For example, Google reported that in their datacenter fabric
+congestion-based drops were observed when the network utilization approached 25\%~\cite{singh2015jupiter}.
+Other studies have shown high variance and substantial increase in the 99.9$^{th}$ percentile latency
+for round-trip times in today's datacenters~\cite{wang2010impact,mogul2015inferring}. 
+Large tail latencies have been shown to impact customer experience, result in
+revenue loss~\cite{alizadeh2011data,dean2013tail}, and degrade application performance~\cite{jang2015silo,qjump}.
+Therefore, significant motivation exists to ensure the impact of congestion is reduced in datacenter fabrics.
+
+%Studies have shown that while CUBIC can achieve
+%high bandwidth, it does so at the cost of aggressively filling up the switch buffers in the network.
+TCP, specifically its congestion control algorithm, is
+known to significantly impact network performance.
+As a result, datacenter TCP performance has been widely
+studied and many new protocols have been proposed~\cite{alizadeh2011data, stephens2014practical, wu2010ictcp,
+mittal2015timely, jose2015high}. Specifically, DCTCP~\cite{alizadeh2011data} achieves high throughput and low
+latency by adjusting a TCP sender's rate based on the fraction of packets that experience congestion. In DCTCP,
+switches are configured to mark packets with an ECN bit when their queue lengths exceed a threshold. By proportionally
+adjusting the rate of the sender based on the fraction of ECN bits received, DCTCP can keep queue lengths low while
+allowing flows to maintain high throughput, while simultaneously increasing fairness and stability over other schemes.
+~\eric{cite} 
+
+
+\subsection{vSwitch-based Congestion Control}
+In this work, we do not propose a new datacenter congestion control algorithm, rather we investigate
+if congestion control can be moved to the vSwitch.
+In a public datacenter environment where
+VMs may deploy non-optimized TCP stacks, implementing congestion control in the vSwitch can provide an element of control without cooperation from
+VMs. This is an important criteria in untrusted environments or simply in cases where tenants cannot update their TCP stack due to
+various constraints (such as not being able to update their OS or a dependence on a certain library). This design point affords
+many benefits in the datacenter.~\eric{Judd paper says not all can be updated to DCTCP}
+\keqiang{yes, so put a citation at the end of second last sentence of this para?}
+
+As outlined in the previous subsection, enforcing a datacenter-specific congestion control algorithm can mitigate the
+impact of congestion while maintaining high throughput in the network. For example, DCTCP can effectively limit 
+queueing latencies in the network. Allowing administrators to enforce an optimized congestion control without
+changing the VM is the first major benefit of our scheme.
+
+The next major benefit is moving congestion control to the vSwitch allows for a {\em unified}
+congestion control algorithm to be implemented throughout the datacenter.
+Ensuring all tenants have the same stack can help limit unfairness in the network. Unfairness arises
+when stacks are handled differently in the fabric or when conservative and aggressive
+stacks coexist. In~\cite{judd2015nsdi}, it is shown ECN and non-ECN flows~\keqiang{ECT vs ECN, which is better?} do not exist gracefully on the
+same fabric because packets belonging to non-ECN flows encounter severe packet drops when their packets
+exceed queue thresholds. Ideally, tenants shouldn't suffer based on a such a simple configuration issue.
+Additionally, stacks with different congestion control algorithms may not gracefully coexist on the same fabric.
+For example, Figure~\ref{tput_fairness_coexistence} shows the performance of five different TCP flows over the topology in
+Figure~\ref{dumbbell_topology}. Each flow has a different congestion control algorithm, all of which are available in today's Linux
+distribution. In this case the more aggressive stacks like TCP Illinois and TCP HighSpeed
+always achieve higher bandwidth. A tenant with the same standing as another tenant in the datacenter should not be able
+to achieve higher bandwidth by simply altering their stack.
+
+Another benefit of moving congestion control to the vSwitch is it allows for different congestion control algorithms to be used on
+a per-flow basis. Currently, all flows within a VM are tied to the same congestion control algorithm. This severely limits
+flexibility and forces tenants to optimize the performance a certain set of flows. For example, a web server may choose a TCP stack that optimizes
+WAN performance~\keqiang{e.g., Compound TCP}, instead of the back-end performance within the datacenter. As studies have shown that TCP can be optimized for datacenters~\cite{alizadeh2011data, stephens2014practical, wu2010ictcp,
+mittal2015timely, jose2015high}, WAN environments~\keqiang{cite Compound TCP?}, and even
+~\eric{one more example, wireless/60Ghz/free-space optics?}, selecting a per-flow TCP stack has the potential to
+enhance network performance. By moving congestion control to the vSwitch, administrators can assign a specific congestion control
+algorithm to each flow, optimizing the network performance of its clients in a seamless manner.~\eric{Also add QoS-based CC
+stuff here, since we have something.}
+
+Congestion control functionality is easy to port. Note that while the entire TCP stack may seem complicated and prone to high-overhead,i
+the congestion control aspect of TCP is relatively light-weight and easy to implement. Indeed, studies have
+shown that most overhead comes from TCP's buffer management~\cite{optimize-tcp-receive}. The actual congestion control implementations in Linux
+are modular: Linux DCTCP congestion control resides in {\tt tcp\_dctcp.c} and is only about 350 lines of code. Given
+the simplicity of congestion control, it is relatively easy to move its functionality to another
+layer. In~\acdc{}, we don't modify VMs so congestion control is run both in the vSwitch and in the VM. However, because congestion
+control is light-weight, the penalty imposed for running it twice is low: our benchmarks in \cref{micro} show the computational overhead of our scheme is less than 2\%.~\keqiang{4\%??}
+
+~\eric{agnostic to UDP or TCP? Can rate-limit both?}
+
+\subsection{Tenant Level Bandwidth Allocation}
+Public cloud administrators not only have to worry about controlling congestion in the
+presence of arbitrary traffic patterns from untrusted VMs, they also have to find ways to
+isolate the performance of different tenants and applications. This is to ensure that one
+tenant or application cannot take an unfair share of the common network resource.
+Transport layer schemes such as DCTCP can control network congestion but they do not
+provide fair bandwidth allocation among tenants. It's because TCP's congestion control
+attempts to achieve fair sharing of available bandwidth across all competing flows in a
+tenant agnostic manner. Therefore, a tenant with more concurrent flows ends up getting
+higher share of the network bandwidth than a tenant with fewer active flows. The
+situation is further worsened by UDP flows since they are not subjected to any transport
+level congestion control.
+
+In order to provide a degree of performance isolation in the network, datacenter operators can implement
+a variety of bandwidth allocation schemes. 
+Simple static rate limiters found
+on many default public cloud images enforce an upper-bound on the bandwidth available
+to different classes of VMs.
+% Congestion can occur when the cumulative bandwidth from a set of
+%senders exceeds the bandwidth of a network link (incast is a special case). Consider the topology in Figure~\ref{dumbbell_topology},  
+%with 5 flows traversing a bottleneck 10 Gbps link. Even in the case of a "perfect" allocation, where each flow is statically limited to 10 Gbps/5 flows = 2 Gbps,
+%the latency caused by queueing heavily depends on the deployed TCP stack. We show this in Figure~\eric{cubic-fill}.
+%CUBIC~\cite{ha2008cubic}, the default TCP congestion control algorithm in Linux, will aggressively fill
+%the buffer of the congested output port, causing latencies to significantly increase. DCTCP, however, is able
+%to keep buffers low~\cite{alizadeh2011data}, allowing for a queueing latency that is an order of magnitude lower than CUBIC's. These differences exist despite the fact
+%that each scheme is able to achieve the same throughput over the congested link (Section~\ref{results}~\eric{Table 1}).
+%Note that in Figure~\ref{cubic-fill}, DCTCP is run in the absence of a static rate limiter, meaning that it is effective
+%in mitigating congestion's impact on latency. 
+More complex performance isolation schemes investigate how to allocate network bandwidth in datacenter
+networks by either guarenteeing or proportionally
+allocating bandwidth for tenants~\cite{rodrigues2011gatekeeper,Ballani2011oktopus,jeyakumar2013eyeq,shieh2011sharing,
+Guo2010Secondnet,Popa2012Faircloud,Xie2012Proteus,Lam2012NetShare,jang2015silo}. 
+Some of these schemes share architechural similarities to~\acdc{}. For example, EyeQ~\cite{jeyakumar2013eyeq} provides a
+single dedicated switch abstraction for tenant VMs and handles bandwidth allocation at
+the edge with a work-conserving distributed bandwidth arbitration scheme. It enforces
+rate limits at senders based on feedback generated by the receivers. Similarly, Seawall~\cite{shieh2011sharing}
+provides proportional bandwidth allocation to a VM or application by tunnneling all
+traffic through a congestion controlled tunnel that is configured through sender
+and receiver feedback.
+
+The fundamental difference between these schemes and our approach is that the different design
+goals determine the granularity on which they operate. 
+These schemes focus on {\em bandwidth allocation} on a VM-level, and
+themselves are not sufficient to relieve the network of congestion because they do not
+operate on flow-level granularity. In fact, bandwidth allocation schemes attempt to provide tenant level performance isolation
+regardless of the tenant transport stack and protocol, even though the stack has a large impact on congestion. 
+Furthermore, the single switch abstraction
+in EyeQ~\cite{jeyakumar2013eyeq} and Gatekeeper~\cite{rodrigues2011gatekeeper} explicitly assumes a congestion free 
+fabric for optimal bandwidth allocation between pairs of VMs. This abstraction doesn't hold in multi-pathed
+topologies, when loss or ECMP hash collisions cause congestion in the core. A pair of VMs may have
+multiple flows communicating between them, each of which traverses its own path (thanks to ECMP). Therefore,
+enforcing rate limits on a VM-to-VM level cannot easily determine how specific flows should adapt in
+order to mitigate the impact of congestion. Furthermore, a scheme like Seawall~\cite{shieh2011sharing}
+cannot be easily applied to flow-level granularity because
+its rate-limiters are unlikely to scale in the number of flows at high networking speeds~\cite{radhakrishnan2014senic}
+and its allocation scheme does not run at fine-grained round-trip
+timescales required for effective congestion control.~\eric{add other works besides
+Seawall here?} Additionally, Seawall violates our design
+principle by requiring modifications to tenant VMs to enforce their congestion controlled tunnels.
+
+%Three bandwidth allocation schemes, EyeQ~\cite{jeyakumar2013eyeq}, Gatekeeper~\cite{rodrigues2011gatekeeper} and Seawall~\cite{shieh2011sharing}
+%use congestion control techniques to provide bandwidth guarentees. At a high-level, these schemes employ
+%VM-to-VM tunnels that partition bandwidth at the network edge (EyeQ) or proportionally allocate bandwidth
+%over network links (Seawall). In addition, both EyeQ and Seawall are designed to adapt to network congestion
+%by analyzing the fraction of packets marked with ECN bits to adjust the rates imposed on the VM-to-VM tunnels. 
+%VM-to-VM tunnels are not fine-grained enough to effective mitigate queueing latencies caused by congestion.
+%For example, datacenter topologies typically contain multiple paths from a source to a destination. Therefore,
+%if a VM has multiple flows to another VM, those flows may take seperate paths (thanks to ECMP). By combining all flows
+%over a single logical VM-to-VM tunnel, the proportion of packets experiencing congestion gets muddled. Flows that
+%are not experiencing any congestion get their rates reduced unneccesarrily. Flows that are experiencing congestion
+%do not reduce their rates fast enough.~\eric{i know this needs work} 
+
+\eric{Seawall talk mentioned O($10^5$) new tasks per minute. Can we make something more concrete above?}
+
+%\begin{figure}[th]
+%        \centering
+%  \includegraphics[width=0.45\textwidth]{figures/motivation/motivation_2Gbps_cubic_rl_dctcp_sockperf.pdf}
+%        \caption{CDF of round-trip times showing that CUBIC fills buffers. DCTCP keeps them low.}
+%        \label{cubic-fill}
+%\end{figure}
+
+
+
+\subsection{Bandwidth Allocation with Transport Control}
+In this work, we claim that public datacenter administrators can not relinquish
+congestion control to tenant VM transport stacks and solely rely on bandwidth arbitration
+to achieve low latency and high utilization in the network fabric. It is important for a
+cloud provider to control both congestion control and bandwidth allocation aspects of the
+problem. The first is important to manage congestion and queue build up in the network
+fabric and the second is important to enforce tenant level resource limits. We also
+argue that effective congestion management in the fabric requires per-flow level control
+knobs at RTT time scales that are only possible in the transport layer. Therefore, its
+important for cloud providers to be able to exercise a desired transport level congestion
+control policy in the presence of unmanaged and untrusted transport stacks in customer
+VMs.
+
+~\acdc{} is the first work that advocates moving transport level congestion control logic
+out of the VM TPC stacks and in to the hypervisor~\keqiang{too strong claim?}. 
+A key design constraint of~\acdc{} is
+to make it modular in nature so it can co-exist with any bandwidth allocation scheme.
+We see the two aspects as complimentary and claim that an administrator should be able to
+combine any congestion control policy (\eg{}, DCTCP) with any bandwidth allocation (\eg{},
+EyeQ) scheme. This means that our scheme should work with a variety of bandwidth
+allocation schemes and their associated rate-limiters (and also in the absence of both).
+In order to achieve this goal,~\acdc{} satisfies a variety of constraints. First, it is
+computationally light-weight in order to minimize the overhead of its adoption. Second,
+it doesn't require any changes to VMs or network hardware so it can be deployed in
+current and future networks. Third, our scheme works in the absence of specific topology
+information and works over arbitrary topologies. Fourth, it does not require
+administrators to possess information about tenant traffic patterns, VM placement, or
+flow demands.
+

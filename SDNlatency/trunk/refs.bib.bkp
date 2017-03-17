@@ -1,0 +1,386 @@
+@article{openflow,
+ author = {McKeown, Nick and Anderson, Tom and Balakrishnan, Hari and Parulkar, Guru and Peterson, Larry and Rexford, Jennifer and Shenker, Scott and Turner, Jonathan},
+ title = {OpenFlow: Enabling Innovation in Campus Networks},
+ journal = {SIGCOMM Comput. Commun. Rev.},
+ issue_date = {April 2008},
+ volume = {38},
+ number = {2},
+ month = mar,
+ year = {2008},
+ issn = {0146-4833},
+ pages = {69--74},
+ numpages = {6},
+ url = {http://doi.acm.org/10.1145/1355734.1355746},
+ doi = {10.1145/1355734.1355746},
+ acmid = {1355746},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {ethernet switch, flow-based, virtualization},
+} 
+
+
+@article{rethinking,
+ author = {Casado, Mart\'{\i}n and Freedman, Michael J. and Pettit, Justin and Luo, Jianying and Gude, Natasha and McKeown, Nick and Shenker, Scott},
+ title = {Rethinking Enterprise Network Control},
+ journal = {IEEE/ACM Trans. Netw.},
+ issue_date = {August 2009},
+ volume = {17},
+ number = {4},
+ month = aug,
+ year = {2009},
+ issn = {1063-6692},
+ pages = {1270--1283},
+ numpages = {14},
+ url = {http://dx.doi.org/10.1109/TNET.2009.2026415},
+ doi = {10.1109/TNET.2009.2026415},
+ acmid = {1618582},
+ publisher = {IEEE Press},
+ address = {Piscataway, NJ, USA},
+ keywords = {architecture, management, network, security},
+} 
+
+@inproceedings{b4,
+  title={B4: Experience with a globally-deployed software defined WAN},
+  author={Jain, Sushant and Kumar, Alok and Mandal, Subhasree and Ong, Joon and Poutievski, Leon and Singh, Arjun and Venkata, Subbaiah and Wanderer, Jim and Zhou, Junlan and Zhu, Min and others},
+  booktitle={Proceedings of the ACM SIGCOMM 2013 conference on SIGCOMM},
+  pages={3--14},
+  year={2013},
+  organization={ACM}
+}
+
+@inproceedings{swan,
+  title={Achieving high utilization with software-driven WAN},
+  author={Hong, Chi-Yao and Kandula, Srikanth and Mahajan, Ratul and Zhang, Ming and Gill, Vijay and Nanduri, Mohan and Wattenhofer, Roger},
+  booktitle={Proceedings of the ACM SIGCOMM 2013 conference on SIGCOMM},
+  pages={15--26},
+  year={2013},
+  organization={ACM}
+}
+
+
+@inproceedings{ananta,
+  title={Ananta: cloud scale load balancing},
+  author={Patel, Parveen and Bansal, Deepak and Yuan, Lihua and Murthy, Ashwin and Greenberg, Albert and Maltz, David A and Kern, Randy and Kumar, Hemant and Zikos, Marios and Wu, Hongyu and others},
+  booktitle={Proceedings of the ACM SIGCOMM 2013 conference on SIGCOMM},
+  pages={207--218},
+  year={2013},
+  organization={ACM}
+}
+
+
+@inproceedings{onix,
+ author = {Koponen, Teemu and Casado, Martin and Gude, Natasha and Stribling, Jeremy and Poutievski, Leon and Zhu, Min and Ramanathan, Rajiv and Iwata, Yuichiro and Inoue, Hiroaki and Hama, Takayuki and Shenker, Scott},
+ title = {Onix: A Distributed Control Platform for Large-scale Production Networks},
+ booktitle = {Proceedings of the 9th USENIX Conference on Operating Systems Design and Implementation},
+ series = {OSDI'10},
+ year = {2010},
+ location = {Vancouver, BC, Canada},
+ pages = {1--6},
+ numpages = {6},
+ url = {http://dl.acm.org/citation.cfm?id=1924943.1924968},
+ acmid = {1924968},
+ publisher = {USENIX Association},
+ address = {Berkeley, CA, USA},
+} 
+
+@inproceedings{simple,
+ author = {Qazi, Zafar Ayyub and Tu, Cheng-Chun and Chiang, Luis and Miao, Rui and Sekar, Vyas and Yu, Minlan},
+ title = {SIMPLE-fying Middlebox Policy Enforcement Using SDN},
+ booktitle = {Proceedings of the ACM SIGCOMM 2013 Conference on SIGCOMM},
+ series = {SIGCOMM '13},
+ year = {2013},
+ isbn = {978-1-4503-2056-6},
+ location = {Hong Kong, China},
+ pages = {27--38},
+ numpages = {12},
+ url = {http://doi.acm.org/10.1145/2486001.2486022},
+ doi = {10.1145/2486001.2486022},
+ acmid = {2486022},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {middlebox, network management, software-defined networking},
+} 
+
+@inproceedings{elastictree,
+  title={ElasticTree: Saving Energy in Data Center Networks.},
+  author={Heller, Brandon and Seetharaman, Srinivasan and Mahadevan, Priya and Yiakoumis, Yiannis and Sharma, Puneet and Banerjee, Sujata and McKeown, Nick},
+  booktitle={NSDI},
+  volume={3},
+  pages={19--21},
+  year={2010}
+}
+
+@inproceedings{softcell,
+ author = {Jin, Xin and Li, Li Erran and Vanbever, Laurent and Rexford, Jennifer},
+ title = {SoftCell: Scalable and Flexible Cellular Core Network Architecture},
+ booktitle = {Proceedings of the Ninth ACM Conference on Emerging Networking Experiments and Technologies},
+ series = {CoNEXT '13},
+ year = {2013},
+ isbn = {978-1-4503-2101-3},
+ location = {Santa Barbara, California, USA},
+ pages = {163--174},
+ numpages = {12},
+ url = {http://doi.acm.org/10.1145/2535372.2535377},
+ doi = {10.1145/2535372.2535377},
+ acmid = {2535377},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {architecture design, cellular core networks, software-defined networking},
+} 
+
+
+
+@article{zupdate,
+ author = {Liu, Hongqiang Harry and Wu, Xin and Zhang, Ming and Yuan, Lihua and Wattenhofer, Roger and Maltz, David},
+ title = {zUpdate: Updating Data Center Networks with Zero Loss},
+ journal = {SIGCOMM Comput. Commun. Rev.},
+ issue_date = {October 2013},
+ volume = {43},
+ number = {4},
+ month = aug,
+ year = {2013},
+ issn = {0146-4833},
+ pages = {411--422},
+ numpages = {12},
+ url = {http://doi.acm.org/10.1145/2534169.2486005},
+ doi = {10.1145/2534169.2486005},
+ acmid = {2486005},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {congestion, data center network, network update},
+} 
+
+@inproceedings{microte,
+ author = {Benson, Theophilus and Anand, Ashok and Akella, Aditya and Zhang, Ming},
+ title = {MicroTE: Fine Grained Traffic Engineering for Data Centers},
+ booktitle = {Proceedings of the Seventh COnference on Emerging Networking EXperiments and Technologies},
+ series = {CoNEXT '11},
+ year = {2011},
+ isbn = {978-1-4503-1041-3},
+ location = {Tokyo, Japan},
+ pages = {8:1--8:12},
+ articleno = {8},
+ numpages = {12},
+ url = {http://doi.acm.org/10.1145/2079296.2079304},
+ doi = {10.1145/2079296.2079304},
+ acmid = {2079304},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {data center network, traffic engineering},
+} 
+
+@inproceedings{oflops,
+  title={Oflops: An open framework for openflow switch evaluation},
+  author={Rotsos, Charalampos and Sarrar, Nadi and Uhlig, Steve and Sherwood, Rob and Moore, Andrew W},
+  booktitle={Passive and Active Measurement},
+  pages={85--95},
+  year={2012},
+  organization={Springer}
+}
+
+@inproceedings{ucsdpaper,
+ author = {Huang, Danny Yuxing and Yocum, Kenneth and Snoeren, Alex C.},
+ title = {High-fidelity Switch Models for Software-defined Network Emulation},
+ booktitle = {Proceedings of the Second ACM SIGCOMM Workshop on Hot Topics in Software Defined Networking},
+ series = {HotSDN '13},
+ year = {2013},
+ isbn = {978-1-4503-2178-5},
+ location = {Hong Kong, China},
+ pages = {43--48},
+ numpages = {6},
+ url = {http://doi.acm.org/10.1145/2491185.2491188},
+ doi = {10.1145/2491185.2491188},
+ acmid = {2491188},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {modeling, openflow, sdn, software-defined networking},
+} 
+
+
+@inproceedings{minlanvcrib,
+  title={vCRIB: virtualized rule management in the cloud},
+  author={Moshref, Masoud and Yu, Minlan and Sharma, Abhishek and Govindan, Ramesh},
+  booktitle={Proceedings of the 4th USENIX conference on Hot Topics in Cloud Ccomputing},
+  pages={23--23},
+  year={2012},
+  organization={USENIX Association}
+}
+
+
+@inproceedings{flowvisor,
+  title={Can the production network be the testbed?},
+  author={Sherwood, Rob and Gibb, Glen and Yap, Kok-Kiong and Appenzeller, Guido and Casado, Martin and McKeown, Nick and Parulkar, Guru M},
+  booktitle={OSDI},
+  volume={10},
+  pages={1--14},
+  year={2010}
+}
+
+
+@inproceedings{mahajan13:hotnets,
+ author = {Mahajan, Ratul and Wattenhofer, Roger},
+ title = {On Consistent Updates in Software Defined Networks},
+ booktitle = {Proceedings of the Twelfth ACM Workshop on Hot Topics in Networks},
+ series = {HotNets-XII},
+ year = {2013},
+ isbn = {978-1-4503-2596-7},
+ location = {College Park, Maryland},
+ pages = {20:1--20:7},
+ articleno = {20},
+ numpages = {7},
+ url = {http://doi.acm.org/10.1145/2535771.2535791},
+ doi = {10.1145/2535771.2535791},
+ acmid = {2535791},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+}
+
+
+@misc{
+    onepk,
+    title = "Cisco's {O}ne {P}latform {K}it (one{PK})",
+    howpublished = {\url{http://www.cisco.com/en/US/prod/iosswrel/onepk.html}}
+}
+
+
+@inproceedings{devoflow,
+ author = {Curtis, Andrew R. and Mogul, Jeffrey C. and Tourrilhes, Jean and Yalagandula, Praveen and Sharma, Puneet and Banerjee, Sujata},
+ title = {DevoFlow: Scaling Flow Management for High-performance Networks},
+ booktitle = {Proceedings of the ACM SIGCOMM 2011 Conference},
+ series = {SIGCOMM '11},
+ year = {2011},
+ isbn = {978-1-4503-0797-0},
+ location = {Toronto, Ontario, Canada},
+ pages = {254--265},
+ numpages = {12},
+ url = {http://doi.acm.org/10.1145/2018436.2018466},
+ doi = {10.1145/2018436.2018466},
+ acmid = {2018466},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {data center, flow-based networking, switch design},
+} 
+
+
+@article{classbench,
+ author = {Taylor, David E. and Turner, Jonathan S.},
+ title = {ClassBench: A Packet Classification Benchmark},
+ journal = {IEEE/ACM Trans. Netw.},
+ issue_date = {June 2007},
+ volume = {15},
+ number = {3},
+ month = jun,
+ year = {2007},
+ issn = {1063-6692},
+ pages = {499--511},
+ numpages = {13},
+ url = {http://dx.doi.org/10.1109/TNET.2007.893156},
+ doi = {10.1109/TNET.2007.893156},
+ acmid = {1295239},
+ publisher = {IEEE Press},
+ address = {Piscataway, NJ, USA},
+ keywords = {communication systems, computer network performance, packet classification, packet switching},
+}
+
+@inproceedings{fattree-sigcomm08,
+ author = {Al-Fares, Mohammad and Loukissas, Alexander and Vahdat, Amin},
+ title = {A Scalable, Commodity Data Center Network Architecture},
+ booktitle = {Proceedings of the ACM SIGCOMM 2008 Conference on Data Communication},
+ series = {SIGCOMM '08},
+ year = {2008},
+ isbn = {978-1-60558-175-0},
+ location = {Seattle, WA, USA},
+ pages = {63--74},
+ numpages = {12},
+ url = {http://doi.acm.org/10.1145/1402958.1402967},
+ doi = {10.1145/1402958.1402967},
+ acmid = {1402967},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {data center topology, equal-cost routing},
+}
+
+@inproceedings{difane,
+ author = {Yu, Minlan and Rexford, Jennifer and Freedman, Michael J. and Wang, Jia},
+ title = {Scalable Flow-based Networking with DIFANE},
+ booktitle = {Proceedings of the ACM SIGCOMM 2010 Conference},
+ series = {SIGCOMM '10},
+ year = {2010},
+ isbn = {978-1-4503-0201-2},
+ location = {New Delhi, India},
+ pages = {351--362},
+ numpages = {12},
+ url = {http://doi.acm.org/10.1145/1851182.1851224},
+ doi = {10.1145/1851182.1851224},
+ acmid = {1851224},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {access control, network architecture, openflow, scalability},
+}
+
+@inproceedings{seawall,
+  title={Seawall: performance isolation for cloud datacenter networks},
+  author={Shieh, Alan and Kandula, Srikanth and Greenberg, Albert and Kim, Changhoon},
+  booktitle={Proceedings of the 2nd USENIX conference on Hot topics in cloud computing},
+  pages={1--1},
+  year={2010},
+  organization={USENIX Association}
+}
+
+
+
+@inproceedings{Cassado,
+ author = {Casado, Martin and Freedman, Michael J. and Pettit, Justin and Luo, Jianying and McKeown, Nick and Shenker, Scott},
+ title = {Ethane: Taking Control of the Enterprise},
+ booktitle = {Proceedings of the 2007 Conference on Applications, Technologies, Architectures, and Protocols for Computer Communications},
+ series = {SIGCOMM '07},
+ year = {2007},
+ isbn = {978-1-59593-713-1},
+ location = {Kyoto, Japan},
+ pages = {1--12},
+ numpages = {12},
+ url = {http://doi.acm.org/10.1145/1282380.1282382},
+ doi = {10.1145/1282380.1282382},
+ acmid = {1282382},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {architecture, management, network, security},
+} 
+
+@inproceedings{hedera,
+  title={Hedera: Dynamic Flow Scheduling for Data Center Networks.},
+  author={Al-Fares, Mohammad and Radhakrishnan, Sivasankar and Raghavan, Barath and Huang, Nelson and Vahdat, Amin},
+  booktitle={NSDI},
+  volume={10},
+  pages={19--19},
+  year={2010}
+}
+
+
+@inproceedings{MorleyMobisys2012,
+ author = {Huang, Junxian and Qian, Feng and Gerber, Alexandre and Mao, Z. Morley and Sen, Subhabrata and Spatscheck, Oliver},
+ title = {A Close Examination of Performance and Power Characteristics of 4G LTE Networks},
+ booktitle = {Proceedings of the 10th International Conference on Mobile Systems, Applications, and Services},
+ series = {MobiSys '12},
+ year = {2012},
+ isbn = {978-1-4503-1301-8},
+ location = {Low Wood Bay, Lake District, UK},
+ pages = {225--238},
+ numpages = {14},
+ url = {http://doi.acm.org/10.1145/2307636.2307658},
+ doi = {10.1145/2307636.2307658},
+ acmid = {2307658},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {3g, 4g, 4gtest, energy saving, lte, network model simulation, power model simulation},
+}    
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  STOP  STOP  STOP STOP%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+############################# I am the line for JUNK< MAN  #######################
+
+
+
+

@@ -1,0 +1,5 @@
+total rules inserted successfully: 15000
+total delay for these rules: 245.202
+avg rule insertion delay: 0.0163468
+max rule insertion delay: 1.141
+min rule insertion delay: 0.012

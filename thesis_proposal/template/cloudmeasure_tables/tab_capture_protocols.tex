@@ -1,0 +1,122 @@
+\begin{tabular}{|c||r|r||r|r||r|r|}
+	\hline
+& \multicolumn{2}{|c||}{\bf EC2} & \multicolumn{2}{|c||}{\bf Azure} &
+\multicolumn{2}{|c|}{\bf Overall}\\ \hline
+{\bf Protocol} &  Bytes & Flows &  Bytes &  Flows & Bytes &  Flows \\
+\hline
+ICMP & 0.01 & 0.03 & 0.01 & 0.18 & 0.01 & 0.06 \\ \hline
+HTTP (TCP) & 16.26 & 70.45 & 59.97 & 65.41 & 24.24 & 69.48  \\ \hline
+HTTPS (TCP) & 80.90 & 6.52 & 37.20 & 6.92 &72.94 & 6.60 \\ \hline
+DNS (UDP) & 0.11 & 10.33 & 0.10 & 11.59 & 0.11 & 10.58 \\ \hline
+Other (TCP) & 2.40 & 0.40 & 2.41 & 1.10 & 2.40 & 0.60 \\ \hline
+Other (UDP) & 0.28 & 0.19 & 0.31 & 14.77 & 0.28 & 3.00   \\ \hline \hline
+Total & 100 & 100 & 100 & 100  & 100 & 100 \\ \hline
+%Total & 81.73 & 80.70 & 18.27 & 19.30  & 100 & 100 \\ \hline
+
+\end{tabular}
+
+
+\iffalse
+\begin{tabular}{|c||r|r||r|r|}
+\hline
+\captureonedata & \multicolumn{2}{|c||}{\bf EC2} &
+\multicolumn{2}{|c|}{\bf Azure} \\\hline
+{\bf Protocol} & {\bf bytes (\%)} & {\bf flows (\%)} & {\bf bytes (\%)} &
+{\bf flows (\%)} \\ \hline
+ICMP&   0.01 & 0.05 & 0.01 & 0.22\\ \hline
+HTTPS&  73.62 & 7.16 & 33.13 & 6.25\\ \hline
+HTTP&   15.94 & 76.82 & 62.31 & 60.85\\ \hline
+DNS&    0.12 & 13.20&   0.17 & 16.98\\ \hline
+Other &    10.31 &  2.77& 4.38     & 15.70 \\ \hline
+{\bf Total}&82 & &18 & \\ \hline
+\hline
+\capturetwodata & \multicolumn{2}{|c||}{\bf EC2} &
+\multicolumn{2}{|c|}{\bf Azure} \\\hline
+{\bf Protocol} & {\bf bytes (\%)} &  {\bf flows (\%)} & {\bf bytes (\%)} &
+{\bf flows (\%)} \\ \hline
+ICMP&   0.01 & 0.01 & $<$0.01 & $<$0.01\\ \hline
+HTTPS&  16.31 & 9.61 & 40.77 & 21.57\\ \hline
+HTTP&   82.70 & 49.42 & 51.82 & 47.00\\ \hline
+DNS&    0.22 & 36.31&   0.39 & 12.51\\ \hline
+Other &    0.76 &  4.65& 7.02     & 18.92 \\ \hline
+{\bf Total}&97.7 & & 2.3& \\ \hline
+\end{tabular}
+\fi
+% mysql> select  provider, sum(orig_ip_bytes + resp_ip_bytes) from uid_totalconnadd where direction = 'in' GROUP BY provider;
+%+----------+------------------------------------+
+%| provider | sum(orig_ip_bytes + resp_ip_bytes) |
+%+----------+------------------------------------+
+%| azure    |                       209622194641 |  18.27 %
+%| ec2      |                       938013924091 | 81.73%
+%+----------+------------------------------------+
+%		Total					1147636118732
+% flow count select provider, count(distinct uid) from uid_totalconnadd where direction = 'in' GROUP BY provider;
+% azure 9869288  21.36%
+% ec2 41287530  
+% total 51156818
+%icmp
+%azure,icmp,30376335,17923
+%ec2,icmp,111091019,14281
+%total, icmp, 141467354, 32204
+
+%other udp
+%mysql> select provider, proto, sum(orig_ip_bytes + resp_ip_bytes) AS bytes, count(distinct uid) from uid_totalconnadd
+%    -> WHERE direction = 'in'
+%    -> AND proto = 'udp'
+%    -> AND resp_p != '53'
+%    -> GROUP BY provider WITH ROLLUP;
+%+----------+-------+------------+---------------------+
+%| provider | proto | bytes      | count(distinct uid) |
+%+----------+-------+------------+---------------------+
+%| azure    | udp   |  649279919 |             1458078 |
+%| ec2      | udp   | 2613832393 |               77649 |
+%| NULL     | udp   | 3263112312 |             1535727 |
+%+----------+-------+------------+---------------------+
+% other tcp
+% mysql> select provider, proto, sum(orig_ip_bytes + resp_ip_bytes) AS bytes, count(distinct uid) from uid_totalconnadd
+%    -> WHERE direction = 'in'
+%    -> AND proto = 'tcp'
+%    -> AND resp_p != '443'
+%    -> AND resp_p != '80'
+%    -> GROUP BY provider WITH ROLLUP;
+%+----------+-------+-------------+---------------------+
+%| provider | proto | bytes       | count(distinct uid) |
+%+----------+-------+-------------+---------------------+
+%| azure    | tcp   |  5041918348 |              109052 |
+%| ec2      | tcp   | 22735102034 |              205169 |
+%| NULL     | tcp   | 27777020382 |              314221 |
+%+----------+-------+-------------+---------------------+
+
+%total dns
+%mysql> select provider, resp_p, sum(orig_ip_bytes + resp_ip_bytes) AS bytes, count(distinct uid) from uid_totalconnadd
+%    -> WHERE direction = 'in'
+%    -> AND proto = 'udp'
+%    -> AND resp_p = '53'
+%    -> GROUP BY provider WITH ROLLUP;
+%+----------+--------+------------+---------------------+
+%| provider | resp_p | bytes      | count(distinct uid) |
+%+----------+--------+------------+---------------------+
+%| azure    |     53 |  205574625 |             1144259 |
+%| ec2      |     53 | 1020349800 |             4266683 |
+%| NULL     |     53 | 1225924425 |             5410942 |
+%+----------+--------+------------+---------------------+
+
+%total http
+%mysql> select provider, resp_p, sum(orig_ip_bytes + resp_ip_bytes) AS bytes, count(distinct uid) from uid_totalconnadd WHERE direction = 'in'  AND proto = 'tcp' AND resp_p = '80'  GROUP BY provider WITH ROLLUP;
+%+----------+--------+--------------+---------------------+
+%| provider | resp_p | bytes        | count(distinct uid) |
+%+----------+--------+--------------+---------------------+
+%| azure    |     80 | 125715559055 |             6456413 |
+%| ec2      |     80 | 152476406498 |            29086853 |
+%| NULL     |     80 | 278191965553 |            35543266 |
+%+----------+--------+--------------+---------------------+
+%total https
+%select provider, resp_p, sum(orig_ip_bytes + resp_ip_bytes) AS bytes, count(distinct uid) from uid_totalconnaddWHERE direction = 'in' AND proto = 'tcp' AND resp_p = '443'GROUP BY provider WITH ROLLUP;
+%+----------+--------+--------------+---------------------+
+%| provider | resp_p | bytes        | count(distinct uid) |
+%+----------+--------+--------------+---------------------+
+%| azure    |    443 |  77979486359 |              683563 | 
+%| ec2      |    443 | 759057142347 |             2690635 | 
+%| NULL     |    443 | 837036628706 |             3374198 |
+%+----------+--------+--------------+---------------------+
+

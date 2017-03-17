@@ -1,0 +1,395 @@
+\section{Introduction}
+\label{ch:intro}
+
+\subsection{Background and Motivations}
+Cloud computing is changing the way computing is conducted since a few years ago.
+It is a rapidly growing business and many industry leaders 
+(\eg{}, Amazon AWS~\cite{amazon-aws},
+Microsoft Azure~\cite{microsoft-azure}, IBM SoftLayer/Bluemix~\cite{ibm-softlayer,ibm-bluemix} and
+Google Compute Engine~\cite{google-compute}) have embraced such a 
+business model and are deploying planet scale, 
+highly advanced cloud computing infrastructures. 
+Analysis~\cite{cloud-market2020} 
+has predicted that the global cloud computing market will 
+reach \$270 billion by 2020. The success of cloud computing is 
+not accidental---it is rooted in many advantages that cloud computing offers 
+over traditional computing model. The most notable feature is that tenants 
+(customers) who rent the computing resources can get equivalent computing power 
+with \emph{lower cost}. That is because the computing resources 
+(CPUs, memory, storage, and networking) are shared among multiple users and 
+\emph {server consolidation and server virtualization} improves the utilization 
+of the computing resources. Another key advantage cloud computing offers 
+is \emph{computing agility}. That means, the tenants can rent as many computing 
+resources as they needed and can grow or shrink the computing pool based on their demand. This feature is especially attractive for relatively smaller and 
+rapidly growing IT businesses.
+
+Building high performance, highly secure cloud computing infrastructures 
+requires substantial research and engineering efforts. Lots of challenges and 
+optimizations need to be done throughout the infrastructure, for example, 
+server virtualization techniques, high throughput and low latency data center 
+network design, highly robust and fast Internet access to cloud-hosted services, 
+scalable and efficient big data analytics platforms etc. 
+In this thesis, 
+we will focus on the {\emph {networking challenges}} emerged in data center networks and 
+the cloud.
+
+\iffalse 
+Key research questions that have been addressed or are being addressed include: 
+1)what should be the most suitable network topologies for data center networks
+~\cite{vl2,fattree,guo2009bcube,guo2008dcell,liu2013f10,niranjan2009portland}, 
+2)how to enable network virtualization for data center 
+networks~\cite{vl2,mahalingam2014vxlan,sridharan2011nvgre,pfaff2009extending,
+pfaff2015design,koponen2014network}, 
+3)how to perform intra-DC and inter-DC traffic engineering 
+or load balancing for data centers~\cite{jain2013b4,hong2013achieving,
+kumar2015bwe,al2010hedera,benson2011microte,rasley2014planck,alizadeh2014conga}, 
+4)how to perform congestion control to mitigate network congestion 
+for data center networks~\cite{alizadeh2011dctcp,alizadeh2012hull,
+mittal2015timely,zhu2015rdma,wu2013ictcp}, and 5)how to improve end users' Internet access 
+to the services in the cloud~\cite{flach2013reducing}.
+
+
+Traditional local area networks are interconnected by spanning trees. 
+But spanning tree-based 
+interconnect solution is far away from the high throughput and low latency 
+demand for data center applications. A key reason is that there is not enough 
+\emph{multipathing} between server pairs such that the conventional data center 
+topologies can easily cause network congestion. Network congestion 
+can hurt time-sensitive applications such as Remote Procedure Calls (RPCs), 
+search and gaming etc. Therefore, seminal works FatTree~\cite{fattree} and 
+VL2~\cite{vl2} proposed to built data center networks using multiple tier 
+(typically 2 or 3-tier) Clos networks. In such topologies, there are 
+substantial amount of paths between each host pair and in theory, it makes 
+full bisection bandwidth network possible.
+\fi
+\subsection{Research Questions}
+
+The research questions we explore in this thesis are 
+that \emph{what are the performance hurdles for data center and cloud networks 
+and how we can leverage recent trends in networking hardware and software to improve the network performance for cloud-hosted services?}
+More specifically, we will explore the following questions:
+
+\begin{enumerate}
+
+\item How can we load balance the traffic within the data center to 
+minimize the likelihood of network congestion? 
+If we can (largely) eliminate network congestion, 
+then cloud-hosted services' performance can be improved significantly. 
+
+\item What are the performance pitfalls when we apply the emerging 
+SDN technique in data center network environment? What are the root causes for 
+such performance pitfalls? 
+And how we can design network applications and 
+scheduling algorithms to avoid such performance pitfalls?
+
+\item Who are the existing users in public clouds? 
+How they are using the cloud? How we can improve cloud-hosted web services' 
+availability and wide area network performance?
+
+\item In multi-tenant cloud where tenant VMs can use out-dated, inefficient, or
+misconfigured TCP stacks, is it possible for administrators to 
+take control of a VM's TCP congestion control
+algorithm {\em without} making changes to the VM or network hardware to 
+reduce network queueing latency and improve throughput fairness?
+
+\item Can we provide near real time network congestion monitoring for data center networks to 
+aid network performance debugging? Whether we can leverage such information to mitigate network congestion?
+
+\end{enumerate}
+
+In what follows, we will present how we answer these research questions. 
+We first introduce works that are completed (questions 1, 2 and 3). 
+Then we will discuss some new topics we plan to work on (questions 4 and 5).
+
+\subsection{Completed Work}
+\subsubsection{Software edge-based load balancing scheme for fast data center networks}
+Datacenter networks must support an increasingly diverse set of
+workloads. Small latency-sensitive flows to support real-time applications such
+as search, RPCs, or gaming share the network with large
+throughput-sensitive flows for video, big data analytics, or VM
+migration. Load balancing the network is crucial to ensure operational efficiency
+and suitable application performance.
+Unfortunately, popular flow-hashing-based load balancing schemes,
+\eg{}, ECMP, cause congestion when hash collisions
+occur~\cite{al2010hedera,dc-mptcp,rasley2014planck,zats2012detail,packetspray,cao2013drb} and
+perform poorly in asymmetric topologies~\cite{alizadeh2014conga,zhou2014wcmp}.
+Conceptually, ECMP's flaws are not internal to its operation but are caused by 
+asymmetry in network topology (or capacities) and variation in flow sizes. 
+{\em In a symmetric network topology
+where all flows are ``mice'', ECMP should provide near optimal load balancing}; 
+indeed, prior work~\cite{alizadeh2014conga,flowlet} has shown the traffic imbalance 
+ECMP imposes across links goes down with an increase in the number of flows and 
+a reduction in the variance of the flow size distribution.
+
+We leverage this insight to design a high performance proactive load balancing 
+scheme without requiring 
+special purpose hardware or modifications to end-point transport.
+It relies on the datacenter network's {\em software edge} to 
+transform arbitrary sized flows into a large number of near uniformly sized small sub-flows, 
+and to proactively spread those uniform data units over the network in a balanced fashion. 
+The proposed scheme is fast (works at 10+ Gbps), and doesn't require network stack 
+configurations that 
+may not be widely supported outside the datacenter (such as increasing MTU sizes). 
+It piggybacks on recent trends where several network functions, \eg{}, 
+firewalls and application-level load balancers, are moving into hypervisors and 
+software virtual switches on end-hosts~\cite{koponen2014network,pfaff2015design,pfaff2009extending}. 
+Several challenges arise when employing the edge to load balance the network
+on a sub-flow level. Software is slower than hardware, so operating at 10+ Gbps speeds means
+algorithms must be simple, light-weight, and take advantage of optimizations in
+the networking stack and offload features in the NIC. Any sub-flow level load balancing should also be
+robust against reordering.
+Reordering not only impacts TCP's congestion control mechanism, 
+but also imposes significant computational
+strain on hosts, effectively limiting TCP's achievable bandwidth if not properly 
+controlled\secref{sec:presto-eval}.
+Last, the approach must be resilient to hardware or link failures and be adaptive to network asymmetry.
+
+We build a proactive load balancing system called Presto to solve the challenges 
+mentioned above.
+Presto utilizes vSwitches to break flows into discrete units of packets, called
+{\em flowcells}, and distributes them evenly
+to near-optimally load balance the network.
+Presto uses the maximum TCP Segment Offload (TSO) size (64 KB) as flowcell granularity,
+allowing for fine-grained load balancing at network speeds of 10+ Gbps.
+To combat reordering, we modify the Generic Receive Offload (GRO) handler
+in the hypervisor OS to mitigate the computational burden imposed by reordering
+and prevent reordered packets from being pushed up the networking stack.
+Finally, we show Presto can load balance the network
+in the face of asymmetry and failures using a combination of fast failover and 
+weighted multipathing at the network edge.
+We evaluate Presto on a real 10 Gbps testbed. Our experiments show Presto
+outperforms existing load balancing schemes (including flowlet switching, ECMP, MPTCP) and
+is able to track the performance of a single, non-blocking switch (an optimal case) within a few percentage points
+over a variety of workloads, including trace-driven. Presto improves throughput, latency and fairness in the network and
+also reduces the flow completion time tail for mice flows. This work is published in ACM 
+SIGCOMM'15~\cite{he2015presto}.
+
+\subsubsection{Exploring and mitigating control plane latencies in SDN switches}
+
+Software defined networking (SDN)
+has opened the
+door to rich network control applications that can adapt to changes in
+network topology or traffic patterns more flexibly and more quickly than
+legacy control
+planes. Many proposals try to apply SDN technique to 
+the data center network domain~\cite{hong2013achieving,jain2013b4,
+heller2010elastictree,liu2013zupdate,benson2011microte}.
+However, to optimally satisfy network objectives, many important control
+applications require the ability to reprogram data plane state at very fine
+time-scales. For instance, fine-grained data center
+traffic engineering requires routes to be set up within a few hundred
+milliseconds to leverage short-term traffic
+predictability~\cite{benson2011microte}.
+Timeliness
+is determined by: (1) the speed of control programs, (2) the latency
+to/from the logically central controller, and (3) the responsiveness
+of network switches in interacting with the controller---specifically,
+in generating the necessary input messages for control programs, and
+in modifying forwarding state as dictated by the programs. Robust control
+software design and advances in distributed controllers~\cite{koponen2010onix}
+have helped overcome the first two issues. However, with the focus in
+current/upcoming generations of SDN switches being on the flexibility
+benefits of SDN w.r.t. legacy technology, the third issue has
+not gained much attention. Thus, it is unknown whether SDN can
+provide sufficiently responsive control to support the aforementioned
+applications.
+
+To this end, we conduct a thorough systematic exploration of latencies in
+\numCombos types of production SDN switches from
+\numVendors different vendors---Broadcom, Intel, and IBM---using a variety
+of workloads. We investigate the relationship between switch design
+and observed latencies using greybox probes and feedback from
+vendors. Key highlights from our measurements are as follows: (1) We
+find that {\em inbound latency}, i.e., the latency involved in the
+switch generating events (e.g., when a flow is seen for the first
+time) can be high---8 ms per packet on average on Intel. The
+delay is particularly high whenever the switch is simultaneously
+processing forwarding rules received from the controller. (2) We find
+that {\em outbound latency}, i.e., the latency involved in the switch
+installing/modifying/deleting forwarding rules provided by control
+applications, is also high---3ms and 30ms per rule for insertion and
+modification, respectively, in Broadcom. The latency crucially
+depends on the priority patterns of both the rules being inserted and
+those already in a switch's table. (3) We find significant differences in
+latency trends across switches with different chipsets and firmware, pointing
+to different internal optimizations.
+
+Furthermore, we propose three techniques to mitigate the outbound latencies
+imposed by current switches:
+{\em Flow engineering} (FE) leverages our empirical latency models to compute
+paths such that the latency of installing forwarding state at any
+switch is minimized.
+{\em Rule
+  offloading} (RO) computes strategies for opportunistically
+offloading installation of some forwarding state to downstream switches.
+Finally, {\em rule reordering} (RR) sends rule installation
+requests in an order that is optimal for the switch in question. By reducing
+installation latency per switch (FE + RR) and enabling network-wide parallel
+updates (RO),
+rule updates can finish much faster (1.6-5X).
+% We evaluate these techniques for fast fail-over and responsive
+% traffic engineering applications under various settings. Depending on
+% the topology and the nature of rules in switches, we find that
+%outbound latencies can render SDN incapable of supporting such
+%applications. In contrast,
+%our techniques can
+% improve the time taken to update network state in these scenarios by factors
+% of 1.6-5X, which we argue makes SDN-based control suitably responsive for these
+% settings. 
+This work is published in ACM SIGCOMM Symposium on SDN Research 
+(SOSR'15)~\cite{he2015measuring} and 
+ACM SIGMETRICS'15 (extended abstract)~\cite{he2015latency}.
+
+\subsubsection{Characterizing web service deployment in public clouds} 
+%and identifying opportunities to 
+%improve network performance and robustness}
+
+Today, web services are
+increasingly being deployed in infrastructure-as-a-service (IaaS) clouds such
+as Amazon EC2, Windows Azure, IBM SoftLayer and Rackspace. Industry and the media claim
+that over 1\% of Internet traffic goes to EC2~\cite{wiredarticle} and that outages in
+EC2 are reputed to hamper a huge variety of
+services~\cite{AWSoutage2011,AWSoutageOct2012,netflixoutage,wsjarticle}.
+Despite the popularity of public IaaS clouds, we are unaware of any in-depth
+measurement study exploring the current usage patterns of these environments.
+Prior measurement studies have either quantified the compute, storage, and
+network performance these clouds
+deliver~\cite{li2010cloudcmp,li2011cloudprophet}, evaluated the
+performance and usage patterns of specific services that are hosted in these
+clouds, e.g., Dropbox~\cite{drago2012inside}, or examined cloud usage solely
+in terms of traffic volume~\cite{deepfield}.
+
+We present the first in-depth empirical study of modern IaaS clouds that
+examines {\em IaaS cloud usage patterns} and identifies {\em ways in which
+cloud tenants could better leverage IaaS clouds to improve performance}. Our focus is particularly
+on web services hosted within IaaS clouds, which our study (unsurprisingly)
+indicates is a large and important usage case for IaaS.
+We first examine {\em who is using public IaaS clouds}. We generate a dataset
+of cloud-using domains using extensive DNS probing in order to compare the IPs
+associated with websites on Alexa's top 1 million list~\cite{alex_topdomains}
+against published lists of cloud IP ranges.  This identifies
+that $\approx$40K
+popular domains (4\% of the Alexa top million) have a subdomain
+running atop Amazon EC2 or Windows Azure, two of the largest public clouds.
+We extract an additional $\approx$13K cloud-using domains from a full
+packet capture taken at the edge of our university, and use this capture
+to characterize the network traffic patterns of cloud-hosted web services.
+These results indicate that a large fraction of important web services are already
+hosted within public IaaS clouds.
+
+Further, we dissect {\em how these services are using the
+  cloud}. EC2 and Azure both have a veritable potpourri of features,
+including virtual machines, load balancers, platform-as-a-service
+(PaaS) environments, content-distribution networks (CDNs), and domain
+name services. They also give tenants the choice of deploying their
+services in several different regions (i.e., geographically distinct
+data centers), and EC2 provides several different ``availability
+zones'' within each region. We couple analysis of DNS records with
+two different cloud cartography techniques~\cite{ristenpart2009hey} to
+identify which features, regions and zones web services use. We
+identify several common \frontend deployment patterns and report
+estimates of the percentages of Alexa subdomains using each of the
+patterns. In particular, we find that about 4\% of
+EC2-using web services use load balancers and 8\% of them
+make use of PaaS. 
+We also show that 97\% of subdomains hosted on EC2 and 92\% of
+subdomains hosted on Azure are deployed in only a single region.
+Counted among these are the subdomains of most of the top 10 (by Alexa
+rank) cloud-using domains. Services deployed in EC2 also appear to
+make limited use of different availability zones: our measurements
+estimate that only 66\% of subdomains use more than one zone and only
+22\% use more than two. This lack of redundancy means that many (even
+highly ranked Alexa) services will not tolerate single-region or even
+single-zone failures.
+
+Finally, we use a series of PlanetLab-based~\cite{planetlab} active measurements and
+simulations to {\em estimate the impact of wide-area route outages and
+  the potential for wide-area performance improvement}. We find that
+expanding a deployment from one region to three could yield 33\% lower
+average latency experienced by globally distributed clients, while
+also substantially reducing the risk of service downtime due to
+downstream Internet routing failures.
+This work is published in ACM IMC'13~\cite{he2013next}.
+
+\subsection{Proposed Work}
+\subsubsection{Congestion control enforcement for improved data center networks}
+\iffalse
+DCTCP~\cite{alizadeh2011dctcp} is a drop-in congestion control replacement for TCP that aims to keep 
+switch buffers low in the network. Companies such as Morgan Stanley have 
+instituted DCTCP in their datacenter~\cite{judd2015dctcp}. 
+DCTCP, however, requires changes to the TCP stack. 
+In public data centers, providers may not have control over the transport stack. 
+In other words, cloud providers can not enforce the transport layer used by customers, 
+for example tenants can use whatever version of TCP (either CUBIC, New Reno or DCTCP) in 
+Amazon's dedicated instances or VMs, IBM's bare-metal machines etc. 
+
+So is there any way we can achieve DCTCP-like properties in the network 
+(either in the core or on the soft edge, like Open vSwitch) even for the stacks we can not control? 
+If the overlying TCP stack can be inferred, perhaps we can play some games in the network to 
+bias its congestion window. For example, we could rate-limit packets at the edge according to 
+a more conservative congestion window, or we could modify the receiver's 
+advertised window size on incoming TCP packets to enforce the sender to slow its rate. 
+\fi
+Multi-tenant datacenters are successful because tenants
+can seamlessly port their workloads, applications and services
+to the cloud. Virtual Machine (VM) technology plays an integral role in this success
+by enabling a diverse set of operating systems and
+software to be run on a unified underlying framework. This
+flexibility, however, comes at the cost of dealing with out-dated, inefficient, or
+misconfigured TCP stacks implemented in the VMs. We investigate if
+administrators can take control of a VM's TCP congestion control
+algorithm {\em without} making changes to the VM or network hardware.
+We propose a virtual switch-based congestion control enforcement scheme that exerts fine-grained
+control over arbitrary tenant TCP stacks by enforcing per-flow congestion
+control in the vSwitch. Our scheme is light-weight, flexible, scalable and
+can police non-conforming flows.
+
+\iffalse
+Our goal is not limited to just keeping switch buffers low in the network 
+such that we can achieve low latency for the whole data center network. 
+As pointed out by~\cite{judd2015dctcp}, when TCP traffic is mixed with DCTCP traffic and ECN marking 
+is turned on, there are two practical performance issues: 1)DCTCP can gain almost all 
+the bandwidth while TCP can only get very little share and 2)TCP or DCTCP's connection 
+establishment probability is decreased sharply with the increase of the number of 
+competing flows in the network. All these two issues are related to the switch's 
+AQM (Active Queue Management) scheme---it simply drops non-ECT (ECN-Capable Transport) 
+packets when the switch's queue length is (even slightly) larger than the threshold. 
+One of the solutions is to apply ECT to all packets at the virtualization edge 
+(no matter it is TCP CUBIC or DCTCP, no matter it is control packets or data packets). 
+We undo the ECT marking properly when the packet arrives the destination host. 
+Finally, we also hope that our congestion control enforcement 
+logic is beneficial to the lossness \emph{ Data Center Bridging } or \emph{ Converged Ethernet } 
+environment where there are serious bufferbloat (hence increase network latency) and 
+fairness issues~\cite{tcp-bolt,zhu2015rdma}.
+\fi
+
+\subsubsection{(Near) Real time network congestion monitoring}
+Network congestion is a critical performance hurdle for high performance cloud computing services like 
+big data analytics. 
+Studies have shown that the end-to-end network latency can be increased by 4 to 10s of milliseconds 
+in modern data centers~\cite{alizadeh2011dctcp,rasley2014planck}. 
+Such a huge network latency can reduce customer's experience and can have significant negative impact on revenue.
+
+Therefore, one research question is whether we can monitor network congestion in (near) real time manner. 
+If the answer is yes, how we should provide such information to the network administrator or the developers 
+in the cloud? How we can easily reroute the network traffic to bypass the congested network path? 
+This research question is challenging because network congestion information should be obtained in 
+(near) real time manner such that the application traffic can be rerouted to avoid buffer building up. 
+In today's data center networks, the base line end-to-end latency is around 40 to 
+200 microseconds, so it is challenging if we want to reduce the ``monitoring and action'' 
+control loop well below such as a bound. 
+To achieve this goal, we may need to explore recent advances in fast software packet processing and 
+mordern hardware features on the switch.
+
+
+\subsection{Structure of Thesis Proposal}
+\label{outline}
+The rest of this proposal is organized as follows: Section~\ref{related} discusses related work.
+Section~\ref{presto} discusses the edge-based traffic load balancing scheme for data center networks. 
+Section~\ref{mazu} discusses the study of control plane latency problem of 
+SDN-enabled switches and measurement-driven techniques to mitigate such latencies 
+for data center network applications. Section~\ref{cloudmeasure} discusses our work 
+on characterizing web service deployment in public cloud, our observations and 
+suggestions to improve network performance and robustness. 
+Section~\ref{plan} presents two new research topics I plan to work on and 
+gives an estimated timeline to finish the rest part of my thesis. 

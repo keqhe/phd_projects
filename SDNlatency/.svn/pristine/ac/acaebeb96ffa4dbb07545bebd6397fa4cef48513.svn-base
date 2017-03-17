@@ -1,0 +1,153 @@
+\subsection{Implications}
+
+%\aaron{Make sure this subsection and the intro agree.}
+
+\iffalse
+\sourav{We also need to include inbound summary here}
+
+In summary, our measurements show that:
+
+\begin{compactitemize}
+
+\item Inserting rules with increasing priority in \BroadcomOne (decreasing
+priority in \Intel) causes TCAM reordering that increases per rule installation latencies by 4.8x (2x)
+%, for a burst of 200 rules, 
+compared to installing rules of the same priority.
+\aaron{We should report the relative latency increase for each additional
+rule.}
+\keqhe{In the case of same priority, per-rule insertion delay in \BroadcomOne, \Intel 
+and \BroadcomThree is about 3.3, 1.1 and 1.0 msec respectively. Rule insertion delay is greatly 
+affected by priority structure due to TCAM reorgnization (e.g., when inserting 200
+increasing priority rules into \BroadcomThree,
+the average per-rule insertion delay is 16 msec) and is inrespective of rule complexity and table occupancy (if the rules to
+be inserted have the same priority with rules already on the flow table).}
+
+\item Rule modification and deletion take up to 19x longer than rule insertion in \BroadcomOne. For \Intel, deletion delay is 2x longer than insertion and modification. 
+\aaron{Check this.}
+\keqhe{Rule modification delay on the measured platforms show different behaviours---rule modification delay on \BroadcomOne is pretty high and variable depending on
+table occupancy while it is constant on \Intel ($\approx1ms$) and \BroadcomThree($\approx2ms$). Modification delay is inrespective of priority structure.}
+
+\item \keqhe{Rule deletion delay is dependent on table occupancy on all the measured platforms. The higher the table occupancy is, the higher the delay is. Deletion delay is inrespective of
+priority structure.}
+\item Heavy interference between simultaneous OpenFlow operations further
+inflates latencies: e.g., generating \packetin messages is 3.8x slower on
+average when an \Intel switch must also process \flowmod and \packetout
+messages alongside; similarly, total insertion time for a burst of 100 rules
+on \BroadcomOne is 72\% higher when there is a simultaneous polling event.
+
+\item \keqhe{\packetin delay is variable and can be unacceptable large due to limited switch CPU and limited ASIC-CPU bus. It is affected by interference and contends
+with \flowmod for limited resources.}
+%\item Openflow activities interference heavily with each other. 
+%For example, generating packet in messages is XXXx slower on Intel when a switch must simultaneously process flow mod and packet out messages. 
+%The insertion time of a burst of 100 rules on Broadcom with same priority into a table with 500 rules can 
+%take around 612 (853) ms when there are one (two) polling events during the insertion process. 
+%In contrast, it takes 356 ms when there is no polling event.
+
+\item In an early OpenFlow 1.3 implementation, rule insertion latency is still impacted by rule priority structure (increasing priority insertion takes more time). Modification delay is independent of table occupancy and rule priority but is 2x higher than per-rule (same priority) insertion latency. Deletion delay is independent of rule priority but is dependent on table occupancy. 
+\aaron{Fix this.}\keqhe{drop ?}
+%when using tables that only allow a few fields to be matched;
+%however, priority and operation do have an effect when using tables that
+%match on more fields.
+
+
+%\item 
+%Priority has effect on insertion delay in Broadcom new firmware --- OF-DPA
+%(OF1.3), too.  Rule insertion takes $\sim1$ msec for same priority rules.
+%But, for rules with increasing priority, per-rule insertion delay is much
+%larger.  For example, it takes 284 msec to insert 50 increasing-priority
+%rules when the initial table is empty, it takes 1192 msec to insertion 50
+%increasing priority rules when the table occupancy is 100.  Rule modification
+%takes $\sim2$ msec  per rule while rule deletion takes $\sim1$ msec per
+%rule.  Rule modification and deletion is independent of rule priority
+%structure. 
+%
+%\iffalse
+%In an early OpenFlow 1.3 implementation, rule insertion latency is not
+%impacted by priority and modification and deletion have lower latency than
+%insertion when using tables that only allow a few fields to be matched;
+%however, priority and operation do have an effect when using tables that
+%match on more fields.
+%\fi
+%
+%\item We also observe that OF-DPA process the rule update (including insertion, modification and deletion) requests in a batch mode (batch size is around 50), 
+%the time gap between each batch is 4 seconds. 
+%Thus, to insert burst of size 100 and 200, the observed latencies were as large as 8 secs and 16 secs respectively.
+%This poses great challenge for rule updates. 
+%But we need to note that OF-DPA is still in its early stage of development.
+
+\end{compactitemize}
+
+\fi
+
+%\aaron{Can we combine implications and conclusion to save space?}
+
+%Prior work~\cite{ucsdpaper,oflops} has highlighted problems with the software
+%implementation on OpenFlow switches. A subset of our findings confirm this:
+A subset of our findings highlight 
+problems with the firm\-ware on OpenFlow switches:
+e.g., rule insertion latencies are 3ms with \BroadcomOne, which is significantly higher than the 
+update rate that TCAM hardware natively supports~\cite{estan:private}. 
+%; also, rule insertions, modifications, and deletions are costly 
+%in an early OpenFlow 1.3 implementation. 
+We believe near term work will reduce such issues, as indicated by
+improved latencies in \BroadcomThree. 
+%That said, given that some software
+%will always remain an integral part of SDN switches, we remain skeptical
+%whether the latencies will ever reach what hardware can natively support.
+However, given that software will continue to bridge 
+control and data planes in SDN switches, we remain skeptical whether 
+latencies will ever reach what hardware can natively support.
+
+% even in the best case (same priority
+% rules on Intel and \BroadcomThree),
+
+Our measurements also reveal root causes of latency that appear to be
+fundamentally entrenched in hardware design: e.g., rules 
+must be organized in the TCAM in a priority order for correct and efficient matching; 
+%\aaron{Is the preceding statement true?} 
+also, \packetin, \flowmod, and \packetout messages must contend for limited
+bus bandwidth between a switch's CPU and ASIC. Unless the hardware
+significantly changes, we believe the latencies we identify
+will continue to manifest in next generation switches.  
+
+\iffalse
+A central contribution of this paper is to highlight these latencies and
+point out to application designers, chip hardware and SDK developers, and
+switch vendors the steps they need to take to curb these latencies. 
+\fi
+\iffalse
+However, given that organizations already have vast beds of switches and
+hardware upgrade cycles are 5+ years, operators need solutions to cope
+with these latencies until hardware and software sufficiently evolve to match
+their requirements.  
+Many SDN applications already avoid (or minimize their dependence on) packet-in 
+messages, thereby mitigating the impact of inbound latency. In contrast, rule
+installations/updates are an intrinsic part of SDN applications, which makes
+outbound latency more challenging, and important, to address.
+In the next section, we present three immediately deployable techniques to 
+mitigate outbound latency.
+\fi
+%In the next section, we present our solutions to help mitigate the outbound latency 
+%(i.e, the latency of programming network device) 
+%on existing hardware because SDN applications mainly 
+%rely on \flowmod operation in production now.
+%\fixme{modified}
+%we present our solutions that meet
+%such immediate needs.
+
+%prior work has highlighted issues with software. a small subset of our
+%findings confirm that. we believe that near term work will address this.
+%however, we also find other root causes of latency that appear to be
+%fundamentally rooted in hardware design and how the OF spec allows control
+%applications to exercise said hardware. unless the hardware changes, or the
+%openflow spec changes, or specific application guidelines are provided, we
+%believe that these kinds of fundamental latencies we identify will manifest
+%even in next generation switches. ultimately the core contrib of our work is
+%in highlight these latencies and pointing out to app designers, chip
+%developers, and switch manufacturers steps they need to take to eliminate or
+%side step these latencies.  
+%
+%Introduce solutions by saying there is a vast bed of switches deployed today.
+%Typically upgrade cycles for switches are 5 years.  Based on what we said
+%above, it is unclear that next gen switches won’t have these issues, so
+%operators still need these solutions.

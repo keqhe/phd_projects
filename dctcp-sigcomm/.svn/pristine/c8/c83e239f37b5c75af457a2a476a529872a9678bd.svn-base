@@ -1,0 +1,11 @@
+\section{Introduction}
+\label{intro}
+
+This is a citation~\cite{paxson1997end}.
+
+This work provides 3 benefits:
+1)unified low latency, regardless of congestion control algorithms VMs use
+2)ECT (e.g., DCTCP) and non-ECT (e.g., CUBIC) can co-exist well on the same network
+3)improved TCP fairness, regardless of congestion control algorithms VMs use
+
+Our scheme is compatible with any TCP variant. It is easy to implement, highly scalable and has very little overhead.

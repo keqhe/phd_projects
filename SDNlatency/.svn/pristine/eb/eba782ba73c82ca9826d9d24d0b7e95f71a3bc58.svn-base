@@ -1,0 +1,63 @@
+\subsection{Dissecting Outbound Delay} 
+\label{s:outbound_meas}
+
+%We define the egress delay as the difference between the time when the switch
+%issues the flow\_mod and/or packet\_out message and the time when the first
+%packet of a particular flow is sent out by the switch. 
+% We used the customized controller interfaces to control the \flowmod\ message
+% generation. 
+%by controlling the matching fields and priorities of the \flowmod\ messages. 
+
+We now study the outbound latencies for three different \flowmod\
+operations: insertion, modification, and deletion. For each operation, we
+examine the latency impact of key factors, including table
+occupancy and rule priority.
+
+Before measuring outbound latency, we install a single default low priority
+rule which instructs the switch to drop all traffic. We then install a set of
+non-overlapping OpenFlow rules that
+%that each specify a destination IP address (other fields are
+%wildcarded); we show in \secref{s:meas_insert} that the number of match
+%fields specified does not impact rule insertion latencies.  All rules
+%instruct the switch to
+output traffic on the port connected to the
+eth2 interface of our measurement host. For some experiments, we 
+systematically vary the rule priorities.
+%We then install bursts of OpenFlow rules by sending back-to-back \flowmod
+%messages from the controller. Each rule matches a unique destination IP
+%address (other fields are wilcards), and, in some cases, has a higher or
+%lower priority than the preceding rule. 
+
+%Before we perform the outbound delay measurements, first we install a single
+%default low priority rule which instructs the switch to drop all the traffic.
+%Then we install specially designed Openflow rules at the switch; while
+%they simply specify the destination IP address leaving other fields
+%wildcarded, they  may have different priorities. All 
+%instruct the switch to output traffic to the port which is connected  
+%to the measurement host on which we are monitoring.  
+
+% By default, the table
+% has only one rule that drops all packets~\footnote. 
+%\li{Is the default rule has a lower
+%  priority in the same priority experiment? Should we say this does not impact
+%  our experiemental results? }
+
+
+%\marina{give an example of what we mean increasing rule priority and decreasing
+%  rule priority}. 
+%Our egress delay measurements make a distinction between the
+%flow\_mod and pkt\_out events.  
+%By contrast previous measurement work \ref{maple, ucsdHiFi13} for egress delay, only
+%captured the "packet out" delay. Thus our approach helps provide a more detailed
+%analysis of the egress delay.  
+
+% The priority of a rule indicates its position in the TCAM. Inserting a higher priority
+% rule can displace many lower priority rules. To investigate how priority rule
+% affects outbound delay. We perform a burst of $n$ \flowmod\ operations with the
+% same, increasing, decreasing priority respectively. The \flowmod\ operations are
+% insertion, modification and deletion. We also vary $n$. 
+
+\input{measure_insert}
+\input{measure_modify}
+\input{measure_delete}
+%\input{measure_overall}

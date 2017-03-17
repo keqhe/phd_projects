@@ -1,0 +1,167 @@
+These are a list of experiments that we need to try to run:
+
+===============
+(COMPLETED)
+===============
+1. Trace-driven 
+Take either DCTCP or MSR workload. Find appropiate scaling factors to generate non-trivial workloads.
+
+DCTCP with scaling factor 10 seemed to give some okay results in our first test (with Python script). Worst case, 
+we can just look at the performance of the 90, 99, and 99.9% of the 4 protocols. We may not have good median
+benefit.
+
+
+===============
+(COMPLETED)
+===============
+2. Have to look at throughput of GRO disabled under two scenarios:	
+	a. Impact of CPU overhead. 
+		Figure 4 now tries to say what happens under reordering. Our premise is that GRO totally breaks
+		down in the face of reordering. So we need to tell a complete story here, in terms of CPU
+		overhead, throughput and CDF of packet size. Fig 4 already has CDF of pkt size.
+
+		Three data points to better understand CPU overhead: (also get throughput)
+			1. GRO disabled, everything official (1 sender to 1 receiver over 1 path workload)
+			(Answer: 5.7 - 6.0G (with OVS), 100% of a CPU core;
+				 6.0 - 6.2G without OVS, 100% of a CPU core,
+				 Verified on 4 hosts: DCN14, DCN15, DCN19, and DCN20, generic kernel
+				 potential reason: because OVS needs to process each small packet without GRO, so
+				 OVS has some overhead, well, OVS's overhead ???)
+			2. Official GRO enabled, run stride workload (or scalability)... some workload that has reordering.
+			(SETTING: sender side rewrite_enable=1, chunkid_enable=1, shadow_mac to real_mac rewriting happened at OVS 
+				 6.8G on average in Stride(8) workload, 10 + 5 + 20 runs,
+				 ranging from 2.7G to 9.0G,
+				 stdev is 1.9G
+				 
+					 
+			)
+			(i realize that actually in this test we should do shadow MAC to real MAC rewriting at Egress switch , not OVS
+			otherwise, because GRO code checks L2 MAC header also TCP option field(chunkid) it helps official GRO "disregard" packet reordering)
+			
+			
+			[Answer: SETTING: sender side rewrite_enable=1, chunkid_enable=0, shadow_mac to real_mac rewriting happened at Egress switch
+			 4.6G average in Stride(8), 20 runs, CPU usage is 86%
+			 ranging from 2.4G(min) to 6.0G(max)
+			 stdev is 715.9Mbps
+			]
+			
+			[Answer: CPU usage should not be a bottleneck for 4.6G, so reordering is the bottleneck]
+			
+
+			3. Presto GRO, with same workload as above
+			[Answer: throughput is 9.2 - 9.3G (9.26G) in Stride(8) on average 20 runs, CPU usage is 69%]
+			(Fig 15 now shows CPU usage )
+
+	b. Impact of reordering. With GRO turned off, the max throughput is somewhere around 4.5 Gbps b/c the CPU is the bottleneck. 
+		We then need to create a bottlenecked environment (like congestion test) were the average flow
+		throughput will be <= 4.5 Gbps. Or, use nuttcp with limited sending rate. Turn GRO off here, because it's unlikely to be the bottleneck,
+		and check the throughput caused by reordering. 
+
+		Figure 3 helps here. It shows the amount of reordering, and that Presto does not present reordering to TCP.
+
+		Two data points we want here:
+			1. Official GRO enabled. Want throughput of TCP flow.
+			(SETTING: sender side rewrite_enable=1, chunkid_enable=1, shadow_mac to real_mac rewriting happened at OVS
+			nuttcp with limited speed: 5G
+			with official GRO, the average throughput is 4.7G, ranging from 3.1G to 5.0G)
+
+
+			(SETTING: sender side rewrite_enable=1, chunkid_enable=0, shadow_mac to real_mac rewriting happened at Egress switch
+			nuttcp with limited speed: 5G
+			with official GRO, the average throughput is 4.5G, ranging from 2.7G to 5.0G)
+			
+			More details:
+
+			hek@arldcn26:~/workloads/ejr_gro_cpu_tput/stride$ cat result-real_official_generic_1000M-S10-f8-PROTpresto-*/arldcn*.stride.out |grep RTT | awk '{s+=$7}END{print s/NR}'
+999.889
+			hek@arldcn26:~/workloads/ejr_gro_cpu_tput/stride$ cat result-real_official_generic_2000M-S10-f8-PROTpresto-*/arldcn*.stride.out |grep RTT | awk '{s+=$7}END{print s/NR}'
+1999.79
+			hek@arldcn26:~/workloads/ejr_gro_cpu_tput/stride$ cat result-real_official_generic_3000M-S10-f8-PROTpresto-*/arldcn*.stride.out |grep RTT | awk '{s+=$7}END{print s/NR}'
+2999.63
+			hek@arldcn26:~/workloads/ejr_gro_cpu_tput/stride$ cat result-real_official_generic_4000M-S10-f8-PROTpresto-*/arldcn*.stride.out |grep RTT | awk '{s+=$7}END{print s/NR}'
+3975.26
+			hek@arldcn26:~/workloads/ejr_gro_cpu_tput/stride$ cat result-real_official_generic_5000M-S10-f8-PROTpresto-*/arldcn*.stride.out |grep RTT | awk '{s+=$7}END{print s/NR}'
+4548.06
+			hek@arldcn26:~/workloads/ejr_gro_cpu_tput/stride$ cat result-real_official_generic_6000M-S10-f8-PROTpresto-*/arldcn*.stride.out |grep RTT | awk '{s+=$7}END{print s/NR}'
+4550.88
+
+			hek@arldcn26:~/workloads/ejr_gro_cpu_tput/stride$ cat result-real_official_generic_7000M-S10-f8-PROTpresto-*/arldcn*.stride.out |grep RTT | awk '{s+=$7}END{print s/NR}'
+4491.23
+			hek@arldcn26:~/workloads/ejr_gro_cpu_tput/stride$ cat result-real_official_generic_8000M-S10-f8-PROTpresto-*/arldcn*.stride.out |grep RTT | awk '{s+=$7}END{print s/NR}'
+4576.45
+			hek@arldcn26:~/workloads/ejr_gro_cpu_tput/stride$ cat result-real_official_generic_9000M-S10-f8-PROTpresto-*/arldcn*.stride.out |grep RTT | awk '{s+=$7}END{print s/NR}'
+4624.91
+			hek@arldcn26:~/workloads/ejr_gro_cpu_tput/stride$ cat result-real_official_generic_10000M-S10-f8-PROTpresto-*/arldcn*.stride.out |grep RTT | awk '{s+=$7}END{print s/NR}'
+4488.43
+			
+			2. Presto GRO. Want throughput of TCP flow.
+	
+hek@arldcn26:~/workloads/ejr_gro_cpu_tput/stride$ cat result-presto_10000M-S10-f8-PROTpresto-*/arldcn*.stride.out |grep RTT| awk '{s+=$7}END{print s/NR}'
+9234.15
+hek@arldcn26:~/workloads/ejr_gro_cpu_tput/stride$ cat result-presto_1000M-S10-f8-PROTpresto-*/arldcn*.stride.out |grep RTT| awk '{s+=$7}END{print s/NR}'
+999.887
+hek@arldcn26:~/workloads/ejr_gro_cpu_tput/stride$ cat result-presto_2000M-S10-f8-PROTpresto-*/arldcn*.stride.out |grep RTT| awk '{s+=$7}END{print s/NR}'
+1999.78
+hek@arldcn26:~/workloads/ejr_gro_cpu_tput/stride$ cat result-presto_3000M-S10-f8-PROTpresto-*/arldcn*.stride.out |grep RTT| awk '{s+=$7}END{print s/NR}'
+2999.68
+hek@arldcn26:~/workloads/ejr_gro_cpu_tput/stride$ cat result-presto_4000M-S10-f8-PROTpresto-*/arldcn*.stride.out |grep RTT| awk '{s+=$7}END{print s/NR}'
+3999.58
+hek@arldcn26:~/workloads/ejr_gro_cpu_tput/stride$ cat result-presto_5000M-S10-f8-PROTpresto-*/arldcn*.stride.out |grep RTT| awk '{s+=$7}END{print s/NR}'
+4999.42
+hek@arldcn26:~/workloads/ejr_gro_cpu_tput/stride$ cat result-presto_6000M-S10-f8-PROTpresto-*/arldcn*.stride.out |grep RTT| awk '{s+=$7}END{print s/NR}'
+5998.76
+hek@arldcn26:~/workloads/ejr_gro_cpu_tput/stride$ cat result-presto_7000M-S10-f8-PROTpresto-*/arldcn*.stride.out |grep RTT| awk '{s+=$7}END{print s/NR}'
+6999.19
+hek@arldcn26:~/workloads/ejr_gro_cpu_tput/stride$ cat result-presto_8000M-S10-f8-PROTpresto-*/arldcn*.stride.out |grep RTT| awk '{s+=$7}END{print s/NR}'
+7984.23
+hek@arldcn26:~/workloads/ejr_gro_cpu_tput/stride$ cat result-presto_9000M-S10-f8-PROTpresto-*/arldcn*.stride.out |grep RTT| awk '{s+=$7}END{print s/NR}'
+8906.46
+hek@arldcn26:~/workloads/ejr_gro_cpu_tput/stride$ cat result-presto_10000M-S10-f8-PROTpresto-*/arldcn*.stride.out |grep RTT| awk '{s+=$7}END{print s/NR}'
+9234.15	
+
+
+3. Adaptative GRO 
+	We need some results to show the effectiveness and importance of adaptive GRO. 
+
+	Seems like congestion test is a good one to do here. Vary the congestion on the x-axis, like the oversubscription tests.
+	Compare GRO with fixed timeout (500us and 1ms) compared to Adaptive GRO. Get throughput (run elephants only) and get mice FCT (run elephants+mice).
+
+
+===============
+(DEBUGGING NEEDED ON PART b)
+===============
+4. Flowlet analysis
+	a. Current graph that looks at impact of 'scp' flowlet sizes only has 4 competing flows. We should get more. This is Figure 13.
+	b. The graph above uses a flowlet timeout of 500us. CONGA says that 100us also works, and the 100us data 
+	   from above does do a decent job of creating small flowlets. We suspect the reordering is a bigger problem
+ 	   here, and need to confirm. NOTE: this is probably hard to do on the end host. Does CONGA do this in hardware?
+
+===============
+(COMPLETED)
+===============
+5. Failure handling
+	Case 2: Switch detects failed link, but controller doesn't know (Uses OpenFlow 1.3 fast fail-over)
+	Case 3: Controller knows, OVS'es are updated with the newest weights
+
+
+6. Redo Figure 15 (Presto shadowMAC vs Presto ECMP). First, do this for a stride workload (or random-bijection). Next, add MPTCP results
+for ECMP and shadowMAC (ie- make MPTCP be aware of the topology by incrementing the shadowMAC by one for each new sub flow). Want latency 
+and throughput.
+ 
+
+
+Questions about our data now:
+
+1. What is going on with FCT for MPTCP in Random workload? It is lower than OPT, Presto and ECMP.
+Possibly because the throughput is bad? But then why don't we see similar trends for Rand-bij and stride?
+
+
+2. MPTCP reruns. 
+	Scalability, congestion need to be rerun because we changed the driver. There were differences
+	in throughput and loss rate under the old approach. Loss rate was much higher on old one. 
+
+3. Why is MPTCP so bad? Especially for trace-driven. Can we debug? Or can we check in simulator as a sanity check? In general, why should MPTCP be worse than ECMP? Let’s understand MPTCP better at a higher level.
+
+4. Figure 14: Flowlet throughput/RTT. We have explained the numbers at a high-level, but can we get some debug from traces to back up our arguments?
+
+

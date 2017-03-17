@@ -1,0 +1,9 @@
+#get the flowlet sizes from the trace
+# this would be run on arldcn4, and we analyze the sending traffic b/c that
+# has the different shadowMACs on it
+for i in `echo 1 3 5 8 10`; do 
+	echo $i; 
+	tshark -r result-official_gro_final_100us-S10-f8-eth2-TCPDUMP1-PROTpresto-$i/tcpdump.pcap -Y "ip.src == 10.2.1.4 && frame.len > 100" -T fields -e eth.dst -e frame.len  | awk 'BEGIN{s=0}{if ($1 == a) { s+=$2 } else { print s; s=$2 } a=$1}END{print s}' | sort -n > /tmp/flowlet100-$i.sort
+	LST=`wc -l /tmp/flowlet100-$i.sort | awk '{print $1}'`; 
+	uniq -c /tmp/flowlet100-$i.sort | awk -v var="$LST" '{s+=$1; print s/var, $2}' > /tmp/flowlet100-$i.cdf; 
+done

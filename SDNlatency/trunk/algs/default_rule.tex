@@ -1,0 +1,34 @@
+\begin{algorithm}
+\footnotesize
+\SetKwFunction{defaultRule}{defaultRule}
+\DontPrintSemicolon
+% \KwData{rule partition set $P$}
+% \KwResult{default rules at root and new partition set $P$}
+  \SetKwFunction{proc}{checkOverlap}
+    \SetKw{KwIn}{in}
+    \SetKwFunction{ruleCount}{ruleCount}
+%  $P'$ = $P$ - $P_{root}$\;
+ \ForEach{distinct partition pair $(P_i, P_j)$ \KwIn $P$}{
+  get covering rectangles $C_i$ and $C_j$ for $P_i$ and $P_j$\;
+  \proc{$P$, $C_i$, $C_j$}\;
+  }
+  \SetKwProg{myproc}{Procedure}{}{}
+  \myproc{\proc{$P$, $C_i$, $C_j$}} { 
+  \uIf{\ruleCount{$C_i$ $\cap$ $C_j$} $\geq$ $\Theta$} {
+   	divide $C_i$ and $C_j$ into two sub-rectangles each\;
+	\ForEach{sub-rectangle pair ($C'_i$, $C'_j$)}{
+		\proc{$P$, $C'_i$, $C'_j$}\;
+	}
+	
+   }
+   \Else{
+        move $C_i$ $\cap$ $C_j$ to $P_{root}$\;
+	$P_{root}$ += \defaultRule{$P_i$, $C_i$}\;
+	$P_{root}$ += \defaultRule{$P_j$, $C_j$}\;
+   }
+  }
+ \caption{Computing default rules}
+ \label{alg:default_rule}
+\end{algorithm}
+
+

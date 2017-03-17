@@ -1,0 +1,8 @@
+Sep 18, 2015.
+
+Keqiang: When using RWND, 1*MSS still has throughput. So we need to reduce it further
+
+Found that when MTU =1500, 1446 >> 2 == 361 bytes can bring to throughput to near zero (2.7Mbps)
+When MTU = 9000, 8946 >> 5 == 279 bytes can bring to througuput to near zero (2.8Mbps)
+
+The means, our lowest value should be MSS >> 5

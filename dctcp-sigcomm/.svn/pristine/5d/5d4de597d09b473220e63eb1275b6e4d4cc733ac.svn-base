@@ -1,0 +1,81 @@
+\section{Introduction}
+\label{intro}
+
+Multi-tenant datacenters are a crucial component of today's computing ecosystem. Large providers, such as Amazon, Microsoft, IBM, Google and Rackspace, support
+a diverse set of customers, applications and systems through their public cloud offerings. These offerings are successful in 
+part because they provide efficient performance to a wide-class of applications running on a diverse set of platforms. Virtual
+Machines (VMs) play a key role in supporting this diversity by allowing customers to run applications in a wide variety of 
+operating systems and configurations.
+
+And while the flexibility of VMs allows customers to easily move a vast array of applications into the cloud, that same flexibility inhibits the 
+amount of control a cloud provider can yield over VM behavior. For example, a cloud provider may be able to provide virtual networks or enforce rate limiting
+on a tenant VM, but it cannot control the TCP/IP stack running on the VM. As the TCP/IP stack considerably impacts overall network performance, it 
+is unforunate that cloud providers cannot exert a fine-grained level of control over one of the most important components in the networking stack.
+
+Without having control over the VM TCP/IP stack, datacenter networks remain at the mercy of inefficient, out-dated or misconfigured TCP/IP stacks.
+TCP behavior, specifically congestion control, has been widely studied and many issues have come to light when its behavior is not optimized. For example,
+network congestion caused by non-optimzed stacks can lead to loss, increased latency and reduced throughput. 
+%As revenue increasingly is tied to 
+%strict latency and bandwidth requirements from workloads such as big data analytics and search~\cite{alizadeh2011data,dean2013tail}, public cloud providers must ensure their
+%network fabrics can provide tight service-level agreements and deadlines required by customer applications.
+
+Thankfully, recent advances in optimizing TCP stacks for datacenter environments have shown that both high throughput and low latency can be 
+achieved through novel TCP congestion control algorithms. Works such as DCTCP~\cite{alizadeh2011data} and TIMELY~\cite{mittal2015timely} show great promise in providing high
+bandwidth and low latency by ensuring that network queues in switches do not fill up. And while these stacks are deployed in many of today's 
+private datacenters~\cite{singh2015jupiter,judd2015nsdi}, ensuring that a vast majority of VMs within a public datacenter will update their TCP stacks
+to this new technology is a daunting, if not impossible task.
+
+In this paper, we explore how operators can regain control of TCP's congestion control, regardless the TCP stack
+running in a VM. Our aim is to allow a public cloud provider to utilize advanced TCP stacks, such as DCTCP, without having
+any control on the VM or requiring any changes in network hardware. We propose implementing congestion control in the virtual switch
+(vSwitch) running on each server. Implementing congestion control within a vSwitch has several advantages. 
+First, vSwitches naturally fit into current datacenter network virtualization architectures and are widely
+deployed~\cite{Pfaff2015ovs}. Second, vSwitches can easily monitor and modify all traffic passing through them. 
+Today vSwitch technology is mature and robust, allowing for a fast, scalable,
+and highly-available framework for regaining control over the network. 
+
+%Since vSwitch technology supports software-defined networking (say OVS),
+%implementing congestion control within the vSwitch can also naturally support advanced congestion control algorithms, such as centralized 
+%or proactive schemes (cite). 
+
+Implementing congestion control within the vSwitch has numerous challenges. First, in order to ensure adoption rates are high, the 
+approach must work without making changes to VMs. 
+Hypervisor-based approaches that do not modify VMs typically rely on rate limiters to limit VM traffic. Rate limiters implemented in
+commodity hardware do not scale in the number of flows and software implementations incur high CPU overhead~\cite{radhakrishnan2014senic}. 
+Therefore, limiting a VM's TCP flows in a fine-grained, dynamic nature
+at scale (10,000's of flows per server~\cite{180302}) with limited computational overhead remains challenging. 
+Finally, VM TCP stacks may differ in the features they support (\eg{}, ECN) or the congestion
+control algorithm they implement, so a vSwitch congestion control implemention should work under a variety
+of conditions. 
+
+In this paper, we present Alternative Congestion for Datacenter TCP (\acdc{} TCP, or simply~\acdc{}), a new technology that implements 
+TCP congestion control within a vSwitch to help ensure VM
+TCP performance cannot impact the network in an adverse way. At a high-level, the vSwitch monitors all packets for a flow, modifies 
+packets to support features not implemented in the VM's TCP stack (\eg{}, ECN) and reconstructs
+important TCP parameters for congestion control.~\acdc runs the congestion control logic specified by an administrator and then enforces an intended
+congestion window by modifying the receiver advertised window (\rwnd{}) on incoming ACKs. A policing
+mechanism ensures stacks cannot benefit from ignoring~\rwnd{} and can also be used for non-TCP traffic.
+
+Our scheme provides the following benefits. First,~\acdc allows for 
+administrators to enforce a uniform, network-wide congestion control algorithm without changing VMs. When using congestion control algorithms tuned for 
+datacenter environments, this allows for high throughput and low latency, regardless of the congestion control algorithms VMs use. Second,
+our system mitigates the impact of varying TCP stacks running on the same fabric. This improves fairness and additionally
+solves the ECN co-existence problem identified in production networks~\cite{wu2012tuning,judd2015nsdi}. 
+Third, our scheme is easy to implement, computationally lightweight, scalable, and modular so that it is highly complimentary to
+performance isolation schemes also designed for virtualized datacenter environments.
+
+The contributions of this paper are as follows:
+\begin{enumerate}
+\item The design of a vSwitch-based congestion control mechanism that regains control over the TCP/IP stack implemented in
+the VM without requiring any changes to the VM or network hardware. 
+\item Prototype implementation to show our scheme is effective, scalable, simple to implement and has only 4\% computational
+overhead over a baseline scheme.%~\todo{We also provide a simple policing scheme to see if tenants are following rules. Add?} 
+\item A set of results showing DCTCP configured as the host TCP stack provides nearly identical
+performance to when the host TCP stack varies but DCTCP's congestion control is implemented in the vSwitch. We demonstrate how~\acdc{} can improve
+throughput, fairness and latency on a shared datacenter fabric.
+\end{enumerate}
+
+The outline of this paper is as follows. Background and motivation are discussed in \cref{background}.~\acdc{}'s design is outlined in \cref{design}, and
+the implementation is detailed in \cref{impl}. Results are demonstrated in \cref{results}. Related work is presented in \cref{related}
+before concluding.
+

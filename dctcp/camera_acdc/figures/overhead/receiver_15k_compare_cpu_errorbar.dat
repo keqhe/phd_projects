@@ -1,0 +1,8 @@
+#use stdev instead of min max, min = avg - stdev, and max = avg + stdev
+#conn count, official_avg, official_max, official_min, ours_avg, ours_max, ours_min
+"100" 0.8985 0.0383 0.0383 1.001 0.045 0.045
+"500" 4.479 0.133 0.133 4.7455 0.134 0.134
+"1K" 13.101 0.358 0.358 13.378 0.934 0.934
+"5K" 15.955 2.214 2.214 16.171 2.123 2.213
+"10K" 16.2735 1.234 1.234 17.126 1.487 1.487
+

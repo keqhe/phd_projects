@@ -1,0 +1,18 @@
+\begin{tabular}{|c|r|c|r|c|r|c|r|} \hline
+\multicolumn{4}{|c|}{Capture 1} & \multicolumn{4}{|c|}{Capture 2}\\
+\multicolumn{2}{|c|}{EC2} & \multicolumn{2}{|c|}{Azure} & \multicolumn{2}{|c|}{EC2} & \multicolumn{2}{|c|}{Azure} \\
+\hline
+Domain Name & traffic  \% & Domain Name & traffic  \% & Domain Name & traffic  \% & Domain Name & traffic  \% \\ \hline
+truste.com   &9.84 &atdmt.com   & 23.63 & mcgraw-hill.com   &8.30 &microsoft.com     & 22.51 \\ \hline
+netflix.com  &7.30 & msecnd.net &  12.00 & kickstarter.com  &4.37 &atdmt.com        &  16.08 \\ \hline
+channel3000.com & 6.97 &microsoft.com  & 10.84 &pogoplug.com & 4.01 &windowsupdate.com  & 10.72 \\ \hline
+pinterest.com  &        5.50 &s-msn.com &  10.40 &instagram.com  & 3.80&virtualearth.net  & 7.83 \\ \hline
+adsafeprotected.com  & 5.06  &msn.com  &  9.41 &newsinc.com  & 2.65&msecnd.net  &       7.59 \\ \hline
+zynga.com       & 3.05  &dreamspark.com  & 6.42  &truste.com  &2.03&s-msn.com  & 4.87 \\ \hline
+echoenabled.com  &  2.75 &virtualearth.net &  6.37 &pinterest.com  &2.00 &msn.com &       4.42\\ \hline
+dropbox.com      &2.19  &hotmail.com  &  4.49 &bleacherreport.com &1.94 &wonderwall.com      &    3.88\\ \hline
+instagram.com    & 1.61  &live.com & 4.31 & imgur.com    & 1.76 &live.com         &        3.72\\ \hline
+linkcat.info     & 1.46  &wonderwall.com   &  2.87&scanscout.com     & 1.76 &msads.com   &        2.47\\ \hline
+\end{tabular}
+
+

@@ -1,0 +1,16 @@
+Oct 14, 2015
+
+double check Figure 1 (controlling RWND can also control tput and compare it with controlling CWND)
+
+Kernel version: Linux arldcn8 3.18.0-dctcp-official-rtomin10 #1 SMP
+both sides are CUBIC.
+sender is DCN8 and receiver is DCN19
+DCN8 ovs based on official , it justs modify the RWND field
+DCN9 is official ovs
+Linux 3.18
+
+To fix the CWND_CLAMP, we use this kernel: Linux arldcn8 3.18.0-maxcwnd #3 SMP
+switches do not have any ECN setting, that is, default switch settings
+
+
+

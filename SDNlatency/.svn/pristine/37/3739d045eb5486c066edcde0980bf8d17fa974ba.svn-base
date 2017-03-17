@@ -1,0 +1,22 @@
+\subsection{Rule Reordering}
+\label{s:optimal}
+
+Our measurements show that given rules of different priorities to be inserted at
+a switch, the ``optimal'' order of rule insertion varies with switch platform
+because of the difference in architecture and the workload the hardware is
+optimized for. For Intel, the optimal order is to insert
+rules in \emph{increasing} order of priority, whereas the \emph{opposite} is
+true for Broadcom. Given this observation, Mazu controls the actual rule
+insertion using the pattern that is optimal for the switch. 
+
+We assume one-shot consistent updates~\cite{one-shot} are in use. In this case, new rules will not take effect unless all of them are installed. Therefore, Mazu can optimize the ordering without causing temporal policy violations. Mazu's techniques can also be adapted for other update schemes~\cite{mahajan13:hotnets}.
+
+%\aditya{is there more to say here?} 
+
+% \aditya{I'm not sure what our measurements show here. Is a particular insertion order better than another?}
+
+% \aditya{Li and I were thinking that given a set of rules to insert into a switch, the idea would be to sort them in descending order of priority and insert. The intuition is that the higher priority rules inserted earlier will not be disturbed by later lower priority rules (in contrast if we change the order then a lower priority rule inserted earlier may have to be moved around to make room for a later higher priority rule).
+% However, our experiments are inconclusive in this respect, correct? (we see that decreasing priority order has somewhat arbitrary performance, and shows abnormally high latency? Also when we interleave priorities we see all high priority inserted first.)
+% So what is our story here?}
+
+% LocalWords:  Broadcom Mazu

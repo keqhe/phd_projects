@@ -1,0 +1,9 @@
+\section{Next Stop, the Cloud: Understanding Modern Web Service Deployment in EC2 and Azure}
+\label{cloudmeasure}
+
+\input{cloudmeasure_intro}
+\input{cloudmeasure_background}
+\input{cloudmeasure_who}
+\input{cloudmeasure_how}
+\input{cloudmeasure_performance}
+%\input{cloudmeasure_conclusion}

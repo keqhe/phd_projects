@@ -1,0 +1,38 @@
+\section{Conclusion}
+\label{sec:conclusion}
+Critical SDN applications such as fast failover and fine-grained traffic engineering demand
+tight interaction between switch control and data planes. 
+However, our measurements across four SDN switches show that the
+latencies underlying the generation of control messages and execution of control operations can be quite high, and
+variable. We find that the underlying causes are linked to
+software inefficiencies, as well as pathological interactions between
+switch hardware properties (shared resources and how forwarding rules
+are organized) and the control operation workload (the order of
+operations issued, and concurrent switch activities). 
+%Our measurements highlight the need for careful design of next generation switch silicon 
+%and software in order to fully utilize the power of SDN.
+Given the software ``glue'' between switch control and data planes and 
+the long upgrade cycles of switch hardware, we believe the latencies we identify will continue to 
+manifest even in next generation switches. 
+Our measurement study highlights the need for careful design of 
+future switch silicon and software in order to fully utilize the power of SDN.
+
+\iffalse
+Finally, to mitigate the
+challenges these latencies create for SDN in supporting critical
+management applications, we present three measurement-driven techniques.
+% (1) \emph{flow engineering}, a
+%mechanism to allow management applications to take path setup latency
+%as a second objective, and, (2) {\em rule offloading}, which computes
+%strategies for opportunistically offloading portions of forwarding
+%state to be installed at a switch to other switches downstream from
+%it. 
+Our evaluation shows that these mechanisms can tame flow setup
+latencies effectively, thereby enabling SDN-based control of critical
+applications.
+\fi
+% are very effective. As part of our
+% future work, we would like to incorporate the Mazu framework in controller
+% platforms such as Floodlight.
+
+% LocalWords:  SDN failover Mazu

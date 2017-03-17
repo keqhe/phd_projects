@@ -1,0 +1,6 @@
+Dec 21, 2015
+
+the goal is to see when RWND limits tput, when CWND limits tput (the congestion control algorithm
+running on the host is CUBIC/Vegas). We enforce the RWND calculated by us in TCP headers.
+
+

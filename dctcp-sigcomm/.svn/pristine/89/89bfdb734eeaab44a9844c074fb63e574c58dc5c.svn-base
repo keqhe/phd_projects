@@ -1,0 +1,355 @@
+\section{Design}
+\label{design}
+\begin{figure}[!t]
+        \centering
+  \includegraphics[width=0.45\textwidth]{figures/acdc_highlevel.pdf}
+        \caption{\acdc{} high level view.}
+        \label{acdc_highlevel}
+\end{figure}
+
+This works main thesis is to explore whether we can provide universal low latency, low packet loss, 
+high throughput and better fairness properties in the network virtualization layer or 
+the network edge (e,g, NIC) which is completely under cloud provider's control such that 
+we can enforce better network performance for public datacenters. Figure~\ref{acdc_highlevel} shows the
+high level view of \acdc{}. 
+
+\begin{figure}[th]
+        \centering
+  \includegraphics[width=0.45\textwidth]{figures/tcp-state.pdf}
+        \caption{Variables for TCP.}
+        \label{tcpstate}
+\end{figure}
+\subsection{How to reconstruct TCP parameters for CC?}
+Since all traffic traverses the vSwitch, all of the necessary information to perform congestion
+control can be derived. For example, it is easy to monitor outgoing sequence numbers,
+incoming acknowledgement numbers, infer duplicate ACKs and monitor for timeout. Below, we give a brief
+description how to obtain important variables for TCP congestion control.
+
+Figure~\ref{tcpstate} provides a visual of the sequence number space. TCP uses three
+variables to keep track of the space. The {\tt snd\_una} variable is the first byte
+that has been sent, but not yet ACKed. The {\tt snd\_nxt} variable represnts the 
+next byte to be sent. Bytes between {\tt snd\_una} and {\tt snd\_nxt} are in flight.
+The largest amount of packets that can be sent is bounded by \cwnd{}. {\tt snd\_una}
+is simple to update: each ACK contains an acknowledgement number ({\tt tcp.ack\_seq}), and when it is higher than the
+current value, we update {\tt snd\_una}. {\tt snd\_nxt} is updated in a similar fashion,
+when packets traverse the switch from the VM, {\tt snd\_nxt} is updated if the sequence
+number is larger than the current {\tt snd\_nxt} value. In the absence of loss, the
+vSwitch can keep its own local \cwnd{} state, updating it as ACKs are received. 
+
+Detecting loss is also relatively simple. If {\tt tcp.ack\_seq $le$ snd\_una}, then
+we update a local {\tt dupack} counter. Timeouts can be inferred when {\tt snd\_una $le$ snd\_nxt}
+and an inactivity timer fires. The slow start threshold ({\tt ssthresh}) is set to
+a default value~\eric{keqiang, what is it?} and then is updated as specified by the congestion control algorithm.
+
+More advanced congestion control techniques that rely on timestamps, round-trip times, SACKs or 
+FACKs can also be easily integrated. We omit the details in the interest of space. 
+
+
+\subsection{How to implement DCTCP?}
+\begin{figure}[!t]
+        \centering
+  \includegraphics[width=0.45\textwidth]{figures/acdc_ECT_marking.pdf}
+        \caption{Simple stateless ECT marking in \acdc{}. 
+		Turn all intra-DC TCP packets in the fabric into ECT.}
+        \label{acdc_ect_marking}
+\end{figure}
+
+\begin{figure}[!t]
+        \centering
+  \includegraphics[width=0.25\textwidth]{figures/carry_ecn_info.pdf}
+        \caption{Carrying the congestion information back. 
+		Being compatible with TSO and minimizing CPU and traffic overhead.}
+        \label{acdc_carry_ecn_info}
+\end{figure}
+
+\begin{figure}[!t]
+        \centering
+  \includegraphics[width=0.40\textwidth]{figures/acdc_cc.pdf}
+        \caption{DCTCP-like congestion control in \acdc{}.}
+        \label{acdc_cc}
+\end{figure}
+
+DCTCP requires additional information in order to perform congestion control. We discuss 
+how to implement DCTCP in this section.
+
+\tightparagraph{ECN Marking.} 
+DCTCP requires that all flows are ECN capable. Adding ECN is important for other
+congestion control algorithms and also to ensure fairness in the network. 
+Algorithm~\ref{alg:non-ect-to-ect} changes non-ECT packets into ECT packets
+in the virtual switch before the packets enter the fabric and
+change them back when they arrive at the destination virtual switch.
+$p.pretendECT$ is set or cleared by flipping the 2nd bit of the 3 reserved bits in TCP header.
+After applying this algorithm, all TCP packets traversing the network appear to be ECT packets.
+So the ECT and non-ECT coexistence issue is solved.
+Also, because we change non-ECT back at the destination virtual switch,
+so TCP is not aware of such a transformation and \acdc{} does not break any TCP connections or applications.
+Algorithm~\ref{alg:non-ect-to-ect} leverages hardware checksumming feature in the NIC implicitly to reduce CPU overhead.
+\todo{how to add comment in this algorithm?}.
+
+
+\begin{algorithm}[t]
+\caption{ECT marking in \acdc{}}
+\label{alg:non-ect-to-ect}
+\begin{algorithmic}[1]
+%\STATE \Comment{packet $p$ is TCP packet}
+\IF{$p$ is going to the network}
+\IF{$p$ is non-ECT}
+\STATE change $p$ to ECT by modifying IP header
+\STATE set $p.pretendECT$
+%\STATE set the 2nd bit of the 3 reserved bits in TCP header to 1
+\ENDIF
+\ELSIF{$p$ is coming from the network}
+\IF{$p$ is non-ECT and $p.pretendECT$ is set}
+\STATE change $p$ back to non-ECT by modifying IP header
+\STATE clear $p.pretendECT$
+%\STATE clear the 2nd bit of the reserved bits
+\ENDIF
+\ENDIF
+\end{algorithmic}
+\end{algorithm}
+
+
+\tightparagraph{Obtaining ECN feedback.}
+In DCTCP, the fraction of packets experiencing ECN needs to be reported back to the sender. 
+DCTCP relays this information from the destination to the sender by essentially modulating data
+in the ACK reporting scheme. Sender and receiver agree on an ACK state-machine that effectively 
+communicates how many packets were received with ECN vs how many were not. Because the TCP stack
+in the VM may not be DCTCP, we do not want to rely on the ACK modulation scheme. Instead, we monitor
+the total bytes and ECN bytes at the vSwitch on the receiver on a per-flow basis. Receivers then report 
+this information to the sender. 
+
+The pseudo-code is presented in Algorithm~\ref{alg:outgoing}. Our scheme simply piggy-backs the
+reported total bytes and ECN bytes on ACKs from the receiver. When piggy-backing the feedback
+does not violate the MTU size, we insert the information as a TCP Option. We call this
+a Piggy-backed ACK (PACK). We create the PACK by moving the IP and TCP header up in
+the ACK's skb headroom. The PACK is inserted into the vacated space and the rest of the 
+pack does not need to be memcpy'd. The header lengths are changed and the checksums are 
+calculated by the NIC (TCP and IP).~\eric{keq: correct?}. The PACK is then stripped at the
+sender so that the VM TCP flow is not aware of any changes. The PACK size is only 16 bytes~\eric{keq XXX},
+so it increases the size of each ACK by only ~\eric{XXX}\%.
+
+When piggy-backing would violate the MTU size, we instead send a dedicated packet we
+call a Fake ACK (FACK). We do this so that TSO does not copy the information into
+every packet. FACKs are identified by modifying the following bits of the TCP/IP
+header.~\eric{keq}. FACKs are also discarded by the sender after logging the included
+data. Note that when a FACK is sent, a real TCP ACK (RACK) is also recieved by the sender, 
+and both the FACK and RACK are used to determine the congestion window.
+In practice, we find that most feedback takes the form of PACKs and RACKs/FACKs are rarely
+sent. 
+
+
+\begin{algorithm}[t]
+\caption{Carrying the congestion information back}
+\label{alg:outgoing}
+\begin{algorithmic}[1]
+%\STATE flow\_key $\leftarrow$ \{dstip, srcip, dstport, srcport\}
+%\STATE ack\_entry $\leftarrow$ rcv\_ack\_hashtbl\_lookup(flow\_key)
+%\STATE end\_seq $\leftarrow$ ntohl(tcp.seq) + tcp.data\_len
+%\IF{after(end\_seq, ack\_entry.snd\_nxt)}
+%       \STATE ack\_entry.snd\_nxt $\leftarrow$ end\_seq
+%\ENDIF
+%\IF{tcp.ack}
+\IF{outgoing skb is a TCP ACK}
+\STATE flow\_key $\leftarrow$ \{dstip, srcip, dstport, srcport\}
+\STATE entry $\leftarrow$ rcv\_data\_hashtbl\_lookup(flow\_key)
+        \IF{entry.total\_bytes > 0}
+                \STATE ecn\_bytes $\leftarrow$ entry.ecn\_bytes
+                \STATE total\_bytes $\leftarrow$ entry.total\_bytes
+                \STATE entry.ecn\_bytes $\leftarrow$ 0
+                \STATE entry.total\_bytes $\leftarrow$ 0
+        \ENDIF
+        \IF{total\_bytes > 0}
+                \IF{skb.data\_len < (MTU -- HEADROOM)}
+                        \STATE skb $\leftarrow$ ovs\_pack(skb, ecn\_bytes, total\_bytes)
+                \ELSE
+                        \STATE fack $\leftarrow$ ovs\_fack(skb, ecn\_bytes, total\_bytes)
+                \ENDIF
+        \ENDIF
+\ENDIF
+\IF{fack != NULL}
+        \STATE sendtoNIC(fack)
+\ENDIF
+\STATE sendtoNIC(skb)
+\end{algorithmic}
+\end{algorithm}
+
+
+
+\tightparagraph{DCTCP congestion control.} Obtaining the fraction of ECN-marked packets allows us to implement most of the DCTCP
+logic. Algorithm~\ref{alg:incoming} shows the psuedo-code. We avoid a detailed 
+description of the congestion control algorithm, as the readers can refer to the
+DCTCP paper~\cite{alizadeh2011data} and associated Linux source code, and its RFC~\eric{cite}.
+
+The {\tt dctcp\_update\_alpha} function only updates alpha once per window (RTT)-- exact same as Linux. That also resets
+{\tt reduced}, which is in line 31.
+The {\tt may\_raise\_rwnd} returns true if no ECN packets were marked and no loss was detected in the current window.
+The {\tt tcp\_cong\_avoid} advances the congestion window based on TCP New Reno's algorithm, taking
+{\tt sshthresh} into account-- does slow start and additive increase. 
+The {\tt may\_reduce\_rwnd} returns true if ECN packets were marked or loss was detected-- but only does
+it once per window. Lines 28-31 calculate the current reduced window based on alpha (terminology follows
+implementation). ({\tt ssthresh} is the new window). Line 31 is only used for line 28.
+
+Line 34-35, puts RWND value in real ACK to VM TCP stack. 
+
+Basically, all this code is for one window and the book-keeping between windows
+is hidden in {\tt update\_alpha}. 
+
+
+\begin{algorithm}[!tbh]
+\caption{Congestion control in \acdc{}}
+\label{alg:incoming}
+\begin{algorithmic}[1]
+\IF{incoming skb is a TCP ACK}
+\STATE initialize is\_rack, is\_pack and is\_fack
+\STATE flow\_key $\leftarrow$ \{srcip, dstip, srcport, dstport\}
+\STATE entry $\leftarrow$ rcv\_ack\_hashtbl\_lookup(flow\_key)
+\IF{is\_pack or is\_fack}
+        \STATE unpack and extract ecn\_bytes and total\_bytes
+        \STATE update(entry.ecn\_bytes, ecn\_bytes)
+        \STATE update(entry.total\_bytes, total\_bytes)
+\ENDIF
+\IF{is\_rack or is\_pack}
+        \STATE acked $\leftarrow$ tcp.ack\_seq -- entry.snd\_una
+        \STATE entry.snd\_una $\leftarrow$ tcp.ack\_seq
+        \IF{duplicated ACK}
+                \STATE entry.dupack\_cnt++
+        \ENDIF
+        \STATE dctcp\_update\_alpha(entry)
+        \IF{acked > 0}
+                \IF{may\_raise\_rwnd(entry)}
+                        \STATE tcp\_cong\_avoid(entry, acked)
+                \ENDIF
+        \ENDIF
+\ENDIF
+\IF{entry.dupack\_cnt >= 3 or ecn\_bytes > 0}
+        \IF{entry.dupack\_cnt >= 3}
+                \STATE entry.alpha $\leftarrow$ MAX\_ALPHA
+                \STATE entry.loss $\leftarrow$ true
+        \ENDIF
+        \IF{may\_reduce\_rwnd(entry)}
+                \STATE entry.ssthresh $\leftarrow$ dctcp\_ssthresh(ack\_entry)
+                \STATE entry.rwnd $\leftarrow$ min(RWND\_MIN, entry.ssthresh)
+                \STATE entry.reduced $\leftarrow$ true
+        \ENDIF
+\ENDIF
+\IF{is\_rack or is\_pack}
+        \STATE tcp.window $\leftarrow$ min(tcp.window, entry.rwnd)
+\ENDIF
+\IF{is\_fack}
+        \STATE drop(skb)
+\ENDIF
+\ENDIF
+\end{algorithmic}
+\end{algorithm}
+
+
+\begin{figure}[t]
+        \centering
+        \begin{subfigure}[b]{0.225\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/new_enforce/new_tput_cwnd_rwnd_cubic_15k.pdf}
+                \caption{MTU = 1.5kB.}
+                \label{effectiveness_15k}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.225\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/new_enforce/new_tput_cwnd_rwnd_cubic_9k.pdf}
+                \caption{MTU = 9kB.}
+                \label{effectiveness_9k}
+        \end{subfigure}
+        \caption{Using \rwnd{} can effectively control throughput.
+                Experiments are conducted on a 10G testbed. TCP CUBIC but New Reno shows similar results.
+                Linux 3.18.0. We control maximal \rwnd{} value by modifying the receiver's advertised window size in TCP ACKs
+                in the Open vSwitch. We control maximal \cwnd{} by specifying ``snd\_cwnd\_clamp" value in Linux TCP.}
+        \label{rwnd_effectiveness}
+\end{figure}
+
+
+\subsection{How to enforce congestion control?}
+Once a congestion control value is determined, we must be able to ensure the VM's TCP stack
+respects the new value. Rate-limiters are commonly used to admit VM traffic. They range from
+software to hardware to hybrid schemes. Rather than enforcing rates, we work on windows.
+We directly dictate how many packets a VM TCP flow can send by altering the~\rwnd{} value 
+on incoming ACKs. TCP standard says that all flows must adhere to minimum of~\rwnd{} and~\cwnd{}.
+
+Window scaling.
+TCP Receive Window Auto-Tuning~\cite{semke1998automatic,receive-auto-runing}.
+Modern TCP stacks have this feature. In Linux and Window Server 2008, it is enabled by default.
+Finding proper receive buffer sizing is difficult due to rapidly changing network conditions.
+TCP receive window scaling~\cite{RFC1072,RFC1323}.
+
+
+VM's with unaltered TCP stacks will naturally follow our enforcement scheme because the stacks
+will simply follow the standard. However, we need a policing scheme to ensure that VM TCP stacks
+do not simply ignore the~\rwnd{} value. This is simple to do: we allow only~\rwnd{} outstanding 
+packets at a time. Any packets that the VM tries to send violating this are dropped. Because
+dropped packets have to be recovered end-to-end, this incentivizes users to respect the standard. 
+
+
+\subsection{Per-flow Differiatation}
+\label{ss:cc-qos}
+Note that multiple congestion control algorithms can be developed in OVS, just as in Linux.
+Administrators can then assign flows to specific congestion control algorithms based on policy.
+For example, flows destined to the WAN may be assigned CUBIC and flows destined within the
+datacenter may be set to DCTCP.
+
+Similarly, administrators can assign different priorities to flow throughputs by altering the 
+congestion control algorithm. There are limited number of priority classes in switches, and 
+an admin may want to differentiate data within a specific class. Freeium users is a good example.
+
+\begin{equation}
+rwnd = rwnd (1 - (\alpha - \frac{\alpha{}\beta}{2}))
+\label{eqn:cc-qos}
+\end{equation}
+
+Differiantated CC inspired by~\cite{Venkataramani2002tcpnice,shieh2011sharing}.
+
+\subsection{How to keep low overhead?}
+Move to Implementation?
+Connection tracking~\cite{ayuso2006netfilter,ovs-conntrack}.
+
+\subsection{How is it complimentary to other schemes?}
+Like bandwidth allocation.
+
+~\eric{Should we talk about how we can actually increase rate of VM TCP?}
+
+
+
+%In history, TCP used packet loss as the signal of network congestion. 
+%But, using packet loss as the signal can not meet the performance demand of datacenter environment 
+%due to high queueing latency and frequent packet losses. Packet loss-based congestion control 
+%can work reasonably well for large data transfers but does harm time-critical RPCs. 
+%Thus, new congestion control algorithms designed for datacenter networks were proposed. 
+%They can be classified into 2 categories: Explicit Congestion Notification (ECN)-based and 
+%latency-based. The most straightforward way is to treat ECN as packet loss and cut congestion 
+%window before network queue built up and packet loss happens---but this can harm flow throughput. 
+%DCTCP improves this by cut window properly based on the portion of marked packets and 
+%gives high throughput for large flows and low latency for mice flows. 
+%Latency-based congestion control such as TCP-NV, TIMELY, DX use the end-to-end latency 
+%as the signal of network congestion. Compared with ECN-based approach, latency is a more 
+%prevalent signal for congestion (i.e., does not need ECN capability on the switches). 
+%But the challenge of such approaches is to find ways to combat with latency measurement noise 
+%caused by TSO, LRO and interrupt coalescence.
+%
+
+
+%\begin{figure}[t]
+%        \centering
+%        \begin{subfigure}[b]{0.225\textwidth}
+%                \centering
+%                \includegraphics[width=\textwidth]{figures/new_enforce/new_tput_cwnd_rwnd_cubic_15k.pdf}
+%                \caption{MTU = 1.5KB.}
+%                \label{effectiveness_15k}
+%        \end{subfigure}
+%        \begin{subfigure}[b]{0.225\textwidth}
+%                \centering
+%                \includegraphics[width=\textwidth]{figures/new_enforce/new_tput_cwnd_rwnd_cubic_9k.pdf}
+%                \caption{MTU = 9KB.}
+%                \label{effectiveness_9k}
+%        \end{subfigure}
+%        \caption{Using \rwnd{} can effectively control throughput. 
+%		Experiments are conducted on a 10G testbed. TCP CUBIC but New Reno shows similar results.
+%		Linux 3.18.0. We control maximal \rwnd{} value by modifying the receiver's advertised window size in TCP ACKs
+%		in the Open vSwitch. We control maximal \cwnd{} by specifying ``snd\_cwnd\_clamp" value in Linux TCP.}
+%        \label{rwnd_effectiveness}
+%\end{figure}

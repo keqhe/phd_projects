@@ -1,0 +1,97 @@
+\section{Related Work}
+\label{sec:related}
+We summarize the related work into three categories: datacenter traffic load balancing, reducing tail latency and handling packet reordering.
+
+{\bf Load Balancing in Datacenters} 
+%Load balancing in datacenter networks has been the focus of several studies.
+MPTCP~\cite{mptcp,dc-mptcp} is a transport protocol that uses subflows to 
+transmit over multiple paths.
+CONGA~\cite{conga} and Juniper VCF~\cite{juniper-vcf} employ congestion-aware flowlet switching~\cite{flowlet} on
+specialized switch chipsets to effectively load balance the network.
+RPS~\cite{packetspray} and DRB~\cite{drb} perform per-packet load balancing on symmetric 1 Gbps networks
+at the switch and end-host, respectively.
+%Per-packet load balancing can incur significant end-host overhead for DRB
+%if not resorting to jumbo frames.
+%Packet reordering problem is not well considered in both RPS and DRB.
+%RPS and DRB may perform worse than ECMP in case of topology asymmetry.
+Hedera~\cite{hedera}, MicroTE~\cite{microte} and Planck~\cite{planck} use centralized traffic engineering to
+reroute traffic based on network conditions.
+FlowBender~\cite{flowbender} reroutes flows when congestion is detected by end-hosts and 
+Fastpass~\cite{fastpass} employs a centralized arbiter to schedule path selection for each packet.
+As compared to these schemes, Presto is the only one that proactively load-balances at line rate for fast networks
+in a near uniform fashion without requiring additional infrastructure or changes
+to network hardware or transport layers. Furthermore, to the best of our knowledge, Presto is
+the first work to explore the interactions of fine-grained load balancing with in-built 
+segment offload (TSO and LRO) capabilities used in fast networks.
+
+{\bf Reducing Tail Latency}
+%Detail~\cite{detail} summarizes the causes of long tails of flow completion time---
+%1)packet loss and retransmissions,
+%2)absence of flow prioritization and 3)uneven load balancing.
+%Reducing tail latencies of small mice flows has also been actively studied.
+Detail~\cite{detail} is a cross-layer network stack designed to reduce the tail of flow completion times.
+%link layer uses port buffer occupancy to construct lossless fabric,
+%network layer performs per-packet adaptive load balancing based on port buffer occupancy,
+%transport layer relies upon congestion notifications
+%derived from port buffer occupancies,
+%finally Detail lets application layer specify flow priorities to
+%avoid head-of-line blocking of elephant flows for mice time-sensitive flows.
+%Detail modified many layers (including the switch) and is hard to deploy using
+%current hardware and network stack.
+DCTCP~\cite{dctcp} is a transport protocol that uses the portion of marked packets 
+by ECN to adaptively adjust TCP's congestion window to reduce switch buffer occupancy.
+%Thus, DCTCP can reduce switch buffer occupancy and reduce flow completion time.
+HULL~\cite{hull} uses Phantom Queues and congestion notifications to cap link utilization and prevent congestion.
+%HULL uses packet pacing to combat with traffic burstiness in order to leave "bandwidth headroom".
+In contrast, Presto is a load balancing system that naturally improves 
+the tail latencies of mice flows by uniformly spreading traffic in 
+fine-grained units.
+%We share the overall goal of reducing mice tail latencies, but instead explore how
+%fine-grained load balancing can provide a solution.
+Last, a blog post by Casado and Pettit~\cite{vmware} summarized
+four potential ways to deal with elephants and mice, with one advocating
+to turn elephants into mice at the edge. 
+We share the same motivation and high-level
+idea and design
+a complete system that addresses many practical challenges of using
+such an approach.
+
+%%%%%the follwoing may not be used
+\iffalse
+WCMP~\cite{wcmp} reduces the number of TCAM/SRAM entries to implement 
+Weighted Cost Multipathing for asymmetry network topologies 
+by approximating the path weights. 
+Different from WCMP, Presto assigns path weights in openvswitch (i.e., host memory), 
+thus Presto is not limited by TCAM resource. 
+Similar to WCMP, Presto can perform near-optimal traffic striping in asymmetry topologies because
+the weights are determined by a global view of the network.
+
+VL2~\cite{vl2} uses flat addressing to allow service instances to be placed anywhere in the network. 
+It leverages a shim-layer on end-hosts to perform IP-in-IP encapsulation to 
+decouple topological address from flat application address.
+Portland~\cite{portland} uses positional pseudo MAC address to decouple forwarding address from service address. 
+VXLAN~\cite{vxlan} and NVGRE~\cite{nvgre} use tunneling mechanism (virtualized L2 networks over L3 network) to 
+enable applications to be deployed and migrated between any server regardless of physical server location. 
+Presto achieves Ethernet L2 semantics via employing shadow MAC~\cite{shadow-mac}, 
+where shadow MAC serves as forwarding address while providing the opportunity to do load balancing.
+\fi
+
+{\bf Handling Packet Reordering}
+%Many schemes have tried to mitigate the impact of reordering.
+TCP performs poorly in the face of reordering, and thus several studies
+design a more robust alternative~\cite{rr-tcp,blanton2002making,tcp-pr}.
+Presto takes the position that reordering should be handled below TCP in the existing 
+receive offload logic.
+In the lower portion of the networking stack, SRPIC~\cite{wu2009sorting} sorts reordered packets 
+in the driver after each interrupt coalescing event. While this approach can help
+mitigate the impact of reordering, it does not sort packets across interrupts, have a 
+direct impact on segment sizes, or distinguish between loss and reordering. 
+%SRPIC is 
+%complementary to our approach because their actions are taken in the driver, before packets
+%are pushed to GRO.
+%RR-TCP~\cite{rr-tcp} proposed to extend TCP sender to detect and recover from false fast retransmits using DSACK information. 
+%As we show, fixing TCP itself cannot solve all the problems incurred by packet reordering.
+%\eric{i have some LRO references in the patent slides that we need to make sure are cited somewhere} 
+%Instead, Presto's chunking scheme leverages the fact that all the packets going through the same path are in order and has two nice properties:
+%1)Presto uses chunkid to make the task of distinguishing packet loss from temporary packet reordering much simpler. 
+%2)Presto only needs to make sure the chunks are in order instead of packets, thus reducing per-packet processing overhead.

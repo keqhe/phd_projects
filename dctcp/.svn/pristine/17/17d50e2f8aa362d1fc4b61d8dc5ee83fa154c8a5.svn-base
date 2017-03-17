@@ -1,0 +1,143 @@
+%% This BibTeX bibliography file was created using BibDesk.
+%% http://bibdesk.sourceforge.net/
+
+
+%% Created for Colin Dixon at 2014-01-31 08:43:52 -0600 
+
+@inproceedings{paxson1997end,
+  title={End-to-end Internet Packet Dynamics},
+  author={Paxson, Vern},
+  booktitle={ACM SIGCOMM Computer Communication Review},
+  year={1997},
+}
+
+@misc{linux-dctcp,
+        Howpublished = {\url{https://lwn.net/Articles/598432/}},
+        Key = {{DCTCP congestion control algorithm}},
+        Title = {{DCTCP congestion control algorithm}}
+}
+
+@misc{ovs-website,
+        Howpublished = {\url{http://openvswitch.org}},
+        key = {{Open vSwitch}},
+        Title = {{Open vSwitch}},
+        
+}
+
+@inproceedings{judd2015nsdi,
+ author = {Judd, Glenn},
+ title = {Attaining the Promise and Avoiding the Pitfalls of TCP in the Datacenter},
+ booktitle = {NSDI},
+ year = {2015},
+} 
+
+@article{guniguntala2008read,
+  title={The read-copy-update mechanism for supporting real-time applications on shared-memory multiprocessor systems with Linux},
+  author={Guniguntala, Dinakar and McKenney, Paul E and Triplett, Josh and Walpole, Jonathan},
+  journal={IBM Systems Journal},
+  year={2008},
+}
+
+@misc{cavium-nic,
+        Howpublished = {\url{http://www.cavium.com/LiquidIO_Server_Adapters.html}},
+        Key = {{LiquidIO Server Adapters}},
+        Title = {{LiquidIO Server Adapters }}
+}
+
+@inproceedings{stephens2014practical,
+  title={Practical DCB for improved data center networks},
+  author={Stephens, Brent and Cox, Alan L and Singla, Anubhav and Carter, Jenny and Dixon, Colin and Felter, Wes},
+  booktitle={INFOCOM},
+  year={2014},
+}
+
+
+@article{alizadeh2011data,
+  title={Data center tcp (dctcp)},
+  author={Alizadeh, Mohammad and Greenberg, Albert and Maltz, David A and Padhye, Jitendra and Patel, Parveen and Prabhakar, Balaji and Sengupta, Sudipta and Sridharan, Murari},
+  booktitle={SIGCOMM},
+  year={2010},
+}
+
+@inproceedings{alizadeh2014conga,
+  title={CONGA: Distributed congestion-aware load balancing for datacenters},
+  author={Alizadeh, Mohammad and Edsall, Tom and Dharmapurikar, Sarang and Vaidyanathan, Ramanan and Chu, Kevin and Fingerhut, Andy and Matus, Francis and Pan, Rong and Yadav, Navindra and Varghese, George and others},
+  booktitle={SIGCOMM},
+  year={2014},
+}
+
+@inproceedings{katabi2002congestion,
+  title={Congestion control for high bandwidth-delay product networks},
+  author={Katabi, Dina and Handley, Mark and Rohrs, Charlie},
+  booktitle={SIGCOMM},
+  year={2002},
+}
+
+@phdthesis{dukkipati2007rate,
+  title={Rate Control Protocol (RCP): Congestion control to make flows complete quickly},
+  author={Dukkipati, Nandita},
+  year={2007},
+  school={Stanford University}
+}
+
+@inproceedings{winstein2013tcp,
+  title={Tcp ex machina: Computer-generated congestion control},
+  author={Winstein, Keith and Balakrishnan, Hari},
+  booktitle={SIGCOMM},
+  year={2013},
+}
+
+@inproceedings{wu2010ictcp,
+ author = {Wu, Haitao and Feng, Zhenqian and Guo, Chuanxiong and Zhang, Yongguang},
+ title = {ICTCP: Incast Congestion Control for TCP in Data Center Networks},
+ booktitle = {CoNEXT},
+ year = {2010},
+} 
+
+@inproceedings{mittal2015timely,
+  title={TIMELY: RTT-based congestion control for the datacenter},
+  author={Mittal, Radhika and Dukkipati, Nandita and Blem, Emily and Wassel, Hassan and Ghobadi, Monia and Vahdat, Amin and Wang, Yaogong and Wetherall, David and Zats, David and others},
+  booktitle={SIGCOMM},
+  year={2015},
+}
+
+@inproceedings{zhu2015congestion,
+  title={Congestion Control for Large-Scale RDMA Deployments},
+  author={Zhu, Yibo and Eran, Haggai and Firestone, Daniel and Guo, Chuanxiong and Lipshteyn, Marina and Liron, Yehonatan and Padhye, Jitendra and Raindel, Shachar and Yahia, Mohamad Haj and Zhang, Ming},
+  booktitle={SIGCOMM},
+  year={2015},
+}
+
+@inproceedings{jang2015silo,
+  title={Silo: Predictable Message Latency in the Cloud},
+  author={Jang, Keon and Sherry, Justine and Ballani, Hitesh and Moncaster, Toby},
+  booktitle={SIGCOMM},
+  year={2015},
+}
+
+@inproceedings{lee2015accurate,
+  title={Accurate latency-based congestion feedback for datacenters},
+  author={Lee, Changhyun and Park, Chunjong and Jang, Keon and Moon, Sue and Han, Dongsu},
+  booktitle={2015 USENIX Annual Technical Conference (USENIX ATC 15)},
+  year={2015}
+}
+
+@misc{tcp-nv,
+        Howpublished = {\url{https://lwn.net/Articles/650325/}},
+        Key = {{tcp: add NV congestion control}},
+        Title = {{tcp: add NV congestion control }}
+}
+
+@article{ayuso2006netfilter,
+  title={Netfilter's connection tracking system},
+  author={Ayuso, P},
+  journal={LOGIN: The USENIX magazine},
+  year={2006}
+}
+
+@inproceedings{ovs-conntrack,
+  title={{Connection tracking \& stateful NAT}},
+  author={Graf, Thomas and Pettit, Justin},
+  booktitle={Open vSwitch 2014 Fall Conference},
+  year={2014}
+}

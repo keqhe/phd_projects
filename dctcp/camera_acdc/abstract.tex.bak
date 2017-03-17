@@ -1,0 +1,19 @@
+\begin{abstract}
+
+Multi-tenant datacenters are successful today because they
+allow tenants to seamlessly port their workloads, applications and services
+to the cloud. Virtual Machine (VM) technology plays an integral role in this success
+by enabling a diverse set of operating systems,
+configurations and software to be run on a unified underlying framework. This
+flexiblity, however, comes at the cost of dealing with out-dated, inefficient, or 
+misconfigured TCP stacks implemented in the VMs. This paper investigates if
+datacenter administrators can take back control of the VM's TCP congestion control
+algorithm {\em without} making any changes to the VM or network hardware.
+We propose a scheme, called~\acdc{} TCP, that exerts a fine-grained
+level of control over arbitrary tenant TCP stacks by enforcing per-flow congestion
+control in the vSwitch. Our scheme is light-weight, flexible, scalable and 
+can effectively enforce and police an administrator-defined congestion control algorithm
+over a variety of VM TCP stacks.
+
+
+\end{abstract}

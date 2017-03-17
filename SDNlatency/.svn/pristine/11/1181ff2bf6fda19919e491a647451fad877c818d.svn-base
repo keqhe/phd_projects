@@ -1,0 +1,103 @@
+\documentclass[letterpaper]{sig-alternate-10pt}
+
+\input{defs} 
+\usepackage{times}
+\usepackage{subfig}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{url,caption}
+\usepackage{epstopdf}
+\usepackage[]{algorithm2e}
+\usepackage{algorithmic}
+\usepackage{mathtools}
+\usepackage[titletoc]{appendix}
+\usepackage{fontenc}
+\usepackage[utf8]{inputenc}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+%\usepackage[font={small}]{caption}
+%\usepackage[section] {placeins}
+%% Define a new 'leo' style for the package that will use a smaller font.
+\makeatletter
+\def\url@leostyle{%
+  \@ifundefined{selectfont}{\def\UrlFont{\sf}}{\def\UrlFont{\small\ttfamily}}}
+\makeatother
+%% Now actually use the newly defined style.
+\urlstyle{leo}
+%\makeatletter
+%\def\@copyrightspace{\relax}
+%\makeatother
+\newcommand{\Tabs}{
+  xx\= xx\= xx\= xx\= xx\= xx\= xx\= xx\=xx\= xx\= xx\= xx\=\kill}
+
+\newenvironment{program}[3]{
+  \begin{figure}[hbtp]
+    \begin{center}
+    \fbox{
+      {\small % yry
+      \begin{minipage}{\textwidth}
+      \begin{tabbing}
+      \Tabs
+      #3
+      \end{tabbing}
+      \vspace{-0.25in}
+      \end{minipage}
+      } % yry
+    \vspace{-0.15in}
+    }
+    \end{center}
+    \vspace{-0.2in}
+    \caption{\label{#1} #2}
+    \vspace{-0.1in}
+  \end{figure}}{}
+
+\begin{document}
+%\title{Mazu: Taming Long tail Latency \\in Software Defined Networks}
+%\title{Mazu: Taming Latency in Software Defined Networks}
+\title{Latency in Software Defined Networks: \\Measurements and Mitigation Techniques}
+\author{Paper \#91, 12 pages + 1 page appendix}
+
+\iffalse
+%\numberofauthors{1}
+\author{
+{
+    Keqiang He$^\dag$,
+    Junaid Khalid$^\dag$,
+    Sourav Das$^\dag$,
+    Aaron Gember-Jacobson$^\dag$,
+    Chaithan Prakash$^\dag$,
+}\\
+{
+    Aditya Akella$^\dag$,
+    Li Erran Li*,
+    Marina Thottan*
+}\\
+{\em $^\dag$University of Wisconsin-Madison, *Bell Labs}
+}
+\fi
+\maketitle
+
+\input{abstract}
+\input{intro_imc}
+\input{motivation_imc}
+\input{measure_imc}
+%\input{overview}
+%\input{inbound}
+\input{outbound_sigmetrics}
+%\input{reasons}
+%%%delete old evaluation section and use eval_outbound_imc to repalce it
+\input{eval_outbound_imc.tex}
+\input{related_new}
+\input{conclusion}
+
+{
+\small
+\bibliographystyle{plain}
+\bibliography{refs}
+}
+
+\newpage
+\begin{appendices}
+\input{ilp}
+\end{appendices}
+%\input{appendix}
+\end{document}

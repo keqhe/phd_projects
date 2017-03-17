@@ -1,0 +1,37 @@
+------------------------------------------------------------
+Server listening on TCP port 5001
+TCP window size: 85.3 KByte (default)
+------------------------------------------------------------
+[  4] local 10.0.2.19 port 5001 connected with 10.0.2.12 port 52777
+[  5] local 10.0.2.19 port 5001 connected with 10.0.2.11 port 2792
+[  6] local 10.0.2.19 port 5001 connected with 10.0.2.10 port 42042
+[  7] local 10.0.2.19 port 5001 connected with 10.0.2.6 port 57875
+[  8] local 10.0.2.19 port 5001 connected with 10.0.2.14 port 29978
+[  9] local 10.0.2.19 port 5001 connected with 10.0.2.7 port 64521
+[ 10] local 10.0.2.19 port 5001 connected with 10.0.2.1 port 41174
+[ 11] local 10.0.2.19 port 5001 connected with 10.0.2.15 port 50208
+[ 12] local 10.0.2.19 port 5001 connected with 10.0.2.3 port 52389
+[ 13] local 10.0.2.19 port 5001 connected with 10.0.2.4 port 28689
+[ 14] local 10.0.2.19 port 5001 connected with 10.0.2.20 port 56131
+[ 15] local 10.0.2.19 port 5001 connected with 10.0.2.16 port 54631
+[ 16] local 10.0.2.19 port 5001 connected with 10.0.2.5 port 39962
+[ 17] local 10.0.2.19 port 5001 connected with 10.0.2.8 port 33793
+[ 18] local 10.0.2.19 port 5001 connected with 10.0.2.17 port 36564
+[ 19] local 10.0.2.19 port 5001 connected with 10.0.2.9 port 34961
+[ ID] Interval       Transfer     Bandwidth
+[  6]  0.0-10.0 sec   645 MBytes   541 Mbits/sec
+[  5]  0.0-10.0 sec   935 MBytes   782 Mbits/sec
+[  7]  0.0-10.0 sec   823 MBytes   689 Mbits/sec
+[  8]  0.0-10.0 sec   707 MBytes   593 Mbits/sec
+[  9]  0.0-10.0 sec   765 MBytes   641 Mbits/sec
+[  4]  0.0-10.1 sec   986 MBytes   818 Mbits/sec
+[ 10]  0.0-10.0 sec   731 MBytes   613 Mbits/sec
+[ 11]  0.0-10.0 sec   839 MBytes   703 Mbits/sec
+[ 12]  0.0-10.0 sec   834 MBytes   699 Mbits/sec
+[ 13]  0.0-10.0 sec   756 MBytes   634 Mbits/sec
+[ 14]  0.0-10.0 sec   912 MBytes   765 Mbits/sec
+[ 15]  0.0-10.0 sec   804 MBytes   674 Mbits/sec
+[ 16]  0.0-10.0 sec   792 MBytes   664 Mbits/sec
+[ 17]  0.0-10.0 sec   833 MBytes   698 Mbits/sec
+[ 18]  0.0-10.0 sec   711 MBytes   596 Mbits/sec
+[ 19]  0.0-10.0 sec   662 MBytes   555 Mbits/sec

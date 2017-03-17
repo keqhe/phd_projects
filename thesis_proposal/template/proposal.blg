@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: proposal.aux
+The style file: abbrv.bst
+Database file #1: refer.bib
+Warning--empty institution in mahalingam2014vxlan
+You've used 90 entries,
+            2118 wiz_defined-function locations,
+            821 strings with 18065 characters,
+and the built_in function-call counts, 28463 in all, are:
+= -- 2342
+> -- 1968
+< -- 2
++ -- 797
+- -- 700
+* -- 1870
+:= -- 4763
+add.period$ -- 251
+call.type$ -- 90
+change.case$ -- 632
+chr.to.int$ -- 0
+cite$ -- 91
+duplicate$ -- 1057
+empty$ -- 2317
+format.name$ -- 700
+if$ -- 5887
+int.to.chr$ -- 0
+int.to.str$ -- 90
+missing$ -- 65
+newline$ -- 434
+num.names$ -- 142
+pop$ -- 943
+preamble$ -- 1
+purify$ -- 543
+quote$ -- 0
+skip$ -- 692
+stack$ -- 0
+substring$ -- 489
+swap$ -- 155
+text.length$ -- 2
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 356
+warning$ -- 1
+while$ -- 145
+width$ -- 92
+write$ -- 846
+(There was 1 warning)

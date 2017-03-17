@@ -1,0 +1,122 @@
+\section{Problem Statement}\label{sec-statement}
+\subsection{Why latency matters?}
+Rapid response is an important feature for customer facing Web services such as 
+Google search engine and the typical time-lined "wall" of Facebook pages~\cite{wilson2011better}. 
+Not limited to Web services, rapid response is also a critical requirement for 
+interactive applications in enterprise, data centers, cellular networks 
+as well as the emerging M2M communications (e.g., smart grid control messages). 
+We call these types of applications as latency critical or time-sensitive applications. 
+Latency can directly affect service revenue~\cite{latencycostyou,googlelession}. 
+Previous work has discovered that a slightly increased latency can cause unsatisfied user experience 
+and consequently lose customers~\cite{hajjat2012dealer,dean2013tail,alizadeh2010data,zats2012detail,vamanan2012deadline}. 
+Typically, Web service providers seek to keep 99.9\%ile latency within 200-300 ms~\cite{wilson2011better,alizadeh2010data}.
+Interactive services running the cloud requires strict time requirements, typically on the order of 10 to 100 ms~\cite{stephens2012past}. 
+Wide Area Situational Awareness in smart grid tries to limit the latency within 20-200ms (Department of Energy). 
+
+\subsection{The long-tailed latency problemm in SDN}
+
+Long tailed latency is an annoying problem in
+distributed systems. In a traditional IP network,
+the sharing of network bandwidth is the main
+cause of the long tailed latency problem. On
+each switch, a specific flow's latency is heavily
+affected by other flows' traffic patterns.
+Network failures exacerbate transient network
+congestion, and even cause network disruptions
+due to delayed network routing protocols. In a
+traditional IP network, it is not easy to keep the
+long tailed latency curve in a satisfactory
+manner because there is not enough knowledge
+and control for the network, and the network
+mainly works in a "best effort" manner.
+
+
+\begin{figure}
+\centering
+\epsfig{file=./figures/problem.eps,width=0.5\textwidth}
+\caption{Long-tailed latency problem in SDN, an example.}\label{latency_example}
+\end{figure}
+
+
+In software-defined networks, the situation is
+greatly changed. The good news is that the SDN
+controller has sufficient global view of
+the network and flexible control over the
+network. However, SDN architecture also
+introduces new problems. The long tailed
+latency includes two parts---\emph{1) the flow 
+setup delay}. Generally, the path setup delay is
+composed of three parts: a)the delay used by
+the controller to decide which rule(s) to install
+to the OpenFlow switch. b) the delay used by
+the underlying OpenFlow switch to send the
+flow\_in event to the controller. We call this part as \emph{ingress delay} and 
+c)the delay between sending out flow\_mod action by the
+controller and forwarding the first packet of a
+particular flow by the OpenFlow switch.
+We call this part as \emph{egress delay}.
+It has been reported that with the increase of
+forwarding rule set size, the flow\_mod operation
+(flow insertion and flow modification) delay increases accordingly
+in the OpenFlow switches~\cite{rotsos2012oflops}.
+That means, the delay between a new flow's first packet arrives at 
+the openflow switch  and
+forwarding the first packet out by the output port is
+not a constant and negligible value in practice. 
+As demonstrated by~\cite{tootoonchian2012controller}, the SDN controller's
+performance can be improved further and
+further if better hardware and multi-processing
+techniques are provided. 
+In addition, thetransmission delay between the controller and
+the switch is negligible according to~\cite{rotsos2012oflops}.
+Therefore, we mainly focus on the delay within
+the switches.
+Actually, according to previous work~\cite{stephens2012past,curtis2011devoflow,huang2013high} 
+and our own measurements (Section~\ref{sec-switch}) on several openflow switches,
+flow setup delay is the major bottleneck of openflow networks.
+\emph{2) the End-to-End transmission/queuing delay}. End-to-End
+delay is a function of switch queue length and
+the packet scheduling algorithms implemented
+by the switches.
+
+For a single openflow switch, the flow setup delay varies because of resources sharing
+(including packet\_in/flow\_mod message queues, CPU, CPU--flow table processing and bandwidth). 
+Vendor specific fireware and network dynamics (including dataplane and control plane) 
+also have great impacts on flow setup delay. We will explore the causes and trends later in Section~\ref{sec-switch}.
+
+
+So far, we can see there are many factors contributing
+to the long tailed latency problem in a SDN
+setting. 
+As shown in \figref{latency_example}, assuming an on-demand flow arrives at SW1 and its destination
+is a server behind SW4,
+an interesting and important question is---how could the controller handle the flows such that the delay of the on-demand 
+flows or time-sensitive flows can be safely bounded in a network comprised of openflow switches?
+Our vision is to leverage the intelligence
+of the controller and necessary network redundancy in the
+network to tailor the latencies for on-demand
+flows. 
+We call such an application as a latency
+tailor. As specified in~\cite{ratul2013achieving}, the flows in the
+datacenter can be categorized as Elastic,
+Interactive and Background. Such interactive
+flow is an example of on-demand flows.
+Tenants in the cloud can provision the "on-
+demand" services from the provider to boost
+their system performance.
+
+Note that we are not trying to violate the End-to-End principle of computer communication
+systems~\cite{saltzer1984end}, instead, we are trying to explore,
+the feasibility and the performance gains the
+applications standing at the end can benefit
+from a simplified version of the latency tailor
+implemented in the network. Note that in a
+traditional network architecture, the cost (even
+It is not possible) to implement such a simplified
+version of any latency tailor is expected to be
+huge due to the distributed management model.
+However, given SDN's central control
+mechanism, such a latency tailor is expected to
+have little implement complexity and just works
+as any other applications (such as traffic
+engineering) atop of the controller.

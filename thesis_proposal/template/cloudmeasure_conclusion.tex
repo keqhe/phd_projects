@@ -1,0 +1,23 @@
+\subsection{Conclusion}
+\label{cloud-measure-conclusion}
+
+In this work we performed the first extensive measurement study of
+usage of modern infrastructure-as-a-service (IaaS) clouds, in
+particular Amazon EC2 and Windows Azure. This measurement study, which combined data
+from a university packet capture, interrogation of DNS records for
+websites listed on the Alexa top 1 million list, and lightweight
+probing, confirms the oft-reported anecdotes about the extent to which
+modern web services use these cloud systems.  We profile the
+deployment patterns observed for popular web services.  We uncover
+that, in many ways, these deployments are somewhat precarious, as the
+vast majority of (even very popular) websites use only one cloud
+region.  In addition to resiliency benefits, we show that multi-region
+deployments could significantly increase latency and throughput
+performance in EC2.
+Beyond providing a snapshot on the state of cloud usage, we
+believe our work will spark further research on 
+tracking cloud usage, as well as developing 
+cloud-region-aware routing and deployment mechanisms.
+Finally, we make all data sets used in 
+this paper publicly available~\cite{cloudmeasuredata}, with the
+exception of the \captureonedata.

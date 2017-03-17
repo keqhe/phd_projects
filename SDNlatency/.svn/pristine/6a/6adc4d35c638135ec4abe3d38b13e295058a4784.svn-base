@@ -1,0 +1,19 @@
+decrease burst: 99.6%
+same burst:99.6%
+increase burst:99.6%
+
+same+ rate10: 39.5% max, gradually increasing
+same+ rate50: max 98.0%, increasing
+same+ rate100: 99.6%was seen
+same+ rate200: max 99.7, rapid increase
+
+
+increse + rate =10: we can see that the CPU usage is becoming larger and larger (from 14% to 99.6%), 14% is the defaul value
+increse + rate =50: we can see that the CPU usage is becoming larger and larger (from 14% to 100%),  faster
+increase: rate=100: we can see that the CPU usage is becoming larger and larger (from 14% to 99.4%), even faster
+incr + r=200, soon to 100%
+
+dec + rate10:~ 21.2%, no increase
+dec + rate50: max 69.1% was seen 
+dec + rate100: max 96.4 was seen
+dec + rate200: max 99.6 was seen

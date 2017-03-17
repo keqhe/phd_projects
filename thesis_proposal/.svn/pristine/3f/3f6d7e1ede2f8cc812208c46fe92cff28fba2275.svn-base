@@ -1,0 +1,86 @@
+\section{Proposed Work}
+\label{plan}
+
+\subsection{Congestion control enforcement for low latency data center networks}
+
+There are many practical performance hurdles when we build high throughput and low latency data center 
+networks to accommodate high-demanding applications 
+(\eg{}, in-memory computing needs fast network to finish computing tasks). 
+DCTCP~\cite{alizadeh2011dctcp} is a transport protocol designed to reduce the network buffering 
+(thus reducing network latency) for data center networks. But, as we learned, 
+in a real production data center network, it is hard to assume that all the TCP stacks are 
+under the cloud provider's control. This is the case for infrastructure-as-a-service (IaaS) cloud, \eg{}, 
+the default TCP protocol used by Amazon EC2 instances is TCP CUBIC at the time of writing. 
+From the cloud provider's view, first, 
+we want to achieve the goal of low latency for all of the tenant's traffic. Therefore, 
+there is a need to enforce DCTCP-like transport protocol on every host in the network. 
+Second, applying DCTCP’s ECN setting to data center switches seriously harms traditional TCP traffic.
+As pointed out by~\cite{judd2015dctcp}, when TCP traffic is mixed with DCTCP traffic and ECN marking
+is turned on, there are two practical performance issues: 1)DCTCP can gain almost all
+the bandwidth while TCP can only get very little share and 2)TCP or DCTCP's connection
+establishment probability is decreased sharply with the increase of the number of
+competing flows in the network. All these two issues are related to the switch's
+AQM (Active Queue Management) scheme---it simply drops non-ECT (ECN-Capable Transport)
+packets when the switch's queue length is (even slightly) larger than the threshold.
+One of the solutions is to apply ECT to all packets at the virtualization edge
+(no matter it is TCP CUBIC or DCTCP, no matter it is control packets or data packets).
+We undo the ECT marking properly when the packet arrives the destination host.
+We propose to build a universal congestion control enforcement component in the virtualization layer or the NIC to 
+boost the network performance (both low latency and high throughputs) for all kinds of traffic. 
+The major challenge in achieving this goal is how we can solve this problem in a scalable and light-weight manner. 
+We plan to implement this congestion control enforcement component on a real testbed and 
+run various kinds of tests to validate its performance.
+Finally, we also hope that our congestion control enforcement
+logic is beneficial to the lossness \emph{ Data Center Bridging } or \emph{ Converged Ethernet }
+environment where there are serious bufferbloat (hence increased network latency) and
+fairness issues~\cite{tcp-bolt,zhu2015rdma}.
+It can also improve the network performance for over-conservative transport protocols such as TCP+ECN.
+
+\subsection{(Near) Real time network congestion monitoring}
+
+Near real time network congestion monitoring can help the network administrator to monitor the network healthy condition. 
+Such information can guide network debugging and improve network performance. 
+Our network congestion monitoring scheme serves for two purposes---1) constructing a ``hot spot" map to 
+aid network debugging and 2) generating fast path congestion feedback signal to the affected hosts to reroute its flows.
+
+We plan to utilize the ECN capacities and port mirroring features that are commonly available 
+in modern switches to gather congestion information. 
+ECN marked packets are mirrored and sampled to the mirroring port on the switch. Each switch's 
+mirroring ports is connected to a logically centralized pool of servers which run the 
+congestion information analytics. The logically centralized servers have two roles. 
+First they need to analyze the packets from each switches' mirroring port and figure out which 
+switch (or which switch port) is congested and which (and how many) flows are 
+affected by the network congestion event. Second. the centralized servers need to have a fast path to 
+generate congestion feedback information to the end-hosts that are affected. 
+The congestion feedback is sent through the management network (which is independent of the data network), 
+so the feedback can reach the affected end-hosts in real time. Finally, 
+we leverage the intelligent network edge (\eg{}, the virtual switch in the hypervisor or the smart NIC) to 
+interpret the congestion feedback information and reroute the affected flows based on the 
+knowledge of the centralized analytics servers. 
+There are two unknown questions we need to explore---1) 
+we can minimize the control loop latency to what value based on existing 
+hardware and software packet processing schemes such as Intel DPDK~\cite{intel_dpdk} and Netmap~\cite{rizzo2012netmap} 
+and 2) what is the scalability of the proposed approach. 
+
+\subsection{Timeline}
+
+Table \ref{tab:plan} shows my plan for completion of the research.
+
+\begin{table}[hc]
+\begin{small}
+\begin{center}
+\begin{tabular}{lll}
+Timeline & Work & Progress\\
+\hline
+          & Presto \& SDN Latency \& CloudMeasure & completed\\
+May 2016 & congestion control enforcement & proposed\\
+March 2017 & network congestion monitoring  & proposed\\
+May 2017 & Thesis writting & \\
+June 2017 & Thesis defense & \\
+\end{tabular}
+\end{center}
+\end{small}
+\caption{Plan for completion of my research}
+\label{tab:plan}
+\end{table}
+

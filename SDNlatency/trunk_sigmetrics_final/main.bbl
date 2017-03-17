@@ -1,0 +1,34 @@
+\begin{thebibliography}{1}
+
+\bibitem{hedera}
+M.~Al-Fares, S.~Radhakrishnan, B.~Raghavan, N.~Huang, and A.~Vahdat.
+\newblock Hedera: Dynamic flow scheduling for data center networks.
+\newblock In {\em NSDI}, 2010.
+
+\bibitem{microte}
+T.~Benson, A.~Anand, A.~Akella, and M.~Zhang.
+\newblock Microte: Fine grained traffic engineering for data centers.
+\newblock In {\em CoNEXT}, 2011.
+
+\bibitem{mazu}
+K.~He, J.~Khalid, S.~Das, A.~Akella, E.~L. Li, and M.~Thottan.
+\newblock Mazu: Taming latency in software defined networks.
+\newblock {\em University of Wisconsin-Madison Technical Report}, 2014.
+
+\bibitem{ucsdpaper}
+D.~Y. Huang, K.~Yocum, and A.~C. Snoeren.
+\newblock High-fidelity switch models for software-defined network emulation.
+\newblock In {\em HotSDN}, 2013.
+
+\bibitem{openflow}
+N.~McKeown, T.~Anderson, H.~Balakrishnan, G.~Parulkar, L.~Peterson, J.~Rexford,
+  S.~Shenker, and J.~Turner.
+\newblock Openflow: enabling innovation in campus networks.
+\newblock {\em SIGCOMM CCR}, 2008.
+
+\bibitem{oflops}
+C.~Rotsos, N.~Sarrar, S.~Uhlig, R.~Sherwood, and A.~W. Moore.
+\newblock Oflops: An open framework for openflow switch evaluation.
+\newblock In {\em PAM}, 2012.
+
+\end{thebibliography}

@@ -1,0 +1,178 @@
+\section{Handling Inbound Delay}
+\label{s:inbound}
+
+\iffalse
+\aditya{this section talks about packetout, but our measurements don't
+  cover them}
+
+Recall the 3 steps I1--I3 taken by a switch to process \packetin described in
+Section XXX. Step I1 is typically quite fast. The latencies we observe is mainly
+due to steps I2 and I3. Earlier measurements~\cite{flowvisor} show that these
+steps are slow due to unoptimized switch implementations. Our measurements
+indicate that the newer switches we measured have better implementations of
+these steps, but latency arises nevertheless due to contention between
+simultaneous processing of \packetin\ messages alongside \flowmod\ and
+\pollstats\ commands received from the controller. \aditya{this can go at the
+  end of section 3} 
+\fi
+%\keqhe{please check below}
+\iffalse
+Reactive flow path setup enables fine-grained visibility and more programmability of the network. 
+As we have mentioned, mobility support is one appealing reactive application enabled by SDN. 
+When mobile users move across the networks, the SDN controller can setup paths in an on-demand manner. 
+Another promising reactive application is security. Network administrator can program the network devices and 
+let the packets matching certain fields go to the SDN controller. For example, all DNS traffic can be redirect to 
+the SDN controller and the controller checks whether the flows are trying to access some malicious websites on a blacklist.
+\fi
+
+\iffalse
+\sourav {Check}
+The applicability of some important reactive applications like mobility and Dns security as described in section (\S\ref{s:apps}) is impacted by inbound delay.
+To overcome the inbound latency, what we propose is to
+  physically decouple the switch's handling of \packetin and \packetout messages from \flowmod\ messages. 
+%\aditya{we need a picture here} 
+We punt all \packetin\ message generation and \packetout\ processing to a
+separate optimized processing unit, i.e., a custom proxy, co-located with ingress (edge)
+switches in a network; The nice properties introduced by this idea are 
+1) reactive path setup packets can avoid the bottleneck ASIC-CPU bandwidth in modern switch systems~\cite{devoflow} because the packet\_in 
+and packet\_out packets go through data plane; 2) the switch CPU load is no longer a system bottleneck and 
+the interference with proactive path setup is mitigated. As we will demonstrate later, 
+the proxy capacity can handle many co-located switches' requests so the cost is reduced 
+compared with the solution of getting high end switches with better hardware.
+
+We establish a (short) label-switched path between the switch and its
+corresponding proxy. The switch continues to have a control
+channel to the controller; the controller associates each switch with its
+relevant proxy. Then we insert openflow rules (based on application, e.g, DNS traffic) in the switch; this
+redirects at line rate all the packets matching the specified rules 
+on the label-switched path to the
+proxy. The switch stamps the incoming port ID in the TOS field on the 
+packet before label-switching it to the proxy.  The proxy 
+%\aditya{check this. i think we need to buffer data plane packets at proxy} 
+generates the necessary \packetin\ messages reflecting the
+switch's incoming port ID, and forwards them on its control channel to the
+controller, and buffers \packetin\ locally (similar to a regular switch).
+%This helps the controller know the switch port on which the packet arrived. 
+%\aditya{is this correct?}
+The controller sends \packetout\ messages to the proxy; the proxy processes the message and forwards the buffered packet corresponding to the \packetin\ back to 
+the switch for routing to the eventual destination.  \flowmod\ messages are sent directly to the switch.\fi
+
+
+
+Inbound latency can have a pronounced impact on reactive applications such as
+those described in \secref{s:apps}. 
+To overcome the primary factor contributing to this latency---limited bus
+bandwidth between the switch ASIC and CPU (\secref{s:measure_inbound})---we
+introduce physically decoupled processing units, i.e., custom proxies, that
+generate \packetin and process \packetout messages.
+
+%the contention for
+%limited switch CPU and bottlenecked ASIC-CPU bandwidth as the main
+%contributors for inbound latency, we introduce physically decoupled optimized
+%processing units, i.e., custom proxies that are capable of generating
+%\packetin and processing \packetout messages, as a solution to overcome it.
+
+Proxies are co-located with the ingress (edge) switches in the network, and
+we establish a (short) label-switched path between each switch and its
+corresponding proxy. The switches continue to have a control channel to the
+controller. We then insert OpenFlow rules in the switches that forward to
+their proxy, at line rates, all packets that would have otherwise required
+them to generate \packetin messages. The switches stamp the incoming port ID
+in the ToS field of the packets before forwarding them to the proxy; this can
+be achieved by installing one rule for each switch port which matches
+based on in-port and sets the packet's ToS
+field accordingly. The
+proxy then generates the necessary \packetin messages reflecting the
+switches` incoming port ID, and forwards them on its control channel to the
+controller. Similar to a regular SDN switch, the proxy also locally buffers
+the packets. The controller sends any \packetout messages to the proxy, which
+processes them and forwards the corresponding buffered packets back to the
+switch to be routed to their eventual destination. All \flowmod messages are sent
+directly to the switch by the controller. 
+
+A single proxy, as we will show in \secref{s:eval_inbound} is capable of
+serving multiple switches and is thus cost-effective. We also show that it
+drastically reduces inbound latency. As an added benefit, more switch CPU
+resources are available for processing \flowmod{s}, polling statistics, etc.
+  
+%the switch CPU is no longer a system bottleneck and thus the interference with proactive path setup is also mitigated.
+
+
+%\aditya{please double check this!!} 
+ %In effect, the approach avoids the need for steps 3 and 4 on the switch altogether, and isolates and speeds up steps 5--7.
+
+% It is possible to integrate the proxy within the SDN controller
+% itself. 
+% % The switches uses a dedicated physical port to contact the
+% % controller. The controller establishes a label switched path from and
+% % to the switch. The default rule installed at the switch forwards
+% % unmatched packets to deliver them to the controller \aditya{check
+% %   this}.
+% %\aditya{rest of the details are same as with MB}
+%   This avoids the need for generating \packetin\  messages
+%   altogether, and avoids having to deploy proxies in the network.
+% % : (1)
+% %   Packets sent to the controller may be lost due to congestion
+% %   en-route.   The original sender
+% %   will
+% %   have to retransmit lost packets, which can significantly inflate connection
+% %   setup delay. While this problem can also arise with the proxy,
+% %   the
+% %   likelihood of loss is higher as the controller may be located several hops away.
+% %   (2) T
+%  But  this scheme imposes high overhead: it sends all full length (MSS
+%   sized) unmatched packets to the controller. In contrast \packetin\
+%   messages are typically much smaller than MSS, e.g., 128B, and in most switch
+%   implementations only one packet \junaid{i am not sure whether this claim(only one packet) is correct or not, at least in openflow 1.0 this is not the case. Am I missing some context ?}is sent while the corresponding
+%   flow's data packets are buffered at the switch.  Therefore, we shun this
+%   approach. 
+
+%   However, in
+%   some deployment
+%   scenarios, e.g., where switches don't buffer packets anyway, the added load
+%   on the controller and the
+%   underlying network may not be significant. \aditya{can someone check
+%     this?}
+
+%   Depending on the deployment scenario in question either approach
+%   could be employed to avoid inbound delay.
+
+% \aditya{the following is unrelated to the paper}
+% \keqhe{ 
+% One common misunderstanding of the MB approach is that we need to place a MB for each switch. 
+% We need to note that MB can be used by multiple openflow switches in a multiplexing manner. 
+% For example, in enterprise networks or campus network, the switches in one building can use one MB.
+% Further, there are several additional good properties of the MB approach. 
+% The first one is, MB enables higher level network programmability. Additional logic can be implemented in the MB to enable more flexible network control. 
+% The second one is security. The previous sections show that the CPU sitting on the  switch is used by tasks such as flow mod message processing, TCAM reordering, 
+% flow status polling etc. An adversary can easily start an attack on the openflow switch CPU such that all other tasks on the CPU suffers from poor performance. 
+% Our MB approach decouples the reactive packet\_in generation task to a dedicated general-purpose CPU 
+% (usually much more powerful than embedded switch CPU) so the attack on switch CPU can be successfully mitigated.
+% }
+
+% \aditya{Can multiple switches in a network could share a single
+%   proxies to collective process their \packetin\  messages?} 
+
+
+% The main cause of Inbound [Ingress?] delay is high CPU processing overhead in generating the PACKET\_IN message and simultaneous processing of FLOW\_MOD messages from the controller. We propose a MiddleBox solution that offloads the generation of PACKET\_IN from the switch to a high CPU power MiddleBox.  
+
+% \begin{enumerate} 
+% \item Control channel is established via the MB. 
+% \begin{itemize}
+% \item Switch\_MB control channel: Between Switch and MB
+% \item MB\_Controller control channel: Between MB and Controller
+% \end{itemize}
+
+% \item Controller inserts a default rule:
+% \begin{itemize}
+% \item Rule0: Forward unmatched packets to MB
+% \end{itemize}
+
+% \item PACKET\_IN message generation is offloaded to the MB
+% \begin{itemize}
+% \item For each unmatched packet received by the MB(forwarded by the switch), it generates a packet\_in message and sends it to the controller via (MB\_Controller) control channel
+% \item The controller sends the packet\_out and flow\_mod message to the MB via  (MB\_Controller) control channel
+% \item The MB forwards the packet\_out and flow\_mod message to the switch via  (Switch\_MB) control channel
+% \end{itemize}
+% \end{enumerate}
+

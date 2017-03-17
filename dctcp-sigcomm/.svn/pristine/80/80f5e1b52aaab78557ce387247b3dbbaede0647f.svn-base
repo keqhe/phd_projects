@@ -1,0 +1,4 @@
+\section{Results}
+
+\input{microbenchmarks}
+\input{incast}

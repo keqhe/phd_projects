@@ -1,0 +1,7 @@
+#get the packet sizes from the trace
+for i in `echo 1 3 5 8 10`; do 
+	echo $i; 
+	tshark -r result-official_gro_final_500us-S10-f8-eth2-TCPDUMP1-PROTpresto-$i/tcpdump.pcap  -Y "ip.dst == 10.2.1.4"  | awk '{if ($7 > 100) print $7}' | sort -n > /tmp/pkt500-$i.sort; 
+	LST=`wc -l /tmp/pkt500-$i.sort | awk '{print $1}'`; 
+	uniq -c /tmp/pkt500-$i.sort | awk -v var="$LST" '{s+=$1; print s/var, $2}' > /tmp/pkt500-$i.cdf; 
+done

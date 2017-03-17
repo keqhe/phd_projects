@@ -1,0 +1,843 @@
+\section{Latency Measurements}\label{sec-measure}
+\iffalse
+\marina{While writing the measurement section I needed some clarifications and
+  may be some fine tuning of couple of expts: 
+In the burst size expts 1)why are the delays worse for decreasing priority as
+compared to the same priority and why the large variance. 
+2)In the CPU usage expts:
+"It was observed that if there is no openflow rule, the switch falls-back to the
+traditional networking mode and a protocol called Fast STP is running as a
+default process. Thus the switch can find a path automatically, i.e., it does
+not requires a rule in TCAM". We found this in the Intel switch as well. This
+means that we need to be clear in our experiments when we say that the rules
+were indeed inserted. In the experimental set up can you please describe how you
+ensure that the packet is being forwarded based on the rule insertion and not
+the default networking.  
+Also would this default switching be the reason for the basic 13-15\% CPU.
+3)Do we know what happens in the firmware during burst mode that causes CPU
+increase 
+4)TCAM: Intel says that there are possible losses during reordering . Have we
+done experiments to check this. 
+5)Priority: Do we have expts to compare insertion rate vs priority
+6)Ingress delays: Can we collect all the results we have thus far for this
+piece. Impact of CPU, Hardware, TCAM, flow rate etc etc. We need to measure all
+the dependencies to motivate our proxy idea better 
+7)Network level: it would be good to show  what the worst case impact of
+ignoring these latencies can be on an entire networks with flows criss crossing?  
+Is the impact significant in some topologies? Does one type of latency have more
+impact than another? Do some switch vendor have more of this issue than others? 
+}
+\fi
+
+An important first step to taming the flow set up latency is to understand the
+various factors that affect the flow set up process within the SDN switch.  
+To draw more general observations about SDN switch performance that are not
+artifacts of any single vendor's implementation specifics,  
+we performed experiments on 3 commercially available switches. Our measurement
+methodology is aimed at isolating various factors within the SDN switch's flow
+set up process that impacts the flow set up latency. As described earlier in the
+details of the switch operation, we break down our measurement approach to
+isolate the delays corresponding to inbound delay and Outbound delay. We also
+evaluate the impact of statistics gathering on flow set up latency.   
+
+\begin{figure}[!tb]
+\centering
+%%\epsfig{file=./figs/openflow_switch_illustrate.eps,width=0.4\textwidth} %%changed
+\includegraphics[width=2.5in]{figs/experiment_setup.PNG}
+\caption{Measurement experiment setup}\label{experiment_setup}
+\end{figure}
+
+\subsection{Measurement Methodology}
+%%\marina{please add the specific features that were added for the expt set up}. 
+The experimental local area network set up for our measurement work is shown in
+~\figref{experiment_setup} and is similar to that used by~\cite{rotsos2012oflops}.  
+We use Openflow 1.0 since this is the most widely supported version on the
+commercial switch platforms. To better isolate the components of the delay
+incurred, we added some additional features to the core POX controller. 
+We added logic to let the switch send a set of \flowmod\ commands as fast as
+possible (burst mode) or in a controlled rate mode by specifying the interval
+between two commands. Using the NetFPGA card we have a built fast and reliable
+packet generator. This is crucial to ensure that our packet injection rates into
+the switch ports are verifiable.  
+
+We use the time stamp of the first packet associated with a particular flow 
+%minus the timestamp of the corresponding \flowmod command for that flow as the
+%\flowmod\ processing delay.  
+as the finish time of the corresponding \flowmod\ command. This requires that
+the packet generator must be fast enough such that the interval of the packets
+belong to the same flow are almost negligible and safely bounded. For example,
+if the number of flows is 800 with 64B packet size and flow injection rate is
+1Gbps,  the interval must be maintained to about 0.4 ms. We assume that the
+propagation delay between the switch and the controller is negligible (The RTT
+between the controller and the switch is about 0.3 ms). We use \emph{libpcap}
+running on a high performance host to accurately time stamp the different packet
+and rule processing events of each flow. We first log the timestamps in memory
+and when the experimental run is completed, the results are dumped to the disk
+and processed. The detailed measurement methodology is customized to clearly
+delineate the inbound and outbound delay components.   
+
+{\bf Switch Platforms.}
+To ensure that we are experimenting in the optimal regimes for the different
+switches we take into account switch specifics such as maximum flow table sizes
+as well as support for priority in rule set up and statistics monitoring. We
+also make the distinction on the types of rule tables supported by the different
+switches.  
+1) Broadcom 956846K, 
+2) Intel FM6000 (model IZ1), 
+and 3) HP Procurve 8212zl.
+The specific details for each switch are shown in Table~\ref{switch_para}.
+\keqhe{Broadcom switch can only support proactive rule insertions while Intel and HP switch can support both proactive and reactive rule insertions.}
+\begin{table}
+\centering
+\small
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+Switch & CPU & RAM & \tabincell{c}{Flow \\Table Size} & Data Plane \\ \hline
+\tabincell{c}{Broadcom \\956846K} & 1Ghz & 1GB & 896 & 18*40Gbps \\ \hline
+Intel FM6000 & 1Ghz & 1GB & 4096 & \tabincell{c}{40*10Gbps \\+ 4*40Gbps} \\ \hline
+\tabincell{c}{HP Procurve \\8212zl} & 666Mhz & 256MB & $\approx$1000 & Modularity \\ \hline
+\hline
+\end{tabular}
+\caption{Specific details of the switches.}{\label{switch_para}}
+\end{table}
+
+%%\marina{We need a table with specific details of the switch - Switch type, Processor RAM, Data plane capacity, Max Flow table size, hardware and software tables, support for prioity, statistics gathering support}
+
+\subsection{Dissecting Inbound Delay}
+
+%%inbound delay on HP
+\begin{figure*}
+\subfloat[Flow rate = 100/s\label{fig:hp_inbound_test1}]
+  {\includegraphics[width=.28\linewidth]{./figs/hp_inbound_delay_100.eps}}\hfill
+\subfloat[Flow rate = 200/s\label{fig:hp_inbound_test2}]
+  {\includegraphics[width=.28\linewidth]{./figs/hp_inbound_delay_200.eps}}\hfill
+\subfloat[Flow rate = 400/s\label{fig:hp_inbound_test3}]
+  {\includegraphics[width=.28\linewidth]{./figs/hp_inbound_delay_400.eps}}
+\caption{{\bf: TODO: Change to Broadcom or Intel} (Inbound delay on HP Procurve). With flow mod and packet out operations.}
+\label{fig:inbound-1}
+\end{figure*}
+
+
+\begin{figure*}
+\subfloat[Flow rate = 200/s\label{fig:hp_inbound_test1_wo}]
+  {\includegraphics[width=.28\linewidth]{./figs/hp_inbound_delay_200_no_mod_out.eps}}\hfill
+\subfloat[Flow rate = 500/s\label{fig:hp_inbound_test2_wo}]
+  {\includegraphics[width=.28\linewidth]{./figs/hp_inbound_delay_500_no_mod_out.eps}}\hfill
+\subfloat[Flow rate = 1000/s\label{fig:hp_inbound_test3_wo}]
+  {\includegraphics[width=.28\linewidth]{./figs/hp_inbound_delay_1000_no_mod_out.eps}}
+\caption{{\bf: TODO: Change to Broadcom or Intel} Inbound delay on HP Procurve. Without flow mod and packet out
+  operations.Because we set up our experiments in a LAN setting, we think that
+  the delay on the wire is negligible}
+\label{fig:inbound-2}
+\end{figure*}
+
+
+%%%%HP switch CPU  usage%%%%%%%%%
+\begin{table}
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+\multicolumn{4}{|c|}{with flow mod/pkt out} \\ \hline
+flow rate & 100/s & 200/s  & 400/s  \\ \hline
+cpu usage & 24\%  & 37\%   & 52\%   \\ \hline
+\hline
+\multicolumn{4}{|c|}{w/o flow mod/pkt out} \\ \hline
+flow rate & 200/s & 400/s  & 1000/s \\ \hline
+cpu usage & 9\%   & 17\%   & 25\%   \\ \hline
+
+%\caption{CPU usage on HP Procurve switch.}
+\end{tabular}
+\caption{CPU usage on HP Procurve switch.}
+\end{table} 
+%\emph{Inbound delay:}
+To capture the inbound delay, we keep the switch in reactive mode and let it
+generate the \packetin\ message to the controller if there is no matching rule
+for that packet in its flow table. We record the timestamp ($t_1$) when each
+packet is transmitted on the NIC of the switch.  We also record the timestamp
+($t_2$) when the \packetin\ message is received by the controller. Te 
+The difference $t_2 - t_1$ is the inbound delay, i.e. the time between the time
+switch receives the first packet of a flow and the time the \packetin\ message
+is generated. This measurement technique differs from the approach used in
+\cite{ucsdHiFi13}, where the delay was captured from the switch to the POX
+controller which includes the overhead at the controller. 
+%\marina{Where are the figures for the inbound delay. Explain how we isolate this
+%  type of delay by dropping the pkt at the controller}. 
+
+%\li{is the following sentence correct?}
+%When the controller receives \packetin\ message, the controller will drop it. As
+%we keep sending packets, it will allow us to repeatedly measure inbound delay. 
+\li{Which vendor's result do we want to show?}
+We generate \packetin\ events in increasing rate: 100, 200, 400 per second. We
+perform two experiments. In the first experiment, the \packetin\ will trigger
+corresponding \flowmod\ and \packetout\ messages. In the second experiment, the
+\packetin\ message is dropped. For the first experiment, as shown in
+Figure~\ref{fig:inbound-1}, the inbound delay is scattered around and increases
+with the \packetin\ rates.  For the second experiment, as shown in
+Figure~\ref{fig:inbound-2}, the inbound delay is almost zero all the time. The
+only difference is that the switch CPU is processing \flowmod\ and \packetout\
+simultaneously as it generates \packetin\. Thus, we conclude that inbound delay
+is mainly caused by switch CPU.  
+ 
+\subsection{Dissecting Outbound Delay} 
+%We define the egress delay as the difference between the time when the switch
+%issues the flow\_mod and/or packet\_out message and the time when the first
+%packet of a particular flow is sent out by the switch. 
+We used the customized controller interfaces to control the \flowmod\ message
+generation. 
+%by controlling the matching fields and priorities of the \flowmod\ messages. 
+Before we perform the outbound delay measurements, first we install a
+default low priority rule which instructs the switch to drop all the traffic.
+Then we install the specifically designed openflow rules from the
+controller. These specific openflow rules have different priorities and they
+will instruct the switch to output the traffic to the port which is connected  
+to the measurement host on which libpcap is monitoring.  By default, the table
+has only one rule that drops all packets. 
+%\marina{give an example of what we mean increasing rule priority and decreasing
+%  rule priority}. 
+%Our egress delay measurements make a distinction between the
+%flow\_mod and pkt\_out events.  
+%By contrast previous measurement work \ref{maple, ucsdHiFi13} for egress delay, only
+%captured the "packet out" delay. Thus our approach helps provide a more detailed
+%analysis of the egress delay.  
+
+%\emph{Causes for egress delay}
+
+\subsubsection{Impact of rule priority and flow table occupancy} 
+%%Broadcom switch, outbound delay, burst size effects, same, incr, and decr priorities
+The priority of a rule indicates its position in the TCAM. Inserting a higher priority
+rule can displace many lower priority rules. To investigate how priority rule
+affects outbound delay. We perform a burst of $n$ \flowmod\ operations with the
+same, increasing, decreasing priority respectively. The \flowmod\ operations are
+insertion, modification and deletion. We also vary $n$. Lets denote the burst rules
+in a sequence as $r_1, r_2,\cdots,r_i,\cdots, r_n$. If the operation on the rule
+$r_i$, $op(r_i)$ is insertion or modification, denote $T(r_i)$ as the time we
+observe the first packet matching $r_i$ emerges from the intended port of the rule
+action. If the operation on the rule $r_i$, $op(r_i)$ is deletion, denote
+$T(r_i)$ as the first time we stopped observing packets matching $r_i$ from the
+intended port of the rule action. We define insertion delay, modification
+delay and deletion delay as $T(r_i)-T(r_i-1)$ depending on the operation on the
+rule.  
+
+{\bf Insertion.}
+\begin{figure*}[!tb]
+\centering
+\subfloat[burst size 100, same priority.\label{fig:bcm_burst_100_same_pri}]
+  {\includegraphics[width=.24\linewidth]{./figs/jan27_bcm_add_same_burst_100.eps}}\hfill
+\subfloat[burst size 200, same priority.\label{fig:bcm_burst_200_same_pri}]
+  {\includegraphics[width=.24\linewidth]{./figs/jan27_bcm_add_same_burst_200.eps}}\hfill
+\subfloat[burst size 100, increasing priority.\label{fig:bcm_burst_100_incr_pri}]
+  {\includegraphics[width=.24\linewidth]{./figs/jan27_bcm_add_incr_burst_100.eps}}\hfill
+\subfloat[burst size 200, increasing priority.\label{fig:bcm_burst_200_incr_pri}]
+  {\includegraphics[width=.24\linewidth]{./figs/jan27_bcm_add_incr_burst_200.eps}}
+\caption{{\bf Broadcom} priority per-rule {\bf insert} latency results: (a) burst size
+  100, same priority (b) burst size 200, same priority (c) burst size 100,
+  increasing priority (d) burst size 200, increasing priority} 
+\label{fig:priority-broadcom-insert}
+\end{figure*}
+
+We first show our measurement results on Broadcom. 
+\begin{itemize}
+\item \emph{Broadcom: same priority.} We insert 100 rules in the
+switch. As shown in Figure~\ref{fig:priority-broadcom-insert}-a, the per rule
+insertion delay among the 100 rules are similar with median xx ms and standard
+deviation xx. As shown in Figure~\ref{fig:priority-broadcom-insert}-b, the
+insertion delay for burst size 200 has a median xx ms and standard deviation
+xx. We also perform other burst sizes. The results are similar. We conclude that
+same priority rule insertion delay does not vary with burst size on Broadcom.
+\item \emph{Broadcom: different priority.} We insert 100 rules in increasing
+  priority. As shown in Figure~\ref{fig:priority-broadcom-insert}-c, the per rule
+insertion delay among the rules is not the same. It is actually linearly
+increasing as the number of rules inserted increases. As shown in
+Figure~\ref{fig:priority-broadcom-insert}-d, the slope stays the same
+if we increase the burst size. Compared with same priority insertion, the delay
+can be much larger 30 ms (xx) vs 5 (xx) ms. We also performed decreasing
+priority insertion (not shown in figure). We observe that the burst is chopped
+into batches and each batch are reordered in increasing order. 
+\end{itemize}
+
+\begin{figure*}[!tb]
+\centering
+\subfloat[burst size 100, same priority.\label{fig:intel_burst_100_same_pri}]
+  {\includegraphics[width=.24\linewidth]{./figs/jan27_intel_same_burst_100.eps}}\hfill
+\subfloat[burst size 200, same priority.\label{fig:intel_burst_200_same_pri}]
+  {\includegraphics[width=.24\linewidth]{./figs/jan27_intel_same_burst_200.eps}}\hfill
+\subfloat[burst size 100, decreasing priority.\label{fig:intel_burst_100_incr_pri}]
+  {\includegraphics[width=.24\linewidth]{./figs/jan27_intel_decr_burst_100.eps}}\hfill
+\subfloat[burst size 200, decreasing priority.\label{fig:intel_burst_200_incr_pri}]
+  {\includegraphics[width=.24\linewidth]{./figs/jan27_intel_decr_burst_200.eps}}
+\caption{{\bf Intel} priority per-rule {\bf insert} latency results: (a) burst size
+  100, same priority (b) burst size 200, same priority (c) burst size 100,
+  increasing priority (d) burst size 200, increasing priority {\bf TODO: (e) burst size
+  100, decreasing priority (f) burst size 200, decreasing priority; SHOW the
+  priority effect}} 
+\label{fig:priority-intel-insert}
+\end{figure*}
+
+We next show our measurement results on Intel. 
+\begin{itemize}
+\item \emph{Intel: same priority.} We insert 100 rules in the
+switch. As shown in Figure~\ref{fig:priority-intel-insert}-a, the per rule
+insertion delay among the 100 rules are similar with median xx ms and standard
+deviation xx. As shown in Figure~\ref{fig:priority-intel-insert}-b, the
+insertion delay for burst size 200 has a median xx ms and standard deviation
+xx. We also perform other burst sizes. The results are similar. We conclude that
+same priority rule insertion delay does not vary with burst size on Intel,
+similar to Broadcom.
+\item \emph{Intel: different priority.} We insert 100 rules in increasing
+  priority. As shown in Figure~\ref{fig:priority-intel-insert}-c,
+  \emph{surprisingly}, the per rule insertion delay among the rules is more or
+  less the same with median xx and standard deviation xx. The insertion delay
+  increases for decreasing priority insertion. This shows that the Intel TCAM
+  architecture is different from Broadcom. Rules are ordered in TCAM in a way
+  that higher priority rule insertion does not displace existing low priority
+  rules. Instead, low priority rule insertion causes displacement of high
+  priority rules.  
+\end{itemize}
+
+We show that same priority insertion is much faster than increasing
+priority. We vary the burst size and report 100 and 200. 
+\keqhe{On Intel switch, decreasing priority incurs larger delay, not increasing priority.}
+
+{\bf Modification.}
+\begin{figure*}[!tb]
+\centering
+\subfloat[burst size 100, same priority.\label{fig:bcm_mod_same_burst_100}]
+  {\includegraphics[width=.24\linewidth]{./figs/jan27_bcm_mod_same_burst_100.eps}}\hfill
+\subfloat[burst size 100, increasing priority.\label{fig:bcm_mod_incr_burst_100}]
+  {\includegraphics[width=.24\linewidth]{./figs/jan27_bcm_mod_incr_burst_100.eps}}\hfill
+\subfloat[burst size 100, decreasing priority.\label{fig:bcm_mod_decr_burst_100}]
+  {\includegraphics[width=.24\linewidth]{./figs/jan27_bcm_mod_decr_burst_100.eps}}\hfill
+\subfloat[burst size 200, same priority.\label{fig:bcm_mod_same_burst_200}]
+  {\includegraphics[width=.24\linewidth]{./figs/jan27_bcm_mod_same_burst_200.eps}}
+\caption{{\bf Broadcom} priority per-rule {\bf modification} latency results, burst size
+  100: (a) same priority (b) increasing priority (c) decreasing priority (d)
+  burst size 200, same priority}
+\label{fig:priority-broadcom-modify}
+\end{figure*}
+
+We first describe our measurement results on Broadcom. We insert a batch of
+rules. We then modify them in place.
+\begin{itemize}
+\item \emph{Broadcom: same priority.} We modify 100 rules with same priority in the
+switch. As shown in Figure~\ref{fig:priority-broadcom-modify}-a, the per rule
+modification delay among the 100 rules are similar with median xx ms and standard
+deviation xx. However, it is much larger than insertion, 30 (xx) ms vs 5 (xx)
+ms. As shown in Figure~\ref{fig:priority-broadcom-modify}-d, the per-rule
+modification delay for 200 rules has a median 60 (xx) ms and standard deviation
+xx. The modification time is significant impacted by the number of rules in the
+table.
+\item \emph{Broadcom: different priority.}  We modify in both increasing rule
+  priority and decreasing rule priority. As shown in
+  Figure~\ref{fig:priority-broadcom-insert}-b,c, the per rule modification delay
+  is not affected by rule priority. Their median delay is xx and xx respectively
+  with standard deviation xx and xx.
+\end{itemize}
+
+\begin{figure*}[!tb]
+\centering
+\subfloat[burst size 100, same priority.\label{fig:intel_mod_same_burst_100}]
+  {\includegraphics[width=.24\linewidth]{./figs/jan27_intel_mod_same_burst_100.eps}}\hfill
+\subfloat[burst size 100, increasing priority.\label{fig:intel_mod_incr_burst_100}]
+  {\includegraphics[width=.24\linewidth]{./figs/jan27_intel_mod_incr_burst_100.eps}}\hfill
+\subfloat[burst size 100, decreasing priority.\label{fig:intel_mod_decr_burst_100}]
+  {\includegraphics[width=.24\linewidth]{./figs/jan27_intel_mod_decr_burst_100.eps}}\hfill
+\subfloat[burst size 200, same priority.\label{fig:intel_mod_same_burst_200}]
+  {\includegraphics[width=.24\linewidth]{./figs/jan27_intel_mod_same_burst_200.eps}}
+\caption{{\bf Intel} priority per-rule {\bf modification} latency results, burst size
+  100: (a) same priority (b) increasing priority (c) decreasing priority (d)
+  burst size 200, same priority}
+\label{fig:priority-intel-modify}
+\end{figure*}
+
+We next describe our measurement results on Intel. We insert a batch of
+rules. We then modify them in place. As shown in
+Figure~\ref{fig:priority-intel-modify}, modification delay is 1 ms independent
+of rule priority and table occupancy.  
+
+
+%We show that modification is expensive in all cases for all rules. The per-rule
+%modification time depends on the number of rules in the table.
+
+{\bf Deletion.}
+\begin{figure*}[!tb]
+\centering
+\subfloat[burst size 100, same priority.\label{fig:bcm_del_same_burst_100}]
+  {\includegraphics[width=.30\linewidth]{./figs/jan27_bcm_del_same_burst_100.eps}}\hfill
+\subfloat[burst size 100, increasing priority.\label{fig:bcm_del_incr_burst_100}]
+  {\includegraphics[width=.30\linewidth]{./figs/jan27_bcm_del_incr_burst_100.eps}}\hfill
+\subfloat[burst size 100, decreasing priority.\label{fig:bcm_del_decr_burst_100}]
+  {\includegraphics[width=.30\linewidth]{./figs/jan27_bcm_del_decr_burst_100.eps}}
+\caption{{\bf Broadcom} priority per-rule {\bf deletion} latency results, burst size
+  100: (a) same priority (b) increasing priority (c) decreasing priority}
+\label{fig:priority-broadcom-deletion}
+\end{figure*}
+
+\begin{figure*}[!tb]
+\centering
+%\subfloat[burst size 100, same priority.\label{fig:jan27_intel_del_same_burst_100}]
+%  {\includegraphics[width=.24\linewidth]{./figs/jan27_intel_del_same_burst_100.eps}}\hfill
+%\subfloat[burst size 100, increasing priority.\label{fig:jan27_intel_del_incr_burst_100}]
+%  {\includegraphics[width=.24\linewidth]{./figs/jan27_intel_del_incr_burst_100.eps}}\hfill
+%\subfloat[burst size 100, decreasing priority.\label{fig:jan27_intel_del_decr_burst_100}]
+%  {\includegraphics[width=.24\linewidth]{./figs/jan27_intel_del_decr_burst_100.eps}
+
+\subfloat[burst size 100, same priority.\label{fig:intel_intel_del_same_burst_100}]
+  {\includegraphics[width=.30\linewidth]{./figs/jan27_intel_del_same_burst_100.eps}}\hfill
+\subfloat[burst size 100, increasing priority.\label{fig:intel_del_incr_burst_100}]
+  {\includegraphics[width=.30\linewidth]{./figs/jan27_intel_del_incr_burst_100.eps}}\hfill
+\subfloat[burst size 100, decreasing priority.\label{fig:intel_del_decr_burst_100}]
+  {\includegraphics[width=.30\linewidth]{./figs/jan27_intel_del_decr_burst_100.eps}}
+
+\caption{{\bf Intel} priority per-rule {\bf deletion} latency results, burst size
+  100: (a) same priority (b) increasing priority (c) decreasing priority}
+\label{fig:priority-intel-deletion}
+\end{figure*}
+
+We now examine our results on deletion on both Broadcom and Intel. We delete
+existing rules with and without priority. In case of priority, we delete rules
+in increasing and decreasing priority.  As shown in
+Figure ~\ref{fig:priority-intel-deletion} and
+~\ref{fig:priority-intel-deletion}, deletion is not affected by rule priorities
+in the table and the order of deletion. However, deletion delay is affected by
+the number of rules in the table. This seems to indicate that deletion incurs
+TCAM reordering in all cases in both switch architecture.
+
+{\bf Summary of the impact of flow table occupancy.}
+We see that flow table occupancy affects insertion delay for both Broadcom and
+Intel, rule deletion delay for both Broadcom and Intel, modification delay 
+for Broadcom, not for Intel. 
+
+
+%\subsubsubsection{Impact of flow table occupancy} 
+\subsubsection{Impact of priority structure on insertion delay} 
+%%%%%%B2.1%%%%%%%%%%%%%%%
+\iffalse
+\begin{figure*}[!tb]
+\centering
+\subfloat[burst size 100, same priority.\label{fig:bcm_table_occ_exp1}]
+  {\includegraphics[width=.24\linewidth]{./figs/jan27_bcm_table_occ_exp1.eps}}\hfill
+\subfloat[burst size 100, increasing priority.\label{fig:bcm_table_occ_exp2}]
+  {\includegraphics[width=.24\linewidth]{./figs/jan27_bcm_table_occ_exp1.eps}}\hfill
+\subfloat[burst size 100, decreasing priority.\label{fig:bcm_table_occ_exp3}]
+  {\includegraphics[width=.24\linewidth]{./figs/jan27_bcm_table_occ_exp3.eps}}\hfill
+\subfloat[burst size 200, same priority.\label{fig:bcm_table_occ_exp4}]
+  {\includegraphics[width=.24\linewidth]{./figs/jan27_bcm_table_occ_exp3.eps}}
+
+\caption{{\bf Broadcom} per-rule {\bf insert} latency flow table occupancy
+  result (a) 100 rules in table, same priority insertion of 100 additional rules
+  (b) 100 low priority rules in table, insert addition 100 rules in decreasing
+  priority (c) 100 low priority rules in table and 100 high priority rules in
+  table, insert additional 100 medium priority rule (d) 100 low priority rules in
+  table and 100 high priority rules in table, insert additional 100 rules in
+  decreasing priority (all 100 priorities are in between low and high)}
+\label{fig:table-occupancy-broadcom}
+\keqhe{Could not be able to plot meaningful figures for part b) and part d),
+  emailed raw data to ELE. Ingore part b) and part d) for now}
+\li{make a table}
+\end{figure*}
+\fi
+\begin{table}
+\centering
+\begin{tabular}{|r|r|r|r|r|r|}
+\hline
+
+\hline
+\end{tabular}
+\caption{{\bf TODO: Impact of rule priority structure on insertion delay: same as long as displacing the same
+  number of rules}}
+\end{table}
+
+We see that both rule priority structure in the table and the order of deletion or
+modification do not affect deletion delay and modification delay. We would like
+to investigate how priority structure affects insertion delay. As we see from
+the table, insertion delay is affected by the number of low (high) priority rules
+displaced for Broadcom (Intel) respectively. Flow table occupancy indirectly
+affects insertion delay through the number of rules displaced. 
+
+
+\subsubsection{Impact of CPU concurrent poll statistics} 
+
+\begin{figure*}
+\subfloat[burst mode:100, init table 0\label{fig:bcm_polling_table0_burst100}]
+  {\includegraphics[width=0.3\textwidth]{./figs/bcm_polling_table0_burst100.eps}}\hfill
+\subfloat[burst mode:100, init table 500\label{fig:bcm_polling_table500_burst100}]
+  {\includegraphics[width=0.3\textwidth]{./figs/bcm_polling_table500_burst100.eps}}\hfill
+\subfloat[controlled-rate mode, rate 50, polling frequency = 1/s\label{fig:bcm_polling_control_50_50_per_polling}]
+  {\includegraphics[width=0.3\textwidth]{./figs/bcm_polling_control_50_50_per_polling.eps}}
+\caption{Polling effects: Outbound delay on Broadcom switch. Polling effect
+  (flow stats query). Averaged on 5 rounds. Measured using simple openflow rules
+  (i.e., just vary destination IP).}
+%\caption{{\bf Broadcom} per-rule {\bf insert} latency: impact of polling}
+\label{fig:polling}
+\end{figure*}
+
+As we can see from Figure~\ref{fig:polling}, concurrent CPU activities such as
+polling statistics can have a great impact on insertion delay.
+
+
+\subsubsection{Root causes}
+{\bf CPU Utilization}
+Since the CPU is shared resource for the different switch operations that
+constitute to \flowmod and \packetout operations we expect that it could be a
+bottleneck and hence a cause for increases in egress delay. Table \marina{tab-2}
+describes the CPU utilization measured at different scenarios. \marina{add
+  description of how this was measured} It was observed that if there is no
+openflow rule, the switch falls-back to the traditional networking mode and a
+protocol called Fast STP is running as a default process.  
+Thus the switch can find a path automatically, i.e., it does not requires a rule
+in TCAM. In our measurements, we have a default drop rule in TCAM. So we make
+sure TCAM rules are used all the time. As we have shown in the polling results,
+CPU utilization can impact insertion delay significantly.
+
+% \marina{We found this in the Intel switch as well. This means that we need to
+% be clear in our experiments when we say that the rules were indeed
+% inserted. In the experimental set up can you please describe how you ensure
+% that the packet is being forwarded based on the rule insertion and not the
+% default networking. Also would this default switching be the reason for the
+% basic 13-15\% CPU} There is no evidence which shows that the CPU is affected
+% in any significant manner by the data plane traffic rate. 
+
+{\bf Hardware Delays}
+The sources of hardware-based delay are in the shared bus between CPU-controller
+and CPU-TCAM and the TCAM itself. The shared bus is not a major cause for the
+latency in our controlled experiments where there is only proactive rule set up
+and because the rates at which we are inserting rule are much smaller than the bus
+capacity (For e.g. its 10 Mbps for Intel).  Thus the hardware impact on the
+outbound delay component is mainly from the TCAM operation.  \li{Did we observe
+  this? It is possible to have packet loss when the TCAM is updating. }
+As we observed, TCAM reordering depends on the operation type (insertion,
+deletion, modification), whether rules in the table have different priorities,
+the order of rule insertion and switch architecture. As we noted, Broadcom
+modification is very expensive even if the modification is just port number and
+all rules have the same priority. In contrast, modification in place is very
+cheap, the same as insertion with all rules having the same priority.  
+
+%%%%%%%%B3.1 controlled rate, change default table size T, a buch of rule B and the rate R
+%%%instead using one table to show the effects of controlled rate experiments, fixed default table size to 100 and insert another 300 rules
+
+\begin{figure}[!tb]
+\centering
+\epsfig{file=./figs/bcm_table_size_effects_B50.eps,width=0.5\textwidth}
+\caption{Outbound delay on Broadcom switch. Table occupancy effects. Burst size 50. Averaged on 5 rounds. Same priority. Measured using simple openflow rules (i.e., just vary destination IP).}\label{bcm_table_effects}
+\end{figure}
+
+\iffalse
+\begin{table}
+\centering
+\begin{tabular}{|r|r|r|r|r|r|}
+\hline
+Rate& avg & max & min & std \\ \hline
+1 &  300010.3 & 300011.9 & 300009.7 & 0.83 \\ \hline
+10 & 30010.4 & 30011.8 & 30009.9 & 0.70 \\ \hline
+50 & 6011.8 & 6015.6 & 6009.5 & 2.57 \\ \hline
+100 & 3012.7 & 3026.7 & 3006.9 & 7.18 \\ \hline
+150 & 2007.9 & 2009.6 & 2006.0 & 1.53 \\ \hline
+200 & 1645.7 & 1676.7 & 1631.7 & 15.86 \\ \hline
+400 & 1394.7 & 1419.1 & 1352.8 & 26.18 \\ \hline
+\hline
+\end{tabular}
+\caption{Total completion time (controlled rate mode): default table occupancy 100, insert another 300 rules.}
+\end{table}
+\fi
+
+\subsection{Overall burst insertion completion time}
+With the understanding per-rule insertion latency, we present burst rule
+completion time as this is the metric many applications such as failover depend
+on. 
+
+We perform the following experiments.
+\begin{itemize}
+\item We insert a burst of low priority rules into a table with 100 (400) high
+priority rules.
+\item We insert a burst of high priority rules into a table with 100 (400) low
+  priority rules.  
+\end{itemize}
+
+As shown in~\ref{fig:burst-completion-time}, based on our hypothesis, as long as
+the same number of rules got displaced, the completion time of different
+settings should be the same. Indeed, from As shown
+in~\ref{fig:burst-completion-time}-a, we see that even with 400 low priority
+rules in the table, the insertion delay is no different from the setting when
+there is only 100 low priority rules in the table. As shown
+in~\ref{fig:burst-completion-time}-b, since newly inserted rules will displace
+400 high priority rules in the table compared with the setting of 100 high
+priority rules in the table, the completion time will be about three times
+higher. \li{TODO: Do we need corresponding results from Intel?}
+
+%%%%%%%%%%%%%%%%%B4%%%%%%%%%%
+\begin{figure*}
+\subfloat[insert a burst of low priority rules into a table with 100 (400) high priority rules.\label{fig:bcm_outbound_two_pri_high_low_burstB}]
+  {\includegraphics[width=.50\linewidth]{./figs/bcm_two_pri_high_low_burstB.eps}}\hfill
+\subfloat[insert a burst of high priority rules into a table with 100 (400) low priority rules.\label{fig:bcm_outbound_two_pri_low_high_burstB}]
+  {\includegraphics[width=.50\linewidth]{./figs/bcm_two_pri_low_high_burstB.eps}}
+\caption{Outbound delay on Broadcom switch. Two priority effects. Initial flow table occupancy is N high (low) priority rules.
+Then, insert a burst of low (high) priority rules. Averaged on 5
+rounds. Measured using simple openflow rules (i.e., just vary destination IP).}
+\label{fig:burst-completion-time}
+\end{figure*}
+
+\begin{figure*}
+\subfloat[burst mode, same priority\label{fig:bcm_outbound_burstsize_same_pri}]
+  {\includegraphics[width=.3\linewidth]{./figs/bcm_burst_size_effects_same.eps}}\hfill
+\subfloat[burst mode, increasing priority\label{fig:bcm_outbound_burstsize_incr_pri}]
+  {\includegraphics[width=.3\linewidth]{./figs/bcm_burst_size_effects_incr.eps}}\hfill
+\subfloat[burst mode, decreasing priority\label{fig:bcm_outbound_burstsize_decr_pri}]
+  {\includegraphics[width=.3\linewidth]{./figs/bcm_burst_size_effects_decr_20rounds.eps}}
+\caption{B1.1, B4.4 and B4.5: Outbound delay on Broadcom switch. Burst size
+  effects. Averaged on 5 rounds. Initial flow table occupancy is 0. Measured
+  using simple openflow rules (i.e., just vary destination IP).}
+\label{fig:burst-completion-time-inc}
+\end{figure*}
+
+If we insert in increasing priority, because each rule displaces different
+number of rules (rule $i$ displaces $i-1$ previous inserted rules), the total
+rule displacement is quadratic. We clearly see this effect in
+Figure~\ref{fig:burst-completion-time-inc}.   \li{TODO: Do we need corresponding
+  results from Intel?} 
+
+
+%%to drop
+\iffalse
+\begin{figure*}
+\subfloat[insert a burst of low priority rules into a table with 100 high priority rules.\label{fig:bcm_outbound_two_pri_high_100_low_burstB}]
+  {\includegraphics[width=.23\linewidth]{./figs/bcm_two_pri_high_100_low_burstB.eps}}\hfill
+\subfloat[insert a burst of high priority rules into a table with 100 low priority rules.\label{fig:bcm_outbound_two_pri_low_100_high_burstB}]
+  {\includegraphics[width=.23\linewidth]{./figs/bcm_two_pri_low_100_low_burstB.eps}}\hfill
+\subfloat[insert a burst of low priority rules into a table with 400 high priority rules.\label{fig:bcm_outbound_two_pri_high_400_low_burstB}]
+  {\includegraphics[width=.23\linewidth]{./figs/bcm_two_pri_high_400_low_burstB.eps}}\hfill
+\subfloat[insert a burst of high priority rules into a table with 400 low priority rules.\label{fig:bcm_outbound_two_pri_low_100_high_burstB}]
+  {\includegraphics[width=.23\linewidth]{./figs/bcm_two_pri_low_400_low_burstB.eps}}
+\caption{B4.1, B4.2 and B4.3: Outbound delay on Broadcom switch. Two priority effects. Initial flow table occupancy is N high (low) priority rules. 
+Then, insert a burst of low (high) priority rules. Averaged on 5 rounds. Measured using simple openflow rules (i.e., just vary destination IP).}
+\end{figure*}
+\fi
+%%
+
+
+\iffalse
+\begin{table}
+\centering
+\begin{tabular}{|l|l|}
+\hline
+scenario & CPU usage \\ \hline
+default & 14.0\% \\ \hline
+burst mode & 99.6\% - 100\%  \\ \hline
+same pri, rate 10 & max: 39.5\%, gradually increasing \\ \hline
+same pri, rate 50 &max: 98.0\%, increasing \\ \hline
+incr pri, rate 10 & max: 99.6\%, gradually increasing \\ \hline
+incr pri, rate 50 & max: 100\%, increasing rapidly \\ \hline
+decr pri, rate 10 & around 21.2\%, no increasing \\ \hline
+decr pri, rate 50 & max: 69.1\%, increasing \\ \hline
+\hline
+\end{tabular}
+\caption{CPU usage on Broadcom switch.}
+\end{table}
+
+
+\fi
+%%Polling effects measured on Broadcom switch%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%Intel FM6000 swith &&&&&&&&&&&&&&&
+
+\begin{figure}
+\centering
+\epsfig{file=./figs/Intel_burst_effect_same.eps,width=0.5\textwidth}
+\caption{Burst size effect. Intel FM6000 (IZ1). Averaged on 5 rounds. Measured using simple openflow rules (i.e., just vary destination IP).}\label{intel_burst_effect_same}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%HP Procurve switch&&&&&&&&&&&&&&
+\begin{figure}
+\centering
+\epsfig{file=./figs/HP_burst_effect_same.eps,width=0.5\textwidth}
+\caption{Burst size effect. HP Procurve 8212zl. Averaged on 5 rounds. Measured using simple openflow rules (i.e., just vary destination IP).}\label{hp_burst_effect_same}
+\end{figure}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%   JUNK    YARD      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%priority effects on broadcom
+
+%%%decided to drop it
+\iffalse
+\begin{figure}
+\centering
+\epsfig{file=./figs/bcm_two_pri_outbound_burst.eps,width=0.5\textwidth}
+\caption{Openflow rule priority's effects on proactive insertion delay. Measured on Broadcom switch. odd: 1, even: 2. Busrt mode (similar observations using controlled flow rates: 1/s, 10/s, 50/s, 100/s, and 200/s). High priority rules are inserted before the low priority rules}\label{bcm_compare_priority_simple1}
+\end{figure}
+
+
+\begin{figure}
+\centering
+\epsfig{file=./figs/bcm_comp_pri_outbound_rate50.eps,width=0.5\textwidth}
+\caption{Openflow rule priority's effects on proactive insertion delay. Measured on Broadcom switch. Averaged on 5 rounds. Insertion rate is 50 per sec.}\label{bcm_compare_priority_simple2}
+\end{figure}
+
+\fi
+
+
+
+\iffalse
+\begin{figure*}
+\subfloat[default table occupancy 100, insert another 50 rules\label{fig:bcm_outbound_rate_effect_1}]
+  {\includegraphics[width=.3\linewidth]{./figs/bcm_insertion_rate_effects_table100_rule50.eps}}\hfill
+\subfloat[default table occupancy 100, insert another 300 rules\label{fig:bcm_outbound_rate_effect_2}]
+  {\includegraphics[width=.3\linewidth]{./figs/bcm_insertion_rate_effects_table100_rule300.eps}}\hfill
+\subfloat[default table occupancy 100, insert another 700 rules\label{fig:bcm_outbound_rate_effect_3}]
+  {\includegraphics[width=.3\linewidth]{./figs/bcm_insertion_rate_effects_table100_rule700.eps}}\hfill
+\subfloat[default table occupancy 400, insert another 50 rules\label{fig:bcm_outbound_rate_effect_4}]
+  {\includegraphics[width=.3\linewidth]{./figs/bcm_insertion_rate_effects_table400_rule50.eps}}\hfill
+\subfloat[default table occupancy 400, insert another 200 rules\label{fig:bcm_outbound_rate_effect_5}]
+  {\includegraphics[width=.3\linewidth]{./figs/bcm_insertion_rate_effects_table400_rule200.eps}}\hfill
+\subfloat[default table occupancy 400, insert another 400 rules\label{fig:bcm_outbound_rate_effect_6}]
+  {\includegraphics[width=.3\linewidth]{./figs/bcm_insertion_rate_effects_table400_rule400.eps}}
+\caption{B3.1, 3.2 and 3.3: Outbound delay on Broadcom switch. Insertion rate effects. Averaged on 5 rounds. Same priority. Measured using simple openflow rules (i.e., just vary destination IP).}
+\end{figure*}
+\fi
+
+
+\iffalse
+\begin{figure*}
+\subfloat[burst size = 10\label{fig:bcm_outbound_table_size_effects_B10}]
+  {\includegraphics[width=.25\linewidth]{./figs/bcm_table_size_effects_B10.eps}}\hfill
+\subfloat[burst size = 50\label{fig:bcm_outbound_table_size_effects_B50}]
+  {\includegraphics[width=.25\linewidth]{./figs/bcm_table_size_effects_B50.eps}}\hfill
+\subfloat[burst size = 100\label{fig:bcm_outbound_table_size_effects_B100}]
+  {\includegraphics[width=.25\linewidth]{./figs/bcm_table_size_effects_B100.eps}}\hfill
+\subfloat[burst size = 200\label{fig:bcm_outbound_table_size_effects_B200}]
+  {\includegraphics[width=.25\linewidth]{./figs/bcm_table_size_effects_B200.eps}}
+\caption{B2.1 and B2.2: Outbound delay on Broadcom switch. Table occupancy effects. Averaged on 5 rounds. Same priority. Measured using simple openflow rules (i.e., just vary destination IP).}
+\end{figure*}
+\fi
+
+
+%%outbound delay of broadcom switch
+\iffalse
+
+\begin{figure}[!tb]
+\centering
+\epsfig{file=./figs/bcm_same_pri_outbound_burst_acc.eps,width=0.5\textwidth}
+\caption{Cumulative insertion delays on Broadcom switch. Burst mode. Averaged on 5 rounds. All rules have the same priority.}\label{bcm_burst_same_simple}
+\end{figure}
+
+\begin{figure}[!tb]
+\centering
+\epsfig{file=./figs/bcm_incr_pri_outbound_burst_acc.eps,width=0.5\textwidth}
+\caption{Cumulative insertion delays on Broadcom switch. Burst mode. Averaged on 5 rounds. Rules have the increasing priority.}\label{bcm_burst_incr_simple}
+\end{figure}
+
+\fi
+
+
+%%outbound delay on HP, 
+%%decided to eliminate HP outbout results
+\iffalse
+
+\begin{figure*}
+\subfloat[Insertion rate = 1/s\label{fig:hp_outbound_same_test1}]
+  {\includegraphics[width=.25\linewidth]{./figs/hp_outbound_same_r1.eps}}\hfill
+\subfloat[Insertion rate = 2/s\label{fig:hp_outbound_same_test2}]
+  {\includegraphics[width=.25\linewidth]{./figs/hp_outbound_same_r2.eps}}\hfill
+\subfloat[Insertion rate = 5/s\label{fig:hp_outbound_same_test3}]
+  {\includegraphics[width=.25\linewidth]{./figs/hp_outbound_same_r5.eps}}\hfill
+\subfloat[Insertion rate = burst\label{fig:hp_outbound_same_test4}]
+  {\includegraphics[width=.25\linewidth]{./figs/hp_outbound_same_burst.eps}}
+\caption{Outbound delay on HP Procurve. With the same priority.}
+\end{figure*}
+
+
+\begin{figure*}
+\subfloat[Insertion rate = 2/s\label{fig:hp_outbound_dec_test1}]
+  {\includegraphics[width=.3\linewidth]{./figs/hp_outbound_dec_r2.eps}}\hfill
+\subfloat[Insertion rate = 5/s\label{fig:hp_outbound_dec_test2}]
+  {\includegraphics[width=.3\linewidth]{./figs/hp_outbound_dec_r5.eps}}\hfill
+\subfloat[Insertion rate = burst\label{fig:hp_outbound_dec_test3}]
+  {\includegraphics[width=.3\linewidth]{./figs/hp_outbound_dec_burst.eps}}
+\caption{Outbound delay on HP Procurve. With the decreasing priority.}
+\end{figure*}
+
+
+
+\begin{figure*}
+\subfloat[Insertion rate = 2/s\label{fig:hp_outbound_incr_test1}]
+  {\includegraphics[width=.3\linewidth]{./figs/hp_outbound_incr_r2.eps}}\hfill
+\subfloat[Insertion rate = 5/s\label{fig:hp_outbound_incr_test2}]
+  {\includegraphics[width=.3\linewidth]{./figs/hp_outbound_incr_r5.eps}}\hfill
+\subfloat[Insertion rate = burst\label{fig:hp_outbound_incr_test3}]
+  {\includegraphics[width=.3\linewidth]{./figs/hp_outbound_incr_burst.eps}}
+\caption{Outbound delay on HP Procurve. With the increasing priority.}
+\end{figure*}
+
+\fi
+
+
+
+
+%%%%%Cisco Switch Results
+\iffalse
+\begin{figure}
+\centering
+\epsfig{file=./figs/cisco_burst_size_effect.eps,width=0.5\textwidth}
+\caption{Burst size effect. Measured on Cisco 3850 switch. Averaged on 5 rounds. Measured using simple openflow rules (i.e., just vary destination IP).}\label{bcm_compare_priority_simple2}
+\end{figure}
+
+\begin{figure}
+\centering
+\epsfig{file=./figs/cisco_priority_effects.eps,width=0.5\textwidth}
+\caption{Priority effect. Measured on Cisco 3850 switch. Averaged on 5 rounds. Measured using simple openflow rules (i.e., just vary destination IP).}\label{bcm_compare_priority_simple2}
+\end{figure}
+
+\begin{figure*}
+\subfloat[insert a burst of lower priority rules, init table 200\label{fig:cisco_priority_effect_decr}]
+  {\includegraphics[width=0.50\textwidth]{./figs/cisco_priority_effect_decr.eps}}\hfill
+\subfloat[insert a burst of higher priority rules, init table 200\label{fig:cisco_priority_effect_decr.eps}]
+  {\includegraphics[width=0.50\textwidth]{./figs/cisco_priority_effect_incr.eps}}
+\caption{Priority effects: Outbound delay on Cisco 3850 switch. Averaged on 5 rounds. Measured using simple openflow rules (i.e., just vary destination IP).}
+\end{figure*}
+
+
+Figure \marina{where is this figure} compares the insertion delays for different rule priorities. 
+The priority of a rule correlates with its position in the TCAM. A high priority rule will displace all lower priority rules to lower down the TCAM. 
+Our experiments of priority's effects on rule insertion delay on broadcom switch supports this claim. 
+From Figure\marina{where is the figure} if the rules have decreasing priorities, the avg delay, 6ms, is the smallest. 
+However, if the rules have increasing priorities, the avg delay is pretty large (hundreds or thousands ms, depending on how many rules are inserted). 
+If the rules have the same priority, the avg delay, 13ms, is slightly larger than that of decreasing priorities. 
+Furthermore, we also observed that if each rule's priority is assigned randomly from a set, then the avg delay is increased with the priority set size (i.e., more priorities, more delay).
+\emph{Flow Table Management:}  Our measurement results show that several aspects of the flow table: its implementation and management contribute to the egress delay. 
+Typically switches have both hardware and software rule tables. The different switch vendors implement proprietary methods to manage and updated these flow tables and 
+this can have a significant impact on the flow set up egress delay. 
+To study the impact of firmware reordering to the rule set, we conducted a round robin experiment where alternate high and low priority rules are inserted. 
+\marina{where is the figure for this}.  
+We observed that the lower priority insertion started only after all the higher priority rule insertions were completed. 
+This suggests that the firmware is reordering the rule set. 
+The switch firmware may also batch the rule processing to optimize the software interface to the hardware tables. 
+If \flowmod events arrive more rapidly than some vendor specific rate, the rules may be placed into the software table first. 
+Thus the firmware buffers the new rules that may have arrived too fast for the hardware table to handle. 
+To study the impact of burst scheduling we created a batch B of rules of some priority P. We then append one rule of higher priority P's. 
+Next we insert this burst of B+1 rules. The experiment was carried out for different burst sizes. 
+For burst mode insertion, we use "cumulative latency" as the y-axis \marina{adjust the axis labels}. "Cumulative" implies how much time it takes to insert N rules, 
+where N is the x-axis. Note cumulative is not the sum of the delays for the N rules.
+It was observed that that the B+1 (high priority) rule always gets inserted at the end. The total latency for B=700 is about 2 secs. Now if we insert 2 batches of 350 rules, a total of 700 rules, 
+with the first 350 rules of low priority and the last 350 rules of high priority, the order of rule insertion was still sequential. 
+This suggests that there is no firmware re-ordering when inserting rules in batches. 
+However, total egress latency in this case is much higher about 20 secs suggesting that there is TCAM reordering which progressively gets worse as the rule set size increases to more than 350. 
+Figures \marina{4} show the egress delay on the Broadcom switch when inserting rules with different burst sizes. We see that a burst of size 300 rules (same priority), can take almost 700ms to 
+install despite the table being empty to start with. The latency grows linearly with burst size when the rule priority is the same. 
+With increasing and decreasing priority we observe that the egress delay is worse. 
+\marina{check to explain why this is the case for decreasing priority and the large variance in the measurements}. 
+Also we observed from Figure \marina{5} that the burst mode of rule installation is impacted by the table occupancy level, 
+where the higher table occupancy adversely affects the larger burst installations in terms of egress delay.  
+
+The decisions as to whether a rule enters the hardware or software table is a function of the permanence of the rule to be inserted \marina{we need experiments to verify this}, 
+inter-arrival rate of the \flowmod requests and the current occupancy of the hardware table. 
+Furthermore, the switch vendor can implement rule-promotion engines that may over time migrate rules from the software to the hardware table.
+\fi
+
+% LocalWords:  expts openflow STP TCAM criss SDN NetFPGA Gbps RTT libpcap IZ zl
+% LocalWords:  Broadcom Procurve Ghz Mhz TODO cpu inboud timestamp NIC ELE init
+% LocalWords:  Ingore IP Mbps failover pri incr decr Busrt Cisco broadcom

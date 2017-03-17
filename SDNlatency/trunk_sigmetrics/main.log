@@ -1,0 +1,2067 @@
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.9.8)  10 APR 2015 10:38
+entering extended mode
+ \write18 enabled.
+ %&-line parsing enabled.
+**main
+(./main.tex
+LaTeX2e <2011/06/27>
+Babel <v3.8m> and hyphenation patterns for english, dumylang, nohyphenation, ge
+rman-x-2011-07-01, ngerman-x-2011-07-01, afrikaans, ancientgreek, ibycus, arabi
+c, armenian, basque, bulgarian, catalan, pinyin, coptic, croatian, czech, danis
+h, dutch, ukenglish, usenglishmax, esperanto, estonian, ethiopic, farsi, finnis
+h, french, galician, german, ngerman, swissgerman, monogreek, greek, hungarian,
+ icelandic, assamese, bengali, gujarati, hindi, kannada, malayalam, marathi, or
+iya, panjabi, tamil, telugu, indonesian, interlingua, irish, italian, kurmanji,
+ lao, latin, latvian, lithuanian, mongolian, mongolianlmc, bokmal, nynorsk, pol
+ish, portuguese, romanian, russian, sanskrit, serbian, serbianc, slovak, sloven
+ian, spanish, swedish, turkish, turkmen, ukrainian, uppersorbian, welsh, loaded
+.
+(./sig-alternate-10pt.cls
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/graphics/epsf
+ig.sty
+Package: epsfig 1999/02/16 v1.7a (e)psfig emulation (SPQR)
+
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/graphics/grap
+hicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/graphics/keyv
+al.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/graphics/grap
+hics.sty
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/graphics/trig
+.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/latexconfig/g
+raphics.cfg
+File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
+)
+Package graphics Info: Driver file: pdftex.def on input line 91.
+
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/pdftex-def/pd
+ftex.def
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/generic/oberdiek/in
+fwarerr.sty
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/message (HO)
+)
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/generic/oberdiek/lt
+xcmds.sty
+Package: ltxcmds 2011/04/18 v1.20 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count79
+))
+\Gin@req@height=\dimen102
+\Gin@req@width=\dimen103
+)
+\epsfxsize=\dimen104
+\epsfysize=\dimen105
+)
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/amsfonts/amss
+ymb.sty
+Package: amssymb 2009/06/22 v3.00
+
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/amsfonts/amsf
+onts.sty
+Package: amsfonts 2009/06/22 v3.00 Basic AMSFonts support
+\@emptytoks=\toks15
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 96.
+))
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/amsmath/amsma
+th.sty
+Package: amsmath 2000/07/18 v2.13 AMS math features
+\@mathmargin=\skip41
+
+For additional information on amsmath, use the `?' option.
+
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/amsmath/amste
+xt.sty
+Package: amstext 2000/06/29 v2.01
+
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/amsmath/amsge
+n.sty
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks16
+\ex@=\dimen106
+))
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/amsmath/amsbs
+y.sty
+Package: amsbsy 1999/11/29 v1.2d
+\pmbraise@=\dimen107
+)
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/amsmath/amsop
+n.sty
+Package: amsopn 1999/12/14 v2.01 operator names
+)
+\inf@bad=\count80
+LaTeX Info: Redefining \frac on input line 211.
+\uproot@=\count81
+\leftroot@=\count82
+LaTeX Info: Redefining \overline on input line 307.
+\classnum@=\count83
+\DOTSCASE@=\count84
+LaTeX Info: Redefining \ldots on input line 379.
+LaTeX Info: Redefining \dots on input line 382.
+LaTeX Info: Redefining \cdots on input line 467.
+\Mathstrutbox@=\box26
+\strutbox@=\box27
+\big@size=\dimen108
+LaTeX Font Info:    Redeclaring font encoding OML on input line 567.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 568.
+\macc@depth=\count85
+\c@MaxMatrixCols=\count86
+\dotsspace@=\muskip10
+\c@parentequation=\count87
+\dspbrk@lvl=\count88
+\tag@help=\toks17
+\row@=\count89
+\column@=\count90
+\maxfields@=\count91
+\andhelp@=\toks18
+\eqnshift@=\dimen109
+\alignsep@=\dimen110
+\tagshift@=\dimen111
+\tagwidth@=\dimen112
+\totwidth@=\dimen113
+\lineht@=\dimen114
+\@envbody=\toks19
+\multlinegap=\skip42
+\multlinetaggap=\skip43
+\mathdisplay@stack=\toks20
+LaTeX Info: Redefining \[ on input line 2666.
+LaTeX Info: Redefining \] on input line 2667.
+)
+Document Class 'sig-alternate' <3rd January '07>. Hacked by Anja Feldmann
+Based in part upon document Style `acmconf' <22 May 89>. Hacked 4/91 by
+shivers@cs.cmu.edu, 4/93 by theobald@cs.mcgill.ca
+Excerpts were taken from (Journal Style) 'esub2acm.cls'.
+****** Bugs/comments/suggestions/technicalities to Gerry Murray -- murray@hq.ac
+m.org ******
+Questions on the style, SIGS policies, etc. to Adrienne Griscti griscti@acm.org
+
+\footheight=\dimen115
+\@maxsep=\dimen116
+\@dblmaxsep=\dimen117
+\aucount=\count92
+\originalaucount=\count93
+\auwidth=\dimen118
+\auskip=\dimen119
+\auskipcount=\count94
+\auskip=\dimen120
+\allauboxes=\dimen121
+\addauthors=\toks21
+\addauflag=\count95
+\subtitletext=\toks22
+\savesection=\count96
+\sectioncntr=\count97
+\c@figure=\count98
+\c@table=\count99
+\titleboxnotes=\toks23
+\titleboxnoteflag=\count100
+
+LaTeX Warning: You have requested document class `sig-alternate-10pt',
+               but the document class provides `sig-alternate'.
+
+Document Class: sig-alternate 2007/03/01 - V1.9 - based on acmproc.cls V1.3 <No
+v. 30 '99>
+
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/base/latexsym
+.sty
+Package: latexsym 1998/08/17 v2.2e Standard LaTeX package (lasy symbols)
+\symlasy=\mathgroup6
+LaTeX Font Info:    Overwriting symbol font `lasy' in version `bold'
+(Font)                  U/lasy/m/n --> U/lasy/b/n on input line 47.
+)
+\@acmtitlebox=\box28
+\titlenotecount=\count101
+\tntoks=\toks24
+\tntokstwo=\toks25
+\tntoksthree=\toks26
+\tntoksfour=\toks27
+\tntoksfive=\toks28
+\catcount=\count102
+\conf=\toks29
+\confinfo=\toks30
+\c@part=\count103
+\c@section=\count104
+\c@subsection=\count105
+\c@subsubsection=\count106
+\c@paragraph=\count107
+
+Using 'Abbrev' bibliography style
+\bibindent=\dimen122
+\colcntr=\count108
+\savebox=\box29
+\copyrtyr=\toks31
+\acmcopyr=\toks32
+\boilerplate=\toks33
+\copyrightetc=\toks34
+) (./defs.tex
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/graphics/colo
+r.sty
+Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
+
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/latexconfig/c
+olor.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package color Info: Driver file: pdftex.def on input line 130.
+)
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/cite/cite.sty
+LaTeX Info: Redefining \cite on input line 302.
+LaTeX Info: Redefining \nocite on input line 373.
+Package: cite 2010/09/10  v 5.3
+)
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/multirow/mult
+irow.sty
+\bigstrutjot=\dimen123
+)
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/tools/xspace.
+sty
+Package: xspace 2009/10/20 v1.13 Space after command names (DPC,MH)
+)
+\c@mynote=\count109
+\saveparindent=\skip44
+\saveparskip=\skip45
+\c@ctr=\count110
+\c@savectr=\count111
+\c@ectr=\count112
+)
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/psnfss/times.
+sty
+Package: times 2005/04/12 PSNFSS-v9.2a (SPQR) 
+)
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/subfig/subfig
+.sty
+Package: subfig 2005/06/28 ver: 1.3 subfig package
+
+
+Package subfig Warning: Your document class has a bad definition
+ of \endfigure, most likely
+ \let\endfigure=\end@float
+ which has now been changed to
+ \def\endfigure{\end@float}
+ because otherwise subsequent changes to \end@float
+ (like done by several packages changing float behaviour)
+ can't take effect on \endfigure.
+ Please complain to your document class author.
+
+
+Package subfig Warning: Your document class has a bad definition
+ of \endtable, most likely
+ \let\endtable=\end@float
+ which has now been changed to
+ \def\endtable{\end@float}
+ because otherwise subsequent changes to \end@float
+ (like done by several packages changing float behaviour)
+ can't take effect on \endtable.
+ Please complain to your document class author.
+
+
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/caption/capti
+on.sty
+Package: caption 2012/02/19 v3.2f Customizing captions (AR)
+
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/caption/capti
+on3.sty
+Package: caption3 2012/01/12 v1.4b caption3 kernel (AR)
+\captionmargin=\dimen124
+\captionmargin@=\dimen125
+\captionwidth=\dimen126
+\caption@indent=\dimen127
+\caption@parindent=\dimen128
+\caption@hangindent=\dimen129
+\abovecaptionskip=\skip46
+\belowcaptionskip=\skip47
+Package caption Info: Unknown document class (or package),
+(caption)             standard defaults will be used.
+)
+
+Package caption Warning: Unsupported document class (or package) detected,
+(caption)                usage of the caption package is not recommended.
+See the caption package documentation for explanation.
+
+Package caption Info: \@makecaption = \long macro:#1#2-> \vskip 10pt \setbox \@
+tempboxa \hbox {\textbf {#1: #2}} \ifdim \wd \@tempboxa >\hsize \textbf {#1: #2
+}\par \else \hbox to\hsize {\hfil \box \@tempboxa \hfil } \fi .
+\c@ContinuedFloat=\count113
+)
+\c@KVtest=\count114
+\sf@farskip=\skip48
+\sf@captopadj=\dimen130
+\sf@capskip=\skip49
+\sf@nearskip=\skip50
+\c@subfigure=\count115
+\c@subfigure@save=\count116
+\c@lofdepth=\count117
+\c@subtable=\count118
+\c@subtable@save=\count119
+\c@lotdepth=\count120
+\sf@top=\skip51
+\sf@bottom=\skip52
+)
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/xcolor/xcolor
+.sty
+Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
+
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/latexconfig/c
+olor.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+LaTeX Info: Redefining \color on input line 702.
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1337.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1341.
+Package xcolor Info: Model `RGB' extended on input line 1353.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1355.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1356.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1357.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1358.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
+)
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf/tex/latex/html/url.sty
+Package: url 1999/03/02  ver 1.4  Verb mode for urls, email addresses, and file
+ names
+)
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/oberdiek/epst
+opdf.sty
+Package: epstopdf 2010/02/09 v2.5 Conversion with epstopdf on the fly (HO)
+
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/oberdiek/epst
+opdf-base.sty
+Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
+
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/oberdiek/grfe
+xt.sty
+Package: grfext 2010/08/19 v1.1 Managing graphics extensions (HO)
+
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/generic/oberdiek/kv
+definekeys.sty
+Package: kvdefinekeys 2011/04/07 v1.3 Defining keys (HO)
+))
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/oberdiek/kvop
+tions.sty
+Package: kvoptions 2010/12/23 v3.10 Keyval support for LaTeX options (HO)
+
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/generic/oberdiek/kv
+setkeys.sty
+Package: kvsetkeys 2011/04/07 v1.13 Key value parser (HO)
+
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/generic/oberdiek/et
+excmds.sty
+Package: etexcmds 2011/02/16 v1.5 Prefix for e-TeX command names (HO)
+
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/generic/oberdiek/if
+luatex.sty
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/generic/oberdiek/pd
+ftexcmds.sty
+Package: pdftexcmds 2011/04/22 v0.16 Utilities of pdfTeX for LuaTeX (HO)
+
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/generic/oberdiek/if
+pdf.sty
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is detected.
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/latexconfig/e
+pstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+)))
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/algorithm2e/a
+lgorithm2e.sty
+Package: algorithm2e 2008/00/00 v3.10 algorithms environments
+\c@AlgoLine=\count121
+
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/base/ifthen.s
+ty
+Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
+)
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/relsize/relsi
+ze.sty
+Package: relsize 2003/07/04 ver 3.1
+
+
+Package relsize Warning: Failed to get list of font sizes.
+(relsize)                Falling back to old definition. on input line 81.
+
+)
+********************************************************
+Package `algorithm2e' Release 4.01 -- december 14 2009 --
+- algorithm2e-announce@lirmm.fr mailing list for announcement about releases
+- algorithm2e-discussion@lirmm.fr mailing list for discussion about package
+subscribe by emailing sympa@lirmm.fr with 'subscribe <list> <firstname name>'
+- Author: Christophe Fiorio (fiorio@lirmm.fr)
+********************************************************
+\skiptotal=\skip53
+\skiplinenumber=\skip54
+\skiprule=\skip55
+\skiphlne=\skip56
+\skiptext=\skip57
+\skiplength=\skip58
+\algomargin=\skip59
+\skipalgocfslide=\skip60
+\algowidth=\dimen131
+\inoutsize=\dimen132
+\inoutline=\dimen133
+\interspacetitleruled=\dimen134
+\interspacealgoruled=\dimen135
+\interspacetitleboxruled=\dimen136
+\algocf@inoutbox=\box30
+\algocf@inputbox=\box31
+\AlCapSkip=\skip61
+\AlCapHSkip=\skip62
+\algocf@nlbox=\box32
+\algocf@hangingbox=\box33
+\algocf@capbox=\box34
+\algoheightruledefault=\skip63
+\algoheightrule=\skip64
+\algotitleheightruledefault=\skip65
+\algotitleheightrule=\skip66
+\c@algocfline=\count122
+\c@algocfproc=\count123
+\c@algocf=\count124
+\algocf@algoframe=\box35
+\algocf@algobox=\box36
+)
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/algorithms/al
+gorithmic.sty
+Package: algorithmic 2009/08/24 v0.1 Document Style `algorithmic'
+\c@ALC@unique=\count125
+\c@ALC@line=\count126
+\c@ALC@rem=\count127
+\c@ALC@depth=\count128
+\ALC@tlm=\skip67
+\algorithmicindent=\skip68
+)
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/mh/mathtools.
+sty
+Package: mathtools 2011/04/06 v1.11 mathematical typesetting tools
+
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/tools/calc.st
+y
+Package: calc 2007/08/22 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count129
+\calc@Bcount=\count130
+\calc@Adimen=\dimen137
+\calc@Bdimen=\dimen138
+\calc@Askip=\skip69
+\calc@Bskip=\skip70
+LaTeX Info: Redefining \setlength on input line 76.
+LaTeX Info: Redefining \addtolength on input line 77.
+\calc@Ccount=\count131
+\calc@Cskip=\skip71
+)
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/mh/mhsetup.st
+y
+Package: mhsetup 2010/01/21 v1.2a programming setup (MH)
+)
+\g_MT_multlinerow_int=\count132
+\l_MT_multwidth_dim=\dimen139
+\origjot=\skip72
+\l_MT_shortvdotswithinadjustabove_dim=\dimen140
+\l_MT_shortvdotswithinadjustbelow_dim=\dimen141
+)
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/appendix/appe
+ndix.sty
+Package: appendix 2009/09/02 v1.2b extra appendix facilities
+\c@@pps=\count133
+\c@@ppsavesec=\count134
+\c@@ppsaveapp=\count135
+)
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/base/fontenc.
+sty
+Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
+)
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/base/inputenc
+.sty
+Package: inputenc 2008/03/30 v1.1d Input encoding file
+\inpenc@prehook=\toks35
+\inpenc@posthook=\toks36
+
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/base/utf8.def
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+Now handling font encoding OML ...
+... no UTF-8 mapping file for font encoding OML
+Now handling font encoding T1 ...
+... processing UTF-8 mapping file for font encoding T1
+
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/base/t1enc.df
+u
+File: t1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
+   defining Unicode char U+00A1 (decimal 161)
+   defining Unicode char U+00A3 (decimal 163)
+   defining Unicode char U+00AB (decimal 171)
+   defining Unicode char U+00BB (decimal 187)
+   defining Unicode char U+00BF (decimal 191)
+   defining Unicode char U+00C0 (decimal 192)
+   defining Unicode char U+00C1 (decimal 193)
+   defining Unicode char U+00C2 (decimal 194)
+   defining Unicode char U+00C3 (decimal 195)
+   defining Unicode char U+00C4 (decimal 196)
+   defining Unicode char U+00C5 (decimal 197)
+   defining Unicode char U+00C6 (decimal 198)
+   defining Unicode char U+00C7 (decimal 199)
+   defining Unicode char U+00C8 (decimal 200)
+   defining Unicode char U+00C9 (decimal 201)
+   defining Unicode char U+00CA (decimal 202)
+   defining Unicode char U+00CB (decimal 203)
+   defining Unicode char U+00CC (decimal 204)
+   defining Unicode char U+00CD (decimal 205)
+   defining Unicode char U+00CE (decimal 206)
+   defining Unicode char U+00CF (decimal 207)
+   defining Unicode char U+00D0 (decimal 208)
+   defining Unicode char U+00D1 (decimal 209)
+   defining Unicode char U+00D2 (decimal 210)
+   defining Unicode char U+00D3 (decimal 211)
+   defining Unicode char U+00D4 (decimal 212)
+   defining Unicode char U+00D5 (decimal 213)
+   defining Unicode char U+00D6 (decimal 214)
+   defining Unicode char U+00D8 (decimal 216)
+   defining Unicode char U+00D9 (decimal 217)
+   defining Unicode char U+00DA (decimal 218)
+   defining Unicode char U+00DB (decimal 219)
+   defining Unicode char U+00DC (decimal 220)
+   defining Unicode char U+00DD (decimal 221)
+   defining Unicode char U+00DE (decimal 222)
+   defining Unicode char U+00DF (decimal 223)
+   defining Unicode char U+00E0 (decimal 224)
+   defining Unicode char U+00E1 (decimal 225)
+   defining Unicode char U+00E2 (decimal 226)
+   defining Unicode char U+00E3 (decimal 227)
+   defining Unicode char U+00E4 (decimal 228)
+   defining Unicode char U+00E5 (decimal 229)
+   defining Unicode char U+00E6 (decimal 230)
+   defining Unicode char U+00E7 (decimal 231)
+   defining Unicode char U+00E8 (decimal 232)
+   defining Unicode char U+00E9 (decimal 233)
+   defining Unicode char U+00EA (decimal 234)
+   defining Unicode char U+00EB (decimal 235)
+   defining Unicode char U+00EC (decimal 236)
+   defining Unicode char U+00ED (decimal 237)
+   defining Unicode char U+00EE (decimal 238)
+   defining Unicode char U+00EF (decimal 239)
+   defining Unicode char U+00F0 (decimal 240)
+   defining Unicode char U+00F1 (decimal 241)
+   defining Unicode char U+00F2 (decimal 242)
+   defining Unicode char U+00F3 (decimal 243)
+   defining Unicode char U+00F4 (decimal 244)
+   defining Unicode char U+00F5 (decimal 245)
+   defining Unicode char U+00F6 (decimal 246)
+   defining Unicode char U+00F8 (decimal 248)
+   defining Unicode char U+00F9 (decimal 249)
+   defining Unicode char U+00FA (decimal 250)
+   defining Unicode char U+00FB (decimal 251)
+   defining Unicode char U+00FC (decimal 252)
+   defining Unicode char U+00FD (decimal 253)
+   defining Unicode char U+00FE (decimal 254)
+   defining Unicode char U+00FF (decimal 255)
+   defining Unicode char U+0102 (decimal 258)
+   defining Unicode char U+0103 (decimal 259)
+   defining Unicode char U+0104 (decimal 260)
+   defining Unicode char U+0105 (decimal 261)
+   defining Unicode char U+0106 (decimal 262)
+   defining Unicode char U+0107 (decimal 263)
+   defining Unicode char U+010C (decimal 268)
+   defining Unicode char U+010D (decimal 269)
+   defining Unicode char U+010E (decimal 270)
+   defining Unicode char U+010F (decimal 271)
+   defining Unicode char U+0110 (decimal 272)
+   defining Unicode char U+0111 (decimal 273)
+   defining Unicode char U+0118 (decimal 280)
+   defining Unicode char U+0119 (decimal 281)
+   defining Unicode char U+011A (decimal 282)
+   defining Unicode char U+011B (decimal 283)
+   defining Unicode char U+011E (decimal 286)
+   defining Unicode char U+011F (decimal 287)
+   defining Unicode char U+0130 (decimal 304)
+   defining Unicode char U+0131 (decimal 305)
+   defining Unicode char U+0132 (decimal 306)
+   defining Unicode char U+0133 (decimal 307)
+   defining Unicode char U+0139 (decimal 313)
+   defining Unicode char U+013A (decimal 314)
+   defining Unicode char U+013D (decimal 317)
+   defining Unicode char U+013E (decimal 318)
+   defining Unicode char U+0141 (decimal 321)
+   defining Unicode char U+0142 (decimal 322)
+   defining Unicode char U+0143 (decimal 323)
+   defining Unicode char U+0144 (decimal 324)
+   defining Unicode char U+0147 (decimal 327)
+   defining Unicode char U+0148 (decimal 328)
+   defining Unicode char U+014A (decimal 330)
+   defining Unicode char U+014B (decimal 331)
+   defining Unicode char U+0150 (decimal 336)
+   defining Unicode char U+0151 (decimal 337)
+   defining Unicode char U+0152 (decimal 338)
+   defining Unicode char U+0153 (decimal 339)
+   defining Unicode char U+0154 (decimal 340)
+   defining Unicode char U+0155 (decimal 341)
+   defining Unicode char U+0158 (decimal 344)
+   defining Unicode char U+0159 (decimal 345)
+   defining Unicode char U+015A (decimal 346)
+   defining Unicode char U+015B (decimal 347)
+   defining Unicode char U+015E (decimal 350)
+   defining Unicode char U+015F (decimal 351)
+   defining Unicode char U+0160 (decimal 352)
+   defining Unicode char U+0161 (decimal 353)
+   defining Unicode char U+0162 (decimal 354)
+   defining Unicode char U+0163 (decimal 355)
+   defining Unicode char U+0164 (decimal 356)
+   defining Unicode char U+0165 (decimal 357)
+   defining Unicode char U+016E (decimal 366)
+   defining Unicode char U+016F (decimal 367)
+   defining Unicode char U+0170 (decimal 368)
+   defining Unicode char U+0171 (decimal 369)
+   defining Unicode char U+0178 (decimal 376)
+   defining Unicode char U+0179 (decimal 377)
+   defining Unicode char U+017A (decimal 378)
+   defining Unicode char U+017B (decimal 379)
+   defining Unicode char U+017C (decimal 380)
+   defining Unicode char U+017D (decimal 381)
+   defining Unicode char U+017E (decimal 382)
+   defining Unicode char U+200C (decimal 8204)
+   defining Unicode char U+2013 (decimal 8211)
+   defining Unicode char U+2014 (decimal 8212)
+   defining Unicode char U+2018 (decimal 8216)
+   defining Unicode char U+2019 (decimal 8217)
+   defining Unicode char U+201A (decimal 8218)
+   defining Unicode char U+201C (decimal 8220)
+   defining Unicode char U+201D (decimal 8221)
+   defining Unicode char U+201E (decimal 8222)
+   defining Unicode char U+2030 (decimal 8240)
+   defining Unicode char U+2031 (decimal 8241)
+   defining Unicode char U+2039 (decimal 8249)
+   defining Unicode char U+203A (decimal 8250)
+   defining Unicode char U+2423 (decimal 9251)
+)
+Now handling font encoding OT1 ...
+... processing UTF-8 mapping file for font encoding OT1
+
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/base/ot1enc.d
+fu
+File: ot1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
+   defining Unicode char U+00A1 (decimal 161)
+   defining Unicode char U+00A3 (decimal 163)
+   defining Unicode char U+00B8 (decimal 184)
+   defining Unicode char U+00BF (decimal 191)
+   defining Unicode char U+00C5 (decimal 197)
+   defining Unicode char U+00C6 (decimal 198)
+   defining Unicode char U+00D8 (decimal 216)
+   defining Unicode char U+00DF (decimal 223)
+   defining Unicode char U+00E6 (decimal 230)
+   defining Unicode char U+00EC (decimal 236)
+   defining Unicode char U+00ED (decimal 237)
+   defining Unicode char U+00EE (decimal 238)
+   defining Unicode char U+00EF (decimal 239)
+   defining Unicode char U+00F8 (decimal 248)
+   defining Unicode char U+0131 (decimal 305)
+   defining Unicode char U+0141 (decimal 321)
+   defining Unicode char U+0142 (decimal 322)
+   defining Unicode char U+0152 (decimal 338)
+   defining Unicode char U+0153 (decimal 339)
+   defining Unicode char U+2013 (decimal 8211)
+   defining Unicode char U+2014 (decimal 8212)
+   defining Unicode char U+2018 (decimal 8216)
+   defining Unicode char U+2019 (decimal 8217)
+   defining Unicode char U+201C (decimal 8220)
+   defining Unicode char U+201D (decimal 8221)
+)
+Now handling font encoding OMS ...
+... processing UTF-8 mapping file for font encoding OMS
+
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/base/omsenc.d
+fu
+File: omsenc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
+   defining Unicode char U+00A7 (decimal 167)
+   defining Unicode char U+00B6 (decimal 182)
+   defining Unicode char U+00B7 (decimal 183)
+   defining Unicode char U+2020 (decimal 8224)
+   defining Unicode char U+2021 (decimal 8225)
+   defining Unicode char U+2022 (decimal 8226)
+)
+Now handling font encoding OMX ...
+... no UTF-8 mapping file for font encoding OMX
+Now handling font encoding U ...
+... no UTF-8 mapping file for font encoding U
+   defining Unicode char U+00A9 (decimal 169)
+   defining Unicode char U+00AA (decimal 170)
+   defining Unicode char U+00AE (decimal 174)
+   defining Unicode char U+00BA (decimal 186)
+   defining Unicode char U+02C6 (decimal 710)
+   defining Unicode char U+02DC (decimal 732)
+   defining Unicode char U+200C (decimal 8204)
+   defining Unicode char U+2026 (decimal 8230)
+   defining Unicode char U+2122 (decimal 8482)
+   defining Unicode char U+2423 (decimal 9251)
+))
+
+LaTeX Warning: Unused global option(s):
+    [letterpaper].
+
+No file main.aux.
+\openout1 = `main.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 53.
+
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/psnfss/ot1ptm
+.fd
+File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
+)
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/context/base/supp-p
+df.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count136
+\scratchdimen=\dimen142
+\scratchbox=\box37
+\nofMPsegments=\count137
+\nofMParguments=\count138
+\everyMPshowfont=\toks37
+\MPscratchCnt=\count139
+\MPscratchDim=\dimen143
+\MPnumerator=\count140
+\makeMPintoPDFobject=\count141
+\everyMPtoPDFconversion=\toks38
+)
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: subfig package v1.3 is loaded.
+Package caption Info: End \AtBeginDocument code.
+LaTeX Font Info:    Try loading font information for U+msa on input line 77.
+
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/amsfonts/umsa
+.fd
+File: umsa.fd 2009/06/22 v3.00 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 77.
+
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/amsfonts/umsb
+.fd
+File: umsb.fd 2009/06/22 v3.00 AMS symbols B
+)
+LaTeX Font Info:    Try loading font information for U+lasy on input line 77.
+
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/base/ulasy.fd
+File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
+) (./abstract.tex) (./intro_imc.tex
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 5.
+
+
+LaTeX Warning: Citation `openflow' on page 1 undefined on input line 5.
+
+
+LaTeX Warning: Citation `rethinking' on page 1 undefined on input line 5.
+
+
+LaTeX Warning: Citation `swan' on page 1 undefined on input line 9.
+
+
+LaTeX Warning: Citation `b4' on page 1 undefined on input line 9.
+
+
+LaTeX Warning: Citation `ananta' on page 1 undefined on input line 9.
+
+
+LaTeX Warning: Citation `simple' on page 1 undefined on input line 9.
+
+
+LaTeX Warning: Citation `elastictree' on page 1 undefined on input line 9.
+
+
+LaTeX Warning: Citation `softcell' on page 1 undefined on input line 9.
+
+
+LaTeX Warning: Citation `zupdate' on page 1 undefined on input line 9.
+
+
+LaTeX Warning: Citation `microte' on page 1 undefined on input line 9.
+
+
+LaTeX Warning: Citation `microte' on page 1 undefined on input line 23.
+
+
+LaTeX Warning: Citation `softcell' on page 1 undefined on input line 26.
+
+
+LaTeX Warning: Citation `onix' on page 1 undefined on input line 41.
+
+
+LaTeX Warning: Citation `ucsdpaper' on page 1 undefined on input line 81.
+
+
+LaTeX Warning: Citation `oflops' on page 1 undefined on input line 81.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [1{/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-var/fonts/map/pdftex/updm
+ap/pdftex.map}
+
+
+]
+Overfull \hbox (2.4774pt too wide) in paragraph at lines 108--131
+\OT1/ptm/m/n/10 pact of in-bound la-tency. In con-trast, rule in-stal-la-tions/
+updates
+ []
+
+
+Overfull \hbox (4.79807pt too wide) in paragraph at lines 154--163
+\OT1/ptm/m/n/10 De-pend-ing on the topol-ogy and the na-ture of rules in switch
+es,
+ []
+
+) (./motivation_imc.tex
+
+LaTeX Warning: Citation `openflow' on page 2 undefined on input line 23.
+
+
+Overfull \hbox (1.06822pt too wide) in paragraph at lines 13--25
+[]\OT1/ptm/m/n/10 Instead of run-ning a com-plex con-trol plane on each switch,
+
+ []
+
+<figs/openflow_switch.pdf, id=12, 522.95375pt x 217.81375pt>
+File: figs/openflow_switch.pdf Graphic file (type pdf)
+
+<use figs/openflow_switch.pdf>
+Package pdftex.def Info: figs/openflow_switch.pdf used on input line 53.
+(pdftex.def)             Requested size: 235.19897pt x 97.9621pt.
+
+
+LaTeX Warning: Reference `openflow_switch_delay' on page 2 undefined on input l
+ine 64.
+
+
+Overfull \hbox (2.23701pt too wide) in paragraph at lines 61--73
+\OT1/ptm/m/n/10 mes-sage con-tain-ing meta-data and the first 128B of the packe
+t.
+ []
+
+
+Overfull \hbox (2.65714pt too wide) in paragraph at lines 79--87
+[]\OT1/ptm/m/n/10 A \OT1/ptm/m/it/10 flow[]mod \OT1/ptm/m/n/10 mes-sage de-scri
+bes the ac-tion the switch should
+ []
+
+
+Overfull \hbox (1.26747pt too wide) in paragraph at lines 97--101
+\OT1/ptm/m/n/10 those for gen-er-at-ing \OT1/ptm/m/it/10 packet[]in \OT1/ptm/m/
+n/10 mes-sages; the la-tency for these
+ []
+
+) (./measure_imc.tex
+
+LaTeX Warning: Citation `openflow' on page 2 undefined on input line 8.
+
+
+LaTeX Warning: Reference `switch_para' on page 2 undefined on input line 13.
+
+[2 <./figs/openflow_switch.pdf>]
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 39.
+ (./measure_method_imc.tex
+<figs/experiment_setup.pdf, id=39, 421.575pt x 106.3975pt>
+File: figs/experiment_setup.pdf Graphic file (type pdf)
+
+<use figs/experiment_setup.pdf>
+Package pdftex.def Info: figs/experiment_setup.pdf used on input line 6.
+(pdftex.def)             Requested size: 167.99927pt x 42.40076pt.
+
+
+LaTeX Warning: Reference `experiment_setup' on page 3 undefined on input line 1
+1.
+
+
+LaTeX Warning: Citation `pktgen' on page 3 undefined on input line 25.
+
+
+LaTeX Warning: Citation `oflops' on page 3 undefined on input line 29.
+
+
+LaTeX Warning: Reference `experiment_setup' on page 3 undefined on input line 3
+2.
+
+) (./measure_packet_imc.tex
+Package epstopdf Info: Source file: <./figs/jan27_intel_inbound_with_pktout_flo
+wmod_rate200.eps>
+(epstopdf)                    date: 2015-04-10 10:34:02
+(epstopdf)                    size: 33328 bytes
+(epstopdf)             Output file: <./figs/jan27_intel_inbound_with_pktout_flo
+wmod_rate200-eps-converted-to.pdf>
+(epstopdf)                    date: 2015-04-10 10:34:14
+(epstopdf)                    size: 19758 bytes
+(epstopdf)             Command: <epstopdf --outfile=./figs/jan27_intel_inbound_
+with_pktout_flowmod_rate200-eps-converted-to.pdf ./figs/jan27_intel_inbound_wit
+h_pktout_flowmod_rate200.eps>
+(epstopdf)             \includegraphics on input line 11.
+Package epstopdf Info: Output file is already uptodate.
+
+<./figs/jan27_intel_inbound_with_pktout_flowmod_rate200-eps-converted-to.pdf, i
+d=40, 361.35pt x 252.945pt>
+File: ./figs/jan27_intel_inbound_with_pktout_flowmod_rate200-eps-converted-to.p
+df Graphic file (type pdf)
+
+<use ./figs/jan27_intel_inbound_with_pktout_flowmod_rate200-eps-converted-to.pd
+f>
+Package pdftex.def Info: ./figs/jan27_intel_inbound_with_pktout_flowmod_rate200
+-eps-converted-to.pdf used on input line 11.
+(pdftex.def)             Requested size: 107.99927pt x 75.59846pt.
+Package epstopdf Info: Source file: <./figs/jan27_intel_inbound_wo_pktout_flowm
+od.eps>
+(epstopdf)                    date: 2015-04-10 10:34:14
+(epstopdf)                    size: 33433 bytes
+(epstopdf)             Output file: <./figs/jan27_intel_inbound_wo_pktout_flowm
+od-eps-converted-to.pdf>
+(epstopdf)                    date: 2015-04-10 10:36:56
+(epstopdf)                    size: 19641 bytes
+(epstopdf)             Command: <epstopdf --outfile=./figs/jan27_intel_inbound_
+wo_pktout_flowmod-eps-converted-to.pdf ./figs/jan27_intel_inbound_wo_pktout_flo
+wmod.eps>
+(epstopdf)             \includegraphics on input line 13.
+Package epstopdf Info: Output file is already uptodate.
+
+<./figs/jan27_intel_inbound_wo_pktout_flowmod-eps-converted-to.pdf, id=41, 361.
+35pt x 252.945pt>
+File: ./figs/jan27_intel_inbound_wo_pktout_flowmod-eps-converted-to.pdf Graphic
+ file (type pdf)
+
+<use ./figs/jan27_intel_inbound_wo_pktout_flowmod-eps-converted-to.pdf>
+Package pdftex.def Info: ./figs/jan27_intel_inbound_wo_pktout_flowmod-eps-conve
+rted-to.pdf used on input line 13.
+(pdftex.def)             Requested size: 107.99927pt x 75.59846pt.
+
+
+LaTeX Warning: Reference `experiment_setup' on page 3 undefined on input line 3
+1.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 36.
+
+LaTeX Warning: Citation `ucsdpaper' on page 3 undefined on input line 36.
+
+
+LaTeX Warning: Reference `fig:intel_inbound_test3' on page 3 undefined on input
+ line 70.
+
+
+LaTeX Warning: Reference `fig:intel_inbound_test3_wo' on page 3 undefined on in
+put line 70.
+
+
+LaTeX Warning: Reference `fig:intel_inbound_test3' on page 3 undefined on input
+ line 79.
+
+
+Overfull \hbox (2.34749pt too wide) in paragraph at lines 69--80
+[]\OT1/ptm/m/n/10 Representative re-sults for these two ex-per-i-ments are show
+n
+ []
+
+
+LaTeX Warning: Reference `fig:inbound-cpu' on page 3 undefined on input line 86
+.
+
+
+LaTeX Warning: Reference `switch_para' on page 3 undefined on input line 87.
+
+[3 <./figs/experiment_setup.pdf> <./figs/jan27_intel_inbound_with_pktout_flowmo
+d_rate200-eps-converted-to.pdf> <./figs/jan27_intel_inbound_wo_pktout_flowmod-e
+ps-converted-to.pdf>]) (./measure_flowmod_imc.tex (./measure_insert.tex
+Package epstopdf Info: Source file: <./figs/jan27_bcm_add_same_burst_100.eps>
+(epstopdf)                    date: 2015-04-10 10:33:24
+(epstopdf)                    size: 21175 bytes
+(epstopdf)             Output file: <./figs/jan27_bcm_add_same_burst_100-eps-co
+nverted-to.pdf>
+(epstopdf)                    date: 2015-04-10 10:33:26
+(epstopdf)                    size: 8716 bytes
+(epstopdf)             Command: <epstopdf --outfile=./figs/jan27_bcm_add_same_b
+urst_100-eps-converted-to.pdf ./figs/jan27_bcm_add_same_burst_100.eps>
+(epstopdf)             \includegraphics on input line 7.
+Package epstopdf Info: Output file is already uptodate.
+
+<./figs/jan27_bcm_add_same_burst_100-eps-converted-to.pdf, id=92, 361.35pt x 25
+2.945pt>
+File: ./figs/jan27_bcm_add_same_burst_100-eps-converted-to.pdf Graphic file (ty
+pe pdf)
+ <use ./figs/jan27_bcm_add_same_burst_100-eps-converted-to.pdf>
+Package pdftex.def Info: ./figs/jan27_bcm_add_same_burst_100-eps-converted-to.p
+df used on input line 7.
+(pdftex.def)             Requested size: 120.96277pt x 84.67244pt.
+Package epstopdf Info: Source file: <./figs/jan27_bcm_add_same_burst_200.eps>
+(epstopdf)                    date: 2015-04-10 10:34:09
+(epstopdf)                    size: 22409 bytes
+(epstopdf)             Output file: <./figs/jan27_bcm_add_same_burst_200-eps-co
+nverted-to.pdf>
+(epstopdf)                    date: 2015-04-10 10:36:56
+(epstopdf)                    size: 10175 bytes
+(epstopdf)             Command: <epstopdf --outfile=./figs/jan27_bcm_add_same_b
+urst_200-eps-converted-to.pdf ./figs/jan27_bcm_add_same_burst_200.eps>
+(epstopdf)             \includegraphics on input line 9.
+Package epstopdf Info: Output file is already uptodate.
+
+<./figs/jan27_bcm_add_same_burst_200-eps-converted-to.pdf, id=93, 361.35pt x 25
+2.945pt>
+File: ./figs/jan27_bcm_add_same_burst_200-eps-converted-to.pdf Graphic file (ty
+pe pdf)
+ <use ./figs/jan27_bcm_add_same_burst_200-eps-converted-to.pdf>
+Package pdftex.def Info: ./figs/jan27_bcm_add_same_burst_200-eps-converted-to.p
+df used on input line 9.
+(pdftex.def)             Requested size: 120.96277pt x 84.67244pt.
+Package epstopdf Info: Source file: <./figs/jan27_bcm_add_incr_burst_100.eps>
+(epstopdf)                    date: 2015-04-10 10:34:10
+(epstopdf)                    size: 21007 bytes
+(epstopdf)             Output file: <./figs/jan27_bcm_add_incr_burst_100-eps-co
+nverted-to.pdf>
+(epstopdf)                    date: 2015-04-10 10:36:56
+(epstopdf)                    size: 8672 bytes
+(epstopdf)             Command: <epstopdf --outfile=./figs/jan27_bcm_add_incr_b
+urst_100-eps-converted-to.pdf ./figs/jan27_bcm_add_incr_burst_100.eps>
+(epstopdf)             \includegraphics on input line 11.
+Package epstopdf Info: Output file is already uptodate.
+
+<./figs/jan27_bcm_add_incr_burst_100-eps-converted-to.pdf, id=94, 361.35pt x 25
+2.945pt>
+File: ./figs/jan27_bcm_add_incr_burst_100-eps-converted-to.pdf Graphic file (ty
+pe pdf)
+ <use ./figs/jan27_bcm_add_incr_burst_100-eps-converted-to.pdf>
+Package pdftex.def Info: ./figs/jan27_bcm_add_incr_burst_100-eps-converted-to.p
+df used on input line 11.
+(pdftex.def)             Requested size: 120.96277pt x 84.67244pt.
+Package epstopdf Info: Source file: <./figs/jan27_bcm_add_incr_burst_200.eps>
+(epstopdf)                    date: 2015-04-10 10:33:57
+(epstopdf)                    size: 22199 bytes
+(epstopdf)             Output file: <./figs/jan27_bcm_add_incr_burst_200-eps-co
+nverted-to.pdf>
+(epstopdf)                    date: 2015-04-10 10:36:57
+(epstopdf)                    size: 10285 bytes
+(epstopdf)             Command: <epstopdf --outfile=./figs/jan27_bcm_add_incr_b
+urst_200-eps-converted-to.pdf ./figs/jan27_bcm_add_incr_burst_200.eps>
+(epstopdf)             \includegraphics on input line 13.
+Package epstopdf Info: Output file is already uptodate.
+
+<./figs/jan27_bcm_add_incr_burst_200-eps-converted-to.pdf, id=95, 361.35pt x 25
+2.945pt>
+File: ./figs/jan27_bcm_add_incr_burst_200-eps-converted-to.pdf Graphic file (ty
+pe pdf)
+ <use ./figs/jan27_bcm_add_incr_burst_200-eps-converted-to.pdf>
+Package pdftex.def Info: ./figs/jan27_bcm_add_incr_burst_200-eps-converted-to.p
+df used on input line 13.
+(pdftex.def)             Requested size: 120.96277pt x 84.67244pt.
+
+
+LaTeX Warning: Reference `fig:bcm_burst_100_same_pri' on page 4 undefined on in
+put line 103.
+
+
+LaTeX Warning: Reference `fig:bcm_burst_200_same_pri' on page 4 undefined on in
+put line 103.
+
+
+LaTeX Warning: Reference `fig:bcm_burst_100_incr_pri' on page 4 undefined on in
+put line 116.
+
+
+LaTeX Warning: Reference `fig:bcm_burst_200_incr_pri' on page 4 undefined on in
+put line 119.
+
+
+Overfull \hbox (9.24803pt too wide) in paragraph at lines 176--183
+\OT1/ptm/m/n/10 with the num-ber of rules inserted---average of 8.19ms (15.5ms)
+
+ []
+
+Package epstopdf Info: Source file: <./figs/jan27_intel_incr_burst_800.eps>
+(epstopdf)                    date: 2015-04-10 10:33:27
+(epstopdf)                    size: 31575 bytes
+(epstopdf)             Output file: <./figs/jan27_intel_incr_burst_800-eps-conv
+erted-to.pdf>
+(epstopdf)                    date: 2015-04-10 10:36:57
+(epstopdf)                    size: 19730 bytes
+(epstopdf)             Command: <epstopdf --outfile=./figs/jan27_intel_incr_bur
+st_800-eps-converted-to.pdf ./figs/jan27_intel_incr_burst_800.eps>
+(epstopdf)             \includegraphics on input line 214.
+Package epstopdf Info: Output file is already uptodate.
+
+<./figs/jan27_intel_incr_burst_800-eps-converted-to.pdf, id=96, 361.35pt x 252.
+945pt>
+File: ./figs/jan27_intel_incr_burst_800-eps-converted-to.pdf Graphic file (type
+ pdf)
+ <use ./figs/jan27_intel_incr_burst_800-eps-converted-to.pdf>
+Package pdftex.def Info: ./figs/jan27_intel_incr_burst_800-eps-converted-to.pdf
+ used on input line 214.
+(pdftex.def)             Requested size: 117.60132pt x 82.32193pt.
+Package epstopdf Info: Source file: <figs/jan27_intel_empty_800L_decr_delta.eps
+>
+(epstopdf)                    date: 2015-04-10 10:33:44
+(epstopdf)                    size: 31245 bytes
+(epstopdf)             Output file: <figs/jan27_intel_empty_800L_decr_delta-eps
+-converted-to.pdf>
+(epstopdf)                    date: 2015-04-10 10:36:57
+(epstopdf)                    size: 20418 bytes
+(epstopdf)             Command: <epstopdf --outfile=figs/jan27_intel_empty_800L
+_decr_delta-eps-converted-to.pdf figs/jan27_intel_empty_800L_decr_delta.eps>
+(epstopdf)             \includegraphics on input line 216.
+Package epstopdf Info: Output file is already uptodate.
+
+<figs/jan27_intel_empty_800L_decr_delta-eps-converted-to.pdf, id=97, 361.35pt x
+ 252.945pt>
+File: figs/jan27_intel_empty_800L_decr_delta-eps-converted-to.pdf Graphic file 
+(type pdf)
+ <use figs/jan27_intel_empty_800L_decr_delta-eps-converted-to.pdf>
+Package pdftex.def Info: figs/jan27_intel_empty_800L_decr_delta-eps-converted-t
+o.pdf used on input line 216.
+(pdftex.def)             Requested size: 117.60132pt x 82.32193pt.
+
+
+LaTeX Warning: Reference `switch_para' on page 4 undefined on input line 231.
+
+[4]
+
+LaTeX Warning: Reference `fig:intel_burst_800_incr_pri' on page 5 undefined on 
+input line 251.
+
+
+LaTeX Warning: Reference `fig:intel_burst_800_decr_pri' on page 5 undefined on 
+input line 269.
+
+Package epstopdf Info: Source file: <./figs/bcm_two_pri_high_low_burstB.eps>
+(epstopdf)                    date: 2015-04-10 10:33:44
+(epstopdf)                    size: 22830 bytes
+(epstopdf)             Output file: <./figs/bcm_two_pri_high_low_burstB-eps-con
+verted-to.pdf>
+(epstopdf)                    date: 2015-04-10 10:36:57
+(epstopdf)                    size: 8607 bytes
+(epstopdf)             Command: <epstopdf --outfile=./figs/bcm_two_pri_high_low
+_burstB-eps-converted-to.pdf ./figs/bcm_two_pri_high_low_burstB.eps>
+(epstopdf)             \includegraphics on input line 318.
+Package epstopdf Info: Output file is already uptodate.
+
+<./figs/bcm_two_pri_high_low_burstB-eps-converted-to.pdf, id=105, 361.35pt x 25
+2.945pt>
+File: ./figs/bcm_two_pri_high_low_burstB-eps-converted-to.pdf Graphic file (typ
+e pdf)
+ <use ./figs/bcm_two_pri_high_low_burstB-eps-converted-to.pdf>
+Package pdftex.def Info: ./figs/bcm_two_pri_high_low_burstB-eps-converted-to.pd
+f used on input line 318.
+(pdftex.def)             Requested size: 120.0pt x 84.00087pt.
+Package epstopdf Info: Source file: <./figs/bcm_two_pri_low_high_burstB.eps>
+(epstopdf)                    date: 2015-04-10 10:33:53
+(epstopdf)                    size: 22654 bytes
+(epstopdf)             Output file: <./figs/bcm_two_pri_low_high_burstB-eps-con
+verted-to.pdf>
+(epstopdf)                    date: 2015-04-10 10:36:57
+(epstopdf)                    size: 8621 bytes
+(epstopdf)             Command: <epstopdf --outfile=./figs/bcm_two_pri_low_high
+_burstB-eps-converted-to.pdf ./figs/bcm_two_pri_low_high_burstB.eps>
+(epstopdf)             \includegraphics on input line 320.
+Package epstopdf Info: Output file is already uptodate.
+
+<./figs/bcm_two_pri_low_high_burstB-eps-converted-to.pdf, id=106, 361.35pt x 25
+2.945pt>
+File: ./figs/bcm_two_pri_low_high_burstB-eps-converted-to.pdf Graphic file (typ
+e pdf)
+ <use ./figs/bcm_two_pri_low_high_burstB-eps-converted-to.pdf>
+Package pdftex.def Info: ./figs/bcm_two_pri_low_high_burstB-eps-converted-to.pd
+f used on input line 320.
+(pdftex.def)             Requested size: 120.0pt x 84.00087pt.
+
+
+LaTeX Warning: Reference `fig:bcm_outbound_two_pri_high_low_burstB' on page 5 u
+ndefined on input line 332.
+
+
+LaTeX Warning: Reference `fig:bcm_outbound_two_pri_low_high_burstB' on page 5 u
+ndefined on input line 336.
+
+[5 <./figs/jan27_bcm_add_same_burst_100-eps-converted-to.pdf> <./figs/jan27_bcm
+_add_same_burst_200-eps-converted-to.pdf> <./figs/jan27_bcm_add_incr_burst_100-
+eps-converted-to.pdf> <./figs/jan27_bcm_add_incr_burst_200-eps-converted-to.pdf
+> <./figs/jan27_intel_incr_burst_800-eps-converted-to.pdf> <./figs/jan27_intel_
+empty_800L_decr_delta-eps-converted-to.pdf> <./figs/bcm_two_pri_high_low_burstB
+-eps-converted-to.pdf> <./figs/bcm_two_pri_low_high_burstB-eps-converted-to.pdf
+>]
+
+LaTeX Warning: Citation `estan:private' on page 6 undefined on input line 378.
+
+) (./measure_modify.tex
+Package epstopdf Info: Source file: <./figs/jan27_bcm_mod_same_burst_100_imc.ep
+s>
+(epstopdf)                    date: 2015-04-10 10:33:34
+(epstopdf)                    size: 21352 bytes
+(epstopdf)             Output file: <./figs/jan27_bcm_mod_same_burst_100_imc-ep
+s-converted-to.pdf>
+(epstopdf)                    date: 2015-04-10 10:36:57
+(epstopdf)                    size: 8817 bytes
+(epstopdf)             Command: <epstopdf --outfile=./figs/jan27_bcm_mod_same_b
+urst_100_imc-eps-converted-to.pdf ./figs/jan27_bcm_mod_same_burst_100_imc.eps>
+(epstopdf)             \includegraphics on input line 14.
+Package epstopdf Info: Output file is already uptodate.
+
+<./figs/jan27_bcm_mod_same_burst_100_imc-eps-converted-to.pdf, id=151, 361.35pt
+ x 252.945pt>
+File: ./figs/jan27_bcm_mod_same_burst_100_imc-eps-converted-to.pdf Graphic file
+ (type pdf)
+
+<use ./figs/jan27_bcm_mod_same_burst_100_imc-eps-converted-to.pdf>
+Package pdftex.def Info: ./figs/jan27_bcm_mod_same_burst_100_imc-eps-converted-
+to.pdf used on input line 14.
+(pdftex.def)             Requested size: 120.0pt x 84.00087pt.
+Package epstopdf Info: Source file: <./figs/jan27_bcm_mod_same_burst_200.eps>
+(epstopdf)                    date: 2015-04-10 10:34:17
+(epstopdf)                    size: 22571 bytes
+(epstopdf)             Output file: <./figs/jan27_bcm_mod_same_burst_200-eps-co
+nverted-to.pdf>
+(epstopdf)                    date: 2015-04-10 10:34:20
+(epstopdf)                    size: 10607 bytes
+(epstopdf)             Command: <epstopdf --outfile=./figs/jan27_bcm_mod_same_b
+urst_200-eps-converted-to.pdf ./figs/jan27_bcm_mod_same_burst_200.eps>
+(epstopdf)             \includegraphics on input line 20.
+Package epstopdf Info: Output file is already uptodate.
+
+<./figs/jan27_bcm_mod_same_burst_200-eps-converted-to.pdf, id=152, 361.35pt x 2
+52.945pt>
+File: ./figs/jan27_bcm_mod_same_burst_200-eps-converted-to.pdf Graphic file (ty
+pe pdf)
+ <use ./figs/jan27_bcm_mod_same_burst_200-eps-converted-to.pdf>
+Package pdftex.def Info: ./figs/jan27_bcm_mod_same_burst_200-eps-converted-to.p
+df used on input line 20.
+(pdftex.def)             Requested size: 120.0pt x 84.00087pt.
+
+
+LaTeX Warning: Reference `fig:bcm_mod_same_burst_100' on page 6 undefined on in
+put line 26.
+
+
+LaTeX Warning: Reference `fig:bcm_mod_same_burst_200' on page 6 undefined on in
+put line 26.
+
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 32.
+
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/psnfss/omsptm
+.fd
+File: omsptm.fd 
+)
+LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 32.
+
+
+LaTeX Warning: Reference `s:meas_insert' on page 6 undefined on input line 32.
+
+Package epstopdf Info: Source file: <./figs/jan27_bcm_mod_incr_burst_100.eps>
+(epstopdf)                    date: 2015-04-10 10:34:19
+(epstopdf)                    size: 21011 bytes
+(epstopdf)             Output file: <./figs/jan27_bcm_mod_incr_burst_100-eps-co
+nverted-to.pdf>
+(epstopdf)                    date: 2015-04-10 10:36:57
+(epstopdf)                    size: 8580 bytes
+(epstopdf)             Command: <epstopdf --outfile=./figs/jan27_bcm_mod_incr_b
+urst_100-eps-converted-to.pdf ./figs/jan27_bcm_mod_incr_burst_100.eps>
+(epstopdf)             \includegraphics on input line 91.
+Package epstopdf Info: Output file is already uptodate.
+
+<./figs/jan27_bcm_mod_incr_burst_100-eps-converted-to.pdf, id=153, 361.35pt x 2
+52.945pt>
+File: ./figs/jan27_bcm_mod_incr_burst_100-eps-converted-to.pdf Graphic file (ty
+pe pdf)
+ <use ./figs/jan27_bcm_mod_incr_burst_100-eps-converted-to.pdf>
+Package pdftex.def Info: ./figs/jan27_bcm_mod_incr_burst_100-eps-converted-to.p
+df used on input line 91.
+(pdftex.def)             Requested size: 120.0pt x 84.00087pt.
+Package epstopdf Info: Source file: <./figs/jan27_bcm_mod_decr_burst_100.eps>
+(epstopdf)                    date: 2015-04-10 10:33:34
+(epstopdf)                    size: 20997 bytes
+(epstopdf)             Output file: <./figs/jan27_bcm_mod_decr_burst_100-eps-co
+nverted-to.pdf>
+(epstopdf)                    date: 2015-04-10 10:36:58
+(epstopdf)                    size: 8536 bytes
+(epstopdf)             Command: <epstopdf --outfile=./figs/jan27_bcm_mod_decr_b
+urst_100-eps-converted-to.pdf ./figs/jan27_bcm_mod_decr_burst_100.eps>
+(epstopdf)             \includegraphics on input line 93.
+Package epstopdf Info: Output file is already uptodate.
+
+<./figs/jan27_bcm_mod_decr_burst_100-eps-converted-to.pdf, id=154, 361.35pt x 2
+52.945pt>
+File: ./figs/jan27_bcm_mod_decr_burst_100-eps-converted-to.pdf Graphic file (ty
+pe pdf)
+ <use ./figs/jan27_bcm_mod_decr_burst_100-eps-converted-to.pdf>
+Package pdftex.def Info: ./figs/jan27_bcm_mod_decr_burst_100-eps-converted-to.p
+df used on input line 93.
+(pdftex.def)             Requested size: 120.0pt x 84.00087pt.
+
+
+LaTeX Warning: Reference `fig:bcm_mod_incr_burst_100' on page 6 undefined on in
+put line 101.
+
+
+LaTeX Warning: Reference `fig:bcm_mod_decr_burst_100' on page 6 undefined on in
+put line 101.
+
+
+Overfull \hbox (4.75717pt too wide) in paragraph at lines 152--165
+\OT1/ptm/m/n/10 mod-i-fi-ca-tion la-tency on BCM-1.0 and IBM is im-pacted purel
+y
+ []
+
+) (./measure_delete.tex
+Package epstopdf Info: Source file: <./figs/jan27_bcm_del_same_burst_100.eps>
+(epstopdf)                    date: 2015-04-10 10:33:49
+(epstopdf)                    size: 21175 bytes
+(epstopdf)             Output file: <./figs/jan27_bcm_del_same_burst_100-eps-co
+nverted-to.pdf>
+(epstopdf)                    date: 2015-04-10 10:36:58
+(epstopdf)                    size: 8738 bytes
+(epstopdf)             Command: <epstopdf --outfile=./figs/jan27_bcm_del_same_b
+urst_100-eps-converted-to.pdf ./figs/jan27_bcm_del_same_burst_100.eps>
+(epstopdf)             \includegraphics on input line 12.
+Package epstopdf Info: Output file is already uptodate.
+
+<./figs/jan27_bcm_del_same_burst_100-eps-converted-to.pdf, id=155, 361.35pt x 2
+52.945pt>
+File: ./figs/jan27_bcm_del_same_burst_100-eps-converted-to.pdf Graphic file (ty
+pe pdf)
+ <use ./figs/jan27_bcm_del_same_burst_100-eps-converted-to.pdf>
+Package pdftex.def Info: ./figs/jan27_bcm_del_same_burst_100-eps-converted-to.p
+df used on input line 12.
+(pdftex.def)             Requested size: 120.0pt x 84.00087pt.
+Package epstopdf Info: Source file: <./figs/jan27_bcm_del_same_burst_200.eps>
+(epstopdf)                    date: 2015-04-10 10:33:33
+(epstopdf)                    size: 22213 bytes
+(epstopdf)             Output file: <./figs/jan27_bcm_del_same_burst_200-eps-co
+nverted-to.pdf>
+(epstopdf)                    date: 2015-04-10 10:34:18
+(epstopdf)                    size: 10465 bytes
+(epstopdf)             Command: <epstopdf --outfile=./figs/jan27_bcm_del_same_b
+urst_200-eps-converted-to.pdf ./figs/jan27_bcm_del_same_burst_200.eps>
+(epstopdf)             \includegraphics on input line 16.
+Package epstopdf Info: Output file is already uptodate.
+
+<./figs/jan27_bcm_del_same_burst_200-eps-converted-to.pdf, id=156, 361.35pt x 2
+52.945pt>
+File: ./figs/jan27_bcm_del_same_burst_200-eps-converted-to.pdf Graphic file (ty
+pe pdf)
+ <use ./figs/jan27_bcm_del_same_burst_200-eps-converted-to.pdf>
+Package pdftex.def Info: ./figs/jan27_bcm_del_same_burst_200-eps-converted-to.p
+df used on input line 16.
+(pdftex.def)             Requested size: 120.0pt x 84.00087pt.
+Package epstopdf Info: Source file: <./figs/jan27_intel_del_same_burst_100.eps>
+
+(epstopdf)                    date: 2015-04-10 10:34:17
+(epstopdf)                    size: 21344 bytes
+(epstopdf)             Output file: <./figs/jan27_intel_del_same_burst_100-eps-
+converted-to.pdf>
+(epstopdf)                    date: 2015-04-10 10:36:58
+(epstopdf)                    size: 8466 bytes
+(epstopdf)             Command: <epstopdf --outfile=./figs/jan27_intel_del_same
+_burst_100-eps-converted-to.pdf ./figs/jan27_intel_del_same_burst_100.eps>
+(epstopdf)             \includegraphics on input line 24.
+Package epstopdf Info: Output file is already uptodate.
+
+<./figs/jan27_intel_del_same_burst_100-eps-converted-to.pdf, id=157, 361.35pt x
+ 252.945pt>
+File: ./figs/jan27_intel_del_same_burst_100-eps-converted-to.pdf Graphic file (
+type pdf)
+ <use ./figs/jan27_intel_del_same_burst_100-eps-converted-to.pdf>
+Package pdftex.def Info: ./figs/jan27_intel_del_same_burst_100-eps-converted-to
+.pdf used on input line 24.
+(pdftex.def)             Requested size: 120.0pt x 84.00087pt.
+Package epstopdf Info: Source file: <./figs/jan27_intel_same_burst_200.eps>
+(epstopdf)                    date: 2015-04-10 10:34:09
+(epstopdf)                    size: 22578 bytes
+(epstopdf)             Output file: <./figs/jan27_intel_same_burst_200-eps-conv
+erted-to.pdf>
+(epstopdf)                    date: 2015-04-10 10:36:58
+(epstopdf)                    size: 10459 bytes
+(epstopdf)             Command: <epstopdf --outfile=./figs/jan27_intel_same_bur
+st_200-eps-converted-to.pdf ./figs/jan27_intel_same_burst_200.eps>
+(epstopdf)             \includegraphics on input line 28.
+Package epstopdf Info: Output file is already uptodate.
+
+<./figs/jan27_intel_same_burst_200-eps-converted-to.pdf, id=158, 361.35pt x 252
+.945pt>
+File: ./figs/jan27_intel_same_burst_200-eps-converted-to.pdf Graphic file (type
+ pdf)
+ <use ./figs/jan27_intel_same_burst_200-eps-converted-to.pdf>
+Package pdftex.def Info: ./figs/jan27_intel_same_burst_200-eps-converted-to.pdf
+ used on input line 28.
+(pdftex.def)             Requested size: 120.0pt x 84.00087pt.
+
+
+LaTeX Warning: Reference `fig:bcm_del_same_burst_100' on page 6 undefined on in
+put line 36.
+
+
+LaTeX Warning: Reference `fig:bcm_del_same_burst_200' on page 6 undefined on in
+put line 36.
+
+
+LaTeX Warning: Reference `fig:intel_del_same_burst_100' on page 6 undefined on 
+input line 37.
+
+
+LaTeX Warning: Reference `fig:intel_del_same_burst_200' on page 6 undefined on 
+input line 37.
+
+
+Overfull \hbox (3.97751pt too wide) in paragraph at lines 33--38
+\OT1/ptm/m/n/10 send-ing dele-tion re-quests back-to-back. The re-sults for BCM
+-
+ []
+
+[6 <./figs/jan27_bcm_mod_same_burst_100_imc-eps-converted-to.pdf> <./figs/jan27
+_bcm_mod_same_burst_200-eps-converted-to.pdf> <./figs/jan27_bcm_mod_incr_burst_
+100-eps-converted-to.pdf> <./figs/jan27_bcm_mod_decr_burst_100-eps-converted-to
+.pdf> <./figs/jan27_bcm_del_same_burst_100-eps-converted-to.pdf> <./figs/jan27_
+bcm_del_same_burst_200-eps-converted-to.pdf> <./figs/jan27_intel_del_same_burst
+_100-eps-converted-to.pdf> <./figs/jan27_intel_same_burst_200-eps-converted-to.
+pdf>]
+Package epstopdf Info: Source file: <./figs/jan27_bcm_del_incr_burst_100.eps>
+(epstopdf)                    date: 2015-04-10 10:33:35
+(epstopdf)                    size: 21175 bytes
+(epstopdf)             Output file: <./figs/jan27_bcm_del_incr_burst_100-eps-co
+nverted-to.pdf>
+(epstopdf)                    date: 2015-04-10 10:33:54
+(epstopdf)                    size: 8752 bytes
+(epstopdf)             Command: <epstopdf --outfile=./figs/jan27_bcm_del_incr_b
+urst_100-eps-converted-to.pdf ./figs/jan27_bcm_del_incr_burst_100.eps>
+(epstopdf)             \includegraphics on input line 49.
+Package epstopdf Info: Output file is already uptodate.
+
+<./figs/jan27_bcm_del_incr_burst_100-eps-converted-to.pdf, id=204, 361.35pt x 2
+52.945pt>
+File: ./figs/jan27_bcm_del_incr_burst_100-eps-converted-to.pdf Graphic file (ty
+pe pdf)
+ <use ./figs/jan27_bcm_del_incr_burst_100-eps-converted-to.pdf>
+Package pdftex.def Info: ./figs/jan27_bcm_del_incr_burst_100-eps-converted-to.p
+df used on input line 49.
+(pdftex.def)             Requested size: 120.0pt x 84.00087pt.
+Package epstopdf Info: Source file: <./figs/jan27_bcm_del_decr_burst_100.eps>
+(epstopdf)                    date: 2015-04-10 10:33:56
+(epstopdf)                    size: 20992 bytes
+(epstopdf)             Output file: <./figs/jan27_bcm_del_decr_burst_100-eps-co
+nverted-to.pdf>
+(epstopdf)                    date: 2015-04-10 10:36:58
+(epstopdf)                    size: 8674 bytes
+(epstopdf)             Command: <epstopdf --outfile=./figs/jan27_bcm_del_decr_b
+urst_100-eps-converted-to.pdf ./figs/jan27_bcm_del_decr_burst_100.eps>
+(epstopdf)             \includegraphics on input line 51.
+Package epstopdf Info: Output file is already uptodate.
+
+<./figs/jan27_bcm_del_decr_burst_100-eps-converted-to.pdf, id=205, 361.35pt x 2
+52.945pt>
+File: ./figs/jan27_bcm_del_decr_burst_100-eps-converted-to.pdf Graphic file (ty
+pe pdf)
+ <use ./figs/jan27_bcm_del_decr_burst_100-eps-converted-to.pdf>
+Package pdftex.def Info: ./figs/jan27_bcm_del_decr_burst_100-eps-converted-to.p
+df used on input line 51.
+(pdftex.def)             Requested size: 120.0pt x 84.00087pt.
+Package epstopdf Info: Source file: <./figs/jan27_intel_del_incr_burst_100.eps>
+
+(epstopdf)                    date: 2015-04-10 10:34:01
+(epstopdf)                    size: 21330 bytes
+(epstopdf)             Output file: <./figs/jan27_intel_del_incr_burst_100-eps-
+converted-to.pdf>
+(epstopdf)                    date: 2015-04-10 10:36:58
+(epstopdf)                    size: 8442 bytes
+(epstopdf)             Command: <epstopdf --outfile=./figs/jan27_intel_del_incr
+_burst_100-eps-converted-to.pdf ./figs/jan27_intel_del_incr_burst_100.eps>
+(epstopdf)             \includegraphics on input line 69.
+Package epstopdf Info: Output file is already uptodate.
+
+<./figs/jan27_intel_del_incr_burst_100-eps-converted-to.pdf, id=206, 361.35pt x
+ 252.945pt>
+File: ./figs/jan27_intel_del_incr_burst_100-eps-converted-to.pdf Graphic file (
+type pdf)
+ <use ./figs/jan27_intel_del_incr_burst_100-eps-converted-to.pdf>
+Package pdftex.def Info: ./figs/jan27_intel_del_incr_burst_100-eps-converted-to
+.pdf used on input line 69.
+(pdftex.def)             Requested size: 120.0pt x 84.00087pt.
+Package epstopdf Info: Source file: <./figs/jan27_intel_del_decr_burst_100.eps>
+
+(epstopdf)                    date: 2015-04-10 10:33:21
+(epstopdf)                    size: 21330 bytes
+(epstopdf)             Output file: <./figs/jan27_intel_del_decr_burst_100-eps-
+converted-to.pdf>
+(epstopdf)                    date: 2015-04-10 10:34:07
+(epstopdf)                    size: 8400 bytes
+(epstopdf)             Command: <epstopdf --outfile=./figs/jan27_intel_del_decr
+_burst_100-eps-converted-to.pdf ./figs/jan27_intel_del_decr_burst_100.eps>
+(epstopdf)             \includegraphics on input line 71.
+Package epstopdf Info: Output file is already uptodate.
+
+<./figs/jan27_intel_del_decr_burst_100-eps-converted-to.pdf, id=207, 361.35pt x
+ 252.945pt>
+File: ./figs/jan27_intel_del_decr_burst_100-eps-converted-to.pdf Graphic file (
+type pdf)
+ <use ./figs/jan27_intel_del_decr_burst_100-eps-converted-to.pdf>
+Package pdftex.def Info: ./figs/jan27_intel_del_decr_burst_100-eps-converted-to
+.pdf used on input line 71.
+(pdftex.def)             Requested size: 120.0pt x 84.00087pt.
+
+
+LaTeX Warning: Reference `fig:priority-broadcom-deletion' on page 7 undefined o
+n input line 83.
+
+
+LaTeX Warning: Reference `fig:priority-intel-deletion' on page 7 undefined on i
+nput line 84.
+
+)) (./measure_summary_imc.tex
+
+LaTeX Warning: Citation `ucsdpaper' on page 7 undefined on input line 82.
+
+
+LaTeX Warning: Citation `oflops' on page 7 undefined on input line 82.
+
+
+LaTeX Warning: Citation `estan:private' on page 7 undefined on input line 85.
+
+
+Overfull \hbox (1.67668pt too wide) in paragraph at lines 113--130
+\OT1/ptm/m/n/10 tions/updates are an in-trin-sic part of SDN ap-pli-ca-tions, w
+hich
+ []
+
+)) (./outbound_sigmetrics.tex
+
+LaTeX Warning: Citation `swan' on page 7 undefined on input line 9.
+
+
+LaTeX Warning: Reference `s:evaluation' on page 7 undefined on input line 13.
+
+
+Overfull \hbox (1.10806pt too wide) in paragraph at lines 6--14
+\OT1/ptm/m/n/10 ing other high/low pri-or-ity flows to avoid hot-spots [\OT1/pt
+m/b/n/10 ?\OT1/ptm/m/n/10 ]. How-
+ []
+
+
+LaTeX Warning: Citation `hedera' on page 7 undefined on input line 32.
+
+
+LaTeX Warning: Citation `microte' on page 7 undefined on input line 32.
+
+
+LaTeX Warning: Reference `s:evaluation' on page 7 undefined on input line 39.
+
+
+Overfull \hbox (6.65701pt too wide) in paragraph at lines 29--45
+\OT1/ptm/m/n/10 ca-tion may want to reroute traf-fic sub-sets at fine timescale
+s [\OT1/ptm/b/n/10 ?\OT1/ptm/m/n/10 ].
+ []
+
+
+LaTeX Warning: Reference `s:evaluation' on page 7 undefined on input line 50.
+
+(./floweng_sigmetrics.tex
+<figs/flow_eng_example.pdf, id=208, 567.11874pt x 310.15875pt>
+File: figs/flow_eng_example.pdf Graphic file (type pdf)
+
+<use figs/flow_eng_example.pdf>
+Package pdftex.def Info: figs/flow_eng_example.pdf used on input line 8.
+(pdftex.def)             Requested size: 231.26378pt x 126.47968pt.
+
+
+LaTeX Warning: Citation `swan' on page 7 undefined on input line 23.
+
+
+LaTeX Warning: Citation `simple' on page 7 undefined on input line 23.
+
+
+LaTeX Warning: Citation `minlanvcrib' on page 7 undefined on input line 23.
+
+
+LaTeX Warning: Reference `fig:flow_eng' on page 7 undefined on input line 25.
+
+[7 <./figs/jan27_bcm_del_incr_burst_100-eps-converted-to.pdf> <./figs/jan27_bcm
+_del_decr_burst_100-eps-converted-to.pdf> <./figs/jan27_intel_del_incr_burst_10
+0-eps-converted-to.pdf> <./figs/jan27_intel_del_decr_burst_100-eps-converted-to
+.pdf>]
+
+LaTeX Warning: Reference `app:floweng' on page 8 undefined on input line 104.
+
+
+Overfull \hbox (15.44925pt too wide) in paragraph at lines 112--116
+\OML/cmm/m/it/10 C$ \OT1/ptm/m/n/10 on the time re-quired to in-stall/modify ru
+les across all switches. 
+ []
+
+
+Overfull \hbox (6.23224pt too wide) in paragraph at lines 186--205
+[]\OT1/ptm/m/n/10 Given our mea-sure-ment re-sults, for ev-ery switch $\OML/cmm
+/m/it/10 s \OMS/cmsy/m/n/10 2 \OML/cmm/m/it/10 P[]$\OT1/ptm/m/n/10 ,
+ []
+
+
+LaTeX Warning: Citation `microte' on page 8 undefined on input line 278.
+
+) (./offload_sigmetrics.tex
+<figs/Rule-Offload2.pdf, id=234, 889.3225pt x 424.58624pt>
+File: figs/Rule-Offload2.pdf Graphic file (type pdf)
+
+<use figs/Rule-Offload2.pdf>
+Package pdftex.def Info: figs/Rule-Offload2.pdf used on input line 8.
+(pdftex.def)             Requested size: 216.81pt x 103.50948pt.
+
+
+LaTeX Warning: Reference `fig:flow_eng' on page 8 undefined on input line 21.
+
+[8 <./figs/flow_eng_example.pdf> <./figs/Rule-Offload2.pdf>]
+
+LaTeX Warning: Reference `fig:rule-offload' on page 9 undefined on input line 8
+7.
+
+
+LaTeX Warning: Reference `fig:rule-offload' on page 9 undefined on input line 8
+8.
+
+
+LaTeX Warning: Reference `fig:flow_eng' on page 9 undefined on input line 89.
+
+(./algs/partition.tex
+
+! LaTeX Error: \@KwIn undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.12     \SetKw{KwIn}{in}
+                         
+? 
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 40.
+
+(/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/tex/latex/psnfss/ot1pcr
+.fd
+File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
+))
+
+LaTeX Warning: Reference `alg:partition' on page 9 undefined on input line 112.
+
+
+
+LaTeX Warning: Reference `fig:rule-offload' on page 9 undefined on input line 1
+39.
+
+
+LaTeX Warning: Reference `alg:default_rule' on page 9 undefined on input line 2
+02.
+
+
+Overfull \hbox (4.61543pt too wide) in paragraph at lines 217--224
+\OT1/ptm/m/n/10 then we fur-ther di-vide both $\OML/cmm/m/it/10 C[]$ \OT1/ptm/m
+/n/10 and $\OML/cmm/m/it/10 C[]$ \OT1/ptm/m/n/10 into two sub-rectangles,
+ []
+
+(./algs/default_rule.tex
+
+! LaTeX Error: \@KwIn undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8     \SetKw{KwIn}{in}
+                        
+? 
+! Undefined control sequence.
+l.15   \SetKwProg
+                 {myproc}{Procedure}{}{}
+? 
+! Undefined control sequence.
+l.16   \myproc
+              {\proc{$P$, $C_i$, $C_j$}} {
+? 
+)
+
+LaTeX Warning: Reference `fig:flow_eng' on page 9 undefined on input line 253.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [9])
+(./insertion.tex
+
+LaTeX Warning: Citation `one-shot' on page 10 undefined on input line 11.
+
+
+LaTeX Warning: Citation `mahajan13:hotnets' on page 10 undefined on input line 
+12.
+
+)) (./eval_outbound_imc.tex
+
+LaTeX Warning: Citation `microte' on page 10 undefined on input line 13.
+
+
+LaTeX Warning: Reference `s:outbound_meas' on page 10 undefined on input line 1
+7.
+
+
+Overfull \hbox (1.82774pt too wide) in paragraph at lines 22--25
+[]\OT1/ptm/m/n/10 We first eval-u-ate the ef-fec-tive-ness of flow en-gi-neer-i
+ng (FE)
+ []
+
+
+LaTeX Warning: Reference `qosTable' on page 10 undefined on input line 33.
+
+
+LaTeX Warning: Reference `qosTable' on page 10 undefined on input line 50.
+
+
+LaTeX Warning: Reference `s:floweng' on page 10 undefined on input line 114.
+
+
+LaTeX Warning: Reference `s:offload' on page 10 undefined on input line 117.
+
+
+LaTeX Warning: Citation `one-shot' on page 10 undefined on input line 119.
+
+
+Overfull \hbox (1.89731pt too wide) in paragraph at lines 119--120
+[]\OT1/ptm/m/n/10 In all cases, we as-sume that one-shot con-sis-tent up-dates 
+[\OT1/ptm/b/n/10 ?\OT1/ptm/m/n/10 ]
+ []
+
+
+LaTeX Warning: Reference `failoverResults' on page 10 undefined on input line 1
+22.
+
+
+Underfull \vbox (badness 5475) has occurred while \output is active []
+
+ [10]
+
+LaTeX Warning: Reference `runtime' on page 11 undefined on input line 141.
+
+Package epstopdf Info: Source file: <./figs/Failover.eps>
+(epstopdf)                    date: 2015-04-10 10:33:53
+(epstopdf)                    size: 23208 bytes
+(epstopdf)             Output file: <./figs/Failover-eps-converted-to.pdf>
+(epstopdf)                    date: 2015-04-10 10:34:03
+(epstopdf)                    size: 8017 bytes
+(epstopdf)             Command: <epstopdf --outfile=./figs/Failover-eps-convert
+ed-to.pdf ./figs/Failover.eps>
+(epstopdf)             \includegraphics on input line 175.
+Package epstopdf Info: Output file is already uptodate.
+<./figs/Failover-eps-converted-to.pdf, id=339, 361.35pt x 252.945pt>
+File: ./figs/Failover-eps-converted-to.pdf Graphic file (type pdf)
+
+<use ./figs/Failover-eps-converted-to.pdf>
+Package pdftex.def Info: ./figs/Failover-eps-converted-to.pdf used on input lin
+e 175.
+(pdftex.def)             Requested size: 176.40308pt x 123.48097pt.
+
+<figs/fe_ro_runtime.pdf, id=340, 433.62pt x 216.81pt>
+File: figs/fe_ro_runtime.pdf Graphic file (type pdf)
+
+<use figs/fe_ro_runtime.pdf>
+Package pdftex.def Info: figs/fe_ro_runtime.pdf used on input line 183.
+(pdftex.def)             Requested size: 151.20154pt x 75.60011pt.
+
+Overfull \hbox (1.21729pt too wide) in paragraph at lines 189--201
+\OT1/ptm/m/n/10 spon-sive traf-fic en-gi-neer-ing. This ap-pli-ca-tion si-mul-t
+a-ne-ously
+ []
+
+
+LaTeX Warning: Reference `s:fe_eval' on page 11 undefined on input line 202.
+
+
+LaTeX Warning: Reference `qos_Results' on page 11 undefined on input line 253.
+
+
+LaTeX Warning: Reference `qos_intelResults' on page 11 undefined on input line 
+253.
+
+Package epstopdf Info: Source file: <./figs/qos.eps>
+(epstopdf)                    date: 2015-04-10 10:34:16
+(epstopdf)                    size: 22776 bytes
+(epstopdf)             Output file: <./figs/qos-eps-converted-to.pdf>
+(epstopdf)                    date: 2015-04-10 10:38:43
+(epstopdf)                    size: 7959 bytes
+(epstopdf)             Command: <epstopdf --outfile=./figs/qos-eps-converted-to
+.pdf ./figs/qos.eps>
+(epstopdf)             \includegraphics on input line 274.
+Package epstopdf Info: Output file is already uptodate.
+<./figs/qos-eps-converted-to.pdf, id=341, 361.35pt x 252.945pt>
+File: ./figs/qos-eps-converted-to.pdf Graphic file (type pdf)
+
+<use ./figs/qos-eps-converted-to.pdf>
+Package pdftex.def Info: ./figs/qos-eps-converted-to.pdf used on input line 274
+.
+(pdftex.def)             Requested size: 120.0pt x 84.00087pt.
+Package epstopdf Info: Source file: <./figs/qos_intel.eps>
+(epstopdf)                    date: 2015-04-10 10:34:15
+(epstopdf)                    size: 28549 bytes
+(epstopdf)             Output file: <./figs/qos_intel-eps-converted-to.pdf>
+(epstopdf)                    date: 2015-04-10 10:38:43
+(epstopdf)                    size: 8072 bytes
+(epstopdf)             Command: <epstopdf --outfile=./figs/qos_intel-eps-conver
+ted-to.pdf ./figs/qos_intel.eps>
+(epstopdf)             \includegraphics on input line 276.
+Package epstopdf Info: Output file is already uptodate.
+
+<./figs/qos_intel-eps-converted-to.pdf, id=342, 361.35pt x 252.945pt>
+File: ./figs/qos_intel-eps-converted-to.pdf Graphic file (type pdf)
+
+<use ./figs/qos_intel-eps-converted-to.pdf>
+Package pdftex.def Info: ./figs/qos_intel-eps-converted-to.pdf used on input li
+ne 276.
+(pdftex.def)             Requested size: 120.0pt x 84.00087pt.
+
+
+LaTeX Warning: Citation `microte' on page 11 undefined on input line 355.
+
+
+LaTeX Warning: Reference `s:floweng' on page 11 undefined on input line 357.
+
+
+Overfull \hbox (7.51738pt too wide) in paragraph at lines 355--361
+[]\OT1/ptm/m/n/10 MicroTE [\OT1/ptm/b/n/10 ?\OT1/ptm/m/n/10 ] lever-ages the pa
+r-tial and short term pre-dictabil-
+ []
+
+
+LaTeX Warning: Citation `fattree-sigcomm08' on page 11 undefined on input line 
+374.
+
+
+LaTeX Warning: Reference `microteResults' on page 11 undefined on input line 37
+8.
+
+Package epstopdf Info: Source file: <./figs/MicroTE_Compl.eps>
+(epstopdf)                    date: 2015-04-10 10:33:33
+(epstopdf)                    size: 20134 bytes
+(epstopdf)             Output file: <./figs/MicroTE_Compl-eps-converted-to.pdf>
+
+(epstopdf)                    date: 2015-04-10 10:38:43
+(epstopdf)                    size: 7441 bytes
+(epstopdf)             Command: <epstopdf --outfile=./figs/MicroTE_Compl-eps-co
+nverted-to.pdf ./figs/MicroTE_Compl.eps>
+(epstopdf)             \includegraphics on input line 389.
+Package epstopdf Info: Output file is already uptodate.
+<./figs/MicroTE_Compl-eps-converted-to.pdf, id=343, 361.35pt x 252.945pt>
+File: ./figs/MicroTE_Compl-eps-converted-to.pdf Graphic file (type pdf)
+
+<use ./figs/MicroTE_Compl-eps-converted-to.pdf>
+Package pdftex.def Info: ./figs/MicroTE_Compl-eps-converted-to.pdf used on inpu
+t line 389.
+(pdftex.def)             Requested size: 155.99854pt x 109.20036pt.
+) (./related_new.tex
+
+LaTeX Warning: Citation `devoflow' on page 11 undefined on input line 14.
+
+
+LaTeX Warning: Citation `oflops' on page 11 undefined on input line 17.
+
+
+LaTeX Warning: Citation `ucsdpaper' on page 11 undefined on input line 17.
+
+
+LaTeX Warning: Citation `oflops' on page 11 undefined on input line 18.
+
+
+LaTeX Warning: Citation `ucsdpaper' on page 11 undefined on input line 21.
+
+[11 <./figs/Failover-eps-converted-to.pdf> <./figs/fe_ro_runtime.pdf> <./figs/q
+os-eps-converted-to.pdf> <./figs/qos_intel-eps-converted-to.pdf>]
+
+LaTeX Warning: Citation `devoflow' on page 12 undefined on input line 74.
+
+
+LaTeX Warning: Citation `difane' on page 12 undefined on input line 92.
+
+
+LaTeX Warning: Citation `minlanvcrib' on page 12 undefined on input line 102.
+
+
+LaTeX Warning: Citation `dionysus' on page 12 undefined on input line 110.
+
+
+Overfull \hbox (6.53786pt too wide) in paragraph at lines 73--117
+\OT1/ptm/m/n/10 over-head of SDN rule match-ing and pro-cess-ing. De-voFlow [\O
+T1/ptm/b/n/10 ?\OT1/ptm/m/n/10 ]
+ []
+
+) (./conclusion.tex
+Overfull \hbox (11.54745pt too wide) in paragraph at lines 3--27
+\OT1/ptm/m/n/10 cies un-der-ly-ing the gen-er-a-tion of con-trol mes-sages (\OT
+1/ptm/m/it/10 packet[]in\OT1/ptm/m/n/10 's)
+ []
+
+
+Overfull \hbox (4.12775pt too wide) in paragraph at lines 3--27
+\OT1/ptm/m/n/10 high-lights the need of care-ful de-sign of next gen-er-a-tion 
+switch
+ []
+
+)
+No file main.bbl.
+[12 <./figs/MicroTE_Compl-eps-converted-to.pdf>]
+! Missing number, treated as zero.
+<to be read again> 
+                   \c@chapter 
+l.99 \begin{appendices}
+                       
+? 
+
+! LaTeX Error: No counter 'chapter' defined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.99 \begin{appendices}
+                       
+? 
+
+! LaTeX Error: \@chapapp undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.99 \begin{appendices}
+                       
+? 
+
+! LaTeX Error: \thechapter undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.99 \begin{appendices}
+                       
+? 
+
+! LaTeX Error: No counter 'chapter' defined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.99 \begin{appendices}
+                       
+? 
+(./ilp.tex
+
+LaTeX Warning: Reference `s:floweng' on page 13 undefined on input line 6.
+
+
+LaTeX Warning: Reference `notations' on page 13 undefined on input line 8.
+
+
+Overfull \hbox (15.07408pt too wide) detected at line 112
+[] \OML/cmm/m/it/10 T[] \OMS/cmsy/m/n/10 ^^C \OML/cmm/m/it/10 I[] \OMS/cmsy/m/n
+/10 ^^T \OT1/cmr/m/n/10 (1 + \OML/cmm/m/it/10 ^^N\OT1/cmr/m/n/10 ) \OMS/cmsy/m/
+n/10 ^^B \OML/cmm/m/it/10 util[] \OMS/cmsy/m/n/10 ^^B \OML/cmm/m/it/10 C[]
+ []
+
+)
+! Missing number, treated as zero.
+<to be read again> 
+                   \c@chapter 
+l.101 \end{appendices}
+                      
+? 
+
+! LaTeX Error: No counter 'chapter' defined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.101 \end{appendices}
+                      
+? 
+[13] (./main.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 7094 strings out of 493629
+ 106939 string characters out of 3134964
+ 188612 words of memory out of 3000000
+ 10140 multiletter control sequences out of 15000+200000
+ 61310 words of font info for 91 fonts, out of 3000000 for 9000
+ 831 hyphenation exceptions out of 8191
+ 44i,17n,46p,685b,483s stack positions out of 5000i,500n,10000p,200000b,50000s
+{/afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/fonts/enc/dvips/base/
+8r.enc}</afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmex10.pfb></afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmmi10.pfb></afs/cs.wisc.edu/s/texlive-2011/a
+md64_rhel5/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></afs/cs.wisc.ed
+u/s/texlive-2011/amd64_rhel5/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pf
+b></afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmmi7.pfb></afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmmi8.pfb></afs/cs.wisc.edu/s/texlive-2011/amd64_rh
+el5/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></afs/cs.wisc.edu/s/tex
+live-2011/amd64_rhel5/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></afs
+/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmr7.pfb></afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmr9.pfb></afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></afs/cs.wisc.edu/s/texlive-201
+1/amd64_rhel5/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></afs/cs.wisc
+.edu/s/texlive-2011/amd64_rhel5/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6
+.pfb></afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmsy7.pfb></afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmsy8.pfb></afs/cs.wisc.edu/s/texlive-2011/amd64
+_rhel5/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></afs/cs.wisc.edu/s/
+texlive-2011/amd64_rhel5/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></afs/cs
+.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/fonts/type1/urw/helvetic/uhvb8a
+.pfb></afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/fonts/type1/urw/he
+lvetic/uhvr8a.pfb></afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-dist/fonts
+/type1/urw/times/utmb8a.pfb></afs/cs.wisc.edu/s/texlive-2011/amd64_rhel5/texmf-
+dist/fonts/type1/urw/times/utmr8a.pfb></afs/cs.wisc.edu/s/texlive-2011/amd64_rh
+el5/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on main.pdf (13 pages, 833322 bytes).
+PDF statistics:
+ 458 PDF objects out of 1000 (max. 8388607)
+ 295 compressed objects within 3 object streams
+ 0 named destinations out of 1000 (max. 500000)
+ 156 words of extra memory for PDF output out of 10000 (max. 10000000)
+

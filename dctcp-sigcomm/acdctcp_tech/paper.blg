@@ -1,0 +1,57 @@
+This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: paper.aux
+The style file: abbrv.bst
+Database file #1: refer.bib
+Warning--empty journal in alizadeh2013pfabric
+Warning--empty institution in RFC5681
+Warning--empty institution in RFC3449
+Warning--empty institution in ietf-tcpm-dctcp
+Warning--empty institution in RFC6928
+Warning--empty institution in RFC3115
+Warning--empty institution in RFC3649
+Warning--empty institution in RFC3782
+Warning--empty institution in RFC1323
+Warning--empty institution in RFC1072
+You've used 73 entries,
+            2118 wiz_defined-function locations,
+            791 strings with 15842 characters,
+and the built_in function-call counts, 23591 in all, are:
+= -- 1962
+> -- 1714
+< -- 10
++ -- 681
+- -- 608
+* -- 1628
+:= -- 4082
+add.period$ -- 215
+call.type$ -- 73
+change.case$ -- 531
+chr.to.int$ -- 0
+cite$ -- 83
+duplicate$ -- 855
+empty$ -- 1750
+format.name$ -- 608
+if$ -- 4767
+int.to.chr$ -- 0
+int.to.str$ -- 73
+missing$ -- 52
+newline$ -- 364
+num.names$ -- 124
+pop$ -- 726
+preamble$ -- 1
+purify$ -- 458
+quote$ -- 0
+skip$ -- 523
+stack$ -- 0
+substring$ -- 365
+swap$ -- 114
+text.length$ -- 10
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 292
+warning$ -- 10
+while$ -- 124
+width$ -- 75
+write$ -- 713
+(There were 10 warnings)

@@ -1,0 +1,259 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
+\HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
+\global\let\oldnewlabel\newlabel
+\gdef\newlabel#1#2{\newlabelxx{#1}#2}
+\gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
+\let\newlabel\oldnewlabel
+\fi}
+\fi}
+\global\let\hyper@last\relax 
+\gdef\HyperFirstAtBeginDocument#1{#1}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{hedera,dc-mptcp,planck,vmware,detail,packetspray,drb}
+\citation{conga,wcmp}
+\citation{hedera}
+\citation{planck}
+\citation{hedera}
+\citation{planck}
+\citation{mptcp}
+\citation{conga}
+\citation{juniper-vcf}
+\citation{conga,flowlet}
+\citation{nv-mtd,ovs-extending,eden}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{\thepage }{section.1}}
+\newlabel{section:intro}{{1}{\thepage }{Introduction}{section.1}{}}
+\citation{drb,packetspray}
+\citation{aws-peek}
+\citation{ovs-edge,nv-mtd,pfaff2015design}
+\citation{planck}
+\citation{mptcp}
+\citation{conga}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Design Decisions and\\Challenges}{\thepage }{section.2}}
+\newlabel{sec:background}{{2}{\thepage }{Design Decisions and\\Challenges}{section.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Design Decisions}{\thepage }{subsection.2.1}}
+\citation{drb,conga,juniper-vcf,packetspray}
+\citation{drb}
+\citation{bullettrains}
+\citation{drb,packetspray}
+\citation{nuttcp}
+\citation{nuttcp}
+\citation{conga,juniper-vcf}
+\citation{conga}
+\citation{benson10,vl2,kandula2009nature}
+\citation{kandula2009nature,benson10,dctcp}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Stacked histogram of flowlet sizes (in MB) for a 1 GB {\tt  scp} file transfer. We vary the number of {\tt  nuttcp}\nobreakspace  {}\cite  {nuttcp} background flows and denote them as {\em  Competing Flows}. The size of each flowlet is shown within each bar, and flowlets are created whenever there is a 500 $\mu $s delay between segments. The top 10 flowlet sizes are shown here. We also analyzed the results of a 1 GB {\tt  nuttcp}, {\tt  ftp}, and a simple custom client/server transfer and found them to be similar. \relax }}{\thepage }{figure.caption.5}}
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{micro_flowlet_size}{{1}{\thepage }{Stacked histogram of flowlet sizes (in MB) for a 1 GB {\tt scp} file transfer. We vary the number of {\tt nuttcp}~\cite {nuttcp} background flows and denote them as {\em Competing Flows}. The size of each flowlet is shown within each bar, and flowlets are created whenever there is a 500 $\mu $s delay between segments. The top 10 flowlet sizes are shown here. We also analyzed the results of a 1 GB {\tt nuttcp}, {\tt ftp}, and a simple custom client/server transfer and found them to be similar. \relax }{figure.caption.5}{}}
+\citation{wcmp}
+\citation{leung2007overview,paxson1997end}
+\citation{rr-tcp,blanton2002making,tcp-pr}
+\citation{ms-rsc}
+\citation{grossman2005large}
+\citation{optimize-tcp-receive}
+\citation{linuxgro,optimize-tcp-receive}
+\citation{mogul1997eliminating,understanding-linux-network}
+\citation{bullettrains}
+\citation{grossman2005large,open-lro}
+\citation{drb}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Reordering Challenges}{\thepage }{subsection.2.2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces GRO pushes up small segments ($S_i$) during reordering.\relax }}{\thepage }{figure.caption.6}}
+\newlabel{gro-break}{{2}{\thepage }{GRO pushes up small segments ($S_i$) during reordering.\relax }{figure.caption.6}{}}
+\citation{conga}
+\citation{casado2012fabric}
+\citation{conga,nv-mtd}
+\citation{drb}
+\citation{shadow-mac}
+\citation{trident2,smart-table,arista}
+\citation{moose}
+\citation{netlord}
+\citation{vxlan-bench}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Our testbed: 2-tier Clos network with 16 hosts.\relax }}{\thepage }{figure.caption.7}}
+\newlabel{macro_evaluation_topology}{{3}{\thepage }{Our testbed: 2-tier Clos network with 16 hosts.\relax }{figure.caption.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Design}{\thepage }{section.3}}
+\newlabel{sec:design}{{3}{\thepage }{Design}{section.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Sender}{\thepage }{subsection.3.1}}
+\citation{nvo3}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Pseudo-code of flowcell creation\relax }}{\thepage }{algorithm.1}}
+\newlabel{alg:flowcell}{{1}{\thepage }{Pseudo-code of flowcell creation\relax }{algorithm.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Receiver}{\thepage }{subsection.3.2}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Pseudo-code of Presto GRO {\tt  flush} function\relax }}{\thepage }{algorithm.2}}
+\newlabel{alg:gro}{{2}{\thepage }{Pseudo-code of Presto GRO {\tt flush} function\relax }{algorithm.2}{}}
+\citation{drb}
+\citation{wcmp}
+\citation{ipblog-failover,huawei-failover}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Failure Handling and Asymmetry}{\thepage }{subsection.3.3}}
+\citation{ovs-website}
+\citation{kernel}
+\citation{cubic}
+\citation{rss}
+\citation{fattree,hedera,planck}
+\citation{kandula2009nature}
+\citation{mptcp-linux}
+\citation{mptcp-not-optimal}
+\citation{dc-mptcp,mptcp-not-optimal,paasch2013benefits}
+\citation{sockperf}
+\citation{jain-fair}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Methodology}{\thepage }{section.4}}
+\newlabel{sec:method}{{4}{\thepage }{Methodology}{section.4}{}}
+\newlabel{micro_scalability_topology}{{4a}{\thepage }{\relax }{figure.caption.8}{}}
+\newlabel{sub@micro_scalability_topology}{{a}{\thepage }{\relax }{figure.caption.8}{}}
+\newlabel{micro_congestion_topology}{{4b}{\thepage }{\relax }{figure.caption.8}{}}
+\newlabel{sub@micro_congestion_topology}{{b}{\thepage }{\relax }{figure.caption.8}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces (a) Scalability benchmark and (b) Oversubscription benchmark topology.\relax }}{\thepage }{figure.caption.8}}
+\newlabel{micro_topology}{{4}{\thepage }{(a) Scalability benchmark and (b) Oversubscription benchmark topology.\relax }{figure.caption.8}{}}
+\newlabel{gro_effectiveness_on_reordering}{{5a}{\thepage }{\relax }{figure.caption.9}{}}
+\newlabel{sub@gro_effectiveness_on_reordering}{{a}{\thepage }{\relax }{figure.caption.9}{}}
+\newlabel{gro_effectiveness_on_pktsize}{{5b}{\thepage }{\relax }{figure.caption.9}{}}
+\newlabel{sub@gro_effectiveness_on_pktsize}{{b}{\thepage }{\relax }{figure.caption.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces (a) Illustration of the modified GRO's effectiveness on masking reordering. (b) In case of massive packet reordering, official GRO cannot merge packets effectively such that lots of small packets are processed by TCP which poses great processing overhead for CPU.\relax }}{\thepage }{figure.caption.9}}
+\newlabel{gro_effectiveness}{{5}{\thepage }{(a) Illustration of the modified GRO's effectiveness on masking reordering. (b) In case of massive packet reordering, official GRO cannot merge packets effectively such that lots of small packets are processed by TCP which poses great processing overhead for CPU.\relax }{figure.caption.9}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Microbenchmarks}{\thepage }{section.5}}
+\newlabel{sec:micro}{{5}{\thepage }{Microbenchmarks}{section.5}{}}
+\citation{conga}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Presto incurs 6\% CPU overhead on average.\relax }}{\thepage }{figure.caption.10}}
+\newlabel{micro_compare_cpu}{{6}{\thepage }{Presto incurs 6\% CPU overhead on average.\relax }{figure.caption.10}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Throughput comparison in scalability benchmark. We denote the non-blocking case as Optimal. \relax }}{\thepage }{figure.caption.11}}
+\newlabel{micro_scalability_test_tput}{{7}{\thepage }{Throughput comparison in scalability benchmark. We denote the non-blocking case as Optimal. \relax }{figure.caption.11}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Round trip time comparison in scalability benchmark. \relax }}{\thepage }{figure.caption.12}}
+\newlabel{micro_scalability_test_latency}{{8}{\thepage }{Round trip time comparison in scalability benchmark. \relax }{figure.caption.12}{}}
+\newlabel{micro_scalability_test_loss}{{9a}{\thepage }{\relax }{figure.caption.13}{}}
+\newlabel{sub@micro_scalability_test_loss}{{a}{\thepage }{\relax }{figure.caption.13}{}}
+\newlabel{micro_scalability_test_fairness}{{9b}{\thepage }{\relax }{figure.caption.13}{}}
+\newlabel{sub@micro_scalability_test_fairness}{{b}{\thepage }{\relax }{figure.caption.13}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces (a) Loss rate and (b) Fairness index comparison in scalability benchmark.\relax }}{\thepage }{figure.caption.13}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Throughput comparison in oversubscription benchmark.\relax }}{\thepage }{figure.caption.14}}
+\newlabel{micro_congestion_test_tput}{{10}{\thepage }{Throughput comparison in oversubscription benchmark.\relax }{figure.caption.14}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Round trip time comparison in oversubscription benchmark. \relax }}{\thepage }{figure.caption.15}}
+\newlabel{micro_congestion_test_latency}{{11}{\thepage }{Round trip time comparison in oversubscription benchmark. \relax }{figure.caption.15}{}}
+\newlabel{micro_congestion_test_loss}{{12a}{\thepage }{\relax }{figure.caption.16}{}}
+\newlabel{sub@micro_congestion_test_loss}{{a}{\thepage }{\relax }{figure.caption.16}{}}
+\newlabel{micro_congestion_test_fairness}{{12b}{\thepage }{\relax }{figure.caption.16}{}}
+\newlabel{sub@micro_congestion_test_fairness}{{b}{\thepage }{\relax }{figure.caption.16}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces (a) Loss rate and (b) Fairness index comparison in oversubscription benchmark.\relax }}{\thepage }{figure.caption.16}}
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Round trip time comparison of flowlet switching and Presto in Stride workload. The throughputs of Flowlet switching with 100 $\mu \text  {s}$ gap, 500 $\mu \text  {s}$ gap and Presto are 4.3 Gbps, 7.6 Gbps and 9.3 Gbps respectively. \relax }}{\thepage }{figure.caption.17}}
+\newlabel{micro_flowlet_rtt_compare}{{13}{\thepage }{Round trip time comparison of flowlet switching and Presto in Stride workload. The throughputs of Flowlet switching with 100 $\mu \text {s}$ gap, 500 $\mu \text {s}$ gap and Presto are 4.3 Gbps, 7.6 Gbps and 9.3 Gbps respectively. \relax }{figure.caption.17}{}}
+\citation{dc-mptcp}
+\citation{kandula2009nature}
+\citation{kandula2009nature}
+\citation{kandula2009nature}
+\citation{he2013next}
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Round trip time comparison between Presto + shadow MAC and Presto + ECMP. \relax }}{\thepage }{figure.caption.18}}
+\newlabel{micro_presto_2mods}{{14}{\thepage }{Round trip time comparison between Presto + shadow MAC and Presto + ECMP. \relax }{figure.caption.18}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Elephant flow throughput for ECMP, MPTCP, Presto and Optimal in shuffle, random, stride and random bijection workloads.\relax }}{\thepage }{figure.caption.19}}
+\newlabel{macro_evaluation_tput}{{15}{\thepage }{Elephant flow throughput for ECMP, MPTCP, Presto and Optimal in shuffle, random, stride and random bijection workloads.\relax }{figure.caption.19}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Evaluation}{\thepage }{section.6}}
+\newlabel{sec:eval}{{6}{\thepage }{Evaluation}{section.6}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Mice ($<$100KB) FCT in trace-driven workload\nobreakspace  {}\cite  {kandula2009nature}. Negative numbers imply shorter FCT.\relax }}{\thepage }{table.caption.21}}
+\newlabel{macro_evaluation_MSR_trace_driven}{{1}{\thepage }{Mice ($<$100KB) FCT in trace-driven workload~\cite {kandula2009nature}. Negative numbers imply shorter FCT.\relax }{table.caption.21}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces FCT comparison (normalized to ECMP) with ECMP load balanced north-south traffic. Optimal means all the hosts are attached to a single switch.\relax }}{\thepage }{table.caption.22}}
+\newlabel{macro_evaluation_north_south_traffic}{{2}{\thepage }{FCT comparison (normalized to ECMP) with ECMP load balanced north-south traffic. Optimal means all the hosts are attached to a single switch.\relax }{table.caption.22}{}}
+\citation{mptcp,dc-mptcp}
+\citation{conga}
+\citation{juniper-vcf}
+\citation{flowlet}
+\citation{packetspray}
+\citation{drb}
+\citation{hedera}
+\citation{microte}
+\citation{planck}
+\citation{flowbender}
+\citation{fastpass}
+\newlabel{macro_evaluation_fct_stride}{{16a}{\thepage }{Stride\relax }{figure.caption.20}{}}
+\newlabel{sub@macro_evaluation_fct_stride}{{a}{\thepage }{Stride\relax }{figure.caption.20}{}}
+\newlabel{macro_evaluation_fct_bijection}{{16b}{\thepage }{Random Bijection\relax }{figure.caption.20}{}}
+\newlabel{sub@macro_evaluation_fct_bijection}{{b}{\thepage }{Random Bijection\relax }{figure.caption.20}{}}
+\newlabel{macro_evaluation_fct_shuffle}{{16c}{\thepage }{Shuffle\relax }{figure.caption.20}{}}
+\newlabel{sub@macro_evaluation_fct_shuffle}{{c}{\thepage }{Shuffle\relax }{figure.caption.20}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces Mice FCT of ECMP, MPTCP, Presto and Optimal in stride, random bijection, and shuffle workloads.\relax }}{\thepage }{figure.caption.20}}
+\newlabel{macro_evaluation_fct}{{16}{\thepage }{Mice FCT of ECMP, MPTCP, Presto and Optimal in stride, random bijection, and shuffle workloads.\relax }{figure.caption.20}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces Presto's throughput in symmetry, fast failover and weighted multipathing stages for different workloads.\relax }}{\thepage }{figure.caption.23}}
+\newlabel{failover_compare_tput}{{17}{\thepage }{Presto's throughput in symmetry, fast failover and weighted multipathing stages for different workloads.\relax }{figure.caption.23}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces Presto's RTT in symmetry, fast failover and weighted multipathing stages in random bijection workload.\relax }}{\thepage }{figure.caption.24}}
+\newlabel{failover_compare_sockperf_bijection}{{18}{\thepage }{Presto's RTT in symmetry, fast failover and weighted multipathing stages in random bijection workload.\relax }{figure.caption.24}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Related Work}{\thepage }{section.7}}
+\newlabel{sec:related}{{7}{\thepage }{Related Work}{section.7}{}}
+\citation{detail}
+\citation{dctcp}
+\citation{hull}
+\citation{qjump}
+\citation{pias}
+\citation{vmware}
+\citation{rr-tcp,blanton2002making,tcp-pr}
+\citation{wu2009sorting}
+\bibstyle{abbrv}
+\bibdata{refer}
+\bibcite{shadow-mac}{{1}{}{{}}{{}}}
+\bibcite{fattree}{{2}{}{{}}{{}}}
+\bibcite{hedera}{{3}{}{{}}{{}}}
+\bibcite{conga}{{4}{}{{}}{{}}}
+\bibcite{dctcp}{{5}{}{{}}{{}}}
+\bibcite{hull}{{6}{}{{}}{{}}}
+\bibcite{open-lro}{{7}{}{{}}{{}}}
+\bibcite{arista}{{8}{}{{}}{{}}}
+\bibcite{pias}{{9}{}{{}}{{}}}
+\bibcite{eden}{{10}{}{{}}{{}}}
+\bibcite{benson10}{{11}{}{{}}{{}}}
+\bibcite{microte}{{12}{}{{}}{{}}}
+\bibcite{understanding-linux-network}{{13}{}{{}}{{}}}
+\bibcite{blanton2002making}{{14}{}{{}}{{}}}
+\bibcite{tcp-pr}{{15}{}{{}}{{}}}
+\bibcite{trident2}{{16}{}{{}}{{}}}
+\bibcite{drb}{{17}{}{{}}{{}}}
+\bibcite{casado2012fabric}{{18}{}{{}}{{}}}
+\bibcite{vmware}{{19}{}{{}}{{}}}
+\bibcite{huawei-failover}{{20}{}{{}}{{}}}
+\bibcite{smart-table}{{21}{}{{}}{{}}}
+\@writefile{toc}{\contentsline {section}{\numberline {8}Conclusion}{\thepage }{section.8}}
+\newlabel{sec:conclusion}{{8}{\thepage }{Conclusion}{section.8}{}}
+\bibcite{packetspray}{{22}{}{{}}{{}}}
+\bibcite{vl2}{{23}{}{{}}{{}}}
+\bibcite{grossman2005large}{{24}{}{{}}{{}}}
+\bibcite{qjump}{{25}{}{{}}{{}}}
+\bibcite{nvo3}{{26}{}{{}}{{}}}
+\bibcite{cubic}{{27}{}{{}}{{}}}
+\bibcite{juniper-vcf}{{28}{}{{}}{{}}}
+\bibcite{he2013next}{{29}{}{{}}{{}}}
+\bibcite{jain-fair}{{30}{}{{}}{{}}}
+\bibcite{linuxgro}{{31}{}{{}}{{}}}
+\bibcite{flowbender}{{32}{}{{}}{{}}}
+\bibcite{kandula2009nature}{{33}{}{{}}{{}}}
+\bibcite{bullettrains}{{34}{}{{}}{{}}}
+\bibcite{mptcp-not-optimal}{{35}{}{{}}{{}}}
+\bibcite{nv-mtd}{{36}{}{{}}{{}}}
+\bibcite{leung2007overview}{{37}{}{{}}{{}}}
+\bibcite{kernel}{{38}{}{{}}{{}}}
+\bibcite{optimize-tcp-receive}{{39}{}{{}}{{}}}
+\bibcite{mogul1997eliminating}{{40}{}{{}}{{}}}
+\bibcite{aws-peek}{{41}{}{{}}{{}}}
+\bibcite{mptcp-linux}{{42}{}{{}}{{}}}
+\bibcite{netlord}{{43}{}{{}}{{}}}
+\bibcite{nuttcp}{{44}{}{{}}{{}}}
+\bibcite{ovs-website}{{45}{}{{}}{{}}}
+\bibcite{paasch2013benefits}{{46}{}{{}}{{}}}
+\bibcite{paxson1997end}{{47}{}{{}}{{}}}
+\bibcite{ipblog-failover}{{48}{}{{}}{{}}}
+\bibcite{fastpass}{{49}{}{{}}{{}}}
+\bibcite{ovs-edge}{{50}{}{{}}{{}}}
+\bibcite{ovs-extending}{{51}{}{{}}{{}}}
+\bibcite{pfaff2015design}{{52}{}{{}}{{}}}
+\bibcite{dc-mptcp}{{53}{}{{}}{{}}}
+\bibcite{planck}{{54}{}{{}}{{}}}
+\bibcite{ms-rsc}{{55}{}{{}}{{}}}
+\bibcite{rss}{{56}{}{{}}{{}}}
+\bibcite{moose}{{57}{}{{}}{{}}}
+\bibcite{flowlet}{{58}{}{{}}{{}}}
+\bibcite{sockperf}{{59}{}{{}}{{}}}
+\bibcite{vxlan-bench}{{60}{}{{}}{{}}}
+\bibcite{mptcp}{{61}{}{{}}{{}}}
+\bibcite{wu2009sorting}{{62}{}{{}}{{}}}
+\bibcite{detail}{{63}{}{{}}{{}}}
+\bibcite{rr-tcp}{{64}{}{{}}{{}}}
+\bibcite{wcmp}{{65}{}{{}}{{}}}
+\providecommand\NAT@force@numbers{}\NAT@force@numbers

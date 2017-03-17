@@ -1,0 +1,367 @@
+\subsection{Incast}
+\label{incast}
+
+For each experiment (i.e., each setting), we run it for 10 minutes.
+%%% incast, 16 to 1 %%%
+% see , /power/home/keq/workloads/program/acdctcp/incast-container16-10Minutes
+\begin{table*}[!htb]
+\begin{center}
+\begin{tabular}{ |c|c|c|c|c|c| }
+ \hline
+  & Avg Tput (Mbps) & Fairness Index & 50$^{th}$ percentile TCP RTT ($\mu$s) & 99.9$^{th}$ percentile TCP RTT ($\mu$s) & Drop Rate \\
+ \hline
+
+ Default & 619 & 0.98 & 3607 & 11599 & 0.14\% \\
+ DCTCP  & 619 & 0.99 & 197 & 486 & 0 \\
+ Ours & 598 & 0.99 &  93 & 289 & 0 \\
+ \hline
+\end{tabular}
+\caption{16 to 1 incast test. MTU = 9000 B. Marking min = 10.}
+\label{incast_16to1_tbl_9000}
+\end{center}
+\end{table*}
+
+%see, /power/home/keq/workloads/program/acdctcp/marking_tune
+\iffalse
+\begin{table*}[!htb]
+\begin{center}
+\begin{tabular}{ |c|c|c|c|c|c| }
+ \hline
+  & Avg Tput (Mbps) & Fairness Index & 50$^{th}$ percentile TCP RTT ($\mu$s) & 99.9$^{th}$ percentile TCP RTT ($\mu$s) & Drop Rate \\
+ \hline
+
+ Default & 619 & 0.98 & 3585 & 4022 & 0.14\% \\
+ DCTCP  & 618 & 0.99 & 195 & 543 & 0 \\
+ Ours & 610 & 0.98 &  120 & 456 & 0 \\
+ \hline
+\end{tabular}
+\caption{16 to 1 incast test. MTU = 9000 B. Marking min = 99.}
+\label{incast_16to1_tbl_9000_markingMin99}
+\end{center}
+\end{table*}
+\fi
+%see, /power/home/keq/workloads/program/acdctcp/incast-container32-10Minutes
+\begin{table*}[!htb]
+\begin{center}
+\begin{tabular}{ |c|c|c|c|c|c| }
+ \hline
+  & Avg Tput (Mbps) & Fairness Index & 50$^{th}$ percentile TCP RTT ($\mu$s) & 99.9$^{th}$ percentile TCP RTT ($\mu$s) & Drop Rate \\
+ \hline
+
+ Default & 318 & 0.97 & 3729 & 14448 & 0.37\% \\
+ DCTCP  & 319 & 0.99 & 448 & 792 & 0 \\
+ Ours & 303 & 0.99 &  103 & 249 & 0 \\
+ \hline
+\end{tabular}
+\caption{32 to 1 incast test. MTU = 9000 B. Marking min = 10.}
+\label{incast_32to1_tbl_9000_markingMin10}
+\end{center}
+\end{table*}
+
+%see, /power/home/keq/workloads/program/acdctcp/incast-container41
+\begin{table*}[!htb]
+\begin{center}
+\begin{tabular}{ |c|c|c|c|c|c| }
+ \hline
+  & Avg Tput (Mbps) & Fairness Index & 50$^{th}$ percentile TCP RTT ($\mu$s) & 99.9$^{th}$ percentile TCP RTT ($\mu$s) & Drop Rate \\
+ \hline
+
+ Default & 245 & 0.96 & 3767 & 14596 & 0.55\% \\
+ DCTCP  & 247 & 0.99 & 589 & 973 & 0 \\
+ Ours & 238 & 0.99 &  130 & 327 & 0 \\
+ \hline
+\end{tabular}
+\caption{40 to 1 incast test. MTU = 9000 B. Marking min = 10.}
+\label{incast_40to1_tbl_9000_markingMin10}
+\end{center}
+\end{table*}
+
+
+%see, /power/home/keq/workloads/program/acdctcp/incast-container48
+\begin{table*}[!htb]
+\begin{center}
+\begin{tabular}{ |c|c|c|c|c|c| }
+ \hline
+  & Avg Tput (Mbps) & Fairness Index & 50$^{th}$ percentile TCP RTT ($\mu$s) & 99.9$^{th}$ percentile TCP RTT ($\mu$s) & Drop Rate \\
+ \hline
+
+ Default & 210 & 0.98 & 3792 & 15776 & 0.71\% \\
+ DCTCP  & 210 & 0.99 & 684 & 1000 & 0 \\
+ Ours & 201 & 0.99 &  121 & 314 & 0 \\
+ \hline
+\end{tabular}
+\caption{47 to 1 incast test. MTU = 9000 B. Marking min = 10.}
+\label{incast_47to1_tbl_9000_markingMin10}
+\end{center}
+\end{table*}
+
+
+
+%%%%%%%%%%1500 bytes %%%%%%%%%%%%
+\iffalse
+%see, keq@arldcn26:~/workloads/program/acdctcp/incast-container16-10Minutes
+\begin{table*}[!htb]
+\begin{center}
+\begin{tabular}{ |c|c|c|c|c|c| }
+ \hline
+  & Avg Tput (Mbps) & Fairness Index & 50$^{th}$ percentile TCP RTT ($\mu$s) & 99.9$^{th}$ percentile TCP RTT ($\mu$s) & Drop Rate \\
+ \hline
+
+ Default & 577 & 0.91 & 3073 & 3672 & 0.06\% \\
+ DCTCP  & 451 & 0.97 & 312 & 707 & 0 \\
+ Ours & 451 & 0.97 &  269 & 508 & 0 \\
+ \hline
+\end{tabular}
+\caption{16 to 1 incast test. MTU = 1500 B. Marking min = 10.}
+\label{incast_16to1_tbl_1500}
+\end{center}
+\end{table*}
+
+%see, /power/home/keq/workloads/program/acdctcp/incast-container32-10Minutes
+\begin{table*}[!htb]
+\begin{center}
+\begin{tabular}{ |c|c|c|c|c|c| }
+ \hline
+  & Avg Tput (Mbps) & Fairness Index & 50$^{th}$ percentile TCP RTT ($\mu$s) & 99.9$^{th}$ percentile TCP RTT ($\mu$s) & Drop Rate \\
+ \hline
+
+ Default & 294 & 0.96 & 3214 & 3702 & 0.08\% \\
+ DCTCP  & 195 & 0.99 & 590 & 1080 & 0 \\
+ Ours & 192 & 0.99 &  567 & 1035 & 0 \\
+ \hline
+\end{tabular}
+\caption{32 to 1 incast test. MTU = 1500 B. Marking min = 10.}
+\label{incast_32to1_tbl_1500_markingMin10}
+\end{center}
+\end{table*}
+
+%see, /power/home/keq/workloads/program/acdctcp/incast-container41
+\begin{table*}[!htb]
+\begin{center}
+\begin{tabular}{ |c|c|c|c|c|c| }
+ \hline
+  & Avg Tput (Mbps) & Fairness Index & 50$^{th}$ percentile TCP RTT ($\mu$s) & 99.9$^{th}$ percentile TCP RTT ($\mu$s) & Drop Rate \\
+ \hline
+
+ Default & 244 & 0.88 & 3221 & 4317 & 0.14\% \\
+ DCTCP  & 154 & 0.99 & 834 & 1356 & 0 \\
+ Ours & 154 & 0.99 &  807 & 1302 & 0 \\
+ \hline
+\end{tabular}
+\caption{40 to 1 incast test. MTU = 1500 B. Marking min = 10.}
+\label{incast_40to1_tbl_1500_markingMin10}
+\end{center}
+\end{table*}
+
+
+%see, /power/home/keq/workloads/program/acdctcp/incast-container48
+\begin{table*}[!htb]
+\begin{center}
+\begin{tabular}{ |c|c|c|c|c|c| }
+ \hline
+  & Avg Tput (Mbps) & Fairness Index & 50$^{th}$ percentile TCP RTT ($\mu$s) & 99.9$^{th}$ percentile TCP RTT ($\mu$s) & Drop Rate \\
+ \hline
+
+ Default & 202 & 0.93 & 3304 & 5049 & 0.12\% \\
+ DCTCP  & 129 & 0.99 & 813 & 1396 & 0 \\
+ Ours & 129 & 0.99 &  903 & 1438 & 0 \\
+ \hline
+\end{tabular}
+\caption{47 to 1 incast test. MTU = 1500 B. Marking min = 10.}
+\label{incast_47to1_tbl_1500_markingMin10}
+\end{center}
+\end{table*}
+
+\fi
+%%%%%%%%%%using figures to present incast: tput, fariness, droprate, TCP RTT
+\begin{figure}[t]
+        \centering
+        \begin{subfigure}[b]{0.225\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/incast/plots9k/incast_tput_vary_sender.pdf}
+                \caption{average throughput}
+                \label{incast_9k_tput}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.225\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/incast/plots9k/incast_fairness_vary_sender.pdf}
+                \caption{fairness}
+                \label{incast_9k_fariness}
+        \end{subfigure}
+        \caption{Incast, vary the number of sender. 9000Bytes.}
+        \label{incast_9k_tput_fairness}
+\end{figure}
+
+\iffalse
+\begin{figure}[t]
+        \centering
+        \begin{subfigure}[b]{0.225\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/incast/plots15k/15k_incast_tput_vary_sender.pdf}
+                \caption{average throughput}
+                \label{incast_15k_tput}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.225\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/incast/plots15k/15k_incast_fairness_vary_sender.pdf}
+                \caption{fairness}
+                \label{incast_15k_fariness}
+        \end{subfigure}
+        \caption{Incast, vary the number of sender. 1500Bytes.}
+        \label{incast_15k_tput_fairness}
+\end{figure}
+\fi
+
+\begin{figure*}[t]
+        \centering
+        \begin{subfigure}[b]{0.33\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/incast/plots9k/incast_sockperf50th_vary_sender.pdf}
+                \caption{50$^{th}$ percentile TCP RTT ($\mu$s).}
+                \label{incast_9k_50th_sockperf}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.33\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/incast/plots9k/incast_sockperf999th_vary_sender.pdf}
+                \caption{99.9$^{th}$ percentile TCP RTT ($\mu$s).}
+                \label{incast_9k_999th_sockperf}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.33\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/incast/plots9k/incast_droprate_vary_sender.pdf}
+                \caption{packet drop rate.}
+                \label{incast_9k_droprate}
+        \end{subfigure}
+	\caption{Incast. Vary the number of sender: 16, 32, 40 and 47. 9000 Bytes.}
+	\label{incast_9k_sockperf_droprate}
+\end{figure*}
+
+\iffalse
+\begin{figure*}[t]
+        \centering
+        \begin{subfigure}[b]{0.33\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/incast/plots15k/15k_incast_sockperf50th_vary_sender.pdf}
+                \caption{50$^{th}$ percentile TCP RTT ($\mu$s).}
+                \label{incast_15k_50th_sockperf}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.33\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/incast/plots15k/15k_incast_sockperf999th_vary_sender.pdf}
+                \caption{99.9$^{th}$ percentile TCP RTT ($\mu$s).}
+                \label{incast_15k_999th_sockperf}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.33\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/incast/plots15k/15k_incast_droprate_vary_sender.pdf}
+                \caption{packet drop rate.}
+                \label{incast_15k_droprate}
+        \end{subfigure}
+        \caption{Incast. Vary the number of sender: 16, 32, 40 and 47. 1500 Bytes.}
+        \label{incast_15k_sockperf_droprate}
+\end{figure*}
+\fi
+
+%%%%47 to 1 incast, sockperf CDF %%%
+\begin{figure}[t]
+        \centering
+  \includegraphics[width=0.45\textwidth]{figures/incast/47to1/incast_47to1_test_sockperf.pdf}
+        \caption{TCP RTT in 47 to 1 incast test. MTU = 9000B.}
+        \label{sockperf_incast_47to1}
+\end{figure}
+
+\begin{figure}[t]
+        \centering
+  \includegraphics[width=0.45\textwidth]{figures/incast/pressure/incast_pressure_compare_sockperf.pdf}
+        \caption{We want to check the case when almost every port of the switch is congested.
+		We split 48 containers into 2 groups. 
+		Each of the 46 containers in group A sends and receives 4 concurrent flows, 
+		meanwhile, everyone in group A starts 1 flow to one container (denote as B1) 
+		in group B to create 46 to 1 incast. TCP RTT is measured from B2 to B1.
+		47 out of 48 ports are congested. MTU=9000. Average throughput for Default, 
+		DCTCP, and Ours are 214, 214 and 201Mbps respectively, all with a fairness
+		index greater than 0.98. Note that y-axis is in logscale. Default has an average 
+		packet drop rate of 0.34\% but the most congested port has a drop rate of 4\%.}
+        \label{sockperf_pressure_incast}
+\end{figure}
+
+\subsection{Macrobenchmarks}
+\label{macro}
+\begin{figure*}[t]
+        \centering
+        \begin{subfigure}[b]{0.45\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/macro_benchmarks/macro_4stride/stride4_mice16KB_fct.pdf}
+                \caption{mice flows}
+                \label{macro_4stride_mice_fct}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.45\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/macro_benchmarks/macro_4stride/stride4_big512MB_fct.pdf}
+                \caption{background flows}
+                \label{macro_4stride_background_fct}
+        \end{subfigure}
+        \caption{CDF of both mice flows and background flows' FCTs in concurrent stride workload. 
+		Y-axis is cut at 99.9\% for clarity.}
+        \label{macro_4stride_fct}
+\end{figure*}
+
+\begin{figure*}[t]
+        \centering
+        \begin{subfigure}[b]{0.45\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/macro_benchmarks/shuffle_17hosts/shuffle_mice16KB_fct.pdf}
+                \caption{mice flows}
+                \label{macro_shuffle_mice_fct}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.45\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/macro_benchmarks/shuffle_17hosts/shuffle_big512MB_fct.pdf}
+                \caption{background flows}
+                \label{macro_shuffle_background_fct}
+        \end{subfigure}
+        \caption{CDF of both mice flows and background flows' FCTs in shuffle workload.
+                Y-axis is cut at 99.9\% for clarity.}
+        \label{macro_shuffle_fct}
+\end{figure*}
+
+\begin{figure*}[t]
+        \centering
+        \begin{subfigure}[b]{0.45\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/macro_benchmarks/trace-driven/trace_driven_workload_dctcp_senders5.pdf}
+                \caption{enterprise workload}
+                \label{trace-driven-enterprise-fct}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.45\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/macro_benchmarks/trace-driven/trace_driven_workload_conga_senders5.pdf}
+                \caption{data mining workload}
+                \label{trace-driven-data-mining-fct}
+        \end{subfigure}
+        \caption{CDF of mice flow's (<10KB) FCT in trace-driven workloads.
+                Y-axis is cut at 99.9\% for clarity.}
+        \label{macro-trace-driven-fct}
+\end{figure*}
+
+First, we run a concurrent stride workload---17 servers are attached to a single 10Gbps switch. 
+Each server $i$ sends 512MB data to servers $[i+1, i+4]\%
+(number\_of\_servers)$. 
+In other words, each server sends 4 concurrent flows and receives 4 concurrent flows.
+These elephant flows are used to emulate the background traffic. 
+All the 17 ports on the switch are congested. At the same time, we wrote a customer TCP
+client server program to measure mice flow's flow completion time. Each server $i$ 
+builds a long-lived TCP connection with server $(i+8)\%(number\_of\_servers)$. 
+Then they send short messages
+of size 16KB every 100 msec. The experiments for each setting last for 10 mintues.
+
+Second, we run a shuffle workload. Background flow is 512MB, mice flow is 16KB, mice flow is sent every
+100 msec. We run shuffle workload for 30 runs. 
+We show both the background and mice flow's flow completion times.
+
+Finally, we do trace-driven workloads. We wrote customer TCP client/server programs. 
+Each server starts 5 concurrent client processes and server processes. 
+Each client process builds a long-lived TCP connection with every other server in this testbed. 
+The flow sizes are sampled from two empirical workloads---enterprise workload~\cite{alizadeh2011data} 
+and data mining workload~\cite{alizadeh2014conga} which is more heavier at the tail.
+For each experiment setting, we run it for 10 minutes and we gathered the results over millions of flows.

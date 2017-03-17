@@ -1,0 +1,5 @@
+#number of sender, default, dctcp, ours
+16 0.06 0 0
+32 0.08 0 0
+40 0.14 0 0
+47 0.12 0 0

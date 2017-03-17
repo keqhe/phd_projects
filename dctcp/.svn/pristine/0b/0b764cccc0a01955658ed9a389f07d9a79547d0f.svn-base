@@ -1,0 +1,85 @@
+Oct 7, 2015
+
+MTU size 1500
+
+keq@arldcn26:~/workloads/program/acdctcp/monitor_cpu_oct7_20runs$ python parse_cpu2.py official-100 20
+old way, sender: 0.955 1.05 0.8
+old way, receiver: 0.8985 0.98 0.84
+new way, sender: 0.955 0.0610327780787
+new way, receiver: 0.8985 0.038376425055
+keq@arldcn26:~/workloads/program/acdctcp/monitor_cpu_oct7_20runs$ python parse_cpu2.py acdctcp-100 20
+old way, sender: 0.9635 1.1 0.82
+old way, receiver: 1.001 1.09 0.94
+new way, sender: 0.9635 0.0684306218005
+new way, receiver: 1.001 0.0454862616622
+
+
+keq@arldcn26:~/workloads/program/acdctcp/monitor_cpu_oct7_20runs$ python parse_cpu2.py official-500 20
+old way, sender: 7.533 8.21 6.88
+old way, receiver: 4.479 4.73 4.17
+new way, sender: 7.533 0.342346315885
+new way, receiver: 4.479 0.133562719349
+keq@arldcn26:~/workloads/program/acdctcp/monitor_cpu_oct7_20runs$ python parse_cpu2.py acdctcp-500 20
+old way, sender: 8.2375 8.92 7.58
+old way, receiver: 4.7455 5.0 4.49
+new way, sender: 8.2375 0.329270025967
+new way, receiver: 4.7455 0.134330748528
+
+
+old way, sender: 16.1665 16.71 15.64
+old way, receiver: 13.101 13.75 12.4
+new way, sender: 16.1665 0.288847277986
+new way, receiver: 13.101 0.3588579106
+keq@arldcn26:~/workloads/program/acdctcp/monitor_cpu_oct7_20runs$ python parse_cpu2.py acdctcp2-1000 5
+old way, sender: 16.312 16.8 15.78
+old way, receiver: 13.378 14.51 11.7
+new way, sender: 16.312 0.428457699196
+new way, receiver: 13.378 0.934224812344
+
+
+
+keq@arldcn26:~/workloads/program/acdctcp/monitor_cpu_oct7_20runs$ python parse_cpu2.py official-5000 10
+old way, sender: 40.782 45.96 32.07
+old way, receiver: 15.955 21.01 13.71
+new way, sender: 40.782 5.02513442606
+new way, receiver: 15.955 2.21458461116
+keq@arldcn26:~/workloads/program/acdctcp/monitor_cpu_oct7_20runs$ python parse_cpu2.py acdctcp2-5000 10
+old way, sender: 40.913 47.99 29.08
+old way, receiver: 16.171 21.33 13.84
+new way, sender: 40.913 6.90560069798
+new way, receiver: 16.171 2.12378176845
+
+
+keq@arldcn26:~/workloads/program/acdctcp/monitor_cpu_oct7_20runs$ python parse_cpu2.py official-10000 20
+old way, sender: 46.141 48.38 37.64
+old way, receiver: 16.2735 20.12 14.68
+new way, sender: 46.141 3.03772925061
+new way, receiver: 16.2735 1.23467111005
+keq@arldcn26:~/workloads/program/acdctcp/monitor_cpu_oct7_20runs$ python parse_cpu2.py acdctcp3-10000 10
+old way, sender: 48.046 52.48 35.99
+old way, receiver: 17.126 20.17 15.33
+new way, sender: 48.046 4.43682589246
+new way, receiver: 17.126 1.48785214319
+
+============
+keq@arldcn26:~/workloads/program/acdctcp/monitor_cpu_oct7_20runs$ python parse_cpu2.py official-5000 20
+old way, sender: 41.2435 46.66 31.3
+old way, receiver: 16.1255 21.01 13.71
+new way, sender: 41.2435 4.7960486601
+new way, receiver: 16.1255 1.95960321239
+keq@arldcn26:~/workloads/program/acdctcp/monitor_cpu_oct7_20runs$ python parse_cpu2.py acdctcp-5000 20
+old way, sender: 41.078 47.56 28.77
+old way, receiver: 16.3915 21.71 13.99
+new way, sender: 41.078 5.93833949855
+new way, receiver: 16.3915 2.33137572047
+
+keq@arldcn26:~/workloads/program/acdctcp/monitor_cpu_oct7_20runs$ python parse_cpu2.py official-10000 20
+old way, sender: 46.141 48.38 37.64
+old way, receiver: 16.2735 20.12 14.68
+new way, sender: 46.141 3.03772925061
+new way, receiver: 16.2735 1.23467111005
+keq@arldcn26:~/workloads/program/acdctcp/monitor_cpu_oct7_20runs$ python parse_cpu2.py acdctcp-10000 20
+old way, sender: 45.399 50.21 13.74
+old way, receiver: 16.5475 19.83 0.13
+new way, sender: 45.399 8.8815786322
+new way, receiver: 16.5475 4.02929134588

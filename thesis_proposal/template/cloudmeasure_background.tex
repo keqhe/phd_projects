@@ -1,0 +1,87 @@
+\subsection{Measurement Scope \& Datasets}
+\label{cloud-measure-background}
+
+
+\begin{figure}[t]
+\centering
+\begin{subfigure}[b]{0.20\textwidth}
+    \includegraphics[width=\textwidth]{figures/cloudmeasure/imag_sec2/ec2_vm.pdf}
+    \caption{P1: VM front end}
+    \label{fig:ec2_vm}
+\end{subfigure}
+\hspace{0.03\columnwidth}
+\begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{figures/cloudmeasure/imag_sec2/ec2_elb.pdf}
+    \caption{P2: Load balancer front end}
+    \label{fig:ec2_elb}
+\end{subfigure}
+
+\begin{subfigure}[b]{0.20\textwidth}
+    \includegraphics[width=\textwidth]{figures/cloudmeasure/imag_sec2/ec2_heroku.pdf}
+    \caption{P3: PaaS front end}
+    \label{fig:ec2_paas}
+\end{subfigure}
+\hspace{0.03\columnwidth}
+\begin{subfigure}[b]{0.30\textwidth}
+    \includegraphics[width=\textwidth]{figures/cloudmeasure/imag_sec2/ec2_cdn.pdf}
+    \caption{P4: Leverage CDN}
+    \label{fig:ec2_cdn}
+\end{subfigure}
+
+\caption{Deployment patterns for web services.}
+\label{fig:ec2_models}
+
+\end{figure}
+
+
+Public IaaS clouds, such as Amazon EC2, Windows Azure, and Rackspace,
+allow tenants to dynamically rent virtual machine (VM) instances with
+varying CPU, network, and storage capacity. Cloud tenants have the
+option of renting VMs in one or more geographically distinct
+data centers, or {\em regions}. Some clouds, such as EC2,
+further divide these regions into multiple distinct availability {\em
+  zones}. Each zone has separate compute and power
+infrastructure to make certain failure modes zone-specific and to
+allow cloud tenants to replicate their deployments across
+multiple zones for smooth fail-over.
+
+Beyond simple VMs, IaaS providers, as well as third parties, offer a
+wide-range of value-added features: load balancers (e.g., Amazon
+Elastic Load Balancer and Azure Traffic Manager),
+plat\-form-as-a-service environments (e.g., Amazon Elastic
+Beanstalk, Heroku, and Azure Cloud Services), content-distribution networks
+(e.g., Amazon CloudFront and Azure Media Services), DNS hosting (e.g.,
+Amazon route53), etc. The result is a complex ecosystem of
+interdependent systems operating at multiple layers of abstraction,
+and, in turn, a large variety of possible deployment patterns for
+cloud tenants. In this paper, we study four popular deployment patterns. We
+describe these using a series of examples.
+
+In \figref{fig:ec2_models}, we show the steps involved in a client
+accessing an EC2-hosted web service that is using one or more of the
+aforementioned features. When a client wants to access a web service,
+it first performs a DNS lookup of the service's domain name.  The
+response may contain an IP address associated with a VM (deployment
+pattern {\em P1}), a load balancer ({\em P2}), or a
+platform-as-a-service (PaaS) node ({\em P3}).
+With {\em P2}, the client request is subsequently directed to a
+VM\footnote{Or PaaS
+  nodes, as is done by Amazon Elastic Beanstalk and Azure Traffic
+  Manager.}. Tenants using {\em P1}--{\em P3} may also rely on
+additional VMs or systems (dashed lines) to handle a
+client's request; these additional components may or may not be in the
+same region or availability zone (indicated by the gray boxes). An
+object returned to a client (e.g., a web page) may sometimes require
+the client to obtain additional objects (e.g., a video) from a
+content-distribution network ({\em P4}).
+
+We focus on studying the front end portions of web
+service deployments within the above four deployment patterns (indicated by 
+the thicker lines in \figref{fig:ec2_models}). These
+portions are encountered within the initial few steps of a client
+making a request. We leave an exploration of deployment/usage patterns
+covering the later steps (e.g. back-end processing) for future work.
+
+
+\input{cloudmeasure_datasets}
+

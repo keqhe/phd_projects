@@ -1,0 +1,106 @@
+\section{Discussion}
+\label{discuss}
+
+\tightparagraph{UDP traffic} How to handle. 
+Mention VxLAN traffic too.
+\keqiang{and IPsec}
+
+\tightparagraph{No vSwitch} 
+\keqiang{title should be hypervisor-bypass?}
+Use middleboxes (for DB server).
+Use NIC (for SR-IOV).
+Hypervisor bypass (e.g., SR-IOV), where TCP traffic is sent to the NIC directly without 
+going through hypervisor. First, as noted by~\cite{shieh2011sharing}, ``loss of the security and 
+manageability features provided by the software virtual switch has limited 
+the deployment of direct I/O NICs in public clouds''. Second, based on techniques like Intel 
+DPDK~\cite{intel-dpdk} and ``smart NICs''~\cite{cavium-nic,netronome-nic}, we believe that low latency 
+congestion control enforcement schemes like \acdc{} can also be 
+employed for hypervisor bypass use cases.
+We need to worry about legacy systems and non-VM systems. For instance, a database or storage device that may not have OVS installed on it.
+We need to talk about either a middlebox or that this percentage of traffic is low? Or implement in NIC (especially one with OVS offload?).
+
+\tightparagraph{North-South traffic.}
+Transport enforcement should be only be done for east west traffic, so if the tenant tuned their stack's
+congestion control algorithm for wide-area networks, their north sourth traffic is not affected and their 
+congestion control scheme can still achieve good performance.
+
+\keqiang{todos: some figures do not read well on printed paper}
+\keqiang{todos: sometimes, when we refer a section, we say ``Section X'', sometimes, we use the 
+dollar sign, we should unify them}
+
+%
+%Byzantine VM.
+%
+%Other names: ACDCTCP, LiquidSwitch, LiquidEdge
+%
+%In CPU overhead measurement, we need to 
+%mention ovs add 1 widecard rule. That means we isolated the overhead of 
+%OVS itself when it has many flows in its flow table (probably it does not matter
+%at the end of the day, because we measured the CPU usage of the whole system).
+%
+%People may say window-based congestion control is burty. TIMELY operates 
+%on TCP segments in order to reduce CPU overhead. Therefore, TIMELY is also
+%busty. In TIMELY, they mentioned they can leverage a hybrid scheme, that is
+%using software to control large segments and use hardware rate limiter to
+%reduce burstyness.
+%
+%Create loss and check how DCTCP and our scheme treates packet losses (revisit it after we finish incast 
+%and macrobenchmarks).
+%
+%One more microbenchmark on the Dumbbell topology: different servers have different transport, so the
+%throughput fairness among different transports (e.g., start cubic, start New Reno, start dctcp).
+%
+%A point that is missing in DCTCP and NSDI paper is that they did not mention how the switch should be
+%configured to handle non-TCP traffic. Note non-TCP traffic such as DNS (UDP 53) and ARP, ICMP etc
+%are also important. We found that if we did not specify how the switch handle the non-TCP traffic,
+%then this kind of non-TCP traffic can be easily dropped by the switch. We found ARP traffic is dropped
+%by the switch such that DCTCP flows stall. Hence, we think it is better to put non-TCP traffic
+%into a different queue when we apply WRED/ECN on the switches.
+%
+%This work offers low latency for ``hetergeneous networks" where different entities can 
+%run different kinds of
+%transport congestion control schemes. A few examples of such hetergeneous networks: public 
+%datacenters where tenants can set up their own VMs (e.g., AWS), or tenants can rent their bare metal
+%machines (e.g., SoftLayer), or certain groups (even within a single organization) 
+%have to use traditional transports due to compatibility of legacy applications (NSDI's Judd said this), or
+%incremental deployment is undergoing. 
+%To ensure a pure low latency datacenter network, a universal transport enforcement scheme is required. 
+%Two challenges to implement such a transport enforcement scheme are scalability and low overhead. 
+%The transport enformancement scheme proposed here meet the two metrics (as shown in our experiments) while
+%providing nice network performance (throughput, latency and packet drop rate). This scheme is 
+%compatible with any kind of TCP stack. Finally, the scheme we propose solves the co-existence issue of 
+%ECT (ECN Capable Transport) and non-ECT, which is a critical deployment hurdle for DCTCP-like transports.
+%
+%Macrobenchmark plan: 18 hosts, 6 switches, ECMP configured. The network oversubscription ratio is 2:1.
+%Run all-to-all traffic for a long time (e.g., 1 hours). Show total throughput and TCP RTT and packet drop 
+%rate.
+%
+%QoS can be implemented too?
+%
+%
+%
+%When we try to launch an instance in EC2: ``An AMI is a template that contains the software 
+%configuration (operating system, application server, and applications) required to launch your instance. 
+%You can select an AMI provided by AWS, our user community, or the AWS Marketplace; 
+%or you can select one of your own AMIs''. Default is CUBIC for most Linux images, Window Servers can
+%have NewReno, Compound TCP (CTCP)~\cite{tan2006compound} and DCTCP. 
+%Users can tweak congestion control algorithms to optimize network performance for their target scenarios. 
+%
+%Section talking about how to implement other CC schemes: TIMELY, PERC, Vegas, etc.
+%
+%EJR: VXLAN, UDP, TCP stack statistics for Cloud?
+%
+%ECT and non-ECT: througput unfairness, long RTT, connection establishment..
+%
+%
+%EyeQ, Seawall, NetShare, Silo, SecondNet, Oktopus etc. Our work did not provide bandwidth allocation property. 
+%This work focused on reducing in-network queuing latency caused by VM TCP stacks. 
+%We show how this goal can be done using a simple and elegant solution.
+%Yes, if an VM opens more connections than another, that VM gains more bandwidth. 
+%But, there are proposals which try to provide proper bandwidth allocation when multiple end-points compete 
+%at the sender side or receiver side. Those works and this work are complementary. 
+%To the best of our knowledge, today's cloud providers have not provide strong bandwidth guarantees 
+%(for example, AWS only roughly classify VMs instances' network performance into 
+%``low to moderate", ``moderate", ``high" and ``10 Gigabit"categories).
+%
+%talk about containers?

@@ -1,0 +1,404 @@
+\begin{thebibliography}{10}
+
+\bibitem{al2010hedera}
+M.~Al-Fares, S.~Radhakrishnan, B.~Raghavan, N.~Huang, and A.~Vahdat.
+\newblock {Hedera: Dynamic Flow Scheduling for Data Center Networks}.
+\newblock In {\em NSDI}, 2010.
+
+\bibitem{alizadeh2014conga}
+M.~Alizadeh, T.~Edsall, S.~Dharmapurikar, R.~Vaidyanathan, K.~Chu,
+  A.~Fingerhut, F.~Matus, R.~Pan, N.~Yadav, G.~Varghese, et~al.
+\newblock {CONGA: Distributed Congestion-aware Load Balancing for Datacenters}.
+\newblock In {\em SIGCOMM}, 2014.
+
+\bibitem{alizadeh2011data}
+M.~Alizadeh, A.~Greenberg, D.~A. Maltz, J.~Padhye, P.~Patel, B.~Prabhakar,
+  S.~Sengupta, and M.~Sridharan.
+\newblock {Data Center TCP (DCTCP)}.
+\newblock In {\em SIGCOMM}, 2010.
+
+\bibitem{alizadeh2012less}
+M.~Alizadeh, A.~Kabbani, T.~Edsall, B.~Prabhakar, A.~Vahdat, and M.~Yasuda.
+\newblock {Less is More: Trading a Little Bandwidth for Ultra-low Latency in
+  the Data Center}.
+\newblock In {\em NSDI}, 2012.
+
+\bibitem{alizadeh2013pfabric}
+M.~Alizadeh, S.~Yang, M.~Sharif, S.~Katti, N.~McKeown, B.~Prabhakar, and
+  S.~Shenker.
+\newblock {pFabric: Minimal Near-Optimal Datacenter Transport}.
+\newblock 2013.
+
+\bibitem{RFC5681}
+M.~Allman, V.~Paxson, and E.~Blanton.
+\newblock {TCP Congestion Control}.
+\newblock RFC 5681, 2009.
+\newblock \url{http://www.rfc-editor.org/rfc/rfc5681.txt}.
+
+\bibitem{RFC3449}
+H.~Balakrishnan, V.~Padmanabhan, G.~Fairhurst, and M.~Sooriyabandara.
+\newblock {TCP Performance Implications of Network Path Asymmetry}.
+\newblock RFC 3449, 2002.
+
+\bibitem{balakrishnan1995improving}
+H.~Balakrishnan, S.~Seshan, E.~Amir, and R.~H. Katz.
+\newblock {Improving TCP/IP Performance over Wireless Networks}.
+\newblock In {\em MobiCom}, 1995.
+
+\bibitem{balakrishnan2008maelstrom}
+M.~Balakrishnan, T.~Marian, K.~Birman, H.~Weatherspoon, and E.~Vollset.
+\newblock {Maelstrom: Transparent Error Correction for Lambda Networks}.
+\newblock In {\em NSDI}, 2008.
+
+\bibitem{Ballani2011oktopus}
+H.~Ballani, P.~Costa, T.~Karagiannis, and A.~Rowstron.
+\newblock {Towards Predictable Datacenter Networks}.
+\newblock In {\em SIGCOMM}, 2011.
+
+\bibitem{ietf-tcpm-dctcp}
+S.~Bensley, L.~Eggert, D.~Thaler, P.~Balasubramanian, and G.~Judd.
+\newblock {Datacenter TCP (DCTCP): TCP Congestion Control for Datacenters}.
+\newblock Internet-Draft draft-ietf-tcpm-dctcp-01, 2015.
+\newblock
+  \url{http://www.ietf.org/internet-drafts/draft-ietf-tcpm-dctcp-01.txt}.
+
+\bibitem{dell-toe}
+{Boosting Data Transfer with TCP Offload Engine Technology}.
+\newblock
+  \url{http://www.dell.com/downloads/global/power/ps3q06-20060132-Broadcom.pdf}.
+
+\bibitem{Brakmo1994}
+L.~S. Brakmo, S.~W. O'Malley, and L.~L. Peterson.
+\newblock {TCP Vegas: New Techniques for Congestion Detection and Avoidance}.
+\newblock In {\em SIGCOMM}, 1994.
+
+\bibitem{RFC6928}
+J.~Chu, N.~Dukkipati, Y.~Cheng, and M.~Mathis.
+\newblock {Increasing TCP's Initial Window}.
+\newblock RFC 6928, 2013.
+\newblock \url{http://www.rfc-editor.org/rfc/rfc6928.txt}.
+
+\bibitem{vcc}
+B.~Cronkite-Ratcliff, A.~Bergman, S.~Vargaftik, M.~Ravi, N.~McKeown,
+  I.~Abraham, and I.~Keslassy.
+\newblock {Virtualized Congestion Control}.
+\newblock In {\em SIGCOMM}, 2016.
+
+\bibitem{davern2011httpep}
+P.~Davern, N.~Nashid, C.~J. Sreenan, and A.~Zahran.
+\newblock {HTTPEP: A HTTP Performance Enhancing Proxy for Satellite Systems}.
+\newblock {\em International Journal of Next-Generation Computing}, 2011.
+
+\bibitem{dean2013tail}
+J.~Dean and L.~A. Barroso.
+\newblock {The Tail at Scale}.
+\newblock {\em Communications of the ACM}, 2013.
+
+\bibitem{RFC3115}
+G.~Dommety and K.~Leung.
+\newblock {Mobile IP Vendor/Organization-Specific Extensions}.
+\newblock RFC 3115, 2001.
+
+\bibitem{dukkipati2006flow}
+N.~Dukkipati and N.~McKeown.
+\newblock {Why Flow-Completion Time is the Right Metric for Congestion
+  Control}.
+\newblock {\em ACM SIGCOMM Computer Communication Review}, 2006.
+
+\bibitem{flach2013reducing}
+T.~Flach, N.~Dukkipati, A.~Terzis, B.~Raghavan, N.~Cardwell, Y.~Cheng, A.~Jain,
+  S.~Hao, E.~Katz-Bassett, and R.~Govindan.
+\newblock {Reducing Web Latency: The Virtue of Gentle Aggression}.
+\newblock In {\em SIGCOMM}, 2013.
+
+\bibitem{RFC3649}
+S.~Floyd.
+\newblock {HighSpeed TCP for Large Congestion Windows}.
+\newblock RFC 3649, 2003.
+\newblock \url{http://www.rfc-editor.org/rfc/rfc3649.txt}.
+
+\bibitem{RFC3782}
+S.~Floyd, T.~Henderson, and A.~Gurtov.
+\newblock {The NewReno Modification to TCP's Fast Recovery Algorithm}.
+\newblock RFC 3782, 2004.
+\newblock \url{https://tools.ietf.org/html/rfc3782}.
+
+\bibitem{RFC6824}
+A.~Ford, C.~Raiciu, M.~Handley, and O.~Bonaventure.
+\newblock Tcp extensions for multipath operation with multiple addresses.
+\newblock RFC 6824, RFC Editor, January 2013.
+\newblock \url{http://www.rfc-editor.org/rfc/rfc6824.txt}.
+
+\bibitem{ghorbani2015micro}
+S.~Ghorbani, B.~Godfrey, Y.~Ganjali, and A.~Firoozshahian.
+\newblock {Micro Load Balancing in Data Centers with DRILL}.
+\newblock In {\em HotNets}, 2015.
+
+\bibitem{greenberg2009vl2}
+A.~Greenberg, J.~R. Hamilton, N.~Jain, S.~Kandula, C.~Kim, P.~Lahiri, D.~A.
+  Maltz, P.~Patel, and S.~Sengupta.
+\newblock {VL2: A Scalable and Flexible Data Center Network}.
+\newblock In {\em SIGCOMM}, 2009.
+
+\bibitem{qjump}
+M.~P. Grosvenor, M.~Schwarzkopf, I.~Gog, R.~N.~M. Watson, A.~W. Moore, S.~Hand,
+  and J.~Crowcroft.
+\newblock {Queues Don{\textquoteright}t Matter When You Can JUMP Them!}
+\newblock In {\em NSDI}, 2015.
+
+\bibitem{guniguntala2008read}
+D.~Guniguntala, P.~E. McKenney, J.~Triplett, and J.~Walpole.
+\newblock {The Read-Copy-Update Mechanism for Supporting Real-time Applications
+  on Shared-memory Multiprocessor Systems with Linux}.
+\newblock {\em IBM Systems Journal}, 2008.
+
+\bibitem{Guo2010Secondnet}
+C.~Guo, G.~Lu, H.~J. Wang, S.~Yang, C.~Kong, P.~Sun, W.~Wu, and Y.~Zhang.
+\newblock {SecondNet: A Data Center Network Virtualization Architecture with
+  Bandwidth Guarantees}.
+\newblock In {\em CoNEXT}, 2010.
+
+\bibitem{ha2008cubic}
+S.~Ha, I.~Rhee, and L.~Xu.
+\newblock {CUBIC: A New TCP-friendly High-speed TCP Variant}.
+\newblock {\em ACM SIGOPS Operating Systems Review}, 2008.
+
+\bibitem{he2015presto}
+K.~He, E.~Rozner, K.~Agarwal, W.~Felter, J.~Carter, and A.~Akella.
+\newblock {Presto: Edge-based Load Balancing for Fast Datacenter Networks}.
+\newblock In {\em SIGCOMM}, 2015.
+
+\bibitem{RFC1323}
+V.~Jacobson, B.~Braden, and D.~Borman.
+\newblock {TCP Extensions for High Performance}.
+\newblock RFC 1323, 1992.
+\newblock \url{http://www.rfc-editor.org/rfc/rfc1323.txt}.
+
+\bibitem{jain-index}
+R.~K. Jain, D.-M.~W. Chi{\`u}, and W.~R. Hawe.
+\newblock {A Quantitative Measure of Fairness and Discrimination for Resource
+  Allocation in Shared Computer Systems}.
+\newblock Technical Report DEC-TR-301, Digital Equipment Corporation, 1984.
+
+\bibitem{jang2015silo}
+K.~Jang, J.~Sherry, H.~Ballani, and T.~Moncaster.
+\newblock {Silo: Predictable Message Latency in the Cloud}.
+\newblock In {\em SIGCOMM}, 2015.
+
+\bibitem{jeyakumar2013eyeq}
+V.~Jeyakumar, M.~Alizadeh, D.~Mazi{\`e}res, B.~Prabhakar, C.~Kim, and
+  A.~Greenberg.
+\newblock {EyeQ: Practical Network Performance Isolation at the Edge}.
+\newblock In {\em NSDI}, 2013.
+
+\bibitem{jose2015high}
+L.~Jose, L.~Yan, M.~Alizadeh, G.~Varghese, N.~McKeown, and S.~Katti.
+\newblock {High Speed Networks Need Proactive Congestion Control}.
+\newblock In {\em HotNets}, 2015.
+
+\bibitem{judd2015nsdi}
+G.~Judd.
+\newblock {Attaining the Promise and Avoiding the Pitfalls of TCP in the
+  Datacenter}.
+\newblock In {\em NSDI}, 2015.
+
+\bibitem{Kalampoukas02}
+L.~Kalampoukas, A.~Varma, and K.~K. Ramakrishnan.
+\newblock {Explicit Window Adaptation: A Method to Enhance TCP Performance}.
+\newblock {\em IEEE/ACM Transactions on Networking}, 2002.
+
+\bibitem{Lam2012NetShare}
+V.~T. Lam, S.~Radhakrishnan, R.~Pan, A.~Vahdat, and G.~Varghese.
+\newblock {Netshare and Stochastic Netshare: Predictable Bandwidth Allocation
+  for Data Centers}.
+\newblock {\em ACM SIGCOMM Computer Communication Review}, 2012.
+
+\bibitem{lee2015accurate}
+C.~Lee, C.~Park, K.~Jang, S.~Moon, and D.~Han.
+\newblock {Accurate Latency-based Congestion Feedback for Datacenters}.
+\newblock In {\em USENIX Annual Technical Conference}, 2015.
+
+\bibitem{cavium-nic}
+{LiquidIO Server Adapters }.
+\newblock \url{http://www.cavium.com/LiquidIO_Server_Adapters.html}.
+
+\bibitem{liu2008tcp}
+S.~Liu, T.~Ba{\c{s}}ar, and R.~Srikant.
+\newblock {TCP-Illinois: A Loss-and Delay-based Congestion Control Algorithm
+  for High-speed Networks}.
+\newblock {\em Performance Evaluation}, 2008.
+
+\bibitem{optimize-tcp-receive}
+A.~Menon and W.~Zwaenepoel.
+\newblock {Optimizing TCP Receive Performance}.
+\newblock In {\em USENIX Annual Technical Conference}, 2008.
+
+\bibitem{mittal2015timely}
+R.~Mittal, N.~Dukkipati, E.~Blem, H.~Wassel, M.~Ghobadi, A.~Vahdat, Y.~Wang,
+  D.~Wetherall, D.~Zats, et~al.
+\newblock {TIMELY: RTT-based Congestion Control for the Datacenter}.
+\newblock In {\em SIGCOMM}, 2015.
+
+\bibitem{mogul2003tcp}
+J.~C. Mogul.
+\newblock {TCP Offload Is a Dumb Idea Whose Time Has Come}.
+\newblock In {\em HotOS}, 2003.
+
+\bibitem{mogul2015inferring}
+J.~C. Mogul and R.~R. Kompella.
+\newblock {Inferring the Network Latency Requirements of Cloud Tenants}.
+\newblock In {\em HotOS}, 2015.
+
+\bibitem{180302}
+M.~Moshref, M.~Yu, A.~Sharma, and R.~Govindan.
+\newblock {Scalable Rule Management for Data Centers}.
+\newblock In {\em NSDI}, 2013.
+
+\bibitem{netronome-nic}
+{Netronome FlowNIC}.
+\newblock \url{https://netronome.com/product/flownics/}.
+
+\bibitem{sockperf}
+{Network Benchmarking Utility}.
+\newblock \url{https://github.com/mellanox/sockperf}.
+
+\bibitem{niranjan2013fastrak}
+R.~Niranjan~Mysore, G.~Porter, and A.~Vahdat.
+\newblock {FasTrak: Enabling Express Lanes in Multi-tenant Data Centers}.
+\newblock In {\em CoNEXT}, 2013.
+
+\bibitem{ovs-website}
+{Open vSwitch}.
+\newblock \url{http://openvswitch.org}.
+
+\bibitem{perry2014fastpass}
+J.~Perry, A.~Ousterhout, H.~Balakrishnan, D.~Shah, and H.~Fugal.
+\newblock {Fastpass: A Centralized Zero-queue Datacenter Network}.
+\newblock In {\em SIGCOMM}, 2014.
+
+\bibitem{Pfaff2015ovs}
+B.~Pfaff, J.~Pettit, T.~Koponen, E.~J. Jackson, A.~Zhou, J.~Rajahalme,
+  J.~Gross, A.~Wang, J.~Stringer, P.~Shelar, K.~Amidon, and M.~Casado.
+\newblock {The Design and Implementation of Open vSwitch}.
+\newblock In {\em NSDI}, 2015.
+
+\bibitem{Popa2012Faircloud}
+L.~Popa, G.~Kumar, M.~Chowdhury, A.~Krishnamurthy, S.~Ratnasamy, and I.~Stoica.
+\newblock {FairCloud: Sharing the Network in Cloud Computing}.
+\newblock In {\em SIGCOMM}, 2012.
+
+\bibitem{radhakrishnan2014senic}
+S.~Radhakrishnan, Y.~Geng, V.~Jeyakumar, A.~Kabbani, G.~Porter, and A.~Vahdat.
+\newblock {SENIC: Scalable NIC for End-host Rate Limiting}.
+\newblock In {\em NSDI}, 2014.
+
+\bibitem{rasley2014planck}
+J.~Rasley, B.~Stephens, C.~Dixon, E.~Rozner, W.~Felter, K.~Agarwal, J.~Carter,
+  and R.~Fonseca.
+\newblock {Planck: Millisecond-scale Monitoring and Control for Commodity
+  Networks}.
+\newblock In {\em SIGCOMM}, 2014.
+
+\bibitem{rodrigues2011gatekeeper}
+H.~Rodrigues, J.~R. Santos, Y.~Turner, P.~Soares, and D.~Guedes.
+\newblock {Gatekeeper: Supporting Bandwidth Guarantees for Multi-tenant
+  Datacenter Networks}.
+\newblock In {\em WIOV}, 2011.
+
+\bibitem{semke1998automatic}
+J.~Semke, J.~Mahdavi, and M.~Mathis.
+\newblock {Automatic TCP Buffer Tuning}.
+\newblock {\em ACM SIGCOMM Computer Communication Review}, 1998.
+
+\bibitem{shieh2011sharing}
+A.~Shieh, S.~Kandula, A.~G. Greenberg, C.~Kim, and B.~Saha.
+\newblock {Sharing the Data Center Network}.
+\newblock In {\em NSDI}, 2011.
+
+\bibitem{singh2015jupiter}
+A.~Singh, J.~Ong, A.~Agarwal, G.~Anderson, A.~Armistead, R.~Bannon, S.~Boving,
+  G.~Desai, B.~Felderman, P.~Germano, et~al.
+\newblock {Jupiter Rising: A Decade of Clos Topologies and Centralized Control
+  in Google's Datacenter Network}.
+\newblock In {\em SIGCOMM}, 2015.
+
+\bibitem{kernel-skb}
+{SKB in Linux Networking}.
+\newblock \url{http://vger.kernel.org/~davem/skb.html}.
+
+\bibitem{Spring00}
+N.~T. Spring, M.~Chesire, M.~Berryman, V.~Sahasranaman, T.~Anderson, and
+  B.~Bershad.
+\newblock {Receiver Based Management of Low Bandwidth Access Links}.
+\newblock In {\em INFOCOM}, 2000.
+
+\bibitem{stephens2014practical}
+B.~Stephens, A.~L. Cox, A.~Singla, J.~Carter, C.~Dixon, and W.~Felter.
+\newblock {Practical DCB for Improved Data Center Networks}.
+\newblock In {\em INFOCOM}, 2014.
+
+\bibitem{tan2006compound}
+K.~Tan, J.~Song, Q.~Zhang, and M.~Sridharan.
+\newblock {A Compound TCP Approach for High-speed and Long Distance Networks}.
+\newblock In {\em INFOCOM}, 2006.
+
+\bibitem{chelsio-toe}
+{TCP Offload Engine (TOE)}.
+\newblock \url{http://www.chelsio.com/nic/tcp-offload-engine/}.
+
+\bibitem{tcp-probe}
+{TCP Probe}.
+\newblock
+  \url{http://www.linuxfoundation.org/collaborate/workgroups/networking/tcpprobe}.
+
+\bibitem{linux-toe}
+{TOE}.
+\newblock
+  \url{http://www.linuxfoundation.org/collaborate/workgroups/networking/toe}.
+
+\bibitem{vasudevan2009safe}
+V.~Vasudevan, A.~Phanishayee, H.~Shah, E.~Krevat, D.~G. Andersen, G.~R. Ganger,
+  G.~A. Gibson, and B.~Mueller.
+\newblock {Safe and Effective Fine-grained TCP Retransmissions for Datacenter
+  Communication}.
+\newblock In {\em SIGCOMM}, 2009.
+
+\bibitem{Venkataramani2002tcpnice}
+A.~Venkataramani, R.~Kokku, and M.~Dahlin.
+\newblock {TCP Nice: A Mechanism for Background Transfers}.
+\newblock {\em SIGOPS Oper. Syst. Rev.}, 2002.
+
+\bibitem{wang2010impact}
+G.~Wang and T.~E. Ng.
+\newblock {The Impact of Virtualization on Network Performance of Amazon EC2
+  Data Center}.
+\newblock In {\em INFOCOM}, 2010.
+
+\bibitem{winstein2013tcp}
+K.~Winstein and H.~Balakrishnan.
+\newblock {TCP ex Machina: Computer-generated Congestion Control}.
+\newblock In {\em SIGCOMM}, 2013.
+
+\bibitem{wu2010ictcp}
+H.~Wu, Z.~Feng, C.~Guo, and Y.~Zhang.
+\newblock {ICTCP: Incast Congestion Control for TCP in Data Center Networks}.
+\newblock In {\em CoNEXT}, 2010.
+
+\bibitem{wu2012tuning}
+H.~Wu, J.~Ju, G.~Lu, C.~Guo, Y.~Xiong, and Y.~Zhang.
+\newblock {Tuning ECN for Data Center Networks}.
+\newblock In {\em CoNEXT}, 2012.
+
+\bibitem{Xie2012Proteus}
+D.~Xie, N.~Ding, Y.~C. Hu, and R.~Kompella.
+\newblock {The Only Constant is Change: Incorporating Time-varying Network
+  Reservations in Data Centers}.
+\newblock In {\em SIGCOMM}, 2012.
+
+\bibitem{zhu2015congestion}
+Y.~Zhu, H.~Eran, D.~Firestone, C.~Guo, M.~Lipshteyn, Y.~Liron, J.~Padhye,
+  S.~Raindel, M.~H. Yahia, and M.~Zhang.
+\newblock {Congestion Control for Large-Scale RDMA Deployments}.
+\newblock In {\em SIGCOMM}, 2015.
+
+\end{thebibliography}

@@ -1,0 +1,114 @@
+\section{Discussion}
+\label{sec:discussion}
+
+1)Conga and Planck, Hedera need to detect link utilization (reactive), we do not need to do that
+
+2)flow size does not matter in our approach 
+
+3)mice flow that is smaller than the chunk (batch size) is not affected 
+
+4)Does Conga work for all traffic patterns ? (transfer a VM file?)
+
+5)simply adjusting TCP parameters does not work well, show it. Do MAC header rewriting at egress switch and use official kernel 
+
+6)centralized traffic engineering (like Hedera and Planck) can also cause packet reordering because they move a flow from more congested path to less congested path
+
+7)Our scheme causes about 0 overhead if there is no reordering and 5\% CPU (5\% of the processor where the 10G flow is processed)
+usage overhead in case of reordering on 10G links.  The reason is that our logic is operated at at "segment" level or polling event level, not per packet level, reduces overhead
+
+8)flowlet has larger latency if two large flowlets collide
+
+9)what happens for packet latency? for mice flow (if < 64KB), there is no effect because there is no reordering. For elephant flow the worse case delay added is the polling interval, which is 10s of microseconds usually. 
+
+10)vm migration impact: no impact because hypervisor does not move (hypervisor's MAC address is not changed).
+This is one benefit of using flat L2 (Ethernet) network for DCN
+
+11))in shadow MAC, MAC only act as the routing/forwarding, not ID. ID/locator separation, like Portland and VL2 ?
+
+12)Presto is a traffic-pattern independent load balancing scheme while Conga is not (flowlet test).
+
+13)when 100G network becomes possible, some technique similar to TSO/GRO/LRO should exists to let CPU cope with the high speed network. So our approach should have a long lifetime, even in future (regardless of MTU size).
+
+14)an analog of our approach is "divide-and-conquer" or "map and reduce", the question is where and how we divide and where and how we conquer. we tried to distribute a bulk of data to switches as evenly as possible so a single switch does not become hot-spot . A big difference from "divide and conquer" is that the flow is still sent out by the end-host in sequence, not parallel (a key difference from MPTCP)
+
+15)handle failure: ping at ovs ? like ECMP ? only controller can provide global view? Similar to WCMP (Eurosys'14) ?
+
+16)list design goals: e.g., build a network on cheap and dumb Ethernet switches, traffic pattern independent, less complexity, fast (10G or 40G) and resilient to hardware or link failures, flat L2 network.
+
+17)Mice and Elephant examples: latency-sensitive traffic (mice) includes remote procedure calls, Database queries, 
+telemetry, logging. Throughput-sensitive traffic (elephants) include video, Big data, Replication, VM cloning, VM migration and backup.
+http://nathanfarrington.com/presentations/oida-100g-lambda-data-center-2014/assets/player/KeynoteDHTMLPlayer.html\#0
+
+18)what are the advantages of flat L2 networks? Like VL2, Portland, 
+make it clear; IBM advocates flat L2 networks, show why. L2 routing and Addressing. 
+VL2 says "Maintain an illusion that a service is assigned all the servers and 
+those servers are connected using a virtual switch. 
+Uniform high capacity, Performance isolation and reconfigurable IP addresses."
+We share similar goals via using L2 routing and addressing.
+
+19)argument on memory overhead. First is that shadow table is populated on demand, like ARP table, a hypervisor usually
+talks a set of server, not all.
+
+Second, give the memory overhead, now the supervisor's today have large memory (256GB), so a few hundreds MB is acceptable, 
+a)memory that is unused is wasted anyway. 2)the price of memory is low, for example, 100MB costs less than \$1.
+ 
+20)Presto can be used to achieve zero loss, small queue network, while providing near-optimal throughput for elephant flows
+
+21)MPTCP converges to the expected throughput very flow (10 seconds or so)
+
+22)What we should do for the traffic going outside/coming into the data center? Answer: the traffic that traverses Data Center Interconnects (DCI) is typically east-west (machine-to-machine) and flow-oriented (TCP-based). The traffic coming
+from/going to the Internet (north-south or user-to-machine) is typically mice flow.
+North-south flow's throughput is usually low because Internet is the bottleneck.
+
+it comes from 
+http://umairhoodbhoy.net/2014/10/31/the-etymology-of-elephant-and-mice-flows/
+
+23)In a virtualized datacenter, the changes Presto made on GRO can be applied to the hypervisor without touching VM's OSes.
+
+24)impact on middleboxes
+
+25)cross traffic
+
+26)Compared with flowlet switching, Presto guarantees that each chunk is uniform and bounded by a small value. 
+However, the flowlet size in flowlet switching
+is dependent on traffic pattern (i.e., the inactivity gap in TCP flow), 
+so flowlet size can be large and non-uniform. 
+Flowlet switching assumes that TCP inactivity gap can prevent reordering happen at the receiver side while 
+Presto {\em explicitly} solves the packet reordering problem.
+
+Compared with naive packet-spraying on the end-hosts, Presto saves CPU usage by performing coarse-grained chunking instead of per-packet load balancing 
+to support 10G speed without resorting to Jumbo frame. 
+More importantly, Presto's chunking scheme makes distinguishing loss from reordering much easier and has negligible impact on latency.
+Presto is resilient to hardware or link failures, adaptive to network asymmetry via weighted multipathing at the network edge.
+
+27) The Conga paper also talks about doing load balancing in the "fabric" but 
+ignores the fact that in most commercial data centers, 
+the {\em soft-edge} is increasingly part of the fabric as well. 
+See Nicira's NSDI 2014 paper~\cite{nv-mtd}. Conga's notion of fabric extends just to the leaf switches. 
+
+In essence, by expanding the view to include end hosts software parts, we have both challenges and opportunities:
+
+Opportunities: Avoid extra hardware cost. Soft-switching in end-hosts is already very mature and feature-rich, 
+and some very sophisticated actions can be taken there. We're piggy-backing on this trend.
+
+{ \em If we arrive at a point where the edge processing is done in software
+and the core in simple hardware, then the entire infrastructure
+becomes much more evolvable} ---Martin Casado~\cite{casado2012fabric}
+
+Challenges: End-host overheard/impact on apps; keeping up with 10G speeds; solving packet reordering without touching transport layer; 
+resilient to hardware or link failures, adaptive to network asymmetry.
+
+The thesis of this paper is to answer {\em whether fine-grained near-optimal load balancing is implementable and 
+how the challenges to ahieve this goal can be solved}.
+
+28)By tuning MPTCP subflow count and TCP parameters, we found it is hard to get both good throughput and latency for mptcp at the same time
+
+29)argument on jumbo frames, first with the increase of link speed (say 40Gbps), offloading scheme like LRO/GRO is still needed even Jumbo frame is used. Second, 
+if we turn Jumbo frame on, then we need to use a separate NIC to talk with outside the DC over the Internet. 
+Third, given existing TSO/LRO/GRO, the benefit of Jumbo frame is unappealing. Forth, to enable Jumbo frame, need to make sure all boxes can process Jumbo frames.
+
+30)CONGA is not evolvable (we need simple hardware, an example, CONGA hardware needs to be upgraded if we switch from IPv4 to IPv6). Presto just needs lable-switching
+
+31)Question: does Presto work with bare-metal cloud (e.g., IBM softlayer )?
+
+32)An alternate name of Presto--- Presto: Distributed Load Balancing at the Datacenter Network Edge

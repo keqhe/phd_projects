@@ -1,0 +1,126 @@
+
+
+\section{Flow Engineering Formulation}
+\label{app:floweng}
+In this appendix we present an integer linear program for flow engineering
+(\secref{s:floweng}). We assume the SDN application performs traffic 
+engineering in a data center with the goal of minimizing the maximum link
+utilization. \tabref{notations} lists the notations used in the formulation.
+
+%\subsection{Notation}
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabular}{c|p{0.7\columnwidth}}
+\hline
+$S$ & Set of all switches \\
+$S_{ToR}$ & Set of all top-of-rack (ToR) switches \\
+$\tau_{u}, \forall u \in S$ & Maximum number of flow entries in the switch $u$ \\
+$E$ & Set of all physical links (between adjacent switches) \\
+$C_e, \forall e \in E$ & Capacity of individual links \\
+$F_{uv}$ & Set of all flows from $u$ to $v$ where $u,v \in S_{ToR}$ \\
+$P_{uv}$ & Set of paths from switch $u$ to switch $v$ \\
+$K _{uv}$ & Number of paths from switch $u$ to $v$ where $u,v \in S_{ToR}$ \\
+$P^k _{uv}$ & Set of links of $k^{th}$ path from device $u$ to $v$ where $u,v \in S_{ToR}$ \\
+$T ^f _{uv}$ & Traffic volume from $u$ to $v$ of flow $f$ where $u,v \in S_{ToR}$ \\
+$util$ & Maximum link utilization \\
+$D_{u} \forall u \in S$ & Number of low priority rules in switch $u$ \\
+$I ^{fk} _{uv}$ & Indicator variable denoting that flow $f$ from $u$ to $v$  takes the $k^{th}$ path \\
+\hline
+%\tabincell{c}{HP Procurve \\8212zl} & 666Mhz & 256MB & $\approx$1000 & Modularity \\ \hline
+%\hline
+\end{tabular}
+\topcompactcaption{Notations used in flow engineering formulation}{\label{notations}}
+\end{table}
+
+\iffalse
+\begin{itemize}
+\item $S$ - Set of all switches
+\item $S_{ToR}$ - Set of all ToR switches
+\item $\tau_{u}, \forall u \in S$ - Maximum number of flow entries in the switch $u$
+\item $E$ - Set of all physical links (between two adjacent devices)
+\item $C_e, \forall e \in E$ - capacity of individual links
+\item $F_{uv}$ - set of all flows from $u$ to $v$ where $u,v \in S_{ToR}$
+\item $P_{uv}$ - Set of paths from device $u$ to device $v$
+\item $K _{uv}$ - Number of paths from device $u$ to $v$ where $u,v \in S_{ToR}$ 
+\item $P^k _{uv}$ - Set of links of $k^{th}$ path from device $u$ to $v$ where $u,v \in S_{ToR}$
+\item $T ^f _{uv}$ - Traffic volume from $u$ to $v$ of flow $f$ where $u,v \in S_{ToR}$
+\item $util$ - maximum link utilization
+\item $I ^{fk} _{uv}$ - Indicator variable denoting that flow $f$ from $u$ to $v$  takes the $k^{th}$ path.
+%\item $entries$ - maximum number of flow rules in any switch
+\end{itemize}
+\fi
+
+\subsection{Step 1 - Minimize ``utilization''}
+In the first step, we minimize the maximum link utilization. 
+We represent the network as a graph \textit{G = (V,E)}, where each vertex is
+a switch and each edge is a physical link. Let $T ^f _{uv}$ be the
+traffic volume between $(u,v)$ of flow \textit{f}, $P^k _{uv}$ be the set of
+links on the $k^{th}$ path between (\textit{u,v}). 
+
+We have two constraints: First, the total traffic volume from an edge should
+not exceed its capacity, $C_e$, times the link utilization limit, $util$. We
+use a binary indicator variable  $I ^{fk} _{uv}$ to show whether or not the 
+flow $f$ is on path $k$.
+
+	
+\begin{equation}
+    \sum _{u,v \in S_{ToR},~f \in F_{uv},~k  \in P_{uv}~s.t.~e \in P^k _{uv}} T ^f _{uv} *  I^{fk}_{uv} \leq util \times C_e 
+\end{equation}
+	
+	
+\noindent Second, each flow $f$ should be routed from a single path.
+
+\begin{equation}
+    \sum _{k  \in P_{uv}} I^{fk}_{uv} = 1 ,\quad \quad \forall u,v \in S_{ToR},~ f \in F_{uv}
+\end{equation}
+  
+
+The objective is to minimize \textit{util}, the maximum link utilization, under the above two constraints. 
+
+\subsection{Step 2 - Minimize ``rule setup latency''}
+Our measurements show that flow installation latency has a linear relation
+with the burst size of the rules (i.e., the number of rules to be installed), 
+and, if rules are of a higher (or lower, depending on switch vendor) priority,
+installation latency increases with the number of rules that need to be 
+displaced. Therefore, the second step is minimize the maximum number of
+rules in any switch. %, as number of rules has a linear relationship with installation
+%latency. Following are three constraints.
+Flow installation latency can be defined as 
+\begin{equation*} 
+%latency_{u} = \max(a, (b +c * Disp_u(Pri(f))))
+latency_{u} = (a_{u}  + c_{u}* D_{u}) *\tau_{u}
+\end{equation*}
+where $a_u$ and $c_u$ are constants for switch $u$ derived from
+measurements.
+%, and $Disp_u(Pri(f))$ is the number of rules at $u$ that will be
+%displaced by the rule for flow $f$.
+%     .\fixme{seem to be inconsistent with FE part} Flow installation latency
+%     can be define as \begin{equation*} latency_{u} = a_{u} * \tau_{u} + c_{u}
+%     \end{equation*} , where $a_{u}$ and $c_{u}$ are constants for switch $u$.
+
+
+There are three constraints:
+First, traffic traversing an edge $e$ does not exceed the $C_e$
+multiplied by 1 $+$ $\delta$ times the $util^*$. $util^*$ is the maximum link
+utilization we got from the step 1, and  $\delta$ defines an upper limit on
+maximum link utilization.
+
+\begin{equation}
+    \sum _{u,v \in S_{ToR},~f \in F_{uv},~k  \in P_{uv}~s.t.~e \in P^k _{uv}} T ^f _{uv} *  I^{fk}_{uv} \leq (1 + \delta) \times util^* \times C_e 
+\end{equation}
+
+\noindent Second, constraint is same as step 1.
+  
+\begin{equation}
+      \sum _{k  \in P_{uv}} I^{fk}_{uv} = 1 ,\quad \quad \forall u,v \in S_{ToR},~ f \in F_{uv}
+\end{equation}
+
+\noindent Third, the number of flows passing through a switch $s$ is less than the number of maximum rules in any switch in the network.
+\begin{equation}
+                       \sum_{u,v \in S_{ToR}, ~f \in F_{uv}, ~k \in P_{uv} ~s.t.~ s\in P^k_{uv} } I^{fk}_{uv} \leq \tau_{u} \quad \quad \forall s \in S
+\end{equation}
+The objective is to minimize the $latency_{u}$, the maximum flow installation latency, under above three constraints.   
+  
+

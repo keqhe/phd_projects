@@ -1,0 +1,54 @@
+\section{Design}
+\label{design}
+
+In history, TCP used packet loss as the signal of network congestion. 
+But, using packet loss as the signal can not meet the performance demand of datacenter environment 
+due to high queueing latency and frequent packet losses. Packet loss-based congestion control 
+can work reasonably well for large data transfers but does harm time-critical RPCs. 
+Thus, new congestion control algorithms designed for datacenter networks were proposed. 
+They can be classified into 2 categories: Explicit Congestion Notification (ECN)-based and 
+latency-based. The most straightforward way is to treat ECN as packet loss and cut congestion 
+window before network queue built up and packet loss happens---but this can harm flow throughput. 
+DCTCP improves this by cut window properly based on the portion of marked packets and 
+gives high throughput for large flows and low latency for mice flows. 
+Latency-based congestion control such as TCP-NV, TIMELY, DX use the end-to-end latency 
+as the signal of network congestion. Compared with ECN-based approach, latency is a more 
+prevalent signal for congestion (i.e., does not need ECN capability on the switches). 
+But the challenge of such approaches is to find ways to combat with latency measurement noise 
+caused by TSO, LRO and interrupt coalescence.
+
+This works main thesis is to explore whether we can provide universal low latency, low packet loss, 
+high throughput and better fairness properties in the network virtualization layer or 
+the network edge (e,g, NIC) which is completely under cloud provider's control such that 
+we can enforce better network performance for public datacenters. 
+%We leverage the existing mature congestion control algorithms and 
+%will use DCTCP as an implementation example.
+
+Connection tracking~\cite{ayuso2006netfilter,ovs-conntrack}.
+
+TCP Receive Window Auto-Tuning~\cite{semke1998automatic,receive-auto-runing}.
+Modern TCP stacks have this feature. In Linux and Window Server 2008, it is enabled by default.
+Finding proper receive buffer sizing is difficult due to rapidly changing network conditions.
+
+TCP receive window scaling~\cite{RFC1072,RFC1323}.
+
+\begin{figure}[t]
+        \centering
+        \begin{subfigure}[b]{0.225\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/new_enforce/new_tput_cwnd_rwnd_cubic_15k.pdf}
+                \caption{MTU = 1500 B}
+                \label{effectiveness_15k}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.225\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/new_enforce/new_tput_cwnd_rwnd_cubic_9k.pdf}
+                \caption{MTU = 9000 B}
+                \label{effectiveness_9k}
+        \end{subfigure}
+        \caption{Using TCP receive window (RWND) can effectively control throughput. 
+		Experiments are conducted on a 10G testbed. TCP CUBIC but New Reno shows similar results.
+		Linux 3.18.0. We control maximal RWND value by modifying the receiver's advertised window size in TCP ACKs
+		in the Open vSwitch. We control maximal CWND by specifying ``snd\_cwnd\_clamp" value in Linux TCP.}
+        \label{rwnd_effectiveness}
+\end{figure}

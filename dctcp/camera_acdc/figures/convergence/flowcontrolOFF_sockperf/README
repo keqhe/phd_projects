@@ -1,0 +1,46 @@
+Sep 22, 2015
+
+get_tput_per_run2.py: a more accurate way to get throughput statistics
+
+Drop rate:
+root@ubuntu:~/repo/dctcp/acdctcp/figures/convergence/flowcontrolOFF_sockperf# python analyze_drops.py tcp-flowctlOFF-tuningON
+python analyze_drops.py <result folder>
+0 port 64 pkts 1408123 drops 286
+0 port 64 pkts 1444098 drops 424
+0 port 64 pkts 1480929 drops 180
+0 port 64 pkts 1404163 drops 162
+0 port 64 pkts 1402579 drops 176
+total: 7139892 drops 1228 rate: 0.0171991397069
+
+root@ubuntu:~/repo/dctcp/acdctcp/figures/convergence/flowcontrolOFF_sockperf# python analyze_drops.py dctcp-official
+python analyze_drops.py <result folder>
+0 port 64 pkts 1401273 drops 0
+0 port 64 pkts 1385518 drops 0
+0 port 64 pkts 1389507 drops 0
+0 port 64 pkts 1400505 drops 0
+0 port 64 pkts 1412222 drops 0
+total: 6989025 drops 0 rate: 0.0
+
+root@ubuntu:~/repo/dctcp/acdctcp/figures/convergence/flowcontrolOFF_sockperf# python analyze_drops.py tcp-flowctlOFF-tuningON
+python analyze_drops.py <result folder>
+0 port 64 pkts 1408123 drops 286
+0 port 64 pkts 1444098 drops 424
+0 port 64 pkts 1480929 drops 180
+0 port 64 pkts 1404163 drops 162
+0 port 64 pkts 1402579 drops 176
+total: 7139892 drops 1228 rate: 0.0171991397069
+
+
+TCP RTT (sockperf):
+root@ubuntu:~/repo/dctcp/figures/convergence/flowcontrolOFF_sockperf# python get_sockperf_per_run.py tcp-flowctlOFF-tuningON
+python get_sockperf_per_run.py <result folder>
+root@ubuntu:~/repo/dctcp/figures/convergence/flowcontrolOFF_sockperf# python sockperf_process.py --file tcp-flowctlOFF-tuningON_sockperf
+root@ubuntu:~/repo/dctcp/figures/convergence/flowcontrolOFF_sockperf# vim tcp-flowctlOFF-tuningON_sockperf.cdf
+root@ubuntu:~/repo/dctcp/figures/convergence/flowcontrolOFF_sockperf# python get_sockperf_per_run.py dctcp-official
+python get_sockperf_per_run.py <result folder>
+root@ubuntu:~/repo/dctcp/figures/convergence/flowcontrolOFF_sockperf# python sockperf_process.py --file dctcp-official_sockperf root@ubuntu:~/repo/dctcp/figures/convergence/flowcontrolOFF_sockperf# python get_sockperf_per_run.py ovsdctcp
+python get_sockperf_per_run.py <result folder>
+root@ubuntu:~/repo/dctcp/figures/convergence/flowcontrolOFF_sockperf# python sockperf_process.py --file ovsdctcp_sockperf
+
+Tput:
+flows start at slightly different time points, so sometimes, the jain index is biased

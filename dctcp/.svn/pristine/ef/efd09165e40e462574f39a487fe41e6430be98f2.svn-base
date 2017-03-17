@@ -1,0 +1,39 @@
+\section{Results}
+\label{results}
+\keqiang{please unify everything like 1500, 1.5KB to 1.5kB, same case for 9kB -- i fixed most of them}
+
+\keqiang{make sure figure/table goes first than the corresponding text, need to double check on this}
+
+\tightparagraph{Testbed}
+The experiments are conducted on a physical testbed with 17 
+IBM System x3620 M3 servers (6-core Intel Xeon
+2.53GHz CPUs, 60GB memory) and Mellanox ConnectX-2 EN 10GbE NICs.
+Our switches are IBM G8264 (Broadcom Trident+ inside) switches, each with a buffer of 9MB shared
+by forty-eight 10G ports and four 40G ports.
+The switches have dynamic memory management enabled by default.
+
+\tightparagraph{System settings}
+We run Linux kernel 3.18.0 which implements DCTCP as a 
+pluggable congestion control module~\cite{linux-dctcp}.
+We use either CUBIC (the default in Linux)~\cite{ha2008cubic} or DCTCP as the congestion control algorithm unless otherwise specified.
+We set {{\tt $RTO_{min}$} to 10 milliseconds~\cite{vasudevan2009safe,judd2015nsdi}.
+We also set {\tt tcp\_low\_latency}, {\tt tcp\_no\_metrics\_save}, {\tt tcp\_sack} to 1 and
+keep other congestion control related parameters as default.
+Our \acdc{} is implemented based on Open vSwitch v2.3.2~\cite{ovs-website}.
+We run our experiments with either standard Open vSwitch or \acdc{}.
+The baseline we compare with is termed ``Default'' where no WRED/ECN is set on 
+the switches and standard Open vSwitch is running. 
+We have WRED/ECN configured on the switches when we run DCTCP and~\acdc{}.
+We use MTU size 9kB unless otherwise noted.
+
+\tightparagraph{Performance metrics}
+In \cref{micro},
+the performance metrics we use are: TCP RTT (measured by sockperf~\cite{sockperf}),
+TCP throughput (measured by iperf),
+packet loss rate (by collecting switch counters) and
+Jain's fairness index~\cite{jain-index}.
+In \cref{macro}, besides these, we also use 
+flow completion time (FCT)~\cite{dukkipati2006flow} to quantify application level performance.
+
+\input{microbenchmarks}
+\input{macrobenchmarks}

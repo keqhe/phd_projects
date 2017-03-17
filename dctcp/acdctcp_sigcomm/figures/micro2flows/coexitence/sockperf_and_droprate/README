@@ -1,0 +1,38 @@
+Sep 24, 2015
+
+Show that our logic can solve the problem of CUBIC and DCTCP coexistence.
+
+keq@arldcn26:~/workloads/program/acdctcp/micro2flows/coexitence/sockperf2$ python analyze_drops.py cubic_dctcp_ours
+python analyze_drops.py <result folder>
+0 port 64 pkts 1484251 drops 0
+0 port 64 pkts 1469634 drops 0
+0 port 64 pkts 1455506 drops 0
+0 port 64 pkts 1456574 drops 0
+0 port 64 pkts 1494876 drops 0
+total: 7360841 drops 0 rate: 0.0
+keq@arldcn26:~/workloads/program/acdctcp/micro2flows/coexitence/sockperf2$ python get_sockperf_per_run.py cubic_dctcp_ours
+python get_sockperf_per_run.py <result folder>
+keq@arldcn26:~/workloads/program/acdctcp/micro2flows/coexitence/sockperf2$ python sockperf_process.py --file cubic_dctcp_ours_CUBIC_sockperf
+keq@arldcn26:~/workloads/program/acdctcp/micro2flows/coexitence/sockperf2$ vim cubic_dctcp_ours_CUBIC_sockperf.cdf
+keq@arldcn26:~/workloads/program/acdctcp/micro2flows/coexitence/sockperf2$ python get_tput_per_run.py cubic_dctcp_ours
+Usage: pyhton <result folder>
+keq@arldcn26:~/workloads/program/acdctcp/micro2flows/coexitence/sockperf2$ python throughput.py cubic_dctcp_ours_tput.out
+average tput is 4822.8
+
+
+keq@arldcn26:~/workloads/program/acdctcp/micro2flows/coexitence/sockperf2$ python analyze_drops.py cubic_dctcp_official
+python analyze_drops.py <result folder>
+0 port 64 pkts 1296585 drops 2212
+0 port 64 pkts 1283600 drops 2223
+0 port 64 pkts 1276970 drops 2226
+0 port 64 pkts 1338859 drops 2729
+0 port 64 pkts 1287107 drops 2460
+total: 6483121 drops 11850 rate: 0.182782335853
+keq@arldcn26:~/workloads/program/acdctcp/micro2flows/coexitence/sockperf2$ python get_sockperf_per_run.py cubic_dctcp_official
+python get_sockperf_per_run.py <result folder>
+keq@arldcn26:~/workloads/program/acdctcp/micro2flows/coexitence/sockperf2$ python sockperf_process.py --file cubic_dctcp_official_CUBIC_sockperf
+keq@arldcn26:~/workloads/program/acdctcp/micro2flows/coexitence/sockperf2$ vim cubic_dctcp_official_CUBIC_sockperf.cdf
+keq@arldcn26:~/workloads/program/acdctcp/micro2flows/coexitence/sockperf2$ python get_tput_per_run.py cubic_dctcp_official
+Usage: pyhton <result folder>
+keq@arldcn26:~/workloads/program/acdctcp/micro2flows/coexitence/sockperf2$ python throughput.py cubic_dctcp_official_tput.out
+average tput is 4635.4

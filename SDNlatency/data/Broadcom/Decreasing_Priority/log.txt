@@ -1,0 +1,56 @@
+Rate 10:
+total rules inserted successfully: 765
+total delay for these rules: 5573.853
+avg rule insertion delay: 7.28608235294
+max rule insertion delay: 20.173
+min rule insertion delay: 3.772
+
+Rate 30:
+total rules inserted successfully: 765
+total delay for these rules: 5748.601
+avg rule insertion delay: 7.51451111111
+max rule insertion delay: 28.129
+min rule insertion delay: 3.629
+
+Rate 50:
+total rules inserted successfully: 765
+total delay for these rules: 6074.538
+avg rule insertion delay: 7.94057254902
+max rule insertion delay: 30.797
+min rule insertion delay: 3.909
+
+Rate 100:
+total rules inserted successfully: 765
+total delay for these rules: 9327.244
+avg rule insertion delay: 12.192475817
+max rule insertion delay: 68.843
+min rule insertion delay: 3.833
+
+Rate 150:
+total rules inserted successfully: 765
+total delay for these rules: 982144.378
+avg rule insertion delay: 1283.84886013
+max rule insertion delay: 6972.337
+min rule insertion delay: 3.969
+
+Rate 200:
+total rules inserted successfully: 765
+total delay for these rules: 3973374.534
+avg rule insertion delay: 5193.95363922
+max rule insertion delay: 14801.995
+min rule insertion delay: 3.997
+
+Rate 250:
+total rules inserted successfully: 765
+total delay for these rules: 5336794.994
+avg rule insertion delay: 6976.20260654
+max rule insertion delay: 21740.719
+min rule insertion delay: 7.265
+
+Rate 300:
+total rules inserted successfully: 765
+total delay for these rules: 7133876.633
+avg rule insertion delay: 9325.32893203
+max rule insertion delay: 21125.028
+min rule insertion delay: 4.079
+

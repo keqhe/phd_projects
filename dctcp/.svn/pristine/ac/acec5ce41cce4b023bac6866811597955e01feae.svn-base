@@ -1,0 +1,182 @@
+\section{Background and Motivation}
+\label{background}
+In this section, we first give a brief background of latencies and congestion 
+control in datacenter environments. Then we motivate the benefits of moving congestion
+control into the vSwitch. Finally, we discuss how a class of related schemes, bandwidth
+allocation, are not sufficient to ensure low latencies on the fabric. 
+
+\subsection{Network Latencies in Datacenters}
+Network latency is a critical performance metric for
+datacenters because it directly determines whether application or customer service level agreements (SLA)
+can be met. Today's datacenters host many intensive applications like search,
+advertising, analytics and retail that require high bandwidth and low latency.
+Large tail latencies often violate the tight timing constraints required by SLAs at scale, and
+have been shown to impact customer experience, result in
+revenue loss~\cite{alizadeh2011data,dean2013tail}, and degrade application performance~\cite{jang2015silo,qjump}.
+Tail latencies are often caused by network congestion.
+The latency of traversing a single switch, NIC and OS network stack is 10--30$\mu$s,
+2.5--32$\mu$s and 15$\mu$s respectively, but a congested port
+on a network switch can consume significant shared memory, causing orders-of-magnitude
+higer latency~\cite{rumble2011s}.
+Congestion is caused by many reasons such as imperfect load balancing~\cite{al2010hedera},
+network upgrades, failures or oversubscription and its occurance in
+datacenters today is not rare. For example, Google reported that in their datacenter fabric
+congestion-based drops were observed when the network utilization approached 25\%~\cite{singh2015jupiter}.
+Other studies have shown high variance and substantial increase in the 99.9$^{th}$ percentile latency
+for round-trip times in today's datacenters~\cite{wang2010impact,mogul2015inferring}. Therefore,
+significant motivation exists to ensure datacenter fabrics reduce the impact of congestion in order to
+limit tail latencies.
+
+%Studies have shown that while CUBIC can achieve
+%high bandwidth, it does so at the cost of aggressively filling up the switch buffers in the network.
+TCP, specifically its congestion control algorithm, is widely
+known to significantly impact network performance.
+As a result, datacenter TCP performance has been widely
+studied and many new protocols have been proposed~\cite{alizadeh2011data, stephens2014practical, wu2010ictcp,
+mittal2015timely, jose2015high}. Specifically, DCTCP~\cite{alizadeh2011data} achieves high throughput and low
+latency by adjusting a TCP sender's rate based on the fraction of packets that experience congestion. In DCTCP,
+switches are configured to mark packets with an ECN bit when their queue lengths exceed a threshold. By proportionally
+adjusting the rate of the sender based on the fraction of ECN bits received, DCTCP can keep queue lengths low while
+allowing flows to maintain high throughput. It has also been shown to increase fairness and stability over other schemes.
+~\eric{cite} In this work, we do not propose a new congestion control algorithm, rather we investigate if congestion
+control can be moved to the vSwitch to optimize datacenter performance in the face of arbitrary VM TCP stacks. 
+
+
+\subsection{Benefits of Datacenter Congestion Control in vSwitch}
+In a public datacenter environment where
+VMs may deploy non-optimized TCP stacks, implementing congestion control in the vSwitch can provide an element of control without cooperation from
+VMs. This is an important criteria in untrusted environments or simply in cases where tenants cannot update their TCP stack due to
+various constraints (such as not being able to update their OS or a dependence on a certain library). 
+As outlined in the previous subsection, enforcing a datacenter-specific congestion control algorithm can help reduce queueing latencies in the network.
+~\eric{and give high throughput}
+This is the first major benefit of our scheme. 
+
+The next major benefit is that moving the congestion control algorithm within the virtual switch allows for a {\em unified}
+congestion control algorithm to be implemented throughout the datacenter.
+Ensuring all tenants have the same stack can help limit unfairness in the network. Unfairness arises
+when stacks are handled differently in the fabric or when conservative and aggressive
+stacks coexist. In~\cite{judd2015nsdi}, it is shown ECN and non-ECN flows do not exist gracefully on the
+same fabric because packets belonging to non-ECN flows encounter severe packet drops when their packets
+exceed queue thresholds. Ideally, tenants shouldn't suffer based on a such a simple configuration issue.
+Additionally, stacks with different congestion control algorithms may not gracefully coexist on the same fabric.
+For example, Figure~\ref{tput_fairness_coexistence} shows the performance of five different TCP flows over the topology in
+Figure~\ref{dumbbell_topology}. Each flow has a different congestion control algorithm, all of which are available in today's Linux
+distribution. In this case the more aggressive stacks like TCP Illinois and TCP HighSpeed
+always achieve higher bandwidth. A tenant with the same standing as another tenant in the datacenter should not be able
+to achieve higher bandwidth by simply altering their stack.
+
+Another benefit of moving congestion control to the vSwitch is it allows for different congestion control algorithms to be used on
+a per-flow basis. Currently, all flows within a VM are tied to the same congestion control algorithm. This severely limits
+flexibility and forces tenants to optimize the performance a certain set of flows. For example, a webserver may choose a TCP stack that optimizes
+WAN performance, instead of the back-end performance within the datacenter. As studies have shown that TCP can be optimized for datacenters~\cite{alizadeh2011data, stephens2014practical, wu2010ictcp,
+mittal2015timely, jose2015high}, WAN environments, and even
+~\eric{one more example, wireless/60Ghz/free-space optics?}, selecting a per-flow TCP stack has the potential to
+enhance network performance. By moving congestion control to the vSwitch, administrators can assign a specific congestion control
+algorithm to each flow, optimizing the network performance of its clients in a seamless manner.~\eric{Also add QoS-based CC
+stuff here, since we have something.}
+
+Congestion control functionality is easy to port. Note that while the entire TCP stack may seem complicated and prone to high-overhead,i
+the congestion control aspect of TCP is relatively light-weight and easy to implement. Indeed, studies have
+shown that most overhead comes from TCP's buffer management~\cite{optimize-tcp-receive}. The actual congestion control implementations in Linux
+are modular: DCTCP's Linux congestion control resides in {\tt tcp\_dctcp.c} and is only about 350 lines of code. Given
+the simplicity of congestion control, it is relatively easy to move its functionality to another
+layer. In~\acdc{}, we don't modify VMs so congestion control is run both in the vSwitch and in the VM. However, because congestion
+control is light-weight, the penalty imposed for running it twice is low: our benchmarks in Section~\todo{XXX} show the computational overhead of our scheme is less than 2\%.
+
+
+\subsection{Can Bandwidth Allocation Provide Low Latency?}
+Datacenter providers must find ways to isolate the performance of different
+tenants and applications so that one tenant or application cannot take
+an unfair share of common resources, like CPU, memory or the network.
+In order to provide a degree of performance isolation in the network, datacenter operators can implement
+a variety of bandwidth allocation schemes. 
+
+Simple static rate limiters found
+on many default public cloud images enforce an upper-bound on the bandwidth available
+to different classes of VMs. Congestion can occur when the cumulative bandwidth from a set of
+senders exceeds the bandwidth of a network link (incast is a special case). Consider the topology in Figure~\ref{dumbbell_topology},  
+with 5 flows traversing a bottleneck 10 Gbps link. Even in the case of a "perfect" allocation, where each flow is statically limited to 10 Gbps/5 flows = 2 Gbps,
+the latency caused by queueing heavily depends on the deployed TCP stack. We show this in Figure~\eric{cubic-fill}.
+CUBIC~\cite{ha2008cubic}, the default TCP congestion control algorithm in Linux, will aggressively fill
+the buffer of the congested output port, causing latencies to significantly increase. DCTCP, however, is able
+to keep buffers low~\cite{alizadeh2011data}, allowing for a queueing latency that is an order of magnitude lower than CUBIC's. These differences exist despite the fact
+that each scheme is able to achieve the same throughput over the congested link (Section~\ref{results}~\eric{Table 1}).
+Note that in Figure~\ref{cubic-fill}, DCTCP is run in the absence of a static rate limiter, meaning that it is effective
+in mitigating congestion's impact on latency. 
+
+
+More complex performance isolation schemes investigate how to allocate network bandwidth in datacenter
+networks by either guarenteeing or proportionally
+allocating bandwidth for tenants~\cite{rodrigues2011gatekeeper,Ballani2011oktopus,jeyakumar2013eyeq,shieh2011sharing,
+Guo2010Secondnet,Popa2012Faircloud,Xie2012Proteus,Lam2012NetShare}. 
+These works focus on {\em bandwidth allocation} 
+on a per-VM level, and do not provide any guarentees on per-flow latency.~\footnote{Note Silo~\cite{jang2015silo}
+guarentees bandwidth and delay by additionally enforcing VM admission and placement}.
+Similar to before, congestion in the network significantly impact latency and these
+schemes do not guarentee a congestion-free network. 
+
+Three bandwidth allocation schemes, EyeQ~\cite{jeyakumar2013eyeq}, Gatekeeper~\cite{rodrigues2011gatekeeper} and Seawall~\cite{shieh2011sharing}
+use congestion control techniques to provide bandwidth guarentees. At a high-level, these schemes employ
+VM-to-VM tunnels that partition bandwidth at the network edge (EyeQ) or proportionally allocate bandwidth
+over network links (Seawall). In addition, both EyeQ and Seawall are designed to adapt to network congestion
+by analyzing the fraction of packets marked with ECN bits to adjust the rates imposed on the VM-to-VM tunnels. 
+VM-to-VM tunnels are not fine-grained enough to effective mitigate queueing latencies caused by congestion.
+For example, datacenter topologies typically contain multiple paths from a source to a destination. Therefore,
+if a VM has multiple flows to another VM, those flows may take seperate paths (thanks to ECMP). By combining all flows
+over a single logical VM-to-VM tunnel, the proportion of packets experiencing congestion gets muddled. Flows that
+are not experiencing any congestion get their rates reduced unneccesarrily. Flows that are experiencing congestion
+do not reduce their rates fast enough.~\eric{i know this needs work} 
+
+Therefore, our scheme is complimentary to prior bandwidth allocation schemes.~\acdc can be used to ensure
+each flow is limited properly, while other schemes can ensure a VM is not sending too much data. 
+The schemes work in
+concert, in that traffic flowing from a VM is bound by the minimum enforcement of the rate-limiter and our scheme.
+Indeed, we designed~\acdc{} to be modular in nature. 
+A key design constraint of~\acdc{} is to make it modular in nature. This means that our scheme should work with a variety
+of bandwidth allocation schemes and their associated rate-limiters (and also in the absence of both). In order to
+achieve this goal,~\acdc{} satisfies a variety of constraints. First, it is computationally light-weight in order to minimize
+the overhead of its adoption.
+Second, it doesn't require any changes to VMs or network hardware so it can be deployed in current and future networks.
+Third, our scheme works in the absence of specific topology information and works over arbitrary topologies.
+Fourth, admins need not possess information about tenant or flow demands.~\eric{mention multi-path?} Mention work
+on congestion-scale time intervals? Our
+implementation within the vSwitch is modularized such that it can easily be co-deployed with other schemes that may also
+alter the vSwitch or components within the hypervisor's networking stack.
+In short, we design our scheme to be complementary in nature to the large body of bandwidth allocation and rate-limiting schemes.
+This works
+well, as the control loops of some bandwidth allocation schemes range from the order to tens of milliseconds~\cite{shieh2011sharing, rodrigues2011gatekeeper}
+to seconds~\cite{Ballani2011oktopus}.
+~\eric{this needs work, trying to remove last section...}
+
+\eric{Seawall talk mentioned O($10^5$) new tasks per minute. Can we make something more concrete above?}
+
+\begin{figure}[th]
+        \centering
+  \includegraphics[width=0.45\textwidth]{figures/motivation/motivation_2Gbps_cubic_rl_dctcp_sockperf.pdf}
+        \caption{CDF of round-trip times showing that CUBIC fills buffers. DCTCP keeps them low.}
+        \label{cubic-fill}
+\end{figure}
+
+
+
+
+\begin{figure}[t]
+        \centering
+        \begin{subfigure}[b]{0.225\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/new_enforce/new_tput_cwnd_rwnd_cubic_15k.pdf}
+                \caption{MTU = 1.5KB.}
+                \label{effectiveness_15k}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.225\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/new_enforce/new_tput_cwnd_rwnd_cubic_9k.pdf}
+                \caption{MTU = 9KB.}
+                \label{effectiveness_9k}
+        \end{subfigure}
+        \caption{Using \rwnd{} can effectively control throughput.
+                Experiments are conducted on a 10G testbed. TCP CUBIC but New Reno shows similar results.
+                Linux 3.18.0. We control maximal \rwnd{} value by modifying the receiver's advertised window size in TCP ACKs
+                in the Open vSwitch. We control maximal \cwnd{} by specifying ``snd\_cwnd\_clamp" value in Linux TCP.}
+        \label{rwnd_effectiveness}
+\end{figure}

@@ -1,0 +1,36 @@
+\section{Conclusion}
+\label{sec:conclusion}
+Critical SDN applications such as fast failover and fine-grained traffic
+engineering demand fast interaction between switch control and data planes.
+However, our measurements of four SDN switches show the latencies
+underlying the generation of control messages and the execution of control
+operations can be quite high, and variable. 
+%
+%A subset of our findings highlight problems with the software implementation
+%on OpenFlow switches: e.g., rule insertion latencies are 3ms with
+%\BroadcomOne, which is significantly higher than the update rate that TCAM
+%hardware natively supports~\cite{estan:private}.  We believe near term work
+%will reduce such issues, as indicated by improved latencies in \BroadcomThree.
+%However, given that software ``glue'' will continue to exist between control
+%and data planes in SDN switches, we remain skeptical whether latencies will
+%ever reach what hardware can natively support.
+%
+%Our measurements also reveal root causes of latency that appear to be
+%fundamentally entrenched in hardware design: e.g., rules must be organized in
+%the TCAM in a priority order for correct and efficient matching; also,
+%\packetin, \flowmod, and \packetout messages must contend for limited bus
+%bandwidth between a switch's CPU and ASIC. Unless the hardware significantly
+%changes, we believe the latencies we identify will continue to manifest in
+%next generation switches.  
+%
+We find that the underlying causes are linked to software inefficiencies, as
+well as pathological interactions between switch hardware properties (shared
+resources and how forwarding rules are organized) and the control operation
+workload (the order of operations, and concurrent switch activities). 
+%%Our measurements highlight the need for careful design of next generation
+%%switch silicon and software in order to fully utilize the power of SDN.
+%Given the software ``glue'' between switch control and data planes and the
+%long upgrade cycles of switch hardware, we believe the latencies we identify
+%will continue to manifest even in next generation switches.  
+These findings highlight the need for careful design of future switch
+silicon and software in order to fully utilize the power of SDN.

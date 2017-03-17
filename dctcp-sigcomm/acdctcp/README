@@ -1,0 +1,101 @@
+Summary from Keqiang meeting on 12/14/15.
+
+To do list:
+
+---
+0. Fix Figure 2 typo.
+
+=====
+Experiments to run:
+=====
+---
+1. When does RWND take affect and when does CWND take effect?
+
+Can show a timeseries with CWND and RWND values. Like Fig 6.
+
+Topology: 5 flows on dumbbell.
+
+Cubic w/o ECN on top. Ours in OVS.
+
+MTU: 1500 and 9000, to be consistent with Fig 6
+
+~5 second run.
+
+Possible to increment senders from 1 to 5, like Fig 9.
+
+NEW: Can we add one "ECN/loss" based congestion control on top and one "RTT"-based congestion control on top?
+==read DCTCP paper, it talks about two classes of congestion control algorithms
+
+---
+2. Effect of different congestion control on fairness.
+
+5 flows on dumbbell: reno, cubic, tcp_illionois, dctcp, HS-tcp
+
+Goal: on official OVS, a lot of unfairness. With ours, it's okay.
+
+May have to move to parking lot to get different RTT times. Motivation plots consist of:
+	+same RTT across all flows, vary CC (this graph)
+	+same CC, but different RTT (parking lot, we have already)
+	+ECT vs non-ECT.
+Graph: Like DCTCP paper: test/run on x-axis and flow throughput on y-axis. Lines for min/max/median/mean.
+Need: 10-20 runs. At least 30 seconds b/c want time for CC to work.
+
+Ours: enable ECN
+Official OVS w/ other CCs: disable ECN
+MTU 9K
+Can also run OVS official + DCTCP. Why? Put 5CC and 5DCTCP in motivation. Put 5CC and OURS in microbenchmarks.
+
+
+May have to move to parking lot if don't get good results. Not as clean b/c RTT varies now.
+
+---
+3. Keqiang, maybe?!!?!? Implement something besides DCTCP in OVS.
+4. Keqaing: motivation on why TCP on top of a Rate Limiter might be bad. Not necessarily CPU usage, but maybe TCP performance.
+
+---
+Eric:
+4. QoS-based CC
+5. Joint path CC
+
+
+=======
+Motivation
+======
+
+Benefits of our scheme:
+1. Unified CC gives low latency and fairness.
+2. Implement QoS within CC
+	+allow free users to get differentiated QoS amongst themselves
+	+allow QoS in networks w/o QoS enabled
+	+allow free users to use unused network resources
+3. Rate limiting does not solve incast.
+4. Congestion control over same bottleneck link.
+	One VM may create 10 flows to get disproportionate bandwidth, say over a VM with 1 flow.
+	We could do CC on <sip,dip> instead of <sport,sip,dport,dip>. But challenges:
+		+CC cwnd not necessarily linear
+		+What if the 10 flows are long lived and only needs the throughput? need to allocate based on weighted usage.
+5. OVS is SDN-enabled. Centralized control framework is there.
+
+
+=======
+Discussion
+======
+
+1. Need to talk about what happens when ppl ignore RWND value. Can easily monitor when RWND is violated. (add figure?)
+	Then move to rate limiter. Need to read rate limiting to see what we can claim in terms of functionality.
+	And how to deal with RWND value that may change after we set rate limiter. That is, we set RL to 500Kbps, but 
+	RWND dips to ~100Kbps. Also, how to map RWND to RL throughput.
+
+2. Auto-tuning.
+	Monitor TCP options for this. Note we can strip this off at sender and receiver during SYN handshake if necessary.
+
+3. North/south traffic.
+	+edge proxy?
+	
+4. Non-TCP traffic.
+	IPsec cause any problems? Some encryption schemes?
+	Someone could just send UDP instead of TCP and use a lot of n/w.
+	
+	
+4. 
+

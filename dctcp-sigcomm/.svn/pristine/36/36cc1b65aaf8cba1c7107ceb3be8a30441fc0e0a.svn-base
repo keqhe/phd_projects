@@ -1,0 +1,289 @@
+\section{Background and Motivation}
+\label{background}
+\keqiang{we may put too much weight on performance isolation or bandwidth allocation,
+i understand the ``modularity'' argument, but still, too much about bandwidth allocation work.
+something like Mogul's "research (e.g., Proteus and Cicada) has shown how to do
+this for network-bandwidth demands, but cloud tenants
+may also need to meet latency objectives, which in turn
+may depend on reliable limits on network latency, and its
+variance,  within the cloud providers infrastructure" seems to be okay here.
+After reading this section, people need to know what problem we are going to solve and 
+why they are important.}
+
+\subsection{Network Latencies in Datacenters}
+Network latency is a critical performance metric for 
+datacenters because it directly determines whether application or customer service level agreements (SLA)
+can be met. Today's datacenters host many online data intensive (OLDI) applications like search,
+advertising, analytics and~\todo{XXX} that require high bandwidth and low latency at scale. 
+Large tail latencies often violate the tight timing constraints required by OLDI SLAs at scale, and
+have been shown to impact customer experience, result in 
+revenue loss~\cite{alizadeh2011data,dean2013tail}, and degrade application performance~\cite{jang2015silo,qjump}.
+Tail latencies are often caused by network congestion.
+The latency of traversing a single switch, NIC and OS network stack is 10--30$\mu$s,
+2.5--32$\mu$s and 15$\mu$s respectively, but a congested port
+on a network switch can consume significant shared memory, causing orders-of-magnitude 
+higer latency~\cite{rumble2011s}. 
+Congestion is caused by many reasons~\todo{(such as XXX)} and its occurance in 
+datacenters today is not rare. For example, Google reported that in their datacenter fabric
+congestion-based drops were observed when the network utilization approached 25\%~\cite{singh2015jupiter}.
+Other studies have shown high variance and substantial increase in the 99.9$^{th}$ percentile latency
+for round-trip times in today's datacenters~\cite{wang2010impact,mogul2015inferring}. Therefore,
+significant motivation exists to ensure datacenter fabrics reduce the impact of congestion in order to 
+limit tail latencies.
+
+%So, in-network queueing latency which is caused by network congestion
+%is considered as the major contributor to high end-to-end
+%network latency and its variance~\cite{jang2015silo,mittal2015timely}.
+
+%~\cite{wang2010impact} measured RTTs for small and medium instance pairs in Amazon EC2 and show that 
+%RTTs have very high variance (ranging from around 0.1 millisecond to more than 10s of milliseconds). 
+%More recently,~\cite{mogul2015inferring} measured TCP latencies in 3 cloud providers and 
+%reported that TCP latency has very high variance and 99.9$^{th}$ percentile latency 
+%is an order of magnitude higher than the median.
+
+%To achieve low latency datacenter network, 
+%a set of research proposals have been proposed, such as DCTCP~\cite{alizadeh2011data}, 
+%HULL~\cite{alizadeh2012less}, TIMELY~\cite{mittal2015timely}, 
+%DX~\cite{lee2015accurate}, Silo~\cite{jang2015silo}, DCQCN~\cite{zhu2015congestion} etc.
+
+%Latencies can be high due to congestion.
+%Studies show large variance in latencies.
+%Relate to our scheme. Google SIGCOMM 2015 paper.
+
+\subsection{Congestion Control for Datacenter Network}
+
+The performance of TCP, specifically its congestion control algorithm, is widely
+known to significantly impact network performance. Specifically, aggressive
+congestion control algorithms tend to increase congestion, which leads to long
+tail latencies and loss. Conservative schemes may reduce latency and loss at the cost of
+sacrificing bandwidth.
+
+Datacenter networks are unique in that their bandwidths are extremely high, their 
+latencies are typically low and their applications are demanding. The default
+TCP stack included in most Linux implementations today, TCP CUBIC, is not
+sufficient under such environments. Studies have shown that while CUBIC can achieve
+high bandwidth, it does so at the cost of aggressively filling up the switch buffers in the network.
+
+As a result, the performance of TCP in datacenters has been widely
+studied and many new protocols have been proposed~\cite{alizadeh2011data, stephens2014practical, wu2010ictcp,
+mittal2015timely, jose2015high}. Specifically, DCTCP~\cite{alizadeh2011data} achieves high throughput and low
+latency by adjusting a TCP sender's rate based on the fraction of packets that experience congestion. In DCTCP,
+switches are configured to mark packets with an ECN bit when their queue lengths exceed a threshold. By proportionally
+adjusting the rate of the sender based on the fraction of ECN bits received, DCTCP can keep queue lengths low while 
+allowing flows to maintain high throughput. It has also been shown to increase fairness and stability over other schemes.
+DCTCP is implemented in Linux and Windows and is deployed by Microsoft, Google, Morgan Stanley.~\todo{add cites.}
+
+Despite the benefits of DCTCP and other newly proposed schemes, it appears the vast majority
+of TCP stacks in-the-wild still use CUBIC. For example, we informally investigated the default congestion
+control algorithm on popular Linux-based VMs provided by Amazon, Azure, and Google, 
+and found the congestion control image to CUBIC. We also informally sampled
+the TCP stack of a production health and mobile application from a large company and found all Linux
+images to also use CUBIC. This highlights the main motivation of our work: datacenter providers
+should not be at the mercy of a tenant's TCP stack. Instead, providers should be able to enforce
+their intended congestion control on a tenant. The provider should be able to do so without making
+any changes to the tenant's VM or applications in order to ensure adoption.~\eric{this is a tricky argument.
+we want to show that VM's aren't using great stacks, but if the congestion control scheme really mattered,
+you would think that at least the default images on cloud providers would change their TCP stacks to DCTCP. Need
+to think about this one.}
+
+Our approach relocates TCP's congestion control algorithm from tenant VMs to the virtual switch
+on the hypervisor. Note that while the entire TCP stack may seem complicated and be prone to high-overhead,
+the congestion control aspect of TCP is relatively light-weight and easier to implement. Indeed, studies have
+shown that most overhead comes from TCP's buffering~\todo{cite} and the actual congestion control implementations in Linux
+are modular (DCTCP's Linux congestion control resides in {\tt tcp\_dctcp.c} and is only about 350 lines). Given
+the simplicity of the congestion control, it should be relatively simple to move its functionality to another
+layer. Furthermore, moving the congestion control algorithm within the virtual switch allows for a {\em unified}
+congestion control algorithm to be implemented throughout the datacenter.
+
+
+Ensuring all tenants have the same stack can help limit unfairness in the network. Unfairness arises
+when stacks are handled differently in the fabric or when conservative and aggressive
+stacks co-exist. In~\cite{judd2015nsdi}, it is shown than ECN and non-ECN flows do not exist gracefully on the
+same fabric because non-ECN flows cannot back off from ECN markings and encounter severe packet drops when their packets
+exceed queue thresholds. Ideally, tenants shouldn't suffer based on a such a simple configuration issue. 
+Additionally, stacks with different congestion control algorithms may not gracefully coexist on the same fabric.
+For example, Figure~\ref{tput_fairness_coexistence} shows the performance of five different TCP flows over a bottleneck
+link. Each flow has a different congestion control algorithm, and all of these algorithms are available in the Linux
+distribution. In this case the more aggressive stacks~\todo{XXX} always
+achieve higher bandwidth. A tenant with the same standing as another tenant in the datacenter should not be able
+to achieve higher bandwidth by simply altering their stack.
+
+
+\subsection{Performance Isolation}
+\keqiang{here, we can say that today's cloud providers only 
+have limited performance isolation properties, a commonly used
+yet practical solution is to setting a ``celling'' bandwidth for 
+different types of VM instances. 
+Our scheme is immediately deployable for today's datacenter networks.
+Even for the research proposals that 
+aim to provide more strict bandwidth guarantees, they mainly or solely focus
+on bandwidth guarantees. Our scheme is modular and compatible with those proposals.
+Finally, as measurement works~\cite{roy2015inside,alizadeh2011data,greenberg2009vl2} 
+on real datacenter network traffic show, 
+most of the flows in datacenter are very small and busty. 
+So providing bandwidth guarantee will benefit those bandwidth-hungry applications. 
+For time-critical services which usually are small in nature, 
+reducing in-network queueing latency is equivalent or even more important.
+}
+
+Datacenter providers must find ways to isolate the performance of different
+tenants and applications so that one tenant or application cannot take
+an unfair share of common resources, like CPU, memory or the network. And while
+most providers (Amazon EC2, Microsoft Azure, Google Cloud Platform) provide logical
+clusters for high-bandwidth, low-latency networking and dedicated instances, there still does not 
+exist strict bandwidth guarentees over the network fabric. Instead, providers typically
+enfore an upper-bound on the throughput available to different classes of VMs~\todo{cites}. 
+The absence of strict isolation means tenant cross-traffic can induce delays due to
+the switch's queue building up. For example, simply limiting a VM to a total sending rate
+of 2 Gbps causes congestion when more than five distributed VMs send over a bottleneck 10 Gbps link.
+The absence of strict guarentees motivates the need for a simple, modular
+scheme to reduce latency caused by congestion in the network. An ideal scheme should
+be immediately deployable, but still be flexible enough to work with future fine-grained
+performance isolation schemes.~\acdc is designed to easily drop in to current and future infrastructures.
+
+Even though fine-grained network performance isolation is not widely adopted,
+many studies investigate how to allocate network bandwidth in datacenter 
+networks~\cite{rodrigues2011gatekeeper,Ballani2011oktopus,jeyakumar2013eyeq,shieh2011sharing,
+Guo2010Secondnet,Popa2012Faircloud,Xie2012Proteus,Lam2012NetShare}.
+These schemes allocate network resources by either guarenteeing or proportionally
+allocating bandwidth for tenants. 
+%Their goals are achieved by either using sophiscated queueing 
+%techniques in the network switch or rate-limiting on end-hosts. Switch implementations
+%are typically difficult to scale. End-host rate-limiters typically focus on throughput, but
+%do not focus on latency. 
+Regardless of their differences, these works focus on bandwidth allocation and
+largley ignore latency~\footnote{Note Silo~\cite{jang2015silo} 
+guarentees bandwidth and delay by additionally enforcing VM admission and placement}. Allocating bandwidth can be insufficient 
+to reduce latencies because different TCP stacks have a large impact on switch queueing.  
+For example, in Section~\ref{results}~\eric{Table 1} we
+show CUBIC and DCTCP obtain the same throughput over a congested link, despite the fact
+that DCTCP's queueing latency is an order-of-magnitude lower than CUBIC's. This follows
+from the fact that DCTCP has been shown to achieve high throughput while proactively avoiding queue build-up~\cite{alizadeh2011data}.
+%CUBIC in incast has the same throughput as DCTCP, but the
+%latencies are much different because CUBIC fills the switch queues and DCTCP can proactively
+%avoid switch build-up. 
+In order to offset the issue of queue build-up due to an inefficient TCP stack, prior schemes rely on sacrificing capacity
+to achieve low latency (~\cite{jang2015silo} and~\cite{jeyakumar2013eyeq} have ~10\% headroom in their experiments).
+~\eric{Have to be careful here? EyeQ's experiments leave 10\% headroom. 11\% in Silo. May need to back off a bit.}
+%usually provide a
+%bandwidth headroom of 5-10\%, reduce rates when line-rate is nearing. 
+With~\acdc, we show that doing so is unnecessary~\eric{not sure we direclty show this} as long as an appropriate
+transport congestion control algorithm can be enforced.
+
+Therefore, our scheme of implementing congestion control the vSwitch is largely
+complimentary to prior bandwidth allocation schemes. Those schemes can provide upper-bounds
+on the sending rates of flows or tenants in the network and the actual transport congestion
+control can be handled by~\acdc. Since~\acdc is low overhead and has relativey few requirements, 
+it can be thought of as a modular drop-in that easily coexists with other technologies.
+
+%Need to talk about how using
+%rate-limiters have has high overhead and using windowing based scheme is much simpler? 
+\eric{Seawall is closest to us in that it does tunnel-based congestion control. Provide
+a footnote about Seawall here to forward reference discussion to related works?}
+%Probably need
+%to hit on fact that we don't change VMs, have tight control loop and low-cost, scalable way
+%to implement rate-limiting.
+ 
+%Need to talk about how our scheme works in absence of bandwidth allocation, but
+%also in cases where tenants/flows have teh same service levels/QoS guarentees.
+
+
+
+\subsection{Rate Limiters vs TCP Windowing}
+Most of the bandwidth allocation schemes above utilize hardware rate-limiters, switch scheduling mechanisms or
+software rate-limiters to ensure end-points do not send more than their allocated amount of traffic.
+Hardware-based techniques are generally difficult to scale in a fine-grained fashion to tens of thousands
+of flows~\cite{radhakrishnan2014senic}.~\todo{accurate source?}
+%Rate-limiting can be achieved in hardware (NIC or edge switches) or
+%software (\eg{}, Linux HTB) or hybrid mod
+%The known limitation is that commodity NICs have limited number of rate limiters
+%which are insufficient at scale, especially as the server consolidation trend is growing~\cite{radhakrishnan2014senic}. Similar problems for switch-based techniques.
+Rate-limiters implemented in software
+have prohibitively high overhead: Linux's HTB implementation incurs high CPU overhead
+and cannot reach line rate~\cite{radhakrishnan2014senic}, and Silo's pacing scheme~\cite{jang2015silo}
+requires disabling NIC-based segment offloads (TSO). \todo{Need to say something about
+FasTrack, which is a hybrid scheme}.
+
+\acdc{} takes an alternative approach to rate limiting. Instead of rate limiting traffic from a 
+VM, we aim to prevent additional traffic from being sent in the first place
+by exploiting the built-in and known behavior of the tenant's TCP stack. 
+Specifically,~\acdc modifies
+the receive advertised window (\rwnd{}) on incoming TCP ACKs in order to limit the amount of data a VM flow can send.
+This works because the amount of packets TCP is able to send is bounded by the min of the congestion window (\cwnd{}) and
+~\rwnd{}. Since many congestion control algorithms rely on windowing, this allows for~\acdc{} to easily
+enforce a derived~\cwnd{} on a tenant's TCP flow.
+
+
+\begin{figure}[t]
+        \centering
+        \begin{subfigure}[b]{0.225\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/new_enforce/new_tput_cwnd_rwnd_cubic_15k.pdf}
+                \caption{MTU = 1.5KB.}
+                \label{effectiveness_15k}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.225\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/new_enforce/new_tput_cwnd_rwnd_cubic_9k.pdf}
+                \caption{MTU = 9KB.}
+                \label{effectiveness_9k}
+        \end{subfigure}
+        \caption{Using \rwnd{} can effectively control throughput.
+                Experiments are conducted on a 10G testbed. TCP CUBIC but New Reno shows similar results.
+                Linux 3.18.0. We control maximal \rwnd{} value by modifying the receiver's advertised window size in TCP ACKs
+                in the Open vSwitch. We control maximal \cwnd{} by specifying ``snd\_cwnd\_clamp" value in Linux TCP.}
+        \label{rwnd_effectiveness}
+\end{figure}
+
+Modifying per-flow~\rwnd{} values is simple, scalable, requires no changes to VMs, and doesn't incur
+high CPU overhead in the hypervisor. As shown in Figure~\ref{rwnd_effectiveness}, bounding~\rwnd{}
+gives the same performance as bounding~\cwnd{} over an uncongested 10 Gbps link. While expected, this
+graph could also be used to convert a window-based scheme to a rate-based scheme.~\eric{yuck} 
+The~\rwnd{} scheme is
+different from rate-limiting in that we trust tenants: our assumption is that most
+tenants will not actively alter their TCP stacks to ignore the standard. Detecting misbehvaior, however,
+is also simple and light-weight, as we show in Section~\todo{XXX}. Our goal is to only use
+rate-limiting in the uncommon cases: a tenant not conforming to the standard or using
+high-bandwidth non-TCP flows. Finally, while window-based schemes may be more suscpetible to burstiness, we believe the trade-offs in
+simplicity and scalability make~\rwnd{} an attractive approach. Note that DCTCP already keeps switch buffers
+low, so loss from burstiness is unlikely. If necessary, traffic could be smoothed
+with a single hardware limiter, as in~\cite{mittal2015timely}. Our
+implementation, however, did not implement these features and still saw increased performance over default
+implementations.
+
+
+\eric{Can we add something here? Seems like softare rate limiters will either have to drop or queue packets.
+Neither seems good. If we drop, need to wait RTT to recover. If we queue, then may have buffer bloat? Our
+RWND scheme may provide application feedback (because TCP socket must buffer data), whereas rate-limiter
+scheme hides this info from the socket. Or maybe show CPU overhead of 1 Gbps rate-limiter vs RWND bound.}
+
+
+
+
+%Rate limiting is a commonly used technique to prevent end-points from 
+%sending out too much traffic into the network. 
+%Rate-limiting can be achieved in hardware (NIC or edge switches) or 
+%software (\eg{}, Linux HTB) or hybrid mode. 
+%The known limitation is that commodity NICs have limited number of rate limiters 
+%which are insufficient especially as the server consolidation trend is growing. 
+%Lack of enough rate limiters causes head-of-line blocking issues for the traffic 
+%that are classified into the same class. 
+%SENIC~\cite{radhakrishnan2014senic} benchmarked the overhead of pure software-based Linux HTB and 
+%found that it incurs high kernel CPU overhead and is unable to handle more than 
+%6.5Gbps aggregated traffic (with MTU size 1500 bytes). So SENIC proposed to re-engineer 
+%the role of software and hardware and let host CPU only classify and 
+%enqueue packets into per-class queues in host memory and let NIC hardware perform 
+%precise packet scheduling such that SENIC can achieve both high scalability and low CPU overhead. 
+%But SENIC needs to replace NIC hardware on each server.
+%Silo~\cite{jang2015silo} proposed an improved pure software-based pacer but Silo's pacer requires to disable TSO on 
+%the hypervisor and still needs to use about one CPU core 
+%(which otherwise can be rented to customers) for 
+%rate limiting purpose to handle 10Gbps line rate. 
+%
+%\subsection{Virtualization \& Virtual Switch}
+%Open vSwitch (OVS)~\cite{ovs-website}, Cisco Application Virtual Switch~\cite{cisco-avs}, 
+%and VALE~\cite{rizzo2012vale}.
+%zOVN~\cite{crisan2013got} identified the packet loss problem in virtual networks and
+%proposed zVALE virtual switch to achieve lossless overlay virtual networks.
+%Open vSwitch (OVS) acceleration in the NIC~\cite{cavium-nic,netronome-nic}.
+%Also, link with Microsoft's ``end-host SDN'' concept---see SIGCOMM'15 and ONS keynote..

@@ -1,0 +1,49 @@
+spawn telnet 10.82.64.1 62
+Trying 10.82.64.1...
+Connected to 10.82.64.1 62.
+Escape character is '^]'.
+
+IBM Networking Operating System RackSwitch G8264.
+
+
+Enter  password: 
+------------------------------------------------------------------
+NOTE: System dump exists in FLASH.
+      The dump was saved at 11:48:03 Tue Dec  4, 2012.
+      Use 'show flash-dump-uuencode' or 'copy flash-dump' to
+      extract the dumps for analysis and 'clear flash-dump' to
+      clear the FLASH region. 
+------------------------------------------------------------------
+
+RS G8264>
+Jan  2  3:32:21 192.168.49.50 NOTICE  mgmt: admin(admin) login from host 10.82.0.1
+enable
+
+Enable privilege granted.
+RS G8264#configure terminal
+Enter configuration commands, one per line.  End with Ctrl/Z.
+RS G8264(config)#show interface port 62 interface-counters
+------------------------------------------------------------------
+Interface statistics for port 62:
+                     ifHCIn Counters       ifHCOut Counters
+Octets:                   4259369900           895975679479
+UcastPkts:                  66131470              237759391
+BroadcastPkts:                    76                    386
+MulticastPkts:                    31                   2963
+FlowCtrlPkts:                  15030                      0
+PriFlowCtrlPkts:                   0                      0
+Discards:                          7                     81
+Errors:                            0                      0
+
+
+Ingress Discard reasons:                   Egress Discard reasons:
+
+VLAN Discards:                     0       HOL-blocking Discards:             42
+Filter Discards:                   0       MMU Discards:                       0
+Policy Discards:                   0       Cell Error Discards:                0
+Non-Forwarding State:              7       MMU Aging Discards:                 0
+IBP/CBP Discards:                  0       Other Discards:                    39
+
+RS G8264(config)#exit
+RS G8264#exit
+Connection closed by foreign host.

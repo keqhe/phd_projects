@@ -1,0 +1,26 @@
+Sep 23, 2015
+
+Usage:
+
+root@ubuntu:~/repo/dctcp/acdctcp/figures/convergence/flowcontrolOFF# python parse_convergence.py tcp-flowctl-off-tuningON/run0001
+tcp-flowctl-off-tuningON/run0001/dcn8-dcn19
+tcp-flowctl-off-tuningON/run0001/dcn16-dcn20
+tcp-flowctl-off-tuningON/run0001/dcn5-dcn7
+tcp-flowctl-off-tuningON/run0001/dcn9-dcn14
+tcp-flowctl-off-tuningON/run0001/dcn15-dcn17
+root@ubuntu:~/repo/dctcp/acdctcp/figures/convergence/flowcontrolOFF# gnuplot plot_tput_convergence_tcp.gp
+root@ubuntu:~/repo/dctcp/acdctcp/figures/convergence/flowcontrolOFF# python analyze_drops.py tcp-flowctl-off-tuningON
+python analyze_drops.py <result folder>
+0 port 64 pkts 37342498 drops 1602
+total: 37342498 drops 1602 rate: 0.00429001830568
+
+
+Each folder means:
+tcp-flowctl-off: TCP CUBIC, flow contrl OFF, official ovs
+dctcp-flowctl-off: DCTCP (linux 3.18), flow control OFF, official ovs
+ovsdctcp-flowctl-off: TCP CUBIC, flowcontrol OFF, our ovs
+tcp-flowctl-off-tuningON: TCP CUBIC, flow control OFF, official ovs and recver buffer auto tuning ON
+
+
+tcp-flowctlOFF-JUDD:
+JUDD method, nuttcp -w or iperf -w

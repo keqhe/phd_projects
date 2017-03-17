@@ -1,0 +1,13 @@
+\subsection{Tenants' Deployment Posture}
+\label{cloud-measure-how}
+
+In this section, we attempt to understand {\em how} tenants use
+the cloud for deploying their front ends. We start by analyzing the deployment patterns employed by
+cloud-using (sub)domains.  We first focus on the four 
+patterns identified in \figref{fig:ec2_models}.  We then quantify how
+many, and which, regions and availability zones are leveraged by
+cloud-using (sub)domains' front ends.
+
+\input{cloudmeasure_feature}
+\input{cloudmeasure_region}
+\input{cloudmeasure_zone}

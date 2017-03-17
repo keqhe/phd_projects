@@ -1,0 +1,53 @@
+\relax 
+\citation{openflow}
+\citation{microte,hedera}
+\citation{ucsdpaper,oflops}
+\citation{mazu}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{\thepage }}
+\newlabel{sec-intro}{{1}{\thepage }}
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:intel_inbound_test3}{{1a}{\thepage }}
+\newlabel{sub@fig:intel_inbound_test3}{{(a)}{a}}
+\newlabel{fig:intel_inbound_test3_wo}{{1b}{\thepage }}
+\newlabel{sub@fig:intel_inbound_test3_wo}{{(b)}{b}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Inbound delay on Intel switch, flow arrival rate = 200/s\relax }}{\thepage }}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {with flow\_mod/pkt\_out }}}{\thepage }}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {w/o flow\_mod/pkt\_out }}}{\thepage }}
+\newlabel{fig:inbound-1}{{1}{\thepage }}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Latency Measurements}{\thepage }}
+\newlabel{sec-measure}{{2}{\thepage }}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Inbound Latency}{\thepage }}
+\newlabel{s:measure_inbound}{{2.1}{\thepage }}
+\citation{microte}
+\bibstyle{abbrv}
+\bibdata{refs}
+\bibcite{hedera}{1}
+\bibcite{microte}{2}
+\bibcite{mazu}{3}
+\bibcite{ucsdpaper}{4}
+\bibcite{openflow}{5}
+\bibcite{oflops}{6}
+\newlabel{fig:bcm_burst_100_same_pri}{{2a}{\thepage }}
+\newlabel{sub@fig:bcm_burst_100_same_pri}{{(a)}{a}}
+\newlabel{fig:bcm_burst_200_same_pri}{{2b}{\thepage }}
+\newlabel{sub@fig:bcm_burst_200_same_pri}{{(b)}{b}}
+\newlabel{fig:bcm_burst_100_incr_pri}{{2c}{\thepage }}
+\newlabel{sub@fig:bcm_burst_100_incr_pri}{{(c)}{c}}
+\newlabel{fig:bcm_burst_200_incr_pri}{{2d}{\thepage }}
+\newlabel{sub@fig:bcm_burst_200_incr_pri}{{(d)}{d}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces BCM-1.0\xspace  per-rule insertion latency\relax }}{\thepage }}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {burst size 100, same priority}}}{\thepage }}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {burst size 200, same priority}}}{\thepage }}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {burst size 100, incr. priority}}}{\thepage }}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {burst size 200, incr. priority}}}{\thepage }}
+\newlabel{fig:priority-broadcom-insert}{{2}{\thepage }}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Outbound Latency}{\thepage }}
+\newlabel{s:outbound_meas}{{2.2}{\thepage }}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.1}Insertion Latency}{\thepage }}
+\newlabel{s:meas_insert}{{2.2.1}{\thepage }}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.2}Modification Latency}{\thepage }}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.3}Deletion Latency}{\thepage }}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Mitigation Techniques}{\thepage }}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Conclusion}{\thepage }}
+\newlabel{sec:conclusion}{{4}{\thepage }}
+\@writefile{toc}{\contentsline {section}{\numberline {5}References}{\thepage }}

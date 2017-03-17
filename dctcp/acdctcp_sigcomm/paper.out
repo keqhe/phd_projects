@@ -1,0 +1,16 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Background and Motivation}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Datacenter Transport}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Benefits of AC69DC}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{Tenant-Level Bandwidth Allocation}{section.2}% 5
+\BOOKMARK [1][-]{section.3}{Design}{}% 6
+\BOOKMARK [2][-]{subsection.3.1}{Obtaining Congestion Control State}{section.3}% 7
+\BOOKMARK [2][-]{subsection.3.2}{Implementing DCTCP}{section.3}% 8
+\BOOKMARK [2][-]{subsection.3.3}{Enforcing Congestion Control}{section.3}% 9
+\BOOKMARK [2][-]{subsection.3.4}{Per-flow Differentiation}{section.3}% 10
+\BOOKMARK [1][-]{section.4}{Implementation}{}% 11
+\BOOKMARK [1][-]{section.5}{Results}{}% 12
+\BOOKMARK [2][-]{subsection.5.1}{Microbenchmarks}{section.5}% 13
+\BOOKMARK [2][-]{subsection.5.2}{Macrobenchmarks}{section.5}% 14
+\BOOKMARK [1][-]{section.6}{Related Work}{}% 15
+\BOOKMARK [1][-]{section.7}{Conclusion}{}% 16

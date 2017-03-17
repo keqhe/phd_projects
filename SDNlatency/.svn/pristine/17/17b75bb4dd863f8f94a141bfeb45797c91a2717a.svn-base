@@ -1,0 +1,15 @@
+\subsubsection{Insertion Latency}
+\label{s:meas_insert}
+
+Figure~\ref{fig:priority-broadcom-insert} shows representative results on \BroadcomOne switch.
+We observe that: (1) rule complexity does not affect insertion delay; (2)
+same priority insertions in \BroadcomOne, \BroadcomThree, \Intel and \IBM are fast
+and not affected by flow table occupancy; and (3) priority insertion patterns
+can affect insertion delay very differently. For \Intel, increasing priority
+insertion is similar to same priority insertion, but decreasing priority 
+incurs much higher delay. For \BroadcomThree and \IBM the behavior is inverted:  
+decreasing priority insertion is similar to same priority insertion and increasing priority insertion incurs higher delay. For \BroadcomOne, 
+insertions with different priority patterns are all much higher than
+insertions with same priority. 
+Key root causes for observed latencies are: (1) how rules are organized in the TCAM, and (2) the number of TCAM slices. {\em Both of these are intrinsically tied to switch hardware.} Even in the best case (\Intel), per-rule insertion latency of 1ms is higher than what native TCAM hardware can support. Thus, in addition to the above two causes, there appears to be an {\em intrinsic switch software overhead} contributing to all latencies.
+

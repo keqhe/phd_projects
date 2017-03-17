@@ -1,0 +1,102 @@
+\documentclass[letterpaper]{sig-alternate-2013}
+
+\input{defs} 
+\usepackage{times}
+\usepackage{subfig}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{url,caption}
+\usepackage{epstopdf}
+\usepackage[]{algorithm2e}
+\usepackage{algorithmic}
+\usepackage{mathtools}
+\usepackage[titletoc]{appendix}
+\usepackage{fontenc}
+\usepackage[utf8]{inputenc}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+%\usepackage[font={small}]{caption}
+%\usepackage[section] {placeins}
+%% Define a new 'leo' style for the package that will use a smaller font.
+\makeatletter
+\def\url@leostyle{%
+  \@ifundefined{selectfont}{\def\UrlFont{\sf}}{\def\UrlFont{\small\ttfamily}}}
+\makeatother
+%% Now actually use the newly defined style.
+\urlstyle{leo}
+%\makeatletter
+%\def\@copyrightspace{\relax}
+%\makeatother
+\newcommand{\Tabs}{
+  xx\= xx\= xx\= xx\= xx\= xx\= xx\= xx\=xx\= xx\= xx\= xx\=\kill}
+
+\newenvironment{program}[3]{
+  \begin{figure}[hbtp]
+    \begin{center}
+    \fbox{
+      {\small % yry
+      \begin{minipage}{\textwidth}
+      \begin{tabbing}
+      \Tabs
+      #3
+      \end{tabbing}
+      \vspace{-0.25in}
+      \end{minipage}
+      } % yry
+    \vspace{-0.15in}
+    }
+    \end{center}
+    \vspace{-0.2in}
+    \caption{\label{#1} #2}
+    \vspace{-0.1in}
+  \end{figure}}{}
+
+\permission{Permission to make digital or hard copies of part or all of this work for personal or classroom use is granted without fee provided that copies are not made or distributed for profit or commercial advantage, and that copies bear this notice and the full citation on the first page. Copyrights for third-party components of this work must be honored. For all other uses, contact the owner/author(s). Copyright is held by the author/owner(s).}
+\conferenceinfo{SIGMETRICS'15,}{June 15–19, 2015, Portland, OR, USA.} 
+\copyrightetc{ACM \the\acmcopyr}
+\crdata{978-1-4503-3486-0/15/06. \\
+http://dx.doi.org/10.1145/2745844.2745880}
+
+
+\begin{document}
+\title{Latency in Software Defined Networks: \\Measurements and Mitigation Techniques}
+
+%\numberofauthors{8}
+\author{
+{
+    Keqiang He$^\dag$,
+    Junaid Khalid$^\dag$,
+    Sourav Das$^\dag$,
+    Aaron Gember-Jacobson$^\dag$,
+    Chaithan Prakash$^\dag$,
+}\\
+{
+    Aditya Akella$^\dag$,
+    Li Erran Li*,
+    Marina Thottan*
+}\\
+\affaddr{ $^\dag$University of Wisconsin-Madison, *Bell Labs}
+}
+\maketitle
+
+\input{abstract}
+\category{C.2.0}{Computer-Communication Network}{General}
+%A category including the fourth, optional field follows...
+%\category{C.2.3}{Computer-Communication Networks}{Network
+%Operations}[Network monitoring]
+
+\keywords{Software-defined Networks; Latency; Measurement; Mitigation}
+
+
+\input{intro_imc}
+\input{measure_imc}
+\input{mitigation}
+\input{conclusion}
+\section*{Acknowledgement}
+This work is supported in part by NSF grants CNS-1302041, CNS-1314363 and CNS-1040757.
+{
+\small
+\bibliographystyle{abbrv}
+\bibliography{refs}
+}
+
+\end{document}

@@ -1,0 +1,73 @@
+\section{Methodology}
+\label{sec:method}
+
+\tightparagraph{Implementation}
+We implemented Presto in Open vSwitch v2.1.2~\cite{ovs-website} and Linux kernel v3.11.0~\cite{kernel}.
+In OVS, we modified 5 files and $\sim$600 lines of code. For GRO, we modified 11 files and $\sim$900 lines of code.
+%The GRO handler in Presto is implemented in the kernel (in directory {\tt /net/core/})
+%, but there have been discussions
+%of moving the GRO handling code into network drivers or to a loadable kernel module. (cite XXX). 
+%eric-- the reference above is from 2009, so i think we'll skip this
+
+%other sections probably talk about what we did
+%Presto uses chunk size of 32KB/25.6$\mu\text{s}$ (used in combination with TCP small queue~\cite{tsq} which is used for
+%reducing latencies on network stack) or 
+%64KB/51.2$\mu\text{s}$ (default TCP segment offload size) for 10GbE.
+
+
+
+%\subsection{Methodology} 
+\tightparagraph{Testbed} We conducted our experiments on a physical
+testbed consisting of 16 IBM System x3620 M3 servers with 6-core Intel Xeon
+2.53GHz CPUs, 60GB memory, and Mellanox ConnectX-2 EN 10GbE NICs. 
+The servers were connected in a 2-tier Clos network topology with 10Gbps
+IBM RackSwitch G8264 switches, as shown in Figure~\ref{macro_evaluation_topology}.
+
+\tightparagraph{Experiment Settings}
+We ran the default TCP implementation in the Linux kernel (TCP CUBIC~\cite{cubic})
+%3.11.0 and uses MPTCP version 0.88~\cite{mptcp-linux}.
+%We use default TSO size 64KB
+and set {\tt tcp\_sack}, {\tt tcp\_fack}, {\tt tcp\_low\_latency} to 1 unless otherwise noted. 
+Further, we tuned the host RSS and IRQ affinity settings and kept them the same in all experiments.
+%For MPTCP, we set the subflow count to 8, use OLIA congestion control algorithm~\cite{mptcp-not-optimal}, and configure buffer sizes
+%as recommended by ~\cite{dc-mptcp,mptcp-not-optimal,paasch2013benefits}.
+
+\tightparagraph{Workloads}
+We evaluate Presto with a set of synthetic and realistic workloads. 
+Similar to previous works~\cite{fattree,hedera,planck}, our synthetic workloads include:
+
+{\em Shuffle}: Each server in the testbed sends 1GB data to every other server in the testbed in random order. 
+Each host sends two flows at a time. %The shuffle is finished if all the servers have finished their jobs. 
+This workload emulates the shuffle behavior of MapReduce/Hadoop workloads.
+
+{\em Stride(8)}: We index the servers in the testbed from left to right. In stride(8) workload, server[i] sends to server[(i+8) mod 16].
+
+{\em Random}: Each server sends to a random destination 
+ not in the same pod as itself. Multiple senders can send to the same receiver.
+
+{\em Random Bijection}: Each server sends to a random destination not in the same pod as itself. 
+Different from random, each server only receives data from one sender.
+ 
+Finally, we also evaluate Presto with trace-driven workloads from real datacenter traffic~\cite{kandula2009nature}.
+
+\tightparagraph{Performance Evaluation}
+We compare Presto to ECMP, MPTCP, and a 
+single non-blocking switch used to represent an optimal scenario.
+ECMP is implemented by enumerating all possible end-to-end paths and randomly selecting a path for each flow.
+MPTCP uses ECMP to determine the paths of each of its sub-flows.
+%We use MPTCP version 0.88~\cite{mptcp-linux}, set the subflow count to 8, use OLIA congestion control algorithm~\cite{mptcp-not-optimal}, and configure buffer sizes
+%as recommended by ~\cite{dc-mptcp,mptcp-not-optimal,paasch2013benefits}. 
+The MPTCP implementation is still under active development, and
+we spent significant effort in finding the most stable configuration of MPTCP on our testbed. Ultimately, we found that Mellanox {\tt mlx\_en4} driver version
+2.2, MPTCP version 0.88~\cite{mptcp-linux}, subflow count set to 8, OLIA congestion control algorithm~\cite{mptcp-not-optimal}, and configured buffer sizes
+as recommended by~\cite{dc-mptcp,mptcp-not-optimal,paasch2013benefits} gave us the best trade-offs in terms of throughput, latency, loss and stability.
+Unfortunately, despite our efforts, we still occasionally witness some stability issues 
+with MPTCP that we believe are due to implementation bugs.
+
+We evaluate Presto on various performance metrics, including: 
+throughput (measured by {\tt nuttcp}), round trip time (a single TCP packet, measured by {\tt sockperf}~\cite{sockperf}), 
+mice flow completion time (time to send a 50 KB flow and receive an application-layer acknowledgement), packet loss (measured from switch counters), 
+and fairness (Jain's fairness index~\cite{jain-fair} over flow throughputs).  Mice flows are sent every 100 ms and elephant flows last 10 seconds. 
+Each experiment is run for 10 seconds over 20 runs. Error bars on graphs denote
+the highest and lowest value over all runs.
+

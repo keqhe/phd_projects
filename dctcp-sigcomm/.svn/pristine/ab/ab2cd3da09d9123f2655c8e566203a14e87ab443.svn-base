@@ -1,0 +1,28 @@
+\section{Related Work}
+\label{related}
+Congestion Control:
+DCTCP~\cite{alizadeh2011data}, XCP~\cite{katabi2002congestion}, RCP~\cite{dukkipati2007rate}, 
+TCP ex Machina~\cite{winstein2013tcp}, ICTCP~\cite{wu2010ictcp}, 
+TCP-Bolt~\cite{stephens2014practical}, 
+TCP-NV~\cite{tcp-nv}, TIMELY~\cite{mittal2015timely}, 
+DX~\cite{lee2015accurate}, 
+DCQCN~\cite{zhu2015congestion}, 
+Judd NSDI 2015~\cite{judd2015nsdi}, PCC~\cite{dong2015pcc}. PERC~\cite{jose2015high}.
+TCP rate control~\cite{karandikar2000tcp}.
+
+
+Rate limiters or performance isolation: 
+FasTrack~\cite{niranjan2013fastrak}, SENIC~\cite{radhakrishnan2014senic}, 
+EyeQ~\cite{jeyakumar2013eyeq}, TIMELY~\cite{mittal2015timely}, 
+Silo~\cite{jang2015silo}, Seawall~\cite{shieh2011sharing}.
+To make rate limiters effective (for enforcing a low latency datacenter network), 
+they must be configured at fine-grained time granularity and react to dynamically 
+changing network conditions.
+Static rate limiters can not work well for incast, for example.
+
+Rate limiters is more about network bandwidth allocation. 
+While our major focus is building universal low latency congestion control for data center networks. 
+Our work should be compatible with bandwidth allocation works.
+
+Load Balancing:
+CONGA~\cite{alizadeh2014conga}, Presto~\cite{he2015presto}, DRILL~\cite{ghorbani2015micro}.

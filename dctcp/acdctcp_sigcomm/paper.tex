@@ -1,0 +1,177 @@
+\documentclass[10pt]{sig-alternate-05-2015}
+%\documentclass{sig-alternate-05-2015}
+%\documentclass{sig-alternate-10pt}
+\usepackage[breaklinks=true,colorlinks=true,plainpages=false,citecolor=blue,urlcolor=blue,linkcolor=magenta,filecolor=blue]{hyperref}
+\usepackage{url}        % Not compatible with hyperref?
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{color}
+\usepackage{times}
+\usepackage[sort]{natbib}
+\usepackage{enumitem}
+%\usepackage{subfigure}
+\usepackage{verbatim}
+\usepackage{xspace}
+\usepackage{xfrac}
+\usepackage{algorithmic} % must come after hyperref
+\usepackage{algorithm}
+%ejr ac/dc 
+\usepackage{marvosym}
+\let\marvosymLightning\Lightning
+
+\usepackage{lastpage}
+
+\usepackage[utf8]{inputenc}
+\usepackage{cleveref}
+\crefname{section}{§}{§§}
+\Crefname{section}{§}{§§}
+\crefformat{section}{§#2#1#3}
+
+\usepackage{listings}
+%\usepackage{microtype} %does typographical voodoo to get rid of most overfull
+                       %boxes. Ideally requires pdfTeX 1.4+, going directly
+                       %to pdf. Don't use a DVI workflow.
+\usepackage{balance}   %\balance keywork has to be included in the last page that
+                       % will not be balanced, in the first column.
+\usepackage{datetime}
+\usepackage{morefloats}
+
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{multirow}
+
+\DeclareMathVersion{mathchartertext}
+\SetSymbolFont{letters}{normal}{OML}{mdbch}{m}{n}
+\newcommand{\gchar}[1]{\mathversion{mathchartertext}$#1$\mathversion{normal}}
+
+% Configure algorithmic and listings
+\renewcommand{\algorithmicrequire}{\textit{Input:}}
+\renewcommand{\algorithmicensure}{\textit{Output:}}
+\lstset{%language=Python,
+numberstyle=\footnotesize,
+basicstyle=\ttfamily\scriptsize,
+numbers=left,
+stepnumber=1,
+showstringspaces=false,
+breaklines=true}
+
+ \newcommand{\todo}[1]{\textcolor{blue}{\textbf{TODO:} #1}}
+ \newcommand{\eric}[1]{\textcolor{red}{\textbf{Eric:} #1}}
+ \newcommand{\aditya}[1]{\textcolor{red}{\textbf{Aditya:} #1}}
+ \newcommand{\keqiang}[1]{\textcolor{red}{\textbf{Keqiang:} #1}}
+\newcommand{\cut}[1]{}
+
+
+%camera ready submission (crs)
+%\newcommand{\crs}[1]{\textcolor{blue}{#1}} %show changes
+\newcommand{\crs}[1]{#1}% Do nothing
+
+%\newcommand{\todo}[1]{}
+\newcommand{\jeff}[1]{}
+\newcommand{\colin}[1]{}
+\newcommand{\brent}[1]{}
+
+%\newcommand{\eg}{\emph{e.g.}\xspace}
+\newcommand{\eg}{{e.g.}\xspace}
+\newcommand{\cf}{{cf.}\xspace}
+%\newcommand{\ie}{\emph{i.e.}\xspace}
+\newcommand{\ie}{{i.e.}\xspace}
+\newcommand{\etal}{{et al.}\xspace}
+%\newcommand{\acdc}{{LiquidSwitch}\xspace}
+\newcommand{\acdc}{{AC\text{\marvosymLightning}DC}\xspace}
+%\newcommand{\acdc}{{AC/DC}\xspace}
+\newcommand{\cwnd}{{{\tt CWND}}\xspace}
+\newcommand{\rwnd}{{{\tt RWND}}\xspace}
+
+\hyphenation{light-weight}
+\hyphenation{meas-ure-ment}
+\newcommand{\tightparagraph}[1]{\vspace{5pt}\noindent\textbf{#1}\ }
+
+%ejr, adding per jitu's email
+\setlength{\pdfpagewidth}{8.5in}
+\setlength{\pdfpageheight}{11in}
+
+
+
+
+%\title{Presto: Distributed Flowcell Load Balancing at the \\ Datacenter Network Edge}
+
+%\title{AC{\LARGE \marvosymLightning{}}DC TCP: Virtual Switch-based Congestion Control Enforcement for Datacenter Networks}
+\title{AC/DC TCP: Virtual Congestion Control Enforcement for Datacenter Networks}
+%\author{Paper \#267,~\pageref{LastPage} pages}
+
+\author{
+{Keqiang He$^\dagger$ \hspace{0.2in} Eric Rozner$^\ddag$ \hspace {0.2in} Kanak Agarwal$^\ast$ \hspace {0.2in} Yu (Jason) Gu$^\ast$}\\[.2cm]
+{Wes Felter$^\ddag$ \hspace{0.1in} John Carter$^\ast$ \hspace{0.1in} Aditya Akella$^\dagger$}\\\\
+{\affaddr{$^\dagger$University of Wisconsin--Madison \hspace{0.15in} $^\ddag$IBM Research \hspace{0.15in} $^\ast$IBM }} %\\\\
+%{\textcolor{red}{\normalsize Git-hash: \input{.git/ORIG_HEAD}}} \\
+%{\textcolor{red}{\normalsize \today, \currenttime}}
+}
+
+%don't want date printed
+\date{}
+
+\newfont{\mycrnotice}{ptmr8t at 7pt}
+\newfont{\myconfname}{ptmri8t at 7pt}
+\let\crnotice\mycrnotice%
+\let\confname\myconfname%
+
+
+\clubpenalty=10000
+\widowpenalty = 10000
+
+\begin{document}
+
+\CopyrightYear{2016}
+\setcopyright{acmlicensed}
+\conferenceinfo{SIGCOMM '16,}{August 22 - 26, 2016, Florianopolis , Brazil}
+\isbn{978-1-4503-4193-6/16/08}\acmPrice{\$15.00}
+\doi{http://dx.doi.org/10.1145/2934872.2934903}
+
+
+\maketitle
+
+\input{abstract}
+
+\begin{CCSXML}
+<ccs2012>
+<concept>
+<concept_id>10003033.10003039.10003048</concept_id>
+<concept_desc>Networks~Transport protocols</concept_desc>
+<concept_significance>500</concept_significance>
+</concept>
+</ccs2012>
+\end{CCSXML}
+
+\ccsdesc[500]{Networks~Transport protocols}
+\printccsdesc
+
+\keywords{Datacenter Networks; Congestion Control; Virtualization;}
+\input{intro}
+\input{background}
+\input{design}
+\input{impl}
+\input{results}
+%\input{discussion}
+\input{related}
+\input{conclusion}
+
+\section*{Acknowledgement}
+
+\crs{We would like to thank our shepherd Vishal Misra, Jeff Rasley, Brent Stephens and
+the anonymous reviewers for their valuable feedback. This
+work is supported in part by National
+Science Foundation (grants CNS-1302041, CNS-1330308
+and CNS-1345249), IBM Corporation and the Wisconsin Institute on Software-Defined Datacenters of Madison.}
+
+\balance
+{%\scriptsize
+\small
+\setlength{\bibsep}{0.5pt}
+\raggedright
+\bibliographystyle{abbrv}
+\bibliography{refer}
+}
+
+\end{document}

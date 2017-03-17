@@ -1,0 +1,11 @@
+Sep 30, 2015
+
+checks that ovs-dctcp works with various kinds of TCP variants
+
+reno: TCP RENO
+cubic: TCP CUBIC
+
+*clearECE*: our ovs clear the ECE bit in TCP header
+
+*keepECE*: our ovs keep that ECE bit in the TCP header
+

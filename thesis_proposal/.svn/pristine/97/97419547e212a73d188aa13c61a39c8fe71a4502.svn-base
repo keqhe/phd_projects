@@ -1,0 +1,39 @@
+\begin{tabular}{|c||c|c|c|c|c|c|} \hline
+%{\bf Rank} & {\bf Domain} & {\bf \# Subdom} &  {\bf \# Regions} & {\bf
+%    {\em k}=1}  & {\bf {\em k}=2} \\ \hline
+& & {\bf \# Cloud} &  {\bf Total \#} & & \\ 
+{\bf Rank} & {\bf Domain} & {\bf Subdom} &  {\bf Regions} & 
+    {\bf {\em k}=1}  & {\bf {\em k}=2} \\ \hline
+7   & live.com   &  18  & 3 & 18 &  0   \\ \hline
+9      & amazon.com  & 2  & 1 & 2 &  0 \\ \hline %1,3,u
+13      & linkedin.com  & 3  &  2 &  3   & 0 \\ \hline %1,u
+18      & msn.com  & 89  & 5 & 78   & 11 \\ \hline
+20      & bing.com  & 1  & 1 & 1   & 0 \\ \hline
+29      & 163.com  & 4  & 1 & 4   & 0 \\ \hline
+31      & microsoft.com  & 11  & 5 & 7   & 4 \\ \hline
+35      & pinterest.com  & 18   & 1& 18 & 0 \\ \hline %u, 2
+36      & fc2.com & 14  & 2 & 14   &  0  \\ \hline % 1,2,3
+42      & ask.com  & 1  & 1 & 1   & 0 \\ \hline
+47      & apple.com  & 1  & 1 & 1   & 0 \\ \hline
+48     & imdb.com  & 2  & 1& 2  & 0   \\ \hline % 3
+51      & hao123.com  & 1  & 1 & 1   & 0 \\ \hline
+59     & go.com   & 4    & 1 & 4  &  0  \\\hline % n/a
+\end{tabular}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\iffalse
+\begin{tabular}{|c||c|c|c|} \hline
+Rank& domain & avg region count& avg zone count \\ \hline
+9      & amazon.com  &  1.0 & 3.0\\ \hline %1,3,u
+13      & linkedin.com  & 1.0 & 2.0\\ \hline %1,u
+35      & pinterest.com     & 1.0 & 1.9\\ \hline %u, 2
+36      & fc2.com & 1.0 & 1.9 \\ \hline % 1,2,3
+48     & imdb.com  & 1.0 & 1.0  \\ \hline % 3
+59     & go.com   & 1.0 & 1.3 \\\hline % n/a
+75     & instagram.com  & 1.0 & 1.7 \\ \hline % 2, 3
+86     & imgur.com  & 1.0 & 2.0 \\ \hline % 1, 3
+92     & netflix.com  & 1.7 & 3.5\\ \hline % 4
+119     & dropbox.com  &  1.0 & 1.0\\ \hline %n/a
+\end{tabular}
+\fi

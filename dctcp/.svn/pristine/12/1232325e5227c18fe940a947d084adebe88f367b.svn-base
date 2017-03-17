@@ -1,0 +1,90 @@
+\section{Implementation}
+\label{impl}
+This section outlines relevant implementation details. We
+implemented~\acdc{} in Open vSwitch (OVS) v2.3.2~\cite{ovs-website} and
+added about 1200 lines of code (many are debug/comments). 
+A high-level overview follows.
+\crs{
+A hash table is added to OVS, and flows are hashed on a 5-tuple (IP addresses, ports and VLAN) to obtain a flow's state.
+The flow entry state is 320 bytes and is used to maintain the congestion control state mentioned in \cref{design}.
+SYN packets are used to create flow entries, and FIN packets, coupled with a course-grained garbage
+collector, are used to remove flow entries. Other TCP packets, such as data and ACKs, trigger 
+updates to flow entries.
+There are many more table lookup operations (to update flow state)
+than table insertions or deletions (to add/remove flows). Thus, Read-Copy-Update (RCU)
+hash tables~\cite{guniguntala2008read} are used to enable efficient lookups.
+Additionally, individual {{\tt spinlocks}} are used on each flow entry in order to allow
+for multiple flow entries to be updated simultaneously.
+}
+
+\crs{
+Putting it together, the high-level operation on a data packet is as follows. An application on the sender generates a packet
+that is pushed down the network stack to OVS. The packet is intercepted in {\tt  ovs\_dp\_process\_packet}, where the
+packet's flow entry is obtained from the hash table. Sequence number state is updated in the flow entry and ECN bits are set on
+the packet if needed (see \cref{design}).
+If the packet's header changes, the IP checksum is recalculated. Note TCP checksumming is offloaded to the NIC.
+The packet is sent over the wire and received at the receiver's OVS. The receiver updates congestion-related state, strips
+off ECN bits, recomputes the IP checksum, and pushes the packet up the stack. ACKs eventually triggered by the packet
+are intercepted, where the congestion information is added. Once the ACK reaches the sender, the~\acdc{} module uses
+the congestion information to compute a new congestion window. Then it modifies~\rwnd{} with a {{\tt memcpy}}, 
+strips off ECN feedback and recomputes the IP checksum before pushing the packet up the stack.
+Since TCP connections are bi-directional, two flow entries are maintained for each connection. 
+}
+
+\crs{
+Our experiments in~\cref{micro} show the CPU overhead of~\acdc{} is small and several implementation details
+help reduce computational overhead. First, OVS sits 
+above NIC offloading features (\ie{}, TSO and GRO/LRO) in the networking stack. Briefly, NIC offloads allow 
+the host to pass large data segments along the TCP/IP stack and only deal with MTU-sized packets in the NIC. Thus,~\acdc{}
+operates on a segment, rather than a per-packet, basis. Second, 
+congestion control is a relatively simple algorithm, and thus the computational burden is not high. Finally,
+while~\acdc{} is implemented in software, it may be possible to further reduce the
+overhead with a NIC implementation. Today, "smart-NICs"
+implement OVS-offload functionality~\cite{cavium-nic,netronome-nic},  
+naturally providing a mechanism to reduce overhead and support hypervisor bypass (\eg{}, SR-IOV). 
+}
+%We have also considered designing an~\acdc{}-enabled middlebox to support
+%legacy systems that do not run OVS and cannot upgrade their NICs.
+
+
+%
+%Standard OVS kernel datapath LoC: 2360
+%\acdc{} kernel datapath LoC: 3590
+%
+%\tightparagraph{UDP traffic} How to handle.
+%Mention VxLAN traffic too.
+%\keqiang{and IPsec}
+%
+%\tightparagraph{No vSwitch}
+%\keqiang{title should be hypervisor-bypass?}
+%Use middleboxes (for DB server).
+%Use NIC (for SR-IOV).
+%Hypervisor bypass (e.g., SR-IOV), where TCP traffic is sent to the NIC directly without
+%going through hypervisor. First, as noted by~\cite{shieh2011sharing}, ``loss of the security and
+%manageability features provided by the software virtual switch has limited
+%the deployment of direct I/O NICs in public clouds''. Second, based on techniques like Intel
+%DPDK~\cite{intel-dpdk} and ``smart NICs''~\cite{cavium-nic,netronome-nic}, we believe that low latency
+%congestion control enforcement schemes like \acdc{} can also be
+%employed for hypervisor bypass use cases.
+%We need to worry about legacy systems and non-VM systems. For instance, a database or storage device that may not have OVS installed on it.
+%We need to talk about either a middlebox or that this percentage of traffic is low? Or implement in NIC (especially one with OVS offload?).
+%
+%
+%\tightparagraph{Little CPU and memory overhead}
+%In our implementation, first we leverage the Read-Copy-Update (RCU)~\cite{guniguntala2008read} enabled hash tables
+%to keep per-flow states (such as ``snd\_una'' and ``snd\_nxt''). RCU technique is also employed by
+%Open vSwitch's kernel datapath and it helps improve processing speed for ``read-heavy''
+%workloads (\ie{}, inserting new flows is much less frequent than looking-up existing flows) on
+%shared-memory multiprocessor systems.
+%Second, \acdc{} processes on ``segment'' level instead of ``packet'' level due to
+%NIC offloading features (TSO at the sender side and GRO/LRO at the receiver side).
+%Third, we also leverage the NIC checksumming offloading feature such that
+%we do not need to compute checksums after we change TCP/IP header fields.
+%Our microbenchmarks (\cref{micro}) show that \acdc{} incurs very little additional CPU overhead (less than 4\%) to
+%support 10Gbps line-rate, even it is fully implemented in software.
+%We are currently implementing \acdc{} on Cavium's programmable NICs~\cite{cavium-nic},
+%where we can entirely offload the computational overhead to hardware. Therefore, we believe
+%\acdc{} can support even higher line rates (\eg{}, 40Gbps).
+%In our implementation, each TCP connection takes 320 bytes in the hash tables,
+%so it takes around 3.2MB even there are 10K concurrent connections.
+%{~\keqiang{i think we may want to mention that we use both FACK and PACK because we want to be compatible with TSO and try to minimize the CPU/traffic overhead.}

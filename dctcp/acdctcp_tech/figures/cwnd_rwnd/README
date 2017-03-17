@@ -1,0 +1,10 @@
+Oct 14, 2015
+
+study how close our rwnd is to dctcp's cwnd
+
+
+moving-ave
+---------
+moving average over 100ms and 200ms for run 1 on 1.5k and 9k runs in newpara
+
+

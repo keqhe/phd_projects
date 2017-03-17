@@ -1,0 +1,41 @@
+\begin{tabular}{|l|r|r|}
+\hline
+{\bf Provider} & {\bf \# Domains (\%)} & {\bf \# Subdomains (\%)}\\ \hline
+\hline
+EC2 only & 3,277 (8.1\%)& 685,725 (96.1\%)\\ \hline
+EC2 + Other & 34,721 (86.1\%) & 21,628 (3.0\%)\\ \hline
+%EC2 Total & 18,154 &  \\\hline
+Azure only & 184 (0.5\%)& 6,328 (0.9\%) \\ \hline
+Azure + Other& 1,858 (4.6\%)& 225 ($<$0.01\%) \\ \hline
+%Azure total & 566 & \\\hline
+EC2 + Azure & 293 (0.7\%)& 4 ($<$0.01\%) \\ \hline
+\hline
+Total  & 40,333 (100.0\%)& 713,910 (100.0\%) \\\hline
+\hline
+EC2 total  & 38,291 (94.9\%)& 707,357 (99.1\%) \\\hline
+Azure total  & 2,335 (5.8\%)& 6,557 (0.9\%) \\\hline
+\end{tabular}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\iffalse
+
+\begin{tabular}{|l|r|r|} 
+\hline
+{\bf Provider} & {\bf \# Domains (\%)} & {\bf \# Subdomains (\%)}\\ \hline
+\hline
+EC2 only & 36,173 (89.7\%)& 685,725 (96.1\%)\\ \hline
+EC2 + Other & 1,825 (4.5\%) & 21,628 (3.0\%)\\ \hline
+%EC2 Total & 18,154 &  \\\hline
+\hline
+Azure only & 1,843 (4.6\%)& 6,328 (0.9\%) \\ \hline
+Azure + Other& 199 (0.5\%)& 225 ($<$0.01\%) \\ \hline
+%Azure total & 566 & \\\hline
+\hline
+EC2 + Azure & 293 (0.7\%)& 4 ($<$0.01\%) \\ \hline 
+\hline
+EC2 total  & 38,291 (94.9\%)& 707,357 (99.1\%) \\\hline
+Azure total  & 2,335 (5.8\%)& 6,557 (0.9\%) \\\hline
+Total  & 40,333 (100.0\%)& 713,910 (100.0\%) \\\hline
+\end{tabular}
+
+\fi

@@ -1,0 +1,23 @@
+\begin{tabular}{|c|r|r|}
+	\hline
+{\bf Cloud} &  {\bf Bytes} & {\bf Flows} \\
+\hline
+EC2 & 81.73 & 80.70 \\ \hline
+Azure & 18.27 & 19.30  \\ \hline \hline
+Total & 100 & 100 \\ \hline
+
+\end{tabular}
+
+% mysql> select  provider, sum(orig_ip_bytes + resp_ip_bytes) from uid_totalconnadd where direction = 'in' GROUP BY provider;
+%+----------+------------------------------------+
+%| provider | sum(orig_ip_bytes + resp_ip_bytes) |
+%+----------+------------------------------------+
+%| azure    |                       209622194641 |  18.27 %
+%| ec2      |                       938013924091 | 81.73%
+%+----------+------------------------------------+
+%		Total					1147636118732
+% flow count select provider, count(distinct uid) from uid_totalconnadd where direction = 'in' GROUP BY provider;
+% azure 9869288  21.36%
+% ec2 41287530  
+% total 51156818
+

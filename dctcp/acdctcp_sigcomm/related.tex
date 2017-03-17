@@ -1,0 +1,77 @@
+\section{Related Work}
+\label{related}
+This section discusses different classes of related work.
+
+\tightparagraph{Congestion control for DCNs}
+\crs{Rather than proposing a new congestion control algorithm, our work investigates if congestion control can be moved to the vSwitch.
+Thus, many of the following schemes are complimentary.}
+DCTCP~\cite{alizadeh2011data} is a seminal TCP variant for datacenter networks.
+Judd~\cite{judd2015nsdi} proposed simple yet practical fixes to enable DCTCP in production networks.
+TCP-Bolt~\cite{stephens2014practical} is a variant of DCTCP for PFC-enabled lossless Ethernet.
+%DCQCN~\cite{zhu2015congestion} is a rate-based congestion control scheme implemented in NICs
+%for QCN-based~\cite{qcn} RDMA deployments.
+DCQCN~\cite{zhu2015congestion} is a rate-based congestion control scheme (built on DCTCP and QCN) to
+support RDMA deployments in PFC-enabled lossless networks.
+TIMELY~\cite{mittal2015timely} and DX~\cite{lee2015accurate} 
+use accurate network latency as the signal to perform congestion control.
+TCP ex Machina~\cite{winstein2013tcp} uses computer-generated congestion control rules.
+PERC~\cite{jose2015high} proposes proactive congestion control to improve convergence.
+ICTCP's~\cite{wu2010ictcp} receiver monitors incoming TCP flows and 
+modifies~\rwnd{} to mitigate the impact of incast, but this cannot
+provide generalized congestion control like~\acdc{}.
+Finally, efforts~\cite{dell-toe,chelsio-toe} to 
+implement TCP Offload Engine (TOE) in specialized NICs are not widely deployed for reasons noted in~\cite{mogul2003tcp,linux-toe}.
+%~\acdc{} is designed to work with commodity NICs. 
+
+\tightparagraph{Bandwidth allocation} Many bandwidth allocation schemes have been proposed.
+Gatekeeper~\cite{rodrigues2011gatekeeper} and EyeQ~\cite{jeyakumar2013eyeq} abstract the network as a single
+switch and provide bandwidth guarantees by managing each server's access link.
+Oktopus~\cite{Ballani2011oktopus} provides fixed performance guarantees within virtual clusters.
+SecondNet~\cite{Guo2010Secondnet} enables virtual datacenters with static bandwidth guarantees.
+Proteus~\cite{Xie2012Proteus} allocates bandwidth for applications with dynamic demands.
+Seawall~\cite{shieh2011sharing} provides bandwidth proportional to a defined weight by
+forcing traffic through congestion-based edge-to-edge tunnels. 
+NetShare~\cite{Lam2012NetShare} utilizes hierarchical weighted max-min fair sharing to tune relative bandwidth allocation for services.
+FairCloud~\cite{Popa2012Faircloud} identifies trade-offs in minimum
+guarantees, proportionality and high utilization, and designs schemes over this space.
+Silo~\cite{jang2015silo} provides guaranteed bandwidth, delay and burst allowances through a novel VM placement and admission 
+algorithm, coupled with a fine-grained packet pacer. As discussed in~\cref{background}, 
+~\acdc{} is largely complimentary to these schemes because it is a transport-level solution.
+
+\tightparagraph{Rate limiters} 
+SENIC~\cite{niranjan2013fastrak} 
+identifies the limitations of NIC hardware rate limiters (\ie{}, not scalable) and 
+software rate limiters (\ie{}, high CPU overhead) and uses the CPU to enqueue packets 
+in host memory and the NIC. Silo's pacer injects void packets into 
+an original packet sequence to achieve pacing. FasTrack~\cite{niranjan2013fastrak} offloads
+functionality from the server into the switch for certain flows.~\acdc{} prevents
+TCP flows from sending in the first place and can be used in conjunction with these
+schemes.
+
+
+\tightparagraph{Low latency DCNs}
+Many schemes have been proposed to reduce latency in datacenter networks.
+HULL~\cite{alizadeh2012less} uses phantom queues to leave bandwidth headroom to support low latency.
+pFabric~\cite{alizadeh2013pfabric} is a clean-slate
+design which utilizes priority and minimal switch buffering to achieve low latency.
+Fastpass~\cite{perry2014fastpass} uses a centralized arbiter to
+perform per-packet level scheduling.
+QJUMP~\cite{qjump} uses priority queueing and rate limiting to
+bound latency. Traffic engineering~\cite{al2010hedera,rasley2014planck} and 
+load balancing~\cite{alizadeh2014conga,he2015presto,ghorbani2015micro} can also
+reduce latency. Because~\acdc{} works on the transport level, it is
+largely complimentary to these works.
+
+\tightparagraph{Performance-enhancing proxies}
+Several schemes improve end-to-end protocol performance via a middlebox
+or proxy~\cite{RFC3449,RFC3115,balakrishnan2008maelstrom,davern2011httpep,balakrishnan1995improving}.
+\acdc{} fits into this class of works, but is unique in providing a mechanism
+to alter a VM's TCP congestion control algorithm by modifying the vSwitch.
+
+\tightparagraph{Virtualized congestion control}
+\crs{vCC~\cite{vcc} is a concurrently designed system that shares~\acdc{}'s goals and some of its design details.
+The paper is complementary in that some items not addressed in this work are presented, such as a more detailed
+analysis of the ECN-coexistence problem, an exploration of the design space, and a theoretical proof of
+virtualized congestion control's correctness. Our paper provides an in-depth design and thorough evaluation of
+a DCTCP-based virtualized congestion control algorithm on a 10 Gbps testbed.
+}

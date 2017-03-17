@@ -1,0 +1,20 @@
+\begin{thebibliography}{1}
+
+\bibitem{alizadeh2011data}
+M.~Alizadeh, A.~Greenberg, D.~A. Maltz, J.~Padhye, P.~Patel, B.~Prabhakar,
+  S.~Sengupta, and M.~Sridharan.
+\newblock {Data Center TCP (DCTCP)}.
+\newblock In {\em SIGCOMM}, 2010.
+
+\bibitem{judd2015nsdi}
+G.~Judd.
+\newblock {Attaining the Promise and Avoiding the Pitfalls of TCP in the
+  Datacenter}.
+\newblock In {\em NSDI}, 2015.
+
+\bibitem{wu2012tuning}
+H.~Wu, J.~Ju, G.~Lu, C.~Guo, Y.~Xiong, and Y.~Zhang.
+\newblock {Tuning ECN for Data Center Networks}.
+\newblock In {\em CoNEXT}, 2012.
+
+\end{thebibliography}

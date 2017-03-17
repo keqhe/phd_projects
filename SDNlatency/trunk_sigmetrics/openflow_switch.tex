@@ -1,0 +1,382 @@
+\section{Understanding Openflow Switch Performance}\label{sec-switch}
+\subsection{Measurement setup}
+%==========================experiment setup==========================
+\begin{figure}
+\centering
+\epsfig{file=./figures/meas_setup.eps,width=0.5\textwidth}
+\caption{Measurement setup.}\label{meas_setup}
+\end{figure}
+
+The measurement setup is shown in~\figref{meas_setup}. We use a high performance PC 
+(Intel Core i5-3470 (3.20 GHz, 6 MB cache, 4 cores) and 20GB memory) to act as the controller. 
+Three 1Gbps Network Interface Cards (NICs) are installed on this PC. We run POX on this PC and record the processing delay for each flow. 
+Also, the PC needs to inject flows and receive flow. As we can observe from~\figref{meas_setup}, 
+eth0 is for the control channel, eth1 for sending out flows and eth2 for receiving flows. Wireshark running on the PC is used to record the time sending/receiving each flow.
+We record the time ($t1$) a flow goes through eth1 and the time ($t2$) to receive that flow by eth2. 
+Finally, the openflow switch setup delay is calculated as --- flow setup delay = $t2 - t1 - \mu$, where $\mu$ is the processing delay in the contrller. 
+
+Becuase eth1 and eth2 are on the same host, we use separate net work namespaces for eth1 and eth2 to make sure 
+that the flows going through eth1 to the openflow switch and then come back to eth2. 
+Otherwise, the OS can intelligently perform traffic loop-back such that no traffic will go through the openflow switch.
+We also set static ARP entries for eth1 and eth2 to avoid ARP  queries and turn off any security tools running on the host.
+
+Our measurements results are obtained from the data plane, not control plane. 
+It has been reported that current some of openflow switch products do not fully 
+obey openflow specifications. For example, ~\cite{rotsos2012oflops} reported that the 
+barrier\_in message returned by the switch do not necessarily reflect that status of successful flow rule setup.
+
+We measured three openflow switches, Pronto Pica8 3290~\cite{pronto3290}, 
+Open vSwitch 1.10.0 (kernel level)~\cite{ovs} and Intel FM6000~\cite{intelfm6000}. 
+Pronto Pica8 3290 supports 48 1Gbps Ethernet port and 4 10Gbps SFP+ uplink ports. 
+Its key parameters include 833Mhz processor and 512MB DDR SDRAM. 
+We measured that it supports 1664 exact matching rules or 128 wildcard rules (can not achieve both). 
+Open vSwitch is installed on a commodity PC with Intel Core i5-3470 (3.20 GHz, 6 MB cache, 4 cores) and 4GB memory. 
+Open vSwitch supports 1M mixed flows. 
+Intel FM6000 switch has 48 SFP+10GbE ports and 4 QSFP+ 40GbE ports. 
+It uses Intel Xeon CPU and has 24K TCAM entries. It supports 4K 12-tuple flow entries. 
+
+To measure each metric with certain parameter settings, 
+we run each experiment for multiple rounds. 
+For Pronto Pica 3290 switch,  we run 20 rounds (30,000 data points) 
+for exact matching rules and 50 rounds (6,400 data points) for wildcard rules. 
+For Open vSwitch, we run 5 rounds (50,000 data points) for exact matching rules and 5 rounds (50,000 data points) for wildcard rules. 
+For Intel FM6000 switch, we run 5 rounds (20,000 data points) for wildcard rules. 
+\subsection{Measurement results}
+
+%===============================pronto=================================
+\begin{figure}
+\centering
+\epsfig{file=./figures/pronto3290_pica8_exact_delay.eps,width=0.5\textwidth}
+\caption{Flow setup delays (exact matching rules) of Pronto Pica8 Openflow Switch.}\label{pronto_exact_setup_delays}
+\end{figure}
+
+
+\begin{figure}
+\centering
+\epsfig{file=./figures/pronto3290_pica8_wild_delay.eps,width=0.5\textwidth}
+\caption{Flow setup delays (wildcard rules) of Pronto Pica8 Openflow Switch.}\label{pronto_wild_setup_delays}
+\end{figure}
+
+\begin{figure}
+\centering
+\epsfig{file=./figures/pronto3290_pica8_u50000_delay.eps,width=0.5\textwidth}
+\caption{Breakdowns of flow setup delay (exact matching rules) of Pronto Pica8 Openflow Switch.}\label{pronto_exact_setup_delay_breakdown}
+\end{figure}
+
+\begin{figure}
+\centering
+\epsfig{file=./figures/pronto3290_pica8_wild_u20000_delay.eps,width=0.5\textwidth}
+\caption{Breakdowns of flow setup delay (wildcard rules) of Pronto Pica8 Openflow Switch.}\label{pronto_wild_setup_delay_breakdown}
+\end{figure}
+
+\begin{figure}
+\centering
+\epsfig{file=./figures/pronto3290_pica8_u33000_delay.eps,width=0.5\textwidth}
+\caption{Egress operation can also be a bottleneck for Pronto Pica8 Openflow Switch.}\label{pronto_exact_setup_delay_breakdown_rate_30}
+\end{figure}
+
+\begin{figure}
+\centering
+\epsfig{file=./figures/pronto3290_pica8_exact_u50000_delay_size.eps,width=0.5\textwidth}
+\caption{Flow setup delay vs. flow rule set size (exact matching rules of Pronto Pica8 Openflow Switch).}\label{pronto_exact_setup_delay_size}
+\end{figure}
+
+\begin{figure}
+\centering
+\epsfig{file=./figures/pronto3290_pica8_exact_u40000_delay_size.eps,width=0.5\textwidth}
+\caption{Flow setup delay vs. flow rule set size (exact matching rules of Pronto Pica8 Openflow Switch).}\label{pronto_exact_setup_delay_size}
+\end{figure}
+
+\begin{figure}
+\centering
+\epsfig{file=./figures/pronto3290_pica8_wild_u25000_delay_size.eps,width=0.5\textwidth}
+\caption{Flow setup delay vs. flow rule set size (wildcard rules of Pronto Pica8 Openflow Switch).}\label{pronto_wild_setup_delay_size}
+\end{figure}
+
+\begin{figure}
+\centering
+\epsfig{file=./figures/pronto3290_pica8_wild_u10000_delay_size.eps,width=0.5\textwidth}
+\caption{Flow setup delay vs. flow rule set size (wildcard rules of Pronto Pica8 Openflow Switch).}\label{pronto_wild_setup_delay_size}
+\end{figure}
+
+\begin{figure}
+\centering
+\epsfig{file=./figures/pronto3290_pica8_u50000_delay_query.eps,width=0.5\textwidth}
+\caption{Flow setup delay vs. statistics query (Pronto Pica8 Openflow Switch). f=0.2 means one flow statistics query in every 5 seconds.}\label{pronto_setup_delay_query}
+\end{figure}
+
+
+%==================================OVS===============================
+\begin{figure}
+\centering
+\epsfig{file=./figures/ovs_flowrate_udp_delay.cdf.eps,width=0.5\textwidth}
+\caption{Flow setup delays (exact matching rules) of Open vSwitch.}\label{ovs_setup_delay}
+\end{figure}
+
+\begin{figure}
+\centering
+\epsfig{file=./figures/wild_ovs_flowrate_udp_delay.cdf.eps,width=0.5\textwidth}
+\caption{Flow setup delays (wildcard rules) of Open vSwitch.}\label{wild_ovs_setup_delay}
+\end{figure}
+
+\begin{figure}
+\centering
+\epsfig{file=./figures/ovs_flowrate_3000_udp_delay.cdf.eps,width=0.5\textwidth}
+\caption{Breakdowns of flow setup delay (exact matching rules) of Open vSwitch.}\label{ovs_exact_setup_delay_breakdown}
+\end{figure}
+
+\begin{figure}
+\centering
+\epsfig{file=./figures/wild_ovs_flowrate_3000_udp_delay.cdf.eps,width=0.5\textwidth}
+\caption{Breakdowns of flow setup delay (wildcard rules) of Open vSwitch.}\label{ovs_wild_setup_delay_breakdown}
+\end{figure}
+
+
+\begin{figure}
+\centering
+\epsfig{file=./figures/ovs_flowrate_exact_delay_size.eps,width=0.5\textwidth}
+\caption{Flow setup delay vs. flow rule set size (exact matching rules of Open vSwitch).}\label{ovs_exact_setup_delay_size}
+\end{figure}
+
+
+\begin{figure}
+\centering
+\epsfig{file=./figures/wild_ovs_flowrate_delay_size.eps,width=0.5\textwidth}
+\caption{Flow setup delay vs. flow rule set size (wildcard rules of Open vSwitch).}\label{ovs_wild_setup_delay_size}
+\end{figure}
+
+\begin{figure}
+\centering
+\epsfig{file=./figures/query5_ovs_flowrate_3000_udp_delay.cdf.eps,width=0.5\textwidth}
+\caption{Flow setup delay vs. statistics query. f=0.1 means one flow statistics query in every 10 seconds.}\label{ovs_setup_delay_query}
+\end{figure}
+
+%\begin{figure}
+%\centering
+%\epsfig{file=./figures/wild_intel_flowrate_compare_delay.cdf.eps,width=0.5\textwidth}
+%\caption{Flow setup delays (wildcard rules) of Intel FM6000 Switch.}\label{intel_wild_setup_delays}
+%\end{figure}
+
+%\begin{figure}
+%\centering
+%\epsfig{file=./figures/intel_flowrate_50_delay_size.eps,width=0.5\textwidth}
+%\caption{Flow setup delay vs. flow rule set size (wildcard rules of Intel FM6000 Switch).}\label{intel_wild_setup_delay_size_rate50}
+%\end{figure}
+
+\subsubsection{Pronto Pica8 Openflow Switch}
+\figref{pronto_exact_setup_delays} shows the exact matching rules' flow setup delays under different new flow arrival (new flows mean the flows which do not 
+have a matching rule in the switch's flow table, i.e., the swith needs to send a packet in message to the controller for new flows) rate for Pronto Pica8 Openflow switch. 
+We observe that, when the new flow arrival rate exceeds a certain value, flow setup delay will become very large (on the order of seconds). 
+In \figref{pronto_exact_setup_delays}, we see if the new flow arrival rate is larger than 20/s, flow setup delay becomes unacceptable. 
+On the other hand, when the new flow arrival rate is 20 per second, 99.0\%ile of the flow setup delays are within 59.63 ms and 99.9\%ile of the flow setup delays 
+are within 82.36 ms. When new flow arrival rate is 10 per second, 99.0\%ile of the flow setup delays are within 64.71 ms and 99.9\%ile of the flow setup delays are 
+within 87.75 ms. When the new flow arrival rate is 5 per second, 99.0\%ile of the flow setup delays are within 64.71 ms and 99.9\%ile of the flow setup delays are 
+within 87.75 ms (the same to the statistics when flow rate is 10/s). It is interesting to note that the flow setup delay does not increase strictly with new flow arrival rate.
+
+
+Similarly, \figref{pronto_wild_setup_delays} shows wildcard rules' flow setup delays under different new flow arrival rate for Pronto Pica8 Openflow switch. 
+Wildcard rules' flow setup delays tend to be smaller than those of exact matching rules' given the same new flow arrival rate. 
+\figref{pronto_wild_setup_delays} shows that when the new flow arrival rate is less than or equal to 50 per second, most of the flow setup action can be finished 
+within 50 ms. In detail, 99.0\%ile of the flow setup delays are within 57.63 ms and 99.9\%ile of the flow setup delays are within 87.12 ms when 
+the new flow arrival rate is 50 per second. It is also interesting to see that flow setup delay does not strictly with new flow arrival rate.
+We observe that when the new flow arrival rate is small (for example within 50/s), different flow rates do not generate quite large setup delay variances.  
+
+\figref{pronto_exact_setup_delay_breakdown} and \figref{pronto_wild_setup_delay_breakdown} show the breakdowns of the flow setup delay. 
+Recall that flow setup delay consists of two parts, ingress delay and egress delay. Ingress delay refers to the difference between the time when 
+a flow's first packet arrives at the switch and the time the controller receives the packet in message. 
+Egress delay refers to the difference between the time when the controller sends out a flow mod operation and the time when 
+the flow's first packet travel through the output port. From these two figures, we observe that ingress delays are larger than egress delays. 
+That means, for the Pronto Pica8 Openflow switch, ingress operation contributes more to the overall flow setup delay. 
+However, this does not mean that egress operation can not be a bottleneck. 
+\figref{pronto_exact_setup_delay_breakdown_rate_30} illustrates that, for exact matching rules, when the new flow arrival rate reaches 30/s, 
+both the ingress operation and egress operation becomes the bottleneck, though ingress operation's delay is larger than 
+egress operation. This phenomena holds for wildcard rules.
+
+The maximal exact matching rules and wildcard rules supported by Pronto Pica8 Openflow switch are 1664 and 128 respectively according to our measurement.  
+\figref{pronto_exact_setup_delay_size} and \figref{pronto_wild_setup_delay_size} show the relationship between flow setup delay and flow rule set size. 
+We keep inserting new flows until the switch can not accommodate more, this process is called one round. Here, we only show the results got from one round flow insertion operation for clarity. 
+Other rounds exhibit similar behaviors.  \figref{pronto_exact_setup_delay_size} shows that when the new flow arrival rate is 20 per sec and the flue rule set size is larger than 900 , 
+the encountered flow setup delay will increase with the rule set size.  In other words, the possibility of long-tailed latency increases when flow rule set size is large. 
+For wildcard rules, the phenomena also happends. 
+From \figref{pronto_wild_setup_delay_size}, we observe that the wildcard rules' setup delay also increase when the rule set size is larger than 60 
+(the new flow arrival rate is set to 50 per sec). 
+
+We also investigate statistics query' effects on flow setup delay. \figref{pronto_setup_delay_query} presents the measurement results. 
+Here, we show the flow setup delays' CDFs under three different conditions: 1) no query operation is performed, 2) we pull flow count statistic in every 5 seconds and 
+3) we pull flow count statistic in every 1 second. All of the three experiments are performed under the same new flow arrival rate (20 per sec). 
+As expected,  statistics query causes flow setup delay to increases. The higher the  statistics query frequency is, the larger flow setup delay tends to be.
+When the statistics query frequency is 0.2 (i.e., one in every 5 seconds), the 99.0\%ile flow setup delay is 805.71 ms and 99.9\%ile 
+flow setup delay is 1231.26 ms. When the statistics query frequency is 1 (i.e., one in every second), the 99.0\%ile flow setup delay is 932.40 ms and 
+99.9\%ile flow setup delay is 1266.84 ms.
+
+
+\subsubsection{Open vSwitch (OVS)}
+\figref{ovs_setup_delay} and \figref{wild_ovs_setup_delay} shows the flow setup delays under various new flow arrival rates for Open vSwitch (OVS). 
+It is clear to see flow setup delay increases with new flow arrival rate. For exact matching rules, when the flow arrival rate is 1000 per second, 99.0\%ile of 
+the flow setup delays are within 4.10 ms and 99.9\%ile are within 29.25 ms. 
+The largest delay seen is 42.40 ms when the new flow arrival rate is 1000/s. When the new flow arrival rate becomes 2000 per second, 
+99.0\%ile flow setup delay is 24.65 ms and 99.9\%ile flow setup delay is 46.76 ms. 
+When the new flow arrival rate is 3000 per second, 99.0\%ile flow setup delay is 75.23 ms and 99.9\%ile flow setup delay is 84.92 ms. 
+When the new flow arrival rate reaches 4000/s and beyond, the tailed flow setup latency becomes unacceptable for most time-sensitive applications. 
+We found that for OVS, wildcard rule's setup delay tend to be smaller than exact matching rue's, 
+given the same flow arrival rate. This result is consistent with Pronto Pica8 Openflow switch's. 
+
+
+\figref{ovs_exact_setup_delay_breakdown} and \figref{ovs_wild_setup_delay_breakdown} breakdowns the setup delay into ingress delay and egress delay. 
+\figref{ovs_exact_setup_delay_breakdown} shows the breakdowns for exact matching rules while \figref{ovs_wild_setup_delay_breakdown} for wildcard rules. 
+It is interesting to find that for OVS, ingress delay is the major contributor of the flow setup delay, regardless the rule type (exact matching vs. wildcard). 
+For example, for exact matching rules, when the new flow arrival rate is 3000 per second, 99.9\%ile egress delays is only 7.32 ms while 
+99.9\%ile ingress delay is 89.99 ms. 
+The ingress-egress breakdown shows similar behavior with Pronto switch though the Pronto Pica8 Openflow switch's performance is much worse.
+
+
+\figref{ovs_exact_setup_delay_size} and \figref{ovs_wild_setup_delay_size} shows flow set size's effects on setup delay (the new flow arrival rate is set to 3000 per sec). 
+We can see from these two figures that flow setup delay follows certain patterns as flow rule set size increase. 
+We talk about exact matching rules' results first. When the flow arrival rate is 1000/s, 
+there is a sharp delay increase when the rule set size is about 4800 and there is anther delay increase when the flow rule set size is around 9600. 
+When the flow arrival rate is 2000/s, the setup delay follows a wave-like passion and we observed several delay spikes 
+(the x-axis is about 9500; this is harmful to latency-sensitive applications). When the flow arrival rate is 3000/s, the wave-like pattern also happens and flow setup delay becomes 
+larger in general. For wildcard rules, the similar behavior exists and the wildcard rule setup delays are typically smaller than those of exact matching rules'. 
+All the experiments are executed for 5 rounds (i.e., 50000 data points). We show only round results for clarity and  other rounds show similar behaviors. 
+
+We investigate flow statistics query's effect on flow setup delay for OVS. We set the new flow arrival rate to 3000 
+per second and we find that OVS's performance is heavily affected by statistics query operation, if the flow statistics query frequency is relatively large. As shown in \figref{ovs_setup_delay_query}, 
+the tail latency becomes pretty large when the flow statistics query frequency is 0.2. If setting the flow statistics query rate to 1, then we got a lot of packet losses.
+The 99.0\%ile setup delay is 229.32 ms and the 99.9\%ile setup delay is 1173.70 ms if we set query frequency to 0.2. 
+If setting the flow statistics query rate to 1, then we got not only heavy-tailed setup delay but also a lot of packet losses. 
+
+%=================================================intel==========================
+
+\begin{figure}
+\centering
+\epsfig{file=./figures/wild_intel_flowrate_compare_delay.cdf.eps,width=0.5\textwidth}
+\caption{Flow setup delays (wildcard rules) of Intel FM6000 Switch.}\label{intel_wild_setup_delays}
+\end{figure}
+
+
+\begin{figure}
+\centering
+\epsfig{file=./figures/wild_intel_flowrate_50_delay.cdf.eps,width=0.5\textwidth}
+\caption{Breakdowns of flow setup delay (wildcard rules) of Intel FM6000 Switch.}\label{intel_wild_setup_delay_breakdown_rate50}
+\end{figure}
+
+\begin{figure}
+\centering
+\epsfig{file=./figures/wild_intel_flowrate_100_delay.cdf.eps,width=0.5\textwidth}
+\caption{Breakdowns of flow setup delay (wildcard rules) of Intel FM6000 Switch.}\label{intel_wild_setup_delay_breakdown_rate100}
+\end{figure}
+
+
+\begin{figure}
+\centering
+\epsfig{file=./figures/intel_flowrate_50_delay_size.eps,width=0.5\textwidth}
+\caption{Flow setup delay vs. flow rule set size (wildcard rules of Intel FM6000 Switch).}\label{intel_wild_setup_delay_size_rate50}
+\end{figure}
+
+\begin{figure}
+\centering
+\epsfig{file=./figures/intel_flowrate_100_delay_size.eps,width=0.5\textwidth}
+\caption{Flow setup delay vs. flow rule set size (wildcard rules of Intel FM6000 Switch).}\label{intel_wild_setup_delay_size_rate100}
+\end{figure}
+
+\begin{figure}[!tp]
+\centering
+\epsfig{file=./figures/intel_flowrate_100_delay_size_finegrained.eps,width=0.5\textwidth}
+\caption{Flow setup delay vs. flow rule set size (wildcard rules of Intel FM6000 Switch).}\label{intel_wild_setup_delay_size_rate100_finegrained}
+\end{figure}
+
+\begin{figure}[!tp]
+\centering
+\epsfig{file=./figures/wild_intel_flowrate_query_impact_delay.cdf.eps,width=0.5\textwidth}
+\caption{Flow setup delay vs. statistics query. f=0.2 means one flow statistics query in every 5 seconds.}\label{intel_setup_delay_query}
+\end{figure}
+
+\subsubsection{Intel FM6000 Switch}
+
+\figref{intel_wild_setup_delays} presents the flow setup delay for Intel FM6000 under various flow rates. 
+We observe that this switch's flow setup delay exhibits very heavy-tailed behavior (even at very low flow rate). 
+For example, 
+the 50.0\%ile setup latency under flow rate 1, 5, 20, 50, 100, 200 per sec are 141.81ms, 41.33 ms, 28.57 ms, 25.42 ms, 25.16 ms, 115.78 ms, 447.64 ms. 
+The 90.0\%ile setup latency under flow rate 1, 5, 20, 50, 100, 200 per sec are  141.81ms, 233.24 ms, 222.28 ms, 232.80ms, 773.47 ms, 1158.52 ms,  1155.69 ms. 
+The 99.0\%ile setup latency under flow rate 1, 5, 20, 50, 100, 200 per sec are  3156 ms, 514.09 ms, 4260.25 ms, 4352.07 ms, 3261.29 ms, 3898.31 ms, 2693.84 ms. 
+The 99.9\%ile setup latency under flow rate 1, 5, 20, 50, 100, 200 per sec are  6173 ms,  730.69 ms, 5930.36 ms, 6089.36 ms, 3897.15 ms, 4366.97 ms, 2774.47 ms. 
+We also observe that when the flow setup delay is between 40 ms to 200 ms, 
+the switch's flow setup delay tends to increase with flow rate. However, when the flow setup delay is below 40 ms or above 200ms, the trends are not clear. 
+
+
+\figref{intel_wild_setup_delay_breakdown_rate50} (flow rate is 50/s) and \figref{intel_wild_setup_delay_breakdown_rate100} (flow rate is 100/s) 
+show the breakdowns of Intel FM6000 switch's flow setup latency. 
+We observe that at the long tail, ingress delay is much larger than egress delay. 
+For example, when the new flow arrival rate is 50 per sec, 82.9\%ile 
+ingress delay is 100 ms, 99.0\%ile ingress delay is 179.44 ms and 99.9\%ile 
+ingress delay is 6025.06 ms. On the other hand, 92.2\%ile 
+egress delay is 100 ms, 99.0\%ile egress delay is 637.34 ms and 
+99.9\%ile egress delay is 911.11 ms. 
+When the new flow arrival rate is 100 per sec, 76.2\%ile ingress delay is 
+100ms, 99.0\%ile ingress delay is 
+2977.29 ms and 99.9\%ile ingress delay is 3675.96 ms. 
+On the other hand, 87.3\%ile egress delay is 100 ms, 99.0\%ile egress delay is 671.42ms and 99.9\%ile egress delay is 821.70 ms.
+
+\figref{intel_wild_setup_delay_size_rate50} and \figref{intel_wild_setup_delay_size_rate100} illustrate one round flow rule install operation's delays. 
+It is interesting to see that when a batch of rules are inserted, 
+the switch's flow setup delay will sharply increase. 
+We induce that after a number of flow rules are inserted into TCAM, 
+the switch does some processing and during this period, no rule insertion request is handled immediately and requests are queued. 
+After the switch complete the processing, it resumes to insert new rules. 
+One possible cause of this phenomena is TCAM re-ordering. \figref{intel_wild_setup_delay_size_rate100_finegrained} show this observation in a fine-grained scale. 
+
+\figref{intel_setup_delay_query} shows query's impacts on flow setup delay for Intel switch.
+
+\subsubsection{Flow Setup Success Rate}
+
+\begin{tabular}{|l|l|c|}
+\hline
+switch/rule-type & flow-rate & succ-rate \\ \hline
+pronto-exact & 5,10,20,25,30 & 100\%\\ \hline
+pronto-exact & 75 & 95.8\%\\ \hline
+pronto-wild & 20,30,40,50,100,200,500,1000 & 100\%\\ \hline
+\hline
+ovs-exact & 1000 & 99.83\% \\ \hline
+ovs-wild & 1000 & 99.99\% \\ \hline
+\hline
+intel-wild & 1,5,20,50,100&100\% \\ \hline
+intel-wild & 150 & 99.4\%  \\
+
+\hline
+\end{tabular}
+
+
+\subsection{Implications}
+
+Based on the measurement work, we summarize the implications here:
+\begin{itemize}
+\item Different types of openflow switch implementations have great performance variances.
+The major bottleneck of current openflow switches is the flow setup rate. Low-ended switches can only support tens of flow setups with reasonable delay (we define reasonable 
+delay to be approximately 100 ms). 
+High performance openflow switches can support hundreds of flow setups with reasonable delay. Open vSwitch is the best in terms of flow setup rate. 
+We expect that Open vSwitch represents an upper bound for openflow switch's flow setup rate in the near further, which can support about 3K flow setups with reasonable delay.
+\item Flow setup delay in SDN is affected by several factors---1)the new flow arrival rate, i.e., the rate of the flows which need to 
+talk to the controller. 2)the flow\_mod rate for the switch 3)the flow\_mod type (flow add, modification and deletion) and 4) 
+flow rule set size (i.e., the number of active entries in the flow table) and 
+e)other activities which share the bus between the cpu and the flow table (such as flow statistics query).
+Note that new flow arrival rate and flow\_mod rate are two different concepts. 
+New flows trigger two operation--packet\_in and flow\_mod. New flow arrival rate is critical for edge routers/switches and flow\_mod rate is crucial 
+for routers/switches in the "core". We believe separating theses two is beneficial for the following discussion.
+\item Flow setup delay exhibits long-tailed behaviors (even under the condition of low flow rate, small flow rule set size and no query operation). 
+For example, 99.9\%ile delays can be several to 
+tens of times larger than 99.0\%ile delay. This implies we need to design smart control over the network to tame the delays properly for time-sensitive applications.
+\item Larger setup rate tends to generate larger setup delays. 
+When the flow rate exceeds a certain maximal flow setup rate, the setup delays become unacceptably large. 
+The reason is that the openflow switch can not handle high speed flow insertion and the requests are accumulated in the queue.
+Flow setup delay usually does not increase strictly with flow rule set size, but when the flow rule set size exceeds a certain limit, flow setup delay can be serveral times larger. 
+Flow statics tics query affect flow setup delay heavily. This is in consistent with previous observations~\cite{curtis2011devoflow}.  
+As expected, the more frequent the query is, the large the delay tends to be. 
+\item We found that the packet\_in delay (ingress delay) is much larger than the flow\_mod operation's delay (egress delay) for OVS based switches.
+This implies that both the network edge and network core can be a bottleneck in SDN. 
+Typically, network edge needs to handle both packet\_in and flow\_mod. 
+The network core only handles flow\_mod. However, the operation rate in the core would be much higher than at the edge.
+\end{itemize}
+
+We characterize the flow setup delay as \emph{predictable delay} and \emph{unpredictable delay}. 
+The delay caused by new flow arrival rate, flow\_mod rate, flow rule set size, flow\_mod type and query operation 
+is called predictable delay. The tail delay is called unpredictable delay.

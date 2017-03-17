@@ -1,0 +1,8 @@
+#we used stdev instead of max min to plot error bar, max = avg + stdev, min = avg - stdev
+#flow count, (official) avg, max, min, (ours) avg, max, min
+
+"100" 1.05 0.0748 0.0748 1.076 0.0431 0.0431
+"500" 6.798 0.093 0.093 7.046 0.068 0.068
+"1K" 11.614 0.188 0.188 11.846 0.0847 0.0847
+"5K" 16.158 0.0538 0.0538 16.836 0.0911 0.0911
+"10K" 16.316 0.160 0.160 17.596 0.1112 0.1112 

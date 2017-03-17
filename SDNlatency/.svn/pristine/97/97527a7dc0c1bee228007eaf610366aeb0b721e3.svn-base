@@ -1,0 +1,87 @@
+\section{Introduction}\label{sec-intro}
+
+Software defined networking (SDN) advocates for the separation of control and
+data planes in network devices, and provides a logically centralized platform
+to program data plane state~\cite{openflow}.  This has opened the
+door to rich network control applications that can adapt to changes in
+network topology or traffic patterns more flexibly and more quickly than 
+legacy control
+planes~\cite{microte,hedera}.
+%For instance, fine-grained data center
+%traffic engineering requires routes to be set up within a few hundred
+%milliseconds to leverage short-term traffic
+%predictability~\cite{microte}. 
+%Similarly, setting up routes in
+%cellular networks (when a device becomes active, or during a handoff)
+%must complete within $\sim$30-40ms to ensure users can interact with
+%Web services in a timely fashion~\cite{softcell}.
+For such applications, timely interaction between the logically
+central SDN control plane and network switches is crucial. 
+%Timeliness
+%is determined by: (1) the speed of control programs, (2) the latency
+%to/from the logically central controller, and (3) the responsiveness
+%of network switches in interacting with the controller---specifically,
+%in generating the necessary input messages for control programs, and
+%in modifying forwarding state as dictated by them. Robust control
+%software design and advances in distributed controllers~\cite{onix}
+%have helped overcome the first two issues. However, with the focus in
+%current/upcoming generations of SDN switches being on the flexibility
+%benefits of SDN w.r.t. legacy technology, the third issue has
+%not gained much attention. 
+However, it is unknown whether SDN can
+provide sufficiently responsive control to support the aforementioned
+applications.
+
+
+% Alarmingly, preliminary studies~\cite{ucsdpaper,oflops} and anecdotal
+% evidence suggest that the latencies of switch control actions (\#3
+% above) are significant. However, it is unclear what factors impact
+% these latencies, what the underlying causes are, and whether the
+% causes are fundamental to switch designs. 
+
+To this end, we present a thorough systematic exploration of latencies in 
+%\#3 above in
+\numCombos types of production SDN switches from
+\numVendors different vendors---Broadcom, Intel, and IBM---using a variety
+of workloads. 
+%We investigate the relationship between switch design
+%and observed latencies using both greybox probes and feedback from
+%vendors. 
+Key highlights from our measurements are as follows: (1) We
+find that {\em inbound latency}, i.e., the latency involved in the
+switch generating packet events to the controller can be high (8 ms per packet on average on Intel). We find the
+delay is particularly high whenever the switch is simultaneously
+processing forwarding rules received from the controller. (2) We find
+that {\em outbound latency}, i.e., the latency involved in the switch
+installing/modifying/deleting forwarding rules, is high as well (3ms and 30ms per rule for insertion and
+modification, respectively, in Broadcom). 
+%The latency crucially
+%depends on the priority patterns both in rules being inserted as well as
+%those already in a switch's table. We find that there are significant
+%differences in latency trends across switches with different chipsets/firmware, pointing to
+%different internal optimizations.
+
+Some of our findings show that poor switch software design
+contributes significantly to observed latencies
+(affirming~\cite{ucsdpaper,oflops}). We believe that near term work
+will address these issues; our measurements with an early release of
+Broadcom's OpenFlow 1.3 software exemplify this.
+More crucially, our measurements also reveal latencies that appear to
+be fundamentally rooted in hardware design: e.g., rules must be
+organized in switch hardware tables in priority order, and
+simultaneous switch control actions must contend for limited bus
+bandwidth between a switch's CPU and ASIC. Unless the hardware
+significantly changes---and our first-of-a-kind in-depth measurement
+study may engender such changes---we believe these latencies will
+manifest even in next generation switches.
+
+To mitigate the impact of outbound latency, and support
+the needs of SDN apps, we propose three
+immediately deployable techniques: flow engineering (FE),
+rule offload (RO), and rule reordering (RR).
+Simulation for fast fail-over and responsive
+ traffic engineering applications shows our techniques can
+ improve the time taken to update network state in these scenarios by factors
+ of 1.6-5X. Detailed results can be found in~\cite{mazu}.
+
+

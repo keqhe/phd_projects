@@ -1,0 +1,321 @@
+\subsubsection{Availability Zone Usage}
+\label{cloud-measure-zone}
+
+
+Within each region of EC2, cloud tenants have the choice of deploying
+across multiple zones. EC2 zones offer a means for improving service
+robustness as they are claimed to use separate compute, network, and
+power infrastructure so that a failure in any of these will not affect
+more than one zone. There seems to be no
+equivalent of zones in Azure.
+
+We now focus on determining the zone deployment for
+EC2-using services' front ends. Unlike the regions, which are easily
+distinguished based on the IP address of a subdomain and the
+advertised ranges~\cite{ec2iprange,azureiprange}, there is no direct way to associate an IP address
+to a zone.  We therefore turn to cloud cartography
+techniques~\cite{ristenpart2009hey}. We use two methods to identify
+zones: network latency and proximity in the internal addresses to
+instances with a known zone (i.e., VMs we launched).
+
+\tightparagraph{Latency-based identification}
+The first technique (originally used in~\cite{ristenpart2009hey}) aims to estimate whether a target physical
+instance (e.g., VM instance, physical ELB instance, etc.) is in the same zone
+as an instance under our control by measuring the RTT to the target. The 
+RTT will be significantly smaller when both instances are in the same zone, 
+compared to when they are in different zones, presumably reflecting a longer 
+path in the latter case.
+We performed a simple experiment to confirm that RTTs follow this trend.
+We setup an m1.micro instance in the \awseasta zone and measured the
+RTT (over 10 trials) to one instance of each type in each of the
+three zones \awseasta, \awseastc, and \awseastd. 
+\tabref{showfeasi} shows both the minimum and median RTTs. It is clear
+that the instances in the same availability zone have the smallest
+RTTs (about 0.5ms) regardless of the instance type. We repeated this
+experiment in each of the EC2 regions with similar results.
+
+\begin{table}
+\centering\small
+%\caption{Latencies (ms) for Different Availability Zones (values are the least/median hping rtt experienced from a micro instance in AZ a)}
+\input{cloudmeasure_tables/tab_rtts_in_ec2_useast}
+\caption{RTTs (least / median) in milliseconds over 10 probes 
+from a micro instance in \awseasta to an instance with a certain type (rows) and
+zone (columns).
+}
+\label{showfeasi}
+\end{table}
+
+
+Our experiment corroborates similar previous ones~\cite{ristenpart2009hey}
+regarding the efficacy of latency-based zone estimates.  However, there are several
+complicating factors when attempting to deploy this methodology for zone
+measurement in practice.  First, our and prior experiments  used 
+%in the literature~\cite{ristenpart2009hey}, were performed using 
+a limited number of otherwise idle EC2 instances---RTT times may be
+significantly more noisy across a broader set of instances and for more heavily
+loaded instances. Second, in some regions (\awseast) we are unable to run an
+instance in each zone.  Nevertheless, we perform, to the best of our knowledge,
+the first use of latency-based zone measurement at scale.
+
+%\tnote{Was the below done just for the VM instances? Or also ELB?}
+
+For each region, we launch three m1.medium instances in each zone from
+which to perform probes; we refer to these as probe instances. In
+\awseast, we use ten additional m1.small instances in each zone because
+a large fraction of IPs are in this region. This region proved more
+challenging, due to a higher density of instances, a lack of full
+coverage of zones by probe instances, and more network noise. For each
+target physical instance in a region, we
+first map the public IP address to an internal IP address via an
+appropriate DNS query from a probe instance in that region.  We then 
+use hping3 to perform 10 TCP
+pings from a probe instance in each zone in the region to both the internal
+IP address and the public IP. While probes are very lightweight, we
+nevertheless limited the frequency of our probing, and the probing
+process was repeated 5 times on each probe instance. The
+experiment was performed over the course of five days (April 4th to
+April 8th, 2013). The minimal RTT is taken as the probe time. For a region
+with $k$ zones (for \awseast we have $k = 3$, even though it has five
+zones), we end up with $k$ probe times $t_1, \ldots, t_k$ and we let
+$i$ be such that $t_i < t_j$ for all $i \ne j \in [1\,..\, k]$. If
+there exists no such $i$ (due to a tie), then we mark the target IP
+(physical instance) as having unknown zone. If $t_i$ is less than a
+threshold $T$ then we conclude that the target physical instance is
+in zone~$i$. Otherwise, we mark the target as having an unknown
+zone.
+
+
+%\setlength{\tabcolsep}{0.1cm}
+\begin{table}[t]
+\center
+\small
+\begin{tabular}{|l|r|r||r|r|r|c|}
+\hline
+\bf Region & \# \bf tgt IPs& \# \bf resp. &  1$^\textbf{st}$ \bf zn & 2$^\textbf{nd}$ \bf \bf zn & 3$^\textbf{rd}$ \bf zn &  \bf \% unk \\
+\hline
+\awseast & 34,194 & 25,085 & 11,592  & 2,835  & 10,658 & 16.6 \\
+\awscali & 3,663 & 2,471  & 1,050 & 1,367 & N/A & 32.5 \\
+\awsoreg & 1,869 & 1,679   & 600   &755    & 324 & 10.1\\
+\awseuro & 8,581 &  7,023   &1,935  &2,095  & 2,993  & 18.2\\
+\awstokyo & 2,558 & 1,260 & 1,129     & N/A     & 131& 50.7\\ 
+\awssing &2,296  & 1,987 & 968 &   1,019  & N/A&  13.5\\
+\awssyd & 333 & 298 & 146 & 152  &  N/A  &  10.5\\
+\awssp & 701  & 616 & 376 &  240 & N/A  & 12.1\\
+\hline
+\end{tabular}
+\caption{Estimated distribution of instance IPs across zones using latency method ($T = 1.1$).
+Second column is total number of IPs derived from subdomains, followed by
+the number that responded to probes, and the estimates of how many were in each
+of the zones. The final column is the percentage of the responding IPs for which no
+zone could be estimated.}
+%Note there are only two zones in \awscali, \awssing, \awssyd and \awssp; there are three zones in \awstokyo, but we can only set up instances in two of them from Feb, 2013}
+\label{tab:latency-zone-estimates}
+\end{table}
+
+Setting $T = 1.1$, we end up with a zone estimate for physical
+instance IPs from our \alexadata dataset in most regions. The results
+are shown in \tabref{tab:latency-zone-estimates}. The
+technique worked well for all regions except for \awstokyo. The
+unknown rate is affected by two factors: ({\em i}) Whether we can set up
+instances in all zones; for example, we can not set up instances in
+\awstokyo's zone \#2 after January, 2013, but, according to our
+observation in January, the number of IPs in zone \#1 and zone \#2 is
+quite similar. ({\em ii}) How many times we repeat the probes to 
+reduce network noise;  with 
+more probe data, the unknown rate can be further reduced. 
+
+\tightparagraph{Address-proximity-based identification}
+We supplement the latency measurements with 
+sampling using our own accounts and an estimation mechanism
+based on proximity of a target internal IP address to a sampled IP address.
+As shown in prior work~\cite{ristenpart2009hey}, it is very likely that two 
+instances running in the same /16 subnet are co-located in the same zone 
+(and are potentially even of the same instance type). 
+We launched 5096 instances (in aggregate %updated number, as of 21Apr2013
+over the course of several years) under a number of our AWS accounts. 
+The result is a set of account, zone label, internal IP triples $(a_i,z_i,ip_i)$ 
+for $i \in [1\,..\,X]$. 
+A complicating factor is that, for $a_i \ne a_j$ (different accounts), 
+it may be that the EC2-provided zone labels are not the same. Meaning,
+for account $a_i$ it may be that the \awseasta is not 
+the same actual zone as \awseasta for account $a_j$.  Let $Z$ be the set of
+zone labels.
+
+\begin{figure}[t]
+\center\small
+\includegraphics[width=0.55\textwidth]{./figures/cloudmeasure/imag_sec4/zone_samples.pdf}
+\caption{Sampling data for address proximity measurement.}
+\label{fig:zone-samples}
+\end{figure}
+
+We thus take the following straightforward 
+approach to merge data across multiple different accounts. 
+Consider a pair of accounts $a,b$. 
+%Let $\calX_a = \{ (a_i,z_i,ip_i) \:|\: a = a_i \}$
+%and similarly define $\calX_{b}$. 
+Find the permutation $\pi_{b\rightarrow a}\Colon Z\rightarrow Z$ 
+that maximizes the number of pairs of /16 IPs
+$ip_i/16 = ip_j/16$ such that $a_i = a$, $a_j = b$ and $\pi_{b\rightarrow a}(z_j) = z_i$.
+This can be done efficiently by ordering all triples 
+of the accounts $a$ and $b$ by IP address, and inspecting 
+the zone labels associated to each account for nearby IP 
+addresses.  
+One can repeat this for all pairs of accounts and solve the
+integer programming problem associated with finding an optimal
+set of permutations $\pi$, but it proved effective to take the
+simpler approach of finding $\pi_{b\rightarrow a}$ for one pair,
+merging the pair's triples by applying $\pi_{b\rightarrow a}$ 
+appropriately, and then repeating with the next account $c$, etc.
+%Let $t$ be the number of accounts and let $a_1,\ldots,a_t$ be ordered by 
+%the number of triples per account.  
+%collect all triples $i,j$ such that $ip_i/24 = ip_j/24$. Let $z,z'$ be
+%the zone labels seen the most 
+The outcome of applying this process to samples from \awseast %from each region, for each zone, 
+is shown in \figref{fig:zone-samples}. 
+Each binned IP address is a point, with the distinct colors representing distinct availability zones.
+
+We now apply the sampling data to the physical instances from the \alexadata
+dataset.  If we have at least one sample IP in the same /16 subnet as the IP
+associated with a target physical instance, we conclude that the target
+instance is in the same zone as the sample instance.  Otherwise, we mark the
+target instance as having an unknown zone.  With this approach, we
+are able to identify the zone for 79.1\% of the EC2 physical instances in
+the \alexadata dataset.
+
+%We now apply the sampling data to the physical instance IP addresses
+%from the \alexadata dataset by marking each IP by the zone of any sample sharing the same /16 in \awseast. 
+%In the case where there are multiple samples, we mark the IP address with the set of possible zones. 
+
+Treating these zone identifications as ground truth, we check the accuracy of
+the latency-based zone identifications.  \tabref{tab:comparing_methods} shows
+for each EC2 region the total number of physical instances in the \alexadata
+dataset, the number of instances for which the two zone identification
+approaches agree, the number of instances whose zone cannot be identified using
+one or both methods, the number of instances where the two methods disagree,
+and the error rate of the latency-based method.  The error rate is defined as
+the number of mismatched instances / (the total number of instances - the
+number of unknown instances). We observe that latency based method's overall
+error rate is 5.7\%. Its error rate is less than 3.9\% for all regions except
+Europe West\footnote{We were unable to decrease the error rate for Europe
+West even after gathering additional latency measurements.}.  In particular, the 
+error rate in the US East region (where the majority of the instances
+reside) is quite low (2.7\%).  
+
+\begin{table}[t] \center\small
+    \input{cloudmeasure_tables/tab_latency_cartography_accuracy} 
+    \caption{Veracity of latency-based zone identification.}
+    \label{tab:comparing_methods} 
+\end{table}
+
+
+\tightparagraph{Combined identification}
+We combine the two zone identification methods to maximize the fraction of
+physical instances whose zone we can identify.  We give preference to our
+address-proximity-based zone identifications, and use our latency-based
+identifications only for instances whose zone cannot be identified
+using the former method.  Combining the two methods allows us to identify the
+EC2 availability zone for 87.0\% of all physical EC2 instances in the
+\alexadata dataset.
+
+%\setlength{\tabcolsep}{0.1cm}
+\begin{table}[t]
+\center
+\small
+\begin{tabular}{|l||r|r|r|r|r|r|r|}
+\hline
+\bf Region & \multicolumn{2}{|c|}{1$^\textbf {st}$ \bf zone} &   \multicolumn{2}{|c|}{2$^\textbf {nd}$ \bf zone}   & \multicolumn{2}{|c|}{3$^\textbf {rd}$ \bf zone}  \\
+           &\#Dom& \#Sub  & \#Dom& \#Sub & \#Dom& \#Sub\\
+\hline
+\awseast &  16.1  &  419.0&  6.2  & 155.4& 9.5  &  292.9 \\
+\awscali &  1.6 &  33.2&  3.0  &  37.4 & N/A  &  N/A\\
+\awsoreg  &  0.9 &  13.4 & 1.0 &  9.6 &0.8 &  7.3 \\
+\awseuro  &   2.3  &  77.0&  2.9 & 63.9 & 4.5  &  98.7\\
+\awstokyo &   0.4 & 3.7 & 1.3 & 11.3   &1.5 & 12.9 \\
+\awssing  &  0.9 & 11.3 &   1.2 & 19.1 & N/A & N/A\\
+\awssyd  &  0.2 & 0.3 & 0.2 & 0.3  & N/A & N/A \\
+\awssp   &  0.5 & 14.4 &  0.2 & 8.9 & N/A & N/A\\
+\hline
+\end{tabular}
+\caption{Estimated number of domains and subdomains using various EC2  zones. 
+Some regions only have 2 zones.}
+%Note there are only two zones in \awscali, \awssing, \awssyd and \awssp; there are three zones in \awstokyo, but we can only set up instances in two of them from Feb, 2013}
+\label{tab:ec2-zone-usage}
+\end{table}
+
+
+\begin{figure}[!tb]
+\centering
+	\begin{subfigure}[b]{0.4\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{./figures/cloudmeasure/imag_sec4/zone_cdf_new_fix.pdf}
+		\caption{subdomain}
+		\label{fig:cloud_zone_subdomains_CDF}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.4\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{./figures/cloudmeasure/imag_sec4/avg_zone_cdf_new_fix.pdf}
+		\caption{domain}
+		\label{fig:cloud_zone_domains_CDF}
+	\end{subfigure}
+\caption{(a) CDF of the number of zones used by each subdomain 
+(b) CDF of the average number of zones used by the subdomains of each domain.}
+\label{fig:cloud_zone_CDF}
+\end{figure}
+
+\begin{table}[t]
+\centering
+\small
+\input{cloudmeasure_tables/tab_domain_deploy_zone.tex}
+\caption{Zone usage estimates for top using zones. Column 4 is estimated 
+total number of zones used by all
+subdomains. Columns 4--6 indicate the estimated number of subdomains that use 
+$k$ different zones.}
+\label{top_alexa_domains_deploy_zone}
+\end{table}
+
+
+\tabref{tab:ec2-zone-usage} summarizes the number of (sub)domains using each region and
+zone.  In all but one region (Asia Pacific Southeast 2), we
+observe a skew in the number of subdomains using each zone in a region. Asia
+Pacific Northeast and US East regions have the highest skew across their
+three zones: 71\% and 63\% fewer subdomains, respectively, use the least
+popular zone in those regions compared to the most popular zone.  
+
+We also look at the number of zones used by each (sub)do-main.
+\figref{fig:cloud_zone_subdomains_CDF} shows a CDF of the number of
+zones used by each subdomain.  We observe that 33.2\% of
+subdomains use only one zone, 44.5\% of subdomains use two zones, and 22.3\%
+of subdomains use three or more zones.  Of the subdomains that use two or
+more zones, only 3.1\% use zones in more than one region.  
+%For example, if
+%the one of the zones in the US East region failed, \fixme{XX\%, XX\%, and
+%XX\%} of subdomains would be completely unavailable if the 1st, 2nd, or 3rd
+%zones, respectively, failed.
+\figref{fig:cloud_zone_domains_CDF} shows the average number of zones used by
+the subdomains of each domain.  We observe that most domains (70\%) only use
+one zone for all subdomains; only 12\% of domains use two or more zones per
+subdomain on average.  
+
+Even for the top EC2-using domains, a large fraction of their subdomains only
+use a single zone (\tabref{top_alexa_domains_deploy_zone}). For example,
+56\% of pinterest.com's EC2-using subdomains and 33\% of linkedin.com's are
+only deployed in one zone.  
+
+%\figref{az_num} breakdowns the number of availability zones deployed by
+%EC2-using subdomains by region.
+
+\tightparagraph{Summary and implications} Our two key findings in this section
+are that ({\em i}) the majority of EC2-using subdomains only use one (33.2\%)
+or two (44.5\%) zones, and ({\em ii}) the subdomains using a given EC2 region
+are not evenly spread across the availability zones in that region. The former
+implies that many EC2-using subdomains would be completely unavailable if a
+single zone failed, and many others would be severely crippled: e.g., a
+failure of \awseasta would cause 16.1\% of subdomains to be completely
+unavailable.  Our later key finding implies that an outage of a particular
+zone in a region may have a greater negative impact than an outage of a
+different zone in the same region: e.g., a failure of \awseasta would impact
+$\approx$419K subdomains, while a failure of \awseastb would only impact
+$\approx$155K.
+
+
+

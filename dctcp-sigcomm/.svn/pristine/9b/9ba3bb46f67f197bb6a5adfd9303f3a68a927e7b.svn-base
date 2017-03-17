@@ -1,0 +1,7 @@
+\section{Implementation}
+\label{impl}
+
+Need FACK, PACK packet format.
+
+Standard OVS kernel datapath LoC: 2360
+\acdc{} kernel datapath LoC: 3590

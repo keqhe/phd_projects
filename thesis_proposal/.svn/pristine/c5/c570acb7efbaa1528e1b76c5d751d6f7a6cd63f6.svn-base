@@ -1,0 +1,64 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Protocols and Services}
+\label{sec:protocols}
+
+\begin{table}[!t]\small
+\centering
+\input{cloudmeasure_tables/tab_capture_cloudsplit}
+\caption{Percent of traffic volume and percent of flows associated with
+    each cloud in the packet capture.}
+\label{tab:cloudsplit}
+\end{table}
+
+\begin{table}[!t]\small
+\centering
+\input{cloudmeasure_tables/tab_capture_protocols}
+\caption{Percent of traffic volume and percent of flows associated with each  
+    protocol in the packet capture.}
+\label{tab:proserv}
+\end{table}
+
+We first examine the fraction of bytes and flows in the \capturedata that are
+associated with each cloud (\tabref{tab:cloudsplit}). We only consider flows
+that were initiated within the university and destined for EC2 or Azure.
+We observe that the majority of cloud traffic, both as measured by volume and
+number of flows, is EC2-related: 81.73\% of bytes (80.70\% of flows)
+are associated with EC2, while Azure accounts for 18.27\% of bytes
+(19.30\% of flows).
+
+Next, we use the \capturedata to study the application-layer protocols used by cloud tenants.
+\tabref{tab:proserv} shows the
+percentage of bytes (and flows) using a specific protocol relative to the
+total number of bytes (and flows) for EC2, Azure, and the capture as a whole.
+
+We observe that more than $99\%$ of bytes in the \captureonedata 
+are sent and received using TCP, with less than $1\%$ of bytes
+associated with UDP or ICMP.  The vast majority of this TCP traffic is
+HTTP and HTTPS. The proportion of HTTPS traffic is far higher than
+that seen for general web services in the past (roughly
+6\%~\cite{agarwal2010endre}); as we will show later, HTTPS traffic is dominated
+by cloud storage services. Interestingly, the majority of Azure's TCP traffic
+is HTTP (59.97\%) while the majority of EC2's TCP traffic is HTTPS (80.90\%)  
+
+The breakdown by flow count is less skewed
+towards TCP, with UDP flows accounting for 14\% of flows in the
+\captureonedata. This is largely due to DNS queries, which account for
+11\% of flows but carry few bytes.
+
+As one would expect, public IaaS clouds are also used for non-web-based
+services.  In the \captureonedata, we find a small fraction of non-HTTP(S)
+TCP traffic and non-DNS UDP traffic going to both EC2 and Azure. 
+This traffic includes SMTP, FTP, IPv6-in-IPv4, SSH, IRC, and other traffic that Bro
+could not classify.
+
+
+\tightparagraph{Summary and implications} While we analyze a single
+vantage point, our measurements suggest that web
+services using HTTP(S) represent an important set of WAN-intensive
+cloud tenants. The extent to which compute-intensive workloads (that
+may not result in a large impact on network traffic) are prevalent as
+cloud tenants remains an interesting open question.  In the following
+sections we dig into what tenants are hosting web services on public
+clouds as well as diving deeper into their traffic patterns.
+
+

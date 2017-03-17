@@ -1,0 +1,14 @@
+Nov 16, 2014
+
+initial folder has data that is collected at very initial stage, we did not delete them but probably wont use it later
+
+plot_tput*.gp : plot tput with error bar for different schemes (ecmp, mptcp, presto, optimal )
+
+plot_sockperf.gp: plot CDF for latency measured by industry standard benchmark tool "sockperf"
+
+plot_fairness.gp: plot fairness index for different schemes
+
+*.cdf: sockperf RTT measurement CDF for different schemes (/settings)
+
+*.dat: tput or fairness data
+

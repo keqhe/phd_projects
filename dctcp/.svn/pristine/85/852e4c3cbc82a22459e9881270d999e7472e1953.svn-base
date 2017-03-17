@@ -1,0 +1,121 @@
+\subsection{Macrobenchmarks}
+\label{macro}
+
+In this section we attach all servers to a single switch and
+run a variaty of well-known workloads to better understand
+how well~\acdc{} can track DCTCP's performance. MTU size is 
+fixed to 9000 bytes, and experiments are run for 10 minutes. A simple TCP application
+sends small bursts of packets to measure flow completion times.
+
+%
+% incast is now within macro
+%
+\input{incast}
+%
+%
+%
+
+
+
+
+
+
+
+\begin{figure*}[!htb]
+        \centering
+        \begin{subfigure}[b]{0.45\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/macro_benchmarks/macro_4stride/stride4_mice16KB_fct.pdf}
+                \caption{mice flow completion times.}
+                \label{macro_4stride_mice_fct}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.45\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/macro_benchmarks/macro_4stride/stride4_big512MB_fct.pdf}
+                \caption{background flow completion times.}
+                \label{macro_4stride_background_fct}
+        \end{subfigure}
+        \caption{CDF of mice and background FCTs in concurrent stride workload.}
+        \label{macro_4stride_fct}
+\end{figure*}
+
+\tightparagraph{Concurrent stride workload}
+In concurrent stride, 17 servers are attached to a single switch.
+Each server $i$ sends a 512MB flow to servers [$i+1$, $i+4$] mod 17 in sequential fashion
+to emulate background traffic.
+Simultaneously, each server $i$ sends 16KB messages every 100 ms to 
+server $(i+8)$ mod 17.
+The FCT for small flows (16KB) and background flows (512MB) are shown 
+in Figure~\ref{macro_4stride_fct}. For small flows DCTCP and \acdc{} 
+reduce the median FCT by 77\% and 76\% respectively. 
+At the 99.9$^{th}$ percentile, DCTCP and \acdc{} reduce FCT by 91\% and 93\%, respectively.
+For background flows, DCTCP and \acdc{} offer similar completion times.
+CUBIC has longer background FCT because its fairness is not as 
+good as DCTCP and \acdc{}.
+
+\begin{figure*}[!htb]
+        \centering
+        \begin{subfigure}[b]{0.45\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/macro_benchmarks/shuffle_17hosts/shuffle_mice16KB_fct.pdf}
+                \caption{mice flow completion times.}
+                \label{macro_shuffle_mice_fct}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.45\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/macro_benchmarks/shuffle_17hosts/shuffle_big512MB_fct.pdf}
+                \caption{background flow completion times.}
+                \label{macro_shuffle_background_fct}
+        \end{subfigure}
+        \caption{CDF of mice and background FCTs in shuffle workload.}
+        \label{macro_shuffle_fct}
+\end{figure*}
+
+\tightparagraph{Shuffle workload}
+In shuffle, each server sends 512MB to every other server in random order. 
+A sender sends at most 2 flows simultaneously and when
+a transfer is finished, the next one is started until 
+all transfers complete.
+Every server $i$ also sends a 16 KB message to server $(i+8)$ mod 17 
+every 100 ms. This workload is repeated for 30 runs.
+The FCT for each type of flow is shown in Figure~\ref{macro_shuffle_fct}.
+For small flows, DCTCP and \acdc{} reduce median FCT by
+72\% and 71\% when compared to CUBIC. 
+At the 99.9$^{th}$ percentile, DCTCP and \acdc{} 
+reduce FCTs by 55\% and 73\% respectively.
+For large flows, CUBIC, DCTCP and \acdc{} have almost identical performance.
+
+
+\begin{figure*}[!htb]
+        \centering
+        \begin{subfigure}[b]{0.45\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/macro_benchmarks/trace-driven/trace_driven_workload_dctcp_senders5.pdf}
+                \caption{web-search workload.}
+                \label{trace-driven-searching-fct}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.45\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/macro_benchmarks/trace-driven/trace_driven_workload_conga_senders5.pdf}
+                \caption{data-mining workload.}
+                \label{trace-driven-data-mining-fct}
+        \end{subfigure}
+        \caption{CDF of mice flow's (<10KB) FCT in web-search and data-mining workloads.}
+        \label{macro-trace-driven-fct}
+\end{figure*}
+
+\tightparagraph{Trace-driven workloads}
+Finally, we run trace-driven workloads to understand how \acdc{} can help reduce FCT for realistic workloads. 
+An application on each server builds a long-lived TCP connection with every other server.
+Message sizes are sampled from a trace and sent to a random destination in sequential fashion. Five
+concurrent applications on each server are run to increase network load. Message
+sizes are sampled from a web-search~\cite{alizadeh2011data}
+and data-mining workload~\cite{greenberg2009vl2,alizadeh2014conga}, whose flow size distribution has a heavier tail.
+Figure~\ref{macro-trace-driven-fct} shows a CDF of FCTs for mice flows (smaller than 10KB) 
+in the web-search and data-mining workloads.
+In the web-search workload,
+DCTCP and \acdc{} reduce median FCTs by 77\% and 76\%, respectively. 
+At the 99.9$^{th}$ percentile, DCTCP and \acdc{} reduce FCTs by 50\% and 55\%, respectively.
+In the data-mining workload, DCTCP and \acdc{} reduce median FCTs by 72\% and 73\%, respectively. 
+At the 99.9$^{th}$ percentile, DCTCP and \acdc{} reduce FCTs by 36\% and 53\% respectively.  
+In both workloads, DCTCP and \acdc{} improve the fraction of mice flows that finish in 1 millisecond significantly.~\eric{what's the number?}

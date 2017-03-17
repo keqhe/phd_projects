@@ -1,0 +1,12 @@
+\subsection{Conclusion}
+\label{sec:presto-conclusion}
+Presto is a near uniform sub-flow distributed load balancing scheme
+that can near optimally load balance the network at fast networking speeds.
+Our scheme makes a few simple changes to the hypervisor soft-edge (vSwitch and GRO)
+and does not require any modifications to the transport layer or network hardware, making
+the bar for deployment lower. 
+Presto is explicitly designed to load balance the network at fine granularities
+and deal with reordering without imposing too much overhead on hosts. Presto is flexible and can also
+deal with failures and asymmetry. Finally, we show the performance of Presto can closely track
+that of an optimal non-blocking switch, meaning elephant throughputs remain high while the tail
+latencies of mice flow completion times do not grow due to congestion.

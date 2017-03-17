@@ -1,0 +1,36 @@
+\subsubsection{Measurement Methodology}
+
+\begin{figure}[!tb]
+\centering
+\includegraphics[width=0.55\textwidth]{figures/mazu/experiment_setup.pdf}
+\caption{Measurement experiment setup}
+\label{mazu_experiment_setup} 
+\end{figure}
+
+\figref{mazu_experiment_setup} shows our measurement setup.
+The host has one 1Gbps and two 10Gbps interfaces connected to the switch under test. 
+The eth0 interface is connected to the control port of the switch, and an SDN
+controller (POX for \Intel, \BroadcomOne, and \IBM; RYU for \BroadcomThree) running
+on the host listens on this interface. 
+The RTT between switch and controller is
+negligible ($\approx$0.1ms). We use the controller to send a burst of OpenFlow 
+\flowmod commands to the switch. For \Intel, \BroadcomOne, and \IBM, we
+install/modify/delete rules in the single table supported by OpenFlow 1.0;
+for \BroadcomThree, we use the highest numbered table, which supports
+rules defined over any L2, L3, or L4 header fields.
+The host's eth1 and eth2 interfaces are connected to data ports on the
+switch. We run pktgen~\cite{pktgen} in kernel space to generate traffic on
+eth1 at a rate of 600-1000Mbps using minimum Ethernet frame size.
+
+Prior work notes that accurate execution times for OpenFlow commands on
+commercial switches can only be observed in the data plane~\cite{rotsos2012oflops}.
+Thus, we craft our experiments to ensure the latency impact of various
+factors can be measured directly from the data plane (at eth2 in
+\figref{mazu_experiment_setup}), with the exception of \packetin generation
+latency. We run \emph{libpcap} on our measurement host to accurately
+timestamp the packet and rule processing events of each flow. We first log
+the timestamps in memory, and when the experimental run is complete, the
+results are dumped to disk and processed. We use the timestamp of the
+first packet associated with a particular flow as the finish time of the
+corresponding \flowmod command; more details are provided later in this
+section.

@@ -1,0 +1,68 @@
+\section{Related Works}
+\label{sec:related}
+% Understanding OpenFlow switch implementations in terms of forwarding table management, flow setup latency, flow space granularity, flow modification types, and 
+% statistics gathering is crucial for developing use cases for these switches. 
+% Recently there has been several publications that attempt to characterize the performance of commercially available Openflow switches and 
+% proposed solutions to circumvent these performance issues. 
+% In the context of the work presented here we will survey prior work on performance studies of commercial switches and from a solution perspective 
+% we will provide the context for two solutions: Rule offloading and Multipath routing.
+
+%  5406z1 switch and the study was aimed primarily at analyzing the various factors that 
+% impact statistics gathering within the switch. The authors show that currently Openflow switches are the primary bottleneck to support the necessary 
+% flow set up and statistics gathering rates for a typical data center network. 
+% The maximum flow rate supported was about 275 fps. It was observed that the rate of statistics gathering is limited by the size of the flow table 
+% (1 sec at a table size of 5600 and 500 ms at a table size 3200). Also it was shown that statistics gathering negatively impacts the flow set up rate 
+% (no statistics: 274 fps and 1 sec statistics: 150 fps).
+
+, but they have either focussed on narrow issues, or have not offered explanations for observed performance issues. 
+
+As openflow enabled switches start to become widely available on the market, it is important to note that there is no clear switch design specification. 
+From a provider perspective it is critical that there are reliable measurement frameworks and emulators to test and compare the performance of the vendor specific implementations of Openflow switches. 
+OFLOPS~\cite{oflops} describes a software framework that can be used to evaluate the performance of Openflow switches. 
+More recently~\cite{ucsdpaper} designed a software openflow switch emulator. Both the OFLOPS framework and the switch emulator work conducted benchmarking 
+studies on openflow switch performance. However the work was limited in scope and only addressed control path delays in~\cite{ucsdpaper} and 
+the performance of general openflow command operations in~\cite{oflops}. Nevertheless the observation made in~\cite{ucsdpaper, oflops} are summarized below. 
+One important observation in the OFLOPS work was that the accurate execution of open flow commands on commercial switches can only be observed in the data plane. 
+In our work we design a measurement set up that is similar to the OFLOPS framework and attempt to comprehensively characterize the different components of the flow set up latency. 
+\marina{say a line specific to our measuremnt method}   
+
+The OFLOPS framework was used to evaluate 3 commercial switches and the authors observed that switching performance depends on applied actions and firmware. 
+The flow update rates and traffic monitoring capabilities of the switches varied widely. 
+The authors of OFLOPS show that switch performance exhibited vendor-specific variations which is further corroborated by our studies on XXX commercial switches. 
+Specifically the OFLOPS paper showed that for software switches that keep all rules in memory, the insertion rate or type has no impact on flow set up latency. 
+However for hardware switches, it takes more time to modify existing flow entries
+as compared to adding new flow entries. This is in agreement with our observations as well where, as the number of TCAM entries increases, 
+there is more delay due to TCAM re-ordering. 
+\marina{Can we say anyting here about the flow mod types and how that impacts flow insertion times}. 
+With respect to statistics gathering, the OFLOPS work confirms the constant response delays seen under constant load as also seen in~\cite{devoflow} and 
+is dependent on the switch type. However with higher polling rates, flow insertion delay increases due to interactions with the OS scheduling mechanism. 
+\marina{one line summary on our statistics gathering result}
+
+In~\cite{ucsdpaper} the authors also present a measurement study to understand the impact of software and hardware issues on control path delays on 3 different 
+commercially available switches. This work shows that all 3 switches show distinct delay distributions that are due to control path delays. 
+From a flow table design, all switches had varying limits on the maximum flow stable sizes that could be supported based on the table type (software/ hardware) used. 
+In addition it was observed that flow set up latency was affected by the buffering of flow installation (\flowmod) events, 
+use of a software flow table, rule migration policy between the software and hardware tables, and hardware rule timeouts. 
+\marina{one line summary of our observations on flow tables etc}
+
+To address the performance issues of the switch several solutions have been proposed. Some of these approaches are implemented in the control plane or hypervisor~\cite{Cassado, Seawall} while others primarily involve the data plane. Our measurement study clearly shows that the solution choice in the data plane is not trivial since 
+the switch is the performance bottleneck. Here we focus on the data plane related solutions to reduce flow set up latencies. 
+In~\cite{devoflow} the authors evaluate a rule cloning solution which reduces the number of controller requests being made by the switch by 
+having the controller set up rules on aggregate or elephant flows. A clone flag is used to indicate if the flow rule should remain as an aggregate in the flow table or 
+if it needs to be split into microflows. This is a local action taken by the switch. The ability to split into microflows allows greater visibility into 
+these flows from a management perspective while at the same time reducing the number of rule set up requests to the controller. 
+Furthermore the action part of the flow table in the switch can implement explicit multipath routing and also rapid rerouting by manipulating the 
+rule priorities within the switch. These proposed solutions were primarily evaluated using simulation studies and they show some promise. 
+However our measurement study indicates that contrary to the simulation studies in~\cite{devoflow} the implementation of these approaches on 
+current switches especially the use of priorities may further impact switch performance. Compared to Devoflow's rule cloning, 
+the DIFANE~\cite{difane} approach reduces flow set up latency by splitting pre-installed wild card rules among multiple switches and 
+therefore all decisions are still made in the data plane. 
+However this approach reduces the global visibility of flow states and the statistics needed for flow management. 
+\marina{add a sentence about why our approach is different for rule offloading and multipath}.
+
+In addition to the purely data plane or control plane approaches for flow setup, there are hybrid approaches that leverage rule processing capabilities at 
+both hypervisors and switches for improving scalability and performance. 
+In~\cite{minlanvcrib}, the authors design a Rule manager that automatically partitions and places rules at both hypervisors and switches to 
+achieve a good trade-off between resource usage and performance. 
+\marina{add a sentence about how our rule space partition and placement is different from Vcrib, 
+in terms of reducing the number of rules per partition and number of partitions}. 

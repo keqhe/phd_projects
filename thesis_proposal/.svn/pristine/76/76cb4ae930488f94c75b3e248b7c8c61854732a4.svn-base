@@ -1,0 +1,16 @@
+\subsubsection{Dissecting Outbound Delay} 
+\label{mazu-outbound_meas}
+
+We now study the outbound latencies for three different \flowmod\
+operations: insertion, modification, and deletion. For each operation, we
+examine the latency impact of key factors, including table
+occupancy and rule priority.
+Before measuring outbound latency, we install a single default low priority
+rule which instructs the switch to drop all traffic. We then install a set of
+non-overlapping OpenFlow rules that
+eth2 interface of our measurement host. For some experiments, we 
+systematically vary the rule priorities.
+
+\input{mazu_measure_flowmod_insert}
+\input{mazu_measure_flowmod_modify}
+\input{mazu_measure_flowmod_delete}

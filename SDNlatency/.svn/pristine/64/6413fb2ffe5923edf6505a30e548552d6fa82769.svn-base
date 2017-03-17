@@ -1,0 +1,52 @@
+This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: main.aux
+The style file: plain.bst
+Database file #1: refs.bib
+Warning--to sort, need author or key in netprotect
+Warning--to sort, need author or key in estan:private
+Warning--empty author in estan:private
+Warning--empty journal in estan:private
+Warning--empty year in estan:private
+You've used 25 entries,
+            2118 wiz_defined-function locations,
+            589 strings with 6121 characters,
+and the built_in function-call counts, 5926 in all, are:
+= -- 503
+> -- 199
+< -- 0
++ -- 85
+- -- 60
+* -- 255
+:= -- 986
+add.period$ -- 72
+call.type$ -- 25
+change.case$ -- 105
+chr.to.int$ -- 0
+cite$ -- 30
+duplicate$ -- 331
+empty$ -- 664
+format.name$ -- 60
+if$ -- 1285
+int.to.chr$ -- 0
+int.to.str$ -- 25
+missing$ -- 24
+newline$ -- 125
+num.names$ -- 46
+pop$ -- 199
+preamble$ -- 1
+purify$ -- 80
+quote$ -- 0
+skip$ -- 174
+stack$ -- 0
+substring$ -- 125
+swap$ -- 45
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 100
+warning$ -- 5
+while$ -- 46
+width$ -- 27
+write$ -- 244
+(There were 5 warnings)

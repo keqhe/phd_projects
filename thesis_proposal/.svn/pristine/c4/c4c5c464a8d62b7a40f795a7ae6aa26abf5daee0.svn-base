@@ -1,0 +1,160 @@
+
+\begin{tabular}{|c|r|c|r|c|r|c|r|} \hline
+\multicolumn{4}{|c|}{Capture 1} & \multicolumn{4}{|c|}{Capture 2}\\
+\multicolumn{2}{|c|}{EC2} & \multicolumn{2}{|c|}{Azure} & \multicolumn{2}{|c|}{EC2} & \multicolumn{2}{|c|}{Azure} \\
+\hline
+Common Name & traffic  (\%) & Common Name & traffic  (\%) & Common Name & traffic  (\%) & Common Name & traffic  (\%) \\ \hline
+dropbox.com (*) & 67.98 & atdmt.com  & 2.98 & dropbox.com (*) & 17.97 &  atdmt.com (*) & 7.88  \\
+ truste.com  & 1.04 & msecnd.net & 1.51 & bitcasa.com (*) & 7.22 & microsoft.com & 3.83  \\
+ netflix.com (*) & 0.93 & microsoft.com & 1.37 &  netflix.com (*) & 6.05 & live.com (*) & 3.70  \\
+ netflix.com  & 0.77 & s-msn.com & 1.31 & simcity.com (*) & 3.74 & atdmt.com & 2.74  \\
+ channel3000.com  & 0.74 & msn.com (*) & 1.20 & mcgraw-hill.com & 2.71 &  windowsupdate.com & 1.82 \\
+ pinterest.com  &0.58 & msn.com  & 1.19 & kickstarter.com & 1.43 & virtualearth.net & 1.33 \\
+ adsafeprotected.com  & 0.53 & microsoft.com (*) & 0.89 & pogoplug.com & 1.31 & msecnd.net & 1.29\\
+ sharefile.com (*) & 0.42 & live.com (*) & 0.81 & instagram.com & 1.24 & s-msn.com & 0.83 \\
+ zoolz.com (*) & 0.36 & dreamspark.com  & 0.81 & newsinc.com & 0.86 &msn.com & 0.75 \\
+ zynga.com  & 0.32 & virtualearth.net  & 0.80 & truste.com & 0.66 & microsoft.com (*) & 0.71 \\
+ echoenabled.com  & 0.29 & hotmail.com  & 0.57 & pinterest.com & 0.65 & wonderwall.com & 0.66 \\
+ vimeo.com (*) & 0.26 & live.com  & 0.54 & bleacherreport.com & 0.63 & live.com & 0.63 \\
+ foursquare.com (*) & 0.25 &mesh.com (*) & 0.52 & imgur.com & 0.57 & msads.net & 0.42 \\
+ dropbox.com  & 0.23 &wonderwall.com  & 0.36 & scanscout.com & 0.57 & livefilestore.com (*) & 0.21 \\
+ sourcefire.com (*) & 0.22 &msads.net  & 0.29 & mhlearnsmart.com & 0.53 & hotmail.com  & 0.19 \\
+ instagram.com  & 0.17 &virtualearth.net (*) & 0.25 & webrootcloudav.com  & 0.47 & aspnetcdn.com & 0.19 \\
+ copperegg.com (*) & 0.17 &windowsphone.com (*) & 0.23 & topfreegames.com & 0.41 & windowsphone.com (*) & 0.12 \\
+ \hline
+\end{tabular}
+
+
+\iffalse
+\begin{tabular}{|c|r|c|r|c|r|c|r|} \hline
+\multicolumn{4}{|c|}{Capture 1} & \multicolumn{4}{|c|}{Capture 2}\\
+\multicolumn{2}{|c|}{EC2} & \multicolumn{2}{|c|}{Azure} & \multicolumn{2}{|c|}{EC2} & \multicolumn{2}{|c|}{Azure} \\
+\hline
+Common Name & traffic  (\%) & Common Name & traffic  (\%) & Common Name & traffic  (\%) & Common Name & traffic  (\%) \\ \hline
+dropbox.com (*) & 593.0GB (67.98) & atdmt.com  & 26.0GB (2.98)  & dropbox.com (*) & 7.2GB (17.97) &  atdmt.com (*) & 3.2GB (7.88)  \\
+ truste.com  & 9.1GB (1.04) & msecnd.net & 13.2GB (1.51) & bitcasa.com (*) & 2.9GB (7.22) & microsoft.com & 1.5GB (3.83)  \\
+ netflix.com (*) & 8.1GB (0.93) & microsoft.com & 11.9GB (1.37) &  netflix.com (*) & 2.4GB (6.05) & live.com (*) & 1.5GB (3.70)  \\
+ netflix.com  & 6.7GB (0.77) & s-msn.com & 11.4GB (1.31) & simcity.com (*) & 1.5GB (3.74) & atdmt.com & 1.1GB (2.74)  \\
+ channel3000.com  & 6.4GB (0.74) & msn.com (*) & 10.5GB (1.20) & mcgraw-hill.com & 1.1GB (2.71) &  windowsupdate.com & 735.3MB (1.82) \\
+ pinterest.com  & 5.1GB (0.58) & msn.com  & 10.4GB (1.19) & kickstarter.com & 574.5MB (1.43) & virtualearth.net & 537.0MB (1.33) \\
+ adsafeprotected.com  & 4.7GB (0.53) & microsoft.com (*) & 7.8GB (0.89) & pogoplug.com & 527.3MB (1.31) & msecnd.net & 520.7MB (1.29) \\
+ sharefile.com (*) & 3.6GB (0.42) & live.com (*) & 7.1GB (0.81) & instagram.com & 499.2MB (1.24) & s-msn.com & 334.2MB (0.83) \\
+ zoolz.com (*) & 3.2GB (0.36) & dreamspark.com  & 7.1GB (0.81) & newsinc.com & 348.0MB (0.86) &msn.com & 302.8MB (0.75) \\ 
+ zynga.com  & 2.8GB (0.32) & virtualearth.net  & 7.0GB (0.80) & truste.com & 267.5MB (0.66) & microsoft.com (*) & 284.4MB (0.71) \\
+ echoenabled.com  & 2.5GB (0.29) & hotmail.com  & 4.9GB (0.57) & pinterest.com & 261.1MB (0.65) & wonderwall.com & 266.2MB (0.66) \\
+ vimeo.com (*) & 2.3GB (0.26) & live.com  & 4.7GB (0.54) & bleacherreport.com & 255.4MB (0.63) & live.com & 254.8MB (0.63) \\
+ foursquare.com (*) & 2.2GB (0.25) &mesh.com (*) & 4.5GB (0.52) & imgur.com & 231.1MB (0.57) & msads.net & 169.5MB (0.42) \\
+ dropbox.com  & 2.0GB (0.23) &wonderwall.com  & 3.2GB (0.36) & scanscout.com & 230.9MB (0.57) & livefilestore.com (*) & 84.6MB (0.21) \\
+ sourcefire.com (*) & 1.9GB (0.22) &msads.net  & 2.5GB (0.29) & mhlearnsmart.com & 215.3MB (0.53) & hotmail.com  & 78.0MB (0.19) \\
+ instagram.com  & 1.5GB (0.17) &virtualearth.net (*) & 2.2GB (0.25) & webrootcloudav.com  & 188.5MB (0.47) & aspnetcdn.com & 75.7MB (0.19) \\
+ copperegg.com (*) & 1.5GB (0.17) &windowsphone.com (*) & 2.0GB (0.23) & topfreegames.com & 166.5MB (0.41) & windowsphone.com (*) & 46.4MB (0.12) \\
+ \hline
+\end{tabular}
+
+\fi
+ 
+% cap1 ec2
+% dropbox.com (https) & 593.0GB (67.98\%) %592990796103
+% truste.com (http) & 9.1GB (1.04\%) %9071150903
+% netflix.com (https) & 8.1GB (0.93\%) %8092280433
+% netflix.com (http) & 6.7GB (0.77\%) %6732281945
+% channel3000.com (http) & 6.4GB (0.74\%) %6430435377
+% pinterest.com (http) & 5.1GB (0.58\%) %5069330310
+% adsafeprotected.com (http) & 4.7GB (0.53\%) %4662595433
+% sharefile.com (https) & 3.6GB (0.42\%) %3645592150
+% zoolz.com (https) & 3.2GB (0.36\%) %3153990746
+% zynga.com (http) & 2.8GB (0.32\%) %2813029789
+% echoenabled.com (http) & 2.5GB (0.29\%) %2538886088
+% vimeo.com (https) & 2.3GB (0.26\%) %2262259091
+% foursquare.com (https) & 2.2GB (0.25\%) %2186212733
+% dropbox.com (http) & 2.0GB (0.23\%) %2018082118
+% sourcefire.com (https) & 1.9GB (0.22\%) %1905451265
+% instagram.com (http) & 1.5GB (0.17\%) %1486947578
+% copperegg.com (https) & 1.5GB (0.17\%) %1485972355
+% linkcat.info (http) & 1.3GB (0.15\%) %1346446979
+% own3d.tv (http) & 1.2GB (0.14\%) %1208508543
+% zynga.com (https) & 1.1GB (0.12\%) %1058475332
+% tubemogul.com (http) & 943.4MB (0.11\%) %943363995
+% fantasymoguls.com (http) & 822.9MB (0.09\%) %822858239
+% syncplicity.com (https) & 816.9MB (0.09\%) %816910862
+% smugmug.com (http) & 795.8MB (0.09\%) %795811798
+% mevio.com (http) & 762.0MB (0.09\%) %762046706
+% cap1 azure
+% atdmt.com (http) & 26.0GB (2.98\%) %25989838649
+% msecnd.net (http) & 13.2GB (1.51\%) %13195109457
+% microsoft.com (http) & 11.9GB (1.37\%) %11921270071
+% s-msn.com (http) & 11.4GB (1.31\%) %11445190831
+% msn.com (https) & 10.5GB (1.20\%) %10506799424
+% msn.com (http) & 10.4GB (1.19\%) %10356460131
+% microsoft.com (https) & 7.8GB (0.89\%) %7791130870
+% live.com (https) & 7.1GB (0.81\%) %7067041146
+% dreamspark.com (http) & 7.1GB (0.81\%) %7063418853
+% virtualearth.net (http) & 7.0GB (0.80\%) %7004608079
+% hotmail.com (http) & 4.9GB (0.57\%) %4934408825
+% live.com (http) & 4.7GB (0.54\%) %4741022813
+% mesh.com (https) & 4.5GB (0.52\%) %4532503163
+% wonderwall.com (http) & 3.2GB (0.36\%) %3155809218
+% msads.net (http) & 2.5GB (0.29\%) %2493127112
+% virtualearth.net (https) & 2.2GB (0.25\%) %2206836360
+% windowsphone.com (https) & 2.0GB (0.23\%) %2041597948
+% windowsphone-int.com (https) & 2.0GB (0.23\%) %2041379752
+% hotmail.com (https) & 1.4GB (0.16\%) %1360088123
+% aspnetcdn.com (http) & 1.3GB (0.14\%) %1256866927
+% windows.net (https) & 1.1GB (0.13\%) %1131908588
+% windowsupdate.com (http) & 1.1GB (0.12\%) %1085625971
+% atdmt.com (https) & 1.0GB (0.12\%) %1041886040
+% s-msn.com (https) & 1.0GB (0.12\%) %1020689876
+% aspnetcdn.com (https) & 1.0GB (0.12\%) %1020689876
+% cap2 ec2
+%dropbox.com (https) & 7.2GB (17.97\%) %7243096172
+%bitcasa.com (https) & 2.9GB (7.22\%) %2907930545
+%netflix.com (https) & 2.4GB (6.05\%) %2436386722
+%simcity.com (https) & 1.5GB (3.74\%) %1508338497
+%mcgraw-hill.com (http) & 1.1GB (2.71\%) %1091865709
+%-. (http) & 929.3MB (2.31\%) %929326714
+%kickstarter.com (http) & 574.5MB (1.43\%) %574454387
+%pogoplug.com (http) & 527.3MB (1.31\%) %527302104
+%instagram.com (http) & 499.2MB (1.24\%) %499214368
+%newsinc.com (http) & 348.0MB (0.86\%) %348019480
+%truste.com (http) & 267.5MB (0.66\%) %267498175
+%pinterest.com (http) & 261.1MB (0.65\%) %261119781
+%bleacherreport.com (http) & 255.4MB (0.63\%) %255353585
+%imgur.com (http) & 231.1MB (0.57\%) %231059024
+%scanscout.com (http) & 230.9MB (0.57\%) %230874179
+%mhlearnsmart.com (http) & 215.3MB (0.53\%) %215282518
+%webrootcloudav.com (http) & 188.5MB (0.47\%) %188477981
+%topfreegames.com (http) & 166.5MB (0.41\%) %166497866
+%sharethis.com (http) & 161.7MB (0.40\%) %161667847
+%thebrighttag.com (http) & 160.7MB (0.40\%) %160716838
+%channel3000.com (http) & 160.6MB (0.40\%) %160618143
+%redditmedia.com (http) & 153.9MB (0.38\%) %153912162
+%skimresources.com (http) & 153.8MB (0.38\%) %153787707
+%ngin.com (http) & 125.0MB (0.31\%) %125017826
+%liverail.com (http) & 122.4MB (0.30\%) %122389126
+% cap2 azure
+% atdmt.com (https) & 3.2GB (7.88\%) %3176692119
+% microsoft.com (http) & 1.5GB (3.83\%) %1543626083
+% live.com (https) & 1.5GB (3.70\%) %1492087771
+% atdmt.com (http) & 1.1GB (2.74\%) %1102269556
+% windowsupdate.com (http) & 735.3MB (1.82\%) %735260522
+% -. (http) & 700.0MB (1.74\%) %699968724
+%  virtualearth.net (http) & 537.0MB (1.33\%) %536975408
+%  msecnd.net (http) & 520.7MB (1.29\%) %520694737
+%  s-msn.com (http) & 334.2MB (0.83\%) %334245194
+%  msn.com (http) & 302.8MB (0.75\%) %302762749
+%  microsoft.com (https) & 284.4MB (0.71\%) %284448001
+%  wonderwall.com (http) & 266.2MB (0.66\%) %266156951
+%  live.com (http) & 254.8MB (0.63\%) %254781002
+%  msads.net (http) & 169.5MB (0.42\%) %169470147
+%  livefilestore.com (https) & 84.6MB (0.21\%) %84640322
+%  hotmail.com (http) & 78.0MB (0.19\%) %77985301
+%  aspnetcdn.com (http) & 75.7MB (0.19\%) %75726440
+%  windowsphone.com (https) & 46.4MB (0.12\%) %46396904
+%  mesh.com (https) & 43.7MB (0.11\%) %43710300
+%  msn.com (https) & 31.6MB (0.08\%) %31605597
+%  trafficmanager.net (http) & 28.1MB (0.07\%) %28110620
+%  glo.com (http) & 20.5MB (0.05\%) %20526919
+%  windows.net (http) & 19.9MB (0.05\%) %19883344
+%  65.55.255.7. (http) & 14.0MB (0.03\%) %13969579
+%  windows.net (https) & 9.9MB (0.02\%) %9902191
+

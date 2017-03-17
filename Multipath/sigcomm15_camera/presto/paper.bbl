@@ -1,0 +1,358 @@
+\begin{thebibliography}{10}
+
+\bibitem{shadow-mac}
+K.~Agarwal, C.~Dixon, E.~Rozner, and J.~Carter.
+\newblock {Shadow MACs: Scalable Label-switching for Commodity Ethernet}.
+\newblock In {\em HotSDN}, 2014.
+
+\bibitem{fattree}
+M.~Al-Fares, A.~Loukissas, and A.~Vahdat.
+\newblock {A Scalable, Commodity Data Center Network Architecture}.
+\newblock In {\em SIGCOMM}, 2008.
+
+\bibitem{hedera}
+M.~Al-fares, S.~Radhakrishnan, B.~Raghavan, N.~Huang, and A.~Vahdat.
+\newblock {Hedera: Dynamic Flow Scheduling for Data Center Networks}.
+\newblock In {\em NSDI}, 2010.
+
+\bibitem{conga}
+M.~Alizadeh, T.~Edsall, S.~Dharmapurikar, R.~Vaidyanathan, K.~Chu,
+  A.~Fingerhut, F.~Matus, R.~Pan, N.~Yadav, G.~Varghese, et~al.
+\newblock {CONGA: Distributed Congestion-aware Load Balancing for Datacenters}.
+\newblock In {\em SIGCOMM}, 2014.
+
+\bibitem{dctcp}
+M.~Alizadeh, A.~Greenberg, D.~A. Maltz, J.~Padhye, P.~Patel, B.~Prabhakar,
+  S.~Sengupta, and M.~Sridharan.
+\newblock {Data Center TCP (DCTCP)}.
+\newblock In {\em SIGCOMM}, 2010.
+
+\bibitem{hull}
+M.~Alizadeh, A.~Kabbani, T.~Edsall, B.~Prabhakar, A.~Vahdat, and M.~Yasuda.
+\newblock {Less Is More: Trading a Little Bandwidth for Ultra-Low Latency in
+  the Data Center}.
+\newblock In {\em NSDI}, 2012.
+
+\bibitem{open-lro}
+G.~Antichi, C.~Callegari, and S.~Giordano.
+\newblock {Implementation of TCP Large Receive Offload on Open Hardware
+  Platform}.
+\newblock In {\em Proceedings of the First Edition Workshop on High Performance
+  and Programmable Networking}, HPPN '13, 2013.
+
+\bibitem{arista}
+{Arista 7250QX Series 10/40G Data Center Switches}.
+\newblock
+  \url{http://www.arista.com/assets/data/pdf/Datasheets/7250QX-64_Datasheet.pdf}.
+
+\bibitem{pias}
+W.~Bai, L.~Chen, K.~Chen, D.~Han, C.~Tian, and H.~Wang.
+\newblock {Information-Agnostic Flow Scheduling for Commodity Data Centers}.
+\newblock In {\em NSDI}, 2015.
+
+\bibitem{eden}
+H.~Ballani, P.~Costa, C.~Gkantsidis, M.~P. Grosvenor, T.~Karagiannis,
+  L.~Koromilas, and G.~O'Shea.
+\newblock {Enabling End Host Network Functions}.
+\newblock In {\em SIGCOMM}, 2015.
+
+\bibitem{benson10}
+T.~Benson, A.~Akella, and D.~A. Maltz.
+\newblock {Network Traffic Characteristics of Data Centers in the Wild}.
+\newblock In {\em IMC}, 2010.
+
+\bibitem{microte}
+T.~Benson, A.~Anand, A.~Akella, and M.~Zhang.
+\newblock {MicroTE: Fine Grained Traffic Engineering for Data Centers}.
+\newblock In {\em CoNEXT}, 2011.
+
+\bibitem{understanding-linux-network}
+C.~Benvenuti.
+\newblock {\em {Understanding Linux Network Internals}}.
+\newblock " O'Reilly Media, Inc.", 2006.
+
+\bibitem{blanton2002making}
+E.~Blanton and M.~Allman.
+\newblock {On Making TCP More Robust to Packet Reordering}.
+\newblock {\em ACM SIGCOMM Computer Communication Review}, 2002.
+
+\bibitem{tcp-pr}
+S.~Bohacek, J.~P. Hespanha, J.~Lee, C.~Lim, and K.~Obraczka.
+\newblock {TCP-PR: TCP for Persistent Packet Reordering}.
+\newblock In {\em ICDCS}, 2003.
+
+\bibitem{trident2}
+{Broadcom Extends Leadership with New {StrataXGS Trident II} Switch Series
+  Optimized for Cloud-Scale Data Center Networks}.
+\newblock \url{http://www.broadcom.com/press/release.php?id=s702418}, 2012.
+
+\bibitem{drb}
+J.~Cao, R.~Xia, P.~Yang, C.~Guo, G.~Lu, L.~Yuan, Y.~Zheng, H.~Wu, Y.~Xiong, and
+  D.~Maltz.
+\newblock {Per-packet Load-balanced, Low-latency Routing for Clos-based Data
+  Center Networks}.
+\newblock In {\em CoNEXT}, 2013.
+
+\bibitem{casado2012fabric}
+M.~Casado, T.~Koponen, S.~Shenker, and A.~Tootoonchian.
+\newblock {Fabric: A Retrospective on Evolving SDN}.
+\newblock In {\em HotSDN}, 2012.
+
+\bibitem{vmware}
+M.~Casado and J.~Pettit.
+\newblock {Of Mice and Elephants}.
+\newblock \url{http://networkheresy.com/2013/11/01/of-mice-and-elephants/},
+  November 2013.
+
+\bibitem{huawei-failover}
+W.~Chou and M.~Luo.
+\newblock {Agile Network, Agile World: the SDN Approach}.
+\newblock
+  \url{http://huaweiempresas.com/img_eventos/140314/SDN_Workshop_2.pdf}.
+
+\bibitem{smart-table}
+S.~Das.
+\newblock {Smart-Table Technology---Enabling Very Large Server, Storage Nodes
+  and Virtual Machines to Scale Using Flexible Network Infrastructure
+  Topologies}.
+\newblock
+  \url{http://www.broadcom.com/collateral/wp/StrataXGS_SmartSwitch-WP101-R.pdf},
+  July 2012.
+
+\bibitem{packetspray}
+A.~Dixit, P.~Prakash, Y.~C. Hu, and R.~R. Kompella.
+\newblock {On the Impact of Packet Spraying in Data Center Networks}.
+\newblock In {\em INFOCOM}, 2013.
+
+\bibitem{vl2}
+A.~Greenberg, J.~R. Hamilton, N.~Jain, S.~Kandula, C.~Kim, P.~Lahiri, D.~A.
+  Maltz, P.~Patel, and S.~Sengupta.
+\newblock {{VL2}: A Scalable and Flexible Data Center Network}.
+\newblock In {\em SIGCOMM}, 2009.
+
+\bibitem{grossman2005large}
+L.~Grossman.
+\newblock {Large Receive Offload Implementation in Neterion 10GbE Ethernet
+  Driver}.
+\newblock In {\em Linux Symposium}, 2005.
+
+\bibitem{qjump}
+M.~P. Grosvenor, M.~Schwarzkopf, I.~Gog, R.~N. Watson, A.~W. Moore, S.~Hand,
+  and J.~Crowcroft.
+\newblock {Queues Don't Matter When You Can JUMP Them!}
+\newblock In {\em NSDI}, 2015.
+
+\bibitem{nvo3}
+{H. Chen and W. Song}.
+\newblock {Load Balancing without Packet Reordering in NVO3}.
+\newblock {Internet-Draft}.
+  \url{https://tools.ietf.org/html/draft-chen-nvo3-load-banlancing-00}, October
+  2014.
+
+\bibitem{cubic}
+S.~Ha, I.~Rhee, and L.~Xu.
+\newblock {CUBIC: A New TCP-friendly High-speed TCP Variant}.
+\newblock {\em SIGOPS Oper. Syst. Rev.}, 2008.
+
+\bibitem{juniper-vcf}
+D.~R. Hanks.
+\newblock {\em {Juniper QFX5100 Series: A Comprehensive Guide to Building
+  Next-Generation Networks}}.
+\newblock " O'Reilly Media, Inc.", 2014.
+
+\bibitem{he2013next}
+K.~He, A.~Fisher, L.~Wang, A.~Gember, A.~Akella, and T.~Ristenpart.
+\newblock {Next Stop, the Cloud: Understanding Modern Web Service Deployment in
+  EC2 and Azure}.
+\newblock In {\em IMC}, 2013.
+
+\bibitem{jain-fair}
+R.~Jain, D.~Chiu, and W.~Hawe.
+\newblock {A Quantitative Measure Of Fairness And Discrimination For Resource
+  Allocation In Shared Computer Systems}.
+\newblock {\em CoRR}, 1998.
+
+\bibitem{linuxgro}
+{JLS2009: Generic Receive Offload}.
+\newblock \url{https://lwn.net/Articles/358910/}.
+
+\bibitem{flowbender}
+A.~Kabbani, B.~Vamanan, J.~Hasan, and F.~Duchene.
+\newblock {FlowBender: Flow-level Adaptive Routing for Improved Latency and
+  Throughput in Datacenter Networks}.
+\newblock In {\em CoNEXT}, 2014.
+
+\bibitem{kandula2009nature}
+S.~Kandula, S.~Sengupta, A.~Greenberg, P.~Patel, and R.~Chaiken.
+\newblock {The Nature of Data Center Traffic: Measurements \& Analysis}.
+\newblock In {\em IMC}, 2009.
+
+\bibitem{bullettrains}
+R.~Kapoor, A.~C. Snoeren, G.~M. Voelker, and G.~Porter.
+\newblock {Bullet Trains: A Study of NIC Burst Behavior at Microsecond
+  Timescales}.
+\newblock In {\em CoNEXT}, 2013.
+
+\bibitem{mptcp-not-optimal}
+R.~Khalili, N.~Gast, M.~Popovic, U.~Upadhyay, and J.-Y. Le~Boudec.
+\newblock {MPTCP is Not Pareto-optimal: Performance Issues and a Possible
+  Solution}.
+\newblock In {\em CoNEXT}, 2012.
+
+\bibitem{nv-mtd}
+T.~Koponen, K.~Amidon, P.~Balland, M.~Casado, A.~Chanda, B.~Fulton,
+  I.~Ganichev, J.~Gross, N.~Gude, P.~Ingram, et~al.
+\newblock {Network Virtualization in Multi-tenant Datacenters}.
+\newblock In {\em NSDI}, 2014.
+
+\bibitem{leung2007overview}
+K.-C. Leung, V.~O. Li, and D.~Yang.
+\newblock {An Overview of Packet Reordering in Transmission Control Protocol
+  (TCP): Problems, Solutions, and Challenges}.
+\newblock {\em Parallel and Distributed Systems, IEEE Transactions on}, 2007.
+
+\bibitem{kernel}
+{Linux Kernel}.
+\newblock \url{https://www.kernel.org}.
+
+\bibitem{optimize-tcp-receive}
+A.~Menon and W.~Zwaenepoel.
+\newblock {Optimizing TCP Receive Performance}.
+\newblock In {\em USENIX Annual Technical Conference}, 2008.
+
+\bibitem{mogul1997eliminating}
+J.~C. Mogul and K.~Ramakrishnan.
+\newblock {Eliminating Receive Livelock in An Interrupt-driven Kernel}.
+\newblock {\em ACM Transactions on Computer Systems}, 1997.
+
+\bibitem{aws-peek}
+T.~P. Morgan.
+\newblock {A Rare Peek Into The Massive Scale of AWS}.
+\newblock
+  \url{http://www.enterprisetech.com/2014/11/14/rare-peek-massive-scale-aws/},
+  November 2014.
+
+\bibitem{mptcp-linux}
+{MPTCP Linux Kernel Implementation}.
+\newblock \url{http://www.multipath-tcp.org}.
+
+\bibitem{netlord}
+J.~Mudigonda, P.~Yalagandula, J.~Mogul, B.~Stiekes, and Y.~Pouffary.
+\newblock {NetLord: A Scalable Multi-tenant Network Architecture for
+  Virtualized Datacenters}.
+\newblock In {\em SIGCOMM}, 2011.
+
+\bibitem{nuttcp}
+Nuttcp.
+\newblock \url{http://www.nuttcp.net/Welcome%20Page.html}.
+
+\bibitem{ovs-website}
+{Open vSwitch}.
+\newblock \url{http://openvswitch.org}.
+
+\bibitem{paasch2013benefits}
+C.~Paasch, R.~Khalili, and O.~Bonaventure.
+\newblock {On the Benefits of Applying Experimental Design to Improve Multipath
+  TCP}.
+\newblock In {\em CoNEXT}, 2013.
+
+\bibitem{paxson1997end}
+V.~Paxson.
+\newblock {End-to-end Internet Packet Dynamics}.
+\newblock In {\em ACM SIGCOMM Computer Communication Review}, 1997.
+
+\bibitem{ipblog-failover}
+I.~Pepelnjak.
+\newblock {NEC+IBM: Enterprise OpenFlow You can Actually Touch}.
+\newblock
+  \url{http://blog.ipspace.net/2012/02/necibm-enterprise-openflow-you-can.html}.
+
+\bibitem{fastpass}
+J.~Perry, A.~Ousterhout, H.~Balakrishnan, D.~Shah, and H.~Fugal.
+\newblock {Fastpass: A Centralized "Zero-Queue" Datacenter Network}.
+\newblock In {\em SIGCOMM}, 2014.
+
+\bibitem{ovs-edge}
+J.~Pettit.
+\newblock {Open vSwitch and the Intelligent Edge}.
+\newblock In {\em OpenStack Summit}, 2014.
+
+\bibitem{ovs-extending}
+B.~Pfaff, J.~Pettit, K.~Amidon, M.~Casado, T.~Koponen, and S.~Shenker.
+\newblock {Extending Networking into the Virtualization Layer}.
+\newblock In {\em HotNets}, 2009.
+
+\bibitem{pfaff2015design}
+B.~Pfaff, J.~Pettit, T.~Koponen, E.~J. Jackson, A.~Zhou, J.~Rajahalme,
+  J.~Gross, A.~Wang, J.~Stringer, P.~Shelar, et~al.
+\newblock {The Design and Implementation of Open vSwitch}.
+\newblock In {\em NSDI}, 2015.
+
+\bibitem{dc-mptcp}
+C.~Raiciu, S.~Barre, C.~Pluntke, A.~Greenhalgh, D.~Wischik, and M.~Handley.
+\newblock {Improving Datacenter Performance and Robustness with Multipath TCP}.
+\newblock In {\em SIGCOMM}, 2011.
+
+\bibitem{planck}
+J.~Rasley, B.~Stephens, C.~Dixon, E.~Rozner, W.~Felter, K.~Agarwal, J.~Carter,
+  and R.~Fonseca.
+\newblock {Planck: Millisecond-scale Monitoring and Control for Commodity
+  Networks}.
+\newblock In {\em SIGCOMM}, 2014.
+
+\bibitem{ms-rsc}
+{Receive Segment Coalescing (RSC)}.
+\newblock \url{http://technet.microsoft.com/en-us/library/hh997024.aspx}.
+
+\bibitem{rss}
+{Receive Side Scaling (RSS)}.
+\newblock \url{https://technet.microsoft.com/en-us/library/hh997036.aspx}.
+
+\bibitem{moose}
+M.~Scott, A.~Moore, and J.~Crowcroft.
+\newblock {Addressing the Scalability of Ethernet with MOOSE}.
+\newblock In {\em Proc. DC CAVES Workshop}, 2009.
+
+\bibitem{flowlet}
+S.~Sinha, S.~Kandula, and D.~Katabi.
+\newblock {Harnessing TCPs Burstiness using Flowlet Switching}.
+\newblock In {\em HotNets}, 2004.
+
+\bibitem{sockperf}
+{Sockperf: A Network Benchmarking Utility over Socket API}.
+\newblock \url{https://code.google.com/p/sockperf/}.
+
+\bibitem{vxlan-bench}
+{VXLAN Performance Evaluation on VMware vSphere 5.1}.
+\newblock
+  \url{http://www.vmware.com/files/pdf/techpaper/VMware-vSphere-VXLAN-Perf.pdf}.
+
+\bibitem{mptcp}
+D.~Wischik, C.~Raiciu, A.~Greenhalgh, and M.~Handley.
+\newblock {Design, Implementation and Evaluation of Congestion Control for
+  Multipath {TCP}}.
+\newblock In {\em NSDI}, 2011.
+
+\bibitem{wu2009sorting}
+W.~Wu, P.~Demar, and M.~Crawford.
+\newblock {Sorting Reordered Packets with Interrupt Coalescing}.
+\newblock {\em Computer Networks}, 2009.
+
+\bibitem{detail}
+D.~Zats, T.~Das, P.~Mohan, D.~Borthakur, and R.~Katz.
+\newblock {DeTail: Reducing the Flow Completion Time Tail in Datacenter
+  Networks}.
+\newblock In {\em SIGCOMM}, 2012.
+
+\bibitem{rr-tcp}
+M.~Zhang, B.~Karp, S.~Floyd, and L.~Peterson.
+\newblock {RR-TCP: A Reordering-robust TCP with DSACK}.
+\newblock In {\em ICNP}, 2003.
+
+\bibitem{wcmp}
+J.~Zhou, M.~Tewari, M.~Zhu, A.~Kabbani, L.~Poutievski, A.~Singh, and A.~Vahdat.
+\newblock {WCMP: Weighted Cost Multipathing for Improved Fairness in Data
+  Centers}.
+\newblock In {\em EuroSys}, 2014.
+
+\end{thebibliography}

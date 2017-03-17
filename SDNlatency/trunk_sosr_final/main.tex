@@ -1,0 +1,96 @@
+\documentclass[letterpaper]{sig-alternate}
+
+\input{defs} 
+\usepackage{times}
+\usepackage{subfig}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{url,caption}
+\usepackage{epstopdf}
+\usepackage[]{algorithm2e}
+\usepackage{algorithmic}
+\usepackage{mathtools}
+\usepackage[titletoc]{appendix}
+\usepackage{fontenc}
+\usepackage[utf8]{inputenc}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+%\usepackage[font={small}]{caption}
+%\usepackage[section] {placeins}
+%% Define a new 'leo' style for the package that will use a smaller font.
+\makeatletter
+\def\url@leostyle{%
+  \@ifundefined{selectfont}{\def\UrlFont{\sf}}{\def\UrlFont{\small\ttfamily}}}
+\makeatother
+%% Now actually use the newly defined style.
+\urlstyle{leo}
+%\makeatletter
+%\def\@copyrightspace{\relax}
+%\makeatother
+\newcommand{\Tabs}{
+  xx\= xx\= xx\= xx\= xx\= xx\= xx\= xx\=xx\= xx\= xx\= xx\=\kill}
+
+\newenvironment{program}[3]{
+  \begin{figure}[hbtp]
+    \begin{center}
+    \fbox{
+      {\small % yry
+      \begin{minipage}{\textwidth}
+      \begin{tabbing}
+      \Tabs
+      #3
+      \end{tabbing}
+      \vspace{-0.25in}
+      \end{minipage}
+      } % yry
+    \vspace{-0.15in}
+    }
+    \end{center}
+    \vspace{-0.2in}
+    \caption{\label{#1} #2}
+    \vspace{-0.1in}
+  \end{figure}}{}
+
+\begin{document}
+
+\title{Measuring Control Plane Latency in SDN-enabled Switches}
+
+\author{
+{
+    Keqiang He$^\dag$,
+    Junaid Khalid$^\dag$,
+    Aaron Gember-Jacobson$^\dag$,
+    Sourav Das$^\dag$,
+    Chaithan Prakash$^\dag$,
+}\\
+{
+    Aditya Akella$^\dag$,
+    Li Erran Li*,
+    Marina Thottan*
+}\\
+\affaddr{ $^\dag$University of Wisconsin-Madison, *Bell Labs}
+}
+\maketitle
+
+
+\input{abstract}
+\category{C.2.0}{Computer-Communication Network}{General}
+\category{C.4}{Perfo\-rmance of Systems}{Metrics}[performance measures]
+
+\keywords{Software-defined Networking (SDN); Latency; Measurement}
+\input{intro_sosr}
+\input{motivation_sosr}
+\input{measure_sosr}
+\input{related_new}
+\input{conclusion_sosr}
+
+\section*{Acknowledgement}
+We would like to thank Cristian Estan, Frank Feather, Young-Jin Kim, Simon Knee,
+Syd Logan, Rob Sherwood for helping collect data and understand switch internals. 
+We would also like to thank the anonymous reviewers for their insightful feedback.
+This work is supported in part by NSF grants CNS-1302041, CNS-1314363 and CNS-1040757.
+{
+\bibliographystyle{abbrv}
+\bibliography{refs}
+}
+
+\end{document}

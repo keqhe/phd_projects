@@ -1,0 +1,316 @@
+%% This BibTeX bibliography file was created using BibDesk.
+%% http://bibdesk.sourceforge.net/
+
+
+%% Created for Colin Dixon at 2014-01-31 08:43:52 -0600 
+
+@inproceedings{paxson1997end,
+  title={End-to-end Internet Packet Dynamics},
+  author={Paxson, Vern},
+  booktitle={ACM SIGCOMM Computer Communication Review},
+  year={1997},
+}
+
+@misc{linux-dctcp,
+        Howpublished = {\url{https://lwn.net/Articles/598432/}},
+        Key = {{DCTCP congestion control algorithm}},
+        Title = {{DCTCP congestion control algorithm}}
+}
+
+@misc{ovs-website,
+        Howpublished = {\url{http://openvswitch.org}},
+        key = {{Open vSwitch}},
+        Title = {{Open vSwitch}},
+        
+}
+
+@inproceedings{judd2015nsdi,
+ author = {Judd, Glenn},
+ title = {Attaining the Promise and Avoiding the Pitfalls of TCP in the Datacenter},
+ booktitle = {NSDI},
+ year = {2015},
+} 
+
+@article{guniguntala2008read,
+  title={The read-copy-update mechanism for supporting real-time applications on shared-memory multiprocessor systems with Linux},
+  author={Guniguntala, Dinakar and McKenney, Paul E and Triplett, Josh and Walpole, Jonathan},
+  journal={IBM Systems Journal},
+  year={2008},
+}
+
+@misc{cavium-nic,
+        Howpublished = {\url{http://www.cavium.com/LiquidIO_Server_Adapters.html}},
+        Key = {{LiquidIO Server Adapters}},
+        Title = {{LiquidIO Server Adapters }}
+}
+
+@misc{netronome-nic,
+        Howpublished = {\url{https://netronome.com/product/flownics/}},
+        Key = {{Netronome FlowNIC}},
+        Title = {{Netronome FlowNIC}}
+}
+
+@inproceedings{stephens2014practical,
+  title={Practical DCB for improved data center networks},
+  author={Stephens, Brent and Cox, Alan L and Singla, Anubhav and Carter, Jenny and Dixon, Colin and Felter, Wes},
+  booktitle={INFOCOM},
+  year={2014},
+}
+
+
+@article{alizadeh2011data,
+  title={Data center tcp (dctcp)},
+  author={Alizadeh, Mohammad and Greenberg, Albert and Maltz, David A and Padhye, Jitendra and Patel, Parveen and Prabhakar, Balaji and Sengupta, Sudipta and Sridharan, Murari},
+  booktitle={SIGCOMM},
+  year={2010},
+}
+
+@inproceedings{alizadeh2014conga,
+  title={CONGA: Distributed congestion-aware load balancing for datacenters},
+  author={Alizadeh, Mohammad and Edsall, Tom and Dharmapurikar, Sarang and Vaidyanathan, Ramanan and Chu, Kevin and Fingerhut, Andy and Matus, Francis and Pan, Rong and Yadav, Navindra and Varghese, George and others},
+  booktitle={SIGCOMM},
+  year={2014},
+}
+
+@inproceedings{katabi2002congestion,
+  title={Congestion control for high bandwidth-delay product networks},
+  author={Katabi, Dina and Handley, Mark and Rohrs, Charlie},
+  booktitle={SIGCOMM},
+  year={2002},
+}
+
+@phdthesis{dukkipati2007rate,
+  title={Rate Control Protocol (RCP): Congestion control to make flows complete quickly},
+  author={Dukkipati, Nandita},
+  year={2007},
+  school={Stanford University}
+}
+
+@inproceedings{winstein2013tcp,
+  title={Tcp ex machina: Computer-generated congestion control},
+  author={Winstein, Keith and Balakrishnan, Hari},
+  booktitle={SIGCOMM},
+  year={2013},
+}
+
+@inproceedings{wu2010ictcp,
+ author = {Wu, Haitao and Feng, Zhenqian and Guo, Chuanxiong and Zhang, Yongguang},
+ title = {ICTCP: Incast Congestion Control for TCP in Data Center Networks},
+ booktitle = {CoNEXT},
+ year = {2010},
+} 
+
+@inproceedings{mittal2015timely,
+  title={TIMELY: RTT-based congestion control for the datacenter},
+  author={Mittal, Radhika and Dukkipati, Nandita and Blem, Emily and Wassel, Hassan and Ghobadi, Monia and Vahdat, Amin and Wang, Yaogong and Wetherall, David and Zats, David and others},
+  booktitle={SIGCOMM},
+  year={2015},
+}
+
+@inproceedings{zhu2015congestion,
+  title={Congestion Control for Large-Scale RDMA Deployments},
+  author={Zhu, Yibo and Eran, Haggai and Firestone, Daniel and Guo, Chuanxiong and Lipshteyn, Marina and Liron, Yehonatan and Padhye, Jitendra and Raindel, Shachar and Yahia, Mohamad Haj and Zhang, Ming},
+  booktitle={SIGCOMM},
+  year={2015},
+}
+
+@inproceedings{jang2015silo,
+  title={Silo: Predictable Message Latency in the Cloud},
+  author={Jang, Keon and Sherry, Justine and Ballani, Hitesh and Moncaster, Toby},
+  booktitle={SIGCOMM},
+  year={2015},
+}
+
+@inproceedings{lee2015accurate,
+  title={Accurate latency-based congestion feedback for datacenters},
+  author={Lee, Changhyun and Park, Chunjong and Jang, Keon and Moon, Sue and Han, Dongsu},
+  booktitle={2015 USENIX Annual Technical Conference (USENIX ATC 15)},
+  year={2015}
+}
+
+@misc{tcp-nv,
+        Howpublished = {\url{https://lwn.net/Articles/650325/}},
+        Key = {{tcp: add NV congestion control}},
+        Title = {{tcp: add NV congestion control }}
+}
+
+@article{ayuso2006netfilter,
+  title={Netfilter's connection tracking system},
+  author={Ayuso, P},
+  journal={LOGIN: The USENIX magazine},
+  year={2006}
+}
+
+@inproceedings{ovs-conntrack,
+  title={{Connection tracking \& stateful NAT}},
+  author={Graf, Thomas and Pettit, Justin},
+  booktitle={Open vSwitch 2014 Fall Conference},
+  year={2014}
+}
+
+@inproceedings{radhakrishnan2014senic,
+  title={SENIC: Scalable NIC for end-host rate limiting},
+  author={Radhakrishnan, Sivasankar and Geng, Yilong and Jeyakumar, Vimalkumar and Kabbani, Abdul and Porter, George and Vahdat, Amin},
+  booktitle={NSDI},
+  year={2014}
+}
+
+@inproceedings{niranjan2013fastrak,
+  title={FasTrak: enabling express lanes in multi-tenant data centers},
+  author={Niranjan Mysore, Radhika and Porter, George and Vahdat, Amin},
+  booktitle={CoNEXT},
+  year={2013},
+}
+
+@inproceedings{shieh2011sharing,
+  title={Sharing the Data Center Network.},
+  author={Shieh, Alan and Kandula, Srikanth and Greenberg, Albert G and Kim, Changhoon and Saha, Bikas},
+  booktitle={NSDI},
+  year={2011}
+}
+
+@inproceedings{jeyakumar2013eyeq,
+  title={EyeQ: Practical network performance isolation at the edge},
+  author={Jeyakumar, Vimalkumar and Alizadeh, Mohammad and Mazi{\`e}res, David and Prabhakar, Balaji and Kim, Changhoon and Greenberg, Albert},
+  booktitle={NSDI},
+  year={2013}
+}
+
+@inproceedings{dong2015pcc,
+  title={PCC: Re-architecting Congestion Control for Consistent High Performance},
+  author={Dong, Mo and Li, Qingxi and Zarchy, Doron and Godfrey, P Brighten and Schapira, Michael},
+  booktitle={NSDI},
+  year={2015}
+}
+
+
+@techreport{RFC1072,
+  author = {V. Jacobson and R.T. Braden},
+  title = {TCP extensions for long-delay paths},
+  howpublished = {Internet Requests for Comments},
+  type = {RFC},
+  number = {1072},
+  year = {1988},
+  month = {October},
+  issn = {2070-1721},
+  publisher = {RFC Editor},
+  institution = {RFC Editor},
+  url = {http://www.rfc-editor.org/rfc/rfc1072.txt},
+  note = {\url{http://www.rfc-editor.org/rfc/rfc1072.txt}},
+}
+
+@techreport{RFC1323,
+  author = {Van Jacobson and Bob Braden and Dave Borman},
+  title = {TCP Extensions for High Performance},
+  howpublished = {Internet Requests for Comments},
+  type = {RFC},
+  number = {1323},
+  year = {1992},
+  month = {May},
+  issn = {2070-1721},
+  publisher = {RFC Editor},
+  institution = {RFC Editor},
+  url = {http://www.rfc-editor.org/rfc/rfc1323.txt},
+  note = {\url{http://www.rfc-editor.org/rfc/rfc1323.txt}},
+}
+
+@misc{receive-auto-runing,
+        Howpublished = {\url{https://technet.microsoft.com/en-us/magazine/2007.01.cableguy.aspx}},
+        Key = {{TCP Receive Window Auto-Tuning}},
+        Title = {{TCP Receive Window Auto-Tuning}}
+}
+
+@inproceedings{wu2012tuning,
+  title={Tuning ECN for data center networks},
+  author={Wu, Haitao and Ju, Jiabo and Lu, Guohan and Guo, Chuanxiong and Xiong, Yongqiang and Zhang, Yongguang},
+  booktitle={CoNEXT},
+  year={2012},
+}
+
+@misc{intel-dpdk,
+        Howpublished = {\url{http://dpdk.org/}},
+        Key = {{Data Plane Development Kit (DPDK)}},
+        Title = {{Data Plane Development Kit (DPDK)}}
+}
+
+@inproceedings{he2015presto,
+  title={Presto: Edge-based load balancing for fast datacenter networks},
+  author={He, Keqiang and Rozner, Eric and Agarwal, Kanak and Felter, Wes and Carter, John and Akella, Aditya},
+  booktitle={SIGCOMM},
+  year={2015},
+}
+
+@article{semke1998automatic,
+  title={Automatic TCP buffer tuning},
+  author={Semke, Jeffrey and Mahdavi, Jamshid and Mathis, Matthew},
+  journal={ACM SIGCOMM Computer Communication Review},
+  year={1998},
+}
+
+@inproceedings{jose2015high,
+  title={High Speed Networks Need Proactive Congestion Control},
+  author={Jose, Lavanya and Yan, Lisa and Alizadeh, Mohammad and Varghese, George and McKeown, Nick and Katti, Sachin},
+  booktitle={Proceedings of the 14th ACM Workshop on Hot Topics in Networks},
+  year={2015},
+}
+
+
+@inproceedings{ghorbani2015micro,
+  title={Micro Load Balancing in Data Centers with DRILL},
+  author={Ghorbani, Soudeh and Godfrey, Brighten and Ganjali, Yashar and Firoozshahian, Amin},
+  booktitle={Proceedings of the 14th ACM Workshop on Hot Topics in Networks},
+  year={2015},
+}
+
+@techreport{RFC3649,
+  author = {S. Floyd},
+  title = {HighSpeed TCP for Large Congestion Windows},
+  howpublished = {Internet Requests for Comments},
+  type = {RFC},
+  number = {3649},
+  year = {2003},
+  month = {December},
+  issn = {2070-1721},
+  publisher = {RFC Editor},
+  institution = {RFC Editor},
+  url = {http://www.rfc-editor.org/rfc/rfc3649.txt},
+  note = {\url{http://www.rfc-editor.org/rfc/rfc3649.txt}},
+}
+
+@article{liu2008tcp,
+  title={TCP-Illinois: A loss-and delay-based congestion control algorithm for high-speed networks},
+  author={Liu, Shao and Ba{\c{s}}ar, Tamer and Srikant, Ravi},
+  journal={Performance Evaluation},
+  volume={65},
+  number={6},
+  pages={417--440},
+  year={2008},
+  publisher={Elsevier}
+}
+
+@article{ha2008cubic,
+  title={CUBIC: a new TCP-friendly high-speed TCP variant},
+  author={Ha, Sangtae and Rhee, Injong and Xu, Lisong},
+  journal={ACM SIGOPS Operating Systems Review},
+  year={2008},
+}
+
+@techreport{RFC3782,
+  author = {S. Floyd and T. Henderson and A. Gurtov},
+  title = {The NewReno Modification to TCP's Fast Recovery Algorithm},
+  howpublished = {Internet Requests for Comments},
+  type = {RFC},
+  number = {3782},
+  year = {2004},
+  month = {April},
+  issn = {2070-1721},
+  publisher = {RFC Editor},
+  institution = {RFC Editor},
+}
+
+@inproceedings{Brakmo1994,
+ author = {Brakmo, Lawrence S. and O'Malley, Sean W. and Peterson, Larry L.},
+ title = {TCP Vegas: New Techniques for Congestion Detection and Avoidance},
+ booktitle = {SIGCOMM},
+ year = {1994},
+} 

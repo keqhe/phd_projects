@@ -1,0 +1,47 @@
+\section{Results}
+\label{results}
+This section quantifies
+the effects of~\acdc{} and determines if the performance of DCTCP
+implemented in the vSwitch (\ie{}, \acdc{}) is equivalent to
+the performance of DCTCP implemented in the host TCP stack.
+
+\tightparagraph{Testbed}
+The experiments are conducted on a physical testbed with 17 
+IBM System x3620 M3 servers (6-core Intel Xeon
+2.53GHz CPUs, 60GB memory) and Mellanox ConnectX-2 EN 10GbE NICs.
+Our switches are IBM G8264, each with a buffer of 9MB shared
+by forty-eight 10G ports. 
+%The switches have dynamic memory management enabled by default.
+
+\tightparagraph{System settings}
+We run Linux kernel 3.18.0 which implements DCTCP as a 
+pluggable module.
+We set {{\tt $RTO_{min}$} to 10 ms~\cite{vasudevan2009safe,judd2015nsdi} and
+set {\tt tcp\_no\_metrics\_save}, {\tt tcp\_sack} and {\tt tcp\_low\_latency} to 1.
+\crs{Results are obtained with MTU sizes of 1.5KB and 9KB,
+as networks typically use one of these settings. 
+Due to space constraints, a subset of
+the results are presented and unless otherwise noted, the MTU is set to 9KB.}
+
+
+
+\tightparagraph{Experiment details}
+To understand~\acdc{} performance, three different congestion control configurations
+are considered. The baseline scheme, referred to as {\em CUBIC}, configures
+the host TCP stack as CUBIC (Linux's default congestion control), which runs on top of an unmodified version of OVS.
+Our goal is to be similar to {\em DCTCP}, which configures the host TCP
+stack as DCTCP and runs on top of an unmodified version of OVS. Our scheme,{\em ~\acdc{}},
+configures the host TCP stack as CUBIC (unless otherwise stated) and implements DCTCP congestion control in OVS.
+In DCTCP and~\acdc{}, WRED/ECN is configured on the switches. In CUBIC,
+WRED/ECN is not configured.
+
+The metrics used are: TCP RTT (measured by sockperf~\cite{sockperf}),
+TCP throughput (measured by iperf),
+loss rate (by collecting switch counters) and
+Jain's fairness index~\cite{jain-index}.
+In \cref{macro}, flow completion time (FCT)~\cite{dukkipati2006flow} is used 
+to quantify application performance.~\crs{All benchmark tools are run
+in a container on each server, rather than in a VM.}
+
+\input{microbenchmarks}
+\input{macrobenchmarks}

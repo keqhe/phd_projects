@@ -1,0 +1,132 @@
+\section{Related Work}
+\label{related}
+\todo{make the guys whose works are cited happy! please fix the sentenses and make them more
+friendly...}
+
+\tightparagraph{Congestion control for DCNs}
+DCTCP~\cite{alizadeh2011data} is the most closely related work.
+DCTCP is a TCP variant which uses the portion 
+of marked packets to reduce queueing latency while 
+maintaining high throughput on ECN-enabled datacenter networks.
+TCP-Bolt~\cite{stephens2014practical} is a variant of DCTCP which solves large queueing latency, 
+throughput unfairness and head-of-line blocking issues for PFC-enabled lossless Ethernet (DCB) and 
+reduces flow completion times further by eliminating slow start phase.
+DCQCN~\cite{zhu2015congestion} is a rate-based congestion control scheme 
+designed to solve similar issues for RDMA deployments in lossless networks.
+DCQCN is built on QCN~\cite{qcn} and DCTCP and is implemented in the NICs.
+ICTCP~\cite{wu2010ictcp} monitors incoming TCP flows into the receiver's NIC and 
+modifies~\rwnd{} to mitigate the impact of incast.
+TIMELY~\cite{mittal2015timely} and DX~\cite{lee2015accurate} 
+use accurate network latency obtained by modern NICs or DPDK drivers as the signal to 
+perform congestion control.
+~\cite{judd2015nsdi} discussed the shortcomings of the first DCTCP implementation and 
+proposed simple yet practical fixes to enable DCTCP in production networks.
+TCP ex Machina~\cite{winstein2013tcp} uses computer-generated congestion control rules and 
+outperforms existing human-defined rules significantly. 
+It is interesting to know how it works for low latency datacenter networks.
+%DCTCP~\cite{alizadeh2011data}, XCP~\cite{katabi2002congestion}, RCP~\cite{dukkipati2007rate}, 
+%TCP ex Machina~\cite{winstein2013tcp}, ICTCP~\cite{wu2010ictcp}, 
+%TCP-Bolt~\cite{stephens2014practical}, 
+%TCP-NV~\cite{tcp-nv}, TIMELY~\cite{mittal2015timely}, 
+%DX~\cite{lee2015accurate}, 
+%DCQCN~\cite{zhu2015congestion}, 
+%Judd NSDI 2015~\cite{judd2015nsdi}, PCC~\cite{dong2015pcc}. PERC~\cite{jose2015high}.
+%TCP rate control~\cite{karandikar2000tcp}.
+%mTCP~\cite{jeong2014mtcp}.
+
+\tightparagraph{Rate limiters and bandwidth guarantee} 
+%FasTrack~\cite{niranjan2013fastrak}, SENIC~\cite{radhakrishnan2014senic}, TIMELY~\cite{mittal2015timely}, 
+%Silo~\cite{jang2015silo}
+SENIC~\cite{niranjan2013fastrak} 
+identifies the limitations of NIC hardware rate limiters (\ie{}, not scalable) and 
+software rate limiters (\ie{}, high CPU overhead) and proposes to use CPU to enqueue packets 
+into per-class queues in host memory and use NIC hardware to perform packet scheduling to 
+achieve both scalability and low overhead. Silo~\cite{jang2015silo}'s pacer injects void packets into 
+original packet sequence to achieve pacing.
+ 
+
+
+Bandwidth allocation, performance guarentees:
+
+Gatekeeper~\cite{rodrigues2011gatekeeper} provides bandwidth guarentees for tenants in multi-tenant datacenters by
+managing each server's access link (very similar to EyeQ!). Receiver element tracks usage and sender element enforces
+rate-limiting. Congestion component reduces sending rate when 95\% of link bandwidth is used. We are complementary. They
+use 10ms feedback at 1 Gbps.~\eric{talk about how these schemes need to know demands to be effective?}
+Per VM.
+
+Oktopus~\cite{Ballani2011oktopus} provides fixed performance guarentees within virtual clusters through a centralized VM manager that 
+allocates VMs and reserves bandwidth, coupled with a endhost rate-limiting scheme. It is an older scheme that is relatively
+general in nature. (From FairCloud: hose model. doesn't satisfy work conserving, so unused b/w remains wasted).
+Per VM.
+
+EyeQ~\cite{jeyakumar2013eyeq} aims to provide tentants with end-to-end bandwidth guarentees by partitioning bandwidth 
+at the servers (allocated and enforce?). Sender and receiver endpoint modules work together to parition bandwidth in a way that an endpoint's 
+bandwidth is not oversubscribed. EyeQ mainly focuses on providing bandwidth guarantees for tenants, whereas our scheme focuses
+on ensuring the transport layer of VM's cannot create latency. While CUBIC and DCTCP obtain nearly identical bandwidth on incast,
+CUBIC fills the switch buffers, while DCTCP keeps them low (meaing EyeQ is not enough). EyeQ experiments use a 10\% bandwidth headroom to keep latencies low. 
+Feedback is fine-grained (every 200us), but requires time to converge (~5ms) and is sent to only one destination per 200us (so latency can
+build up). Feedback reduces rate, which may not be necessary (small bandwidth penalty). We are complementary. Some updates:
+this is a bandwidth allocation scheme that tries to provide guarentees. They require admission control. Guarentees are on per-VM
+basis. They have a component to reduce sending rates when congestion is encountered, but it reduces rate of all flows over source-VM to dest-VM
+pairing. This granularity isn't effective and want to reduce the rate on a per-flow level. RCP "congestion control" used to proportionally
+allocate sending rates when destination receives too much traffic. Done in vSwitch. 
+Per VM. 
+
+Silo~\cite{jang2015silo} provides guarenteed network bandwidth, packet delay and burst allowances through a novel VM placement and admission 
+algorithm, coupled with a fine-grained packet pacer. The scheme sacrifices a small amount of network utilization to help achieve these goals (XXX). 
+Our scheme aims to reduce latency, without providing guarentees, which means it is agnostic to VM placement and admission. 
+
+Seawall~\cite{shieh2011sharing} is a bandwidth allocation/performance isolation scheme that provides bandwidth to a network entity proportional to 
+a defined weight. The scheme is similar to our approach in that it enforces congestion control on flows through edge-to-edge tunnels. Seawall has three main 
+differences from our work: (i) Seawall forces VM's to change their TCP stack to enforce their congestion control, whereas our scheme requires no changes
+to VMs, (ii) Seawall's congestion control loop is coarse-grained (10-50ms on 1 Gbps link) which
+can lead to increased latency, and (iii) Seawall requires path-to-link mappings for weighted performance isolation on bottleneck links. In addition,
+our main focus is the impact of latency on performance isolation, and we provide a detailed study to how our window-based scheme can proactively 
+reduce congestion. Plus, our scheme is simple and modular, designed to work in a variety of scenarios.
+
+SecondNet~\cite{Guo2010Secondnet} allows for virtual datacenters via a centralized manager that admits and allcoates VMs and
+also statically reserves bandwidth for each VM. Rate limiter in Windows Hyper-V used. (from Faircloud: pipe model, not work conserving, Proteus and
+EyeQ say does pair-wise bandwidth reservation). Similar to Seawall in that it is not a strict guarentee, just a proportion.
+Does source-routing, so doesn't rely on ECMP. Doesn't talk about congestion.
+Per VM.
+
+FairCloud~\cite{Popa2012Faircloud} identifies the trade-off in three main properties for bandwidth allocation: minimum
+guarentees, proportionality and high utilization. They design three schemes to cover different trade-offs in the space.
+Three different implementation options, with two of them switch-based. The third is very similar to Seawall, and they 
+mostly punt saying they would use Seawall, but just change the weights to those given by PS-N, instead of the per-source
+weights provided by Seawall.
+
+Proteus~\cite{Xie2012Proteus} realizes that fixed bandwidth guarentees are inefficient in the face of applications with dynamic demands.
+Proteus implements a new network abstraction to optimize time-varying cloud applications. It is implemented through a centralized VM
+allocation algorithm and uses switch-based rate-limiters to enforce bandwidth reservations. (testbed implementation uses Linux tc?).
+Per VM.
+
+NetShare~\cite{Lam2012NetShare} utilized hierarchical weighted max-min fair sharing to tune relative bandwidth allocation for different services.
+There is a distributed approach that uses Deficit Round Robin (DRR) in the switches (many: DRR queues way less than VMs) and a 
+centralized approach that relies on token bucket rate 
+limiters at each host. (Seawall: link-local decisions can waste end-to-end b/w when packet dropped at end of path.)
+
+DLR work mentioned in Seawall?
+
+To make rate limiters effective (for enforcing a low latency datacenter network), 
+they must be configured at fine-grained time granularity and react to dynamically 
+changing network conditions.
+Static rate limiters can not work well for incast, for example.
+
+Rate limiters is more about network bandwidth allocation. 
+While our major focus is building universal low latency congestion control for data center networks. 
+Our work should be compatible with bandwidth allocation works.
+
+\tightparagraph{Low Latency DCNs}
+HULL~\cite{alizadeh2012less} uses Phantom queues to signal congestion before 
+queues are really built up and leaves bandwidth headroom for low latency traffic. 
+HULL also uses edge pacers to combat with traffic burstiness. 
+pFabric~\cite{alizadeh2013pfabric} is clean-slate datacenter transport 
+design which utilizes priority and minimal buffering on the switches to achieve low latency. 
+Fastpass~\cite{perry2014fastpass} explored the potential of using centralized arbiter to 
+perform per-packet level scheduling to achieve near zero queue datacenter networks. 
+QJUMP~\cite{qjump} uses high priority and rate limiting on the hypervisor to 
+provide bounded latency for time-critical applications with lower bandwidth requirement. 
+There are also traffic engineering and load balancing efforts that try to mitigate 
+hotspots as much as possible such as Hedera~\cite{al2010hedera}, Planck~\cite{rasley2014planck}, 
+CONGA~\cite{alizadeh2014conga}, FlowBender~\cite{kabbani2014flowbender}, Presto~\cite{he2015presto} and TRILL~\cite{ghorbani2015micro}.

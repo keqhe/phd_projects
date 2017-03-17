@@ -1,0 +1,160 @@
+\subsubsection{Popular Cloud-Using (Sub)Domains} 
+\label{cloud-measure-global}
+
+\tightparagraph{Cloud-using Alexa domains} We now consider what subset of the 
+Alexa top 1 million websites use the cloud to (partly) host their services. 
+Recall that Alexa provides an estimate of the most
+popular domains worldwide. Their ranking is based on the number of unique
+visitors and the number of page views over the last 3 months, aggregated at the
+domain level\footnote{Except for domains hosting personal sites, e.g.,
+\myurl{wordpress.com}, where subdomains are ranked
+individually.}~\cite{alex_topdomains}.  
+Using our \alexadata dataset, we can determine which Alexa sites are hosted in
+EC2/Azure.
+%Determining the reliance on EC2/Azure
+%of  such popular sites  allows us to assess the extent
+%this macroscopic perspective on website popularity 
+%to begin to quantify what web domains use public IaaS clouds.
+
+We find that 40,333 ($\mathord{>}4\%$) of the domains on Alexa's top 1 million
+list have a subdomain that uses EC2 and/or Azure.
+Under these domains, there are a
+total of 713,910 cloud-using subdomains. 
+Note that these are lower bounds on cloud use, since our
+analysis approach (see \S\ref{cloud-measure-datasets}) means we do not flag as
+cloud-using any domains that use a layer of indirection (e.g., via services
+like CloudFlare~\cite{cloudflare}) before requests are sent to EC2 or Azure. 
+
+\tabref{tab:hybrid_cloud} provides a breakdown of the domains and
+subdomains in terms of whether they use EC2, Azure, or other hosting
+services (the last indicating
+IP addresses not associated with EC2 or Azure).  Note that ``other''
+could in fact be public clouds besides EC2 and Azure. 
+A subdomain is marked as {\em EC2 only} if it always resolves only to IP 
+addresses within EC2; similarly for Azure. We mark a subdomain as {\em
+EC2+Azure}, {\em EC2+Other}, or {\em Azure+Other} if it resolves to IP 
+addresses associated with the appropriate subset of EC2, Azure, and other.
+Domains are counted as {\em EC2 only}
+if all of their subdomains only use EC2; similarly for Azure. Domains are 
+marked as {\em EC2+Azure}, {\em EC2+Other}, or {\em Azure+Other} if they have 
+subdomains associated with
+the indicated subset of EC2, Azure, and other. 
+
+\begin{table}[!t]
+\centering
+\small
+\input{cloudmeasure_tables/tab_cloud-using_alexa}
+\caption{Breakdown of domains and subdomains based on their use of EC2, 
+    Azure, and/or other hosting services.}
+\label{tab:hybrid_cloud}
+\end{table}
+
+
+
+
+
+The vast majority of cloud-using domains (94.9\%) use EC2, and the majority of
+these domains use other hosting for some of their subdomains (i.e., EC2 + Other).  
+{Only 5.8\% of domains use Azure.  Additionally, a small
+fraction (0.7\%) of cloud-using domains use both EC2 and Azure; hence
+the {\em EC2 total} and {\em Azure total} rows in \tabref{tab:hybrid_cloud}
+sum to more than 100\%.
+A list of the top 10 (by Alexa rank) EC2-using domains 
+appears in \tabref{tab:top-15}. This list will be used in several later 
+sections with results specific  to EC2, which is why we excluded the four 
+top Azure domains 
+that would otherwise have been in the top~10: \myurl{live.com}, \myurl{msn.com}, \myurl{bing.com}, and \myurl{microsoft.com}.
+
+The distribution of Alexa ranks for cloud-using domains 
+is skewed: higher ranked domains are more likely 
+to be cloud-using than lower ranked domains. 
+%a larger fraction of higher-ranked domains use EC2 and/or Azure
+%compared to lower-ranked domains 
+%Figure~\ref{fig:cdf-alexa} shows a CDF of the percentage of cloud-using 
+%domains with rank less than or equal to the indicated x-axis values. 
+Notably, 42.3\% of cloud-using domains have ranks in 
+the first 250,000 sites versus only 16.2\% of the bottom 250K domains. 
+%In Figure~\ref{fig:top-15} we list the top 15 EC2-using 
+%Alexa domains, and the number of subdomains they use both 
+%in and out of the cloud. 
+
+The most frequent prefix used by cloud-using subdomains in our Alexa 
+subdomains dataset is \myurl{www} (3.3\% of all cloud-using subdomains). The other top 10 prefixes
+(each $\mathord{<}1\%$) are, in order:
+\myurl{m}, \myurl{ftp}, \myurl{cdn}, \myurl{mail},
+\myurl{staging}, \myurl{blog}, \myurl{support}, \myurl{test}, and \myurl{dev}.
+%A small handful of domains use both EC2 and Azure. 
+The majority of subdomains are hosted either only in
+the cloud or only elsewhere, although a small fraction (3\%) appear to be
+hosted both on EC2 and other providers,
+what we might call a hybrid-cloud deployment.
+
+
+
+
+
+
+
+\begin{table}[!t]
+\center
+\small
+\input{cloudmeasure_tables/tab_top15_subdomains}
+\caption{Top 10 (by Alexa rank) EC2-using domains, their total number of subdomains, and the
+number of EC2-using subdomains.} 
+\label{tab:top-15}
+\end{table}
+
+\begin{table*}[!t]
+\centering
+\small
+\input{cloudmeasure_tables/tab_capture_top_combined}
+\caption{Domains with highest HTTP(S) traffic volumes (in GB) in the \captureonedata.
+Percentages are relative to the total HTTP(S) traffic across both clouds in the capture. Domains marked with 
+($\deepfield$) appeared on DeepField's Top 15~\cite{deepfield}.}
+\label{tab:topdomains}
+\end{table*}
+
+\tightparagraph{High traffic volume domains}
+We complement the above with an analysis of the top domains seen in 
+the \captureonedata, as measured by traffic volume.  
+We use Bro to extract 
+hostnames within HTTP requests and common names within the server
+certificates embedded in HTTPS flows\footnote{TLS
+encryption hides the hostname associated with the underlying HTTP
+requests, so we use the common names found in TLS server
+certificates as a proxy.}. Aggregating the hostnames and common
+names by domain, we find 13,604 unique cloud-using domains:
+12,720 use EC2 and 885 use Azure.  Of these 13,604 domains, 6902 were also
+identified as cloud-using via the Alexa dataset; the remainder were not in
+the Alexa top 1 million.
+\tabref{tab:topdomains} lists the highest 15 such 
+domains in terms of traffic volume. A few tenants 
+are responsible for a large fraction of the traffic. Most notably, 
+\myurl{dropbox.com} accounts for almost 70\% of the combined HTTP(S) traffic volume. 
+This also explains why HTTPS (used by \myurl{dropbox.com}) dominates HTTP 
+in terms of volume (though not number of flows, refer to
+        \tabref{tab:proserv}). 
+
+
+It is informative to compare our analysis of top EC2-using domains by traffic
+volume to the analysis by DeepField networks~\cite{deepfield}, 
+which was conducted three months
+before we collected the \captureonedata. They used data from
+customers of their network analysis products. Seven of the domains on our top
+15 list also appear within the top 15 on DeepField's list (indicated with a
+        ($\deepfield$) in \tabref{tab:topdomains}).
+
+\tightparagraph{Summary and implications} A substantial fraction of the
+world's most popular websites rely in whole or in part on public IaaS
+clouds, especially EC2.  Most cloud-using domains have some subdomains
+hosted on a cloud service while other subdomains are hosted elsewhere.
+Perhaps surprisingly a small, but noticeable fraction of subdomains
+use both a cloud and other hosting solutions. Finally, traffic volume
+appears to be dominated by a few cloud tenants (we discuss traffic
+patterns more next). Depending on how tenants' deploy their services
+(e.g., how many and which regions they use), these observations have
+implications for availability of web-based cloud-resident services. We
+explore the underlying deployments in more detail in \secref{cloud-measure-how}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

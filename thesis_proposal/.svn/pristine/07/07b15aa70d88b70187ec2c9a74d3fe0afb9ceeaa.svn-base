@@ -1,0 +1,18 @@
+\begin{tabular}{|l||r|r|r|r|r|}
+\hline
+\bf Region& \bf count& \bf match& \bf unknown & \bf mismat. & \bf error rate \\
+\hline
+all & 37876 & 28640 & 7494 & 1742 & 5.7\%\\ % 30382
+\hline
+\awstokyo & 1260 & 965 & 295 & 0 & 0.0\% \\ % 965 ap-northeast-1 
+\awssing & 1987 & 1558 & 428 & 1 & $<$0.1\% \\ %1559 ap-southeast-1
+\awssyd & 298 & 201 & 97 & 0 & 0.0\% \\ %201 ap-southeast-2
+\awseuro & 6102 & 3359 & 1597 & 1146 & 25.0\% \\ %4505 eu-west-1
+\awssp & 616 & 0 & 616 & 0 & N/A \\ % 0 sa-east-1
+\awseast & 23518 & 19228 & 3748 & 542 & 2.7\% \\ % 19770 us-east-1
+\awscali & 2417 & 2032 & 385 & 0 & 0.0\% \\ % 2032 us-west-1
+\awsoreg & 1678 & 1297 & 328 & 53 & 3.9\% \\ % 1350 us-west-2
+%error rate column is (mismatched / (count - unknown))
+\hline
+\end{tabular}
+

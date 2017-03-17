@@ -1,0 +1,31 @@
+Sep 22, 2015
+
+
+in this folder:
+cubic_dctcp_official*: DCN8-DCN19 runs CUBIC, DCN16-DCN20 runs DCTCP, official OVS, RTO_min=10ms
+cubic_dctcp_acdctcp*: DCN8-DCN19 runs CUBIC, DCN16-DCN20 runs DCTCP, Our OVS, RTO_min=10ms
+
+
+
+Usage:
+
+root@ubuntu:~/repo/dctcp/figures/micro2flows/coexitence# python analyze_drops.py cubic_dctcp_acdctcp/
+python analyze_drops.py <result folder>
+0 port 64 pkts 2841443 drops 0
+total: 2841443 drops 0 rate: 0.0
+root@ubuntu:~/repo/dctcp/figures/micro2flows/coexitence# python analyze_drops.py cubic_dctcp_official/
+python analyze_drops.py <result folder>
+0 port 64 pkts 2657185 drops 2534
+total: 2657185 drops 2534 rate: 0.095364078903
+root@ubuntu:~/repo/dctcp/figures/micro2flows/coexitence# python parse_coexistence.py cubic_dctcp_acdctcp/run0001
+cubic_dctcp_acdctcp/run0001/dcn8-dcn19
+cubic_dctcp_acdctcp/run0001/dcn16-dcn20
+root@ubuntu:~/repo/dctcp/figures/micro2flows/coexitence# gnuplot plot_cubic_dctcp_conexistence_acdctcp.gp
+root@ubuntu:~/repo/dctcp/figures/micro2flows/coexitence# python parse_coexistence.py cubic_dctcp_official/run0001
+cubic_dctcp_official/run0001/dcn8-dcn19
+cubic_dctcp_official/run0001/dcn16-dcn20
+root@ubuntu:~/repo/dctcp/figures/micro2flows/coexitence# gnuplot plot_cubic_dctcp_conexistence_official.gp
+root@ubuntu:~/repo/dctcp/figures/micro2flows/coexitence# ls -al -h -rt
+
+
+

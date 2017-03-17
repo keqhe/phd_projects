@@ -1,0 +1,21 @@
+\section{Mitigation Techniques}
+
+We propose three techniques to mitigate the outbound latencies
+imposed by current switches:
+{\em Flow engineering} (FE) leverages our empirical latency models to compute
+paths such that the latency of installing forwarding state at any
+switch is minimized.
+{\em Rule
+  offloading} (RO) computes strategies for opportunistically
+offloading installation of some forwarding state to downstream switches.
+Finally, {\em rule reordering} (RR) sends rule installation
+requests in an order that is optimal for the switch in question. By reducing
+installation latency per switch (FE + RR) and enabling network-wide parallel
+updates (RO),
+rule updates can finish much faster. 
+We evaluated our mitigation techniques for three applications: failover in a tunneled WAN, two-level
+responsive traffic engineering, and MicroTE~\cite{microte}. Our
+simulations show we can improve
+the time taken to update network state in these scenarios by factors
+of 1.6-5X.
+

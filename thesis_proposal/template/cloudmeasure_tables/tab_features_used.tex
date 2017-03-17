@@ -1,0 +1,51 @@
+\setlength{\tabcolsep}{0.1cm}
+\begin{tabular}{|c|c|r|r|r|} \hline
+{\bf Cloud }&\bf{Feature} & {\bf \# Domains} & {\bf \# Subdomains } & {\bf
+    \# Inst.} \\
+\hline
+\multirow{5}{*}{EC2}
+& VM & 19.9K (52.5\%)  &  505.6K (71.5\%) & 28.3K \\ \cline{2-5}
+%& ELB-BeanStalk & 9.7K (25.5\%) & 26.9K (3.8\%) & 15.3K\\\cline{2-5}
+& ELB & 9.9K (25.9\%) & 27.1K (3.8\%) & 15.7K\\\cline{2-5}
+& BeanStalk (w/ ELB) & 188 (0.5\%) & 280 ($<0.01$\%) & 455  \\ \cline{2-5}
+& Heroku (w/ ELB & 622 (1.6\%)  & 1.9K (0.3\%) &  2.4K\\ \cline{2-5}
+& Heroku (no ELB) & 1.3K (3.5\%)  & 58.1K (8.2\%) &  94\\ \cline{2-5}
+%& CloudFront CDN & 137 & n.a. \\ \cline{2-4}
+%& Route53 DNS & 2,041  \\ 
+\hline
+\hline
+\multirow{2}{*}{Azure}
+%  & VM  & 455 (19.5\%) & 1.2K (17.6\%) & 720\\ \cline{2-5}
+%  & CS+TM & 52 (2.2\%) & 100 (1.5\%) & 78\\ \cline{2-5}
+%  & CS-TM & 825 (35.3\%) & 3.3K (50.8\%) & 790\\ \cline{2-5}
+  & CS & 863 (37.0\%) & 4.5K (68.3\%) & 790\\ \cline{2-5}
+  & TM & 52 (2.2\%) & 100 (1.5\%) & 78\\ \cline{2-5}
+  %& msecnd CDN & ... & ...\\ 
+\hline
+\end{tabular}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%bkp%%%%%%%%%%%%%%%%%%%%%%
+\iffalse
+\begin{tabular}{|c|c|r|r|r|} \hline
+{\bf Cloud }&\bf{Feature} & {\bf \# Domains} & {\bf \# Subdomains } & {\bf
+    \# Instances} \\ 
+\hline
+\multirow{4}{*}{EC2}
+& VM & 19,896 (52\%)  &  505,578 (72\%) & 28,258 \\ \cline{2-5}
+& LB & 9,851 (26\%) & 27,154 (4\%) & 15,703\\\cline{2-5}
+& PaaS & 1,929 (5\%) & 60,273 (8\%) & 2,979  \\ \cline{2-5}
+& LB + PaaS & 809 (2\%)  & 2,130 (0.3\%) &  2,890\\ \cline{2-5}
+%& CloudFront CDN & 137 & n.a. \\ \cline{2-4}
+%& Route53 DNS & 2,041  \\ 
+\hline
+\hline
+\multirow{4}{*}{Azure}  
+  & VM  & 455 (19\%) & 1,153 (18\%) & 720\\ \cline{2-5}
+  & LB & 52 (2\%) & 100 (2\%) & 78\\ \cline{2-5}
+  & PaaS & 863 (37\%) & 3,428 (52\%) & 864\\ \cline{2-5}
+  & LB + PaaS & 52 (2\%)  & 100 (2\%) & 78 \\ \cline{2-5}
+  %& msecnd CDN & ... & ...\\ 
+\hline
+\end{tabular}
+\fi

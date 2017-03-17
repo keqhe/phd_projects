@@ -1,0 +1,229 @@
+\documentclass[12pt]{article}
+
+\usepackage[breaklinks=true,colorlinks=false]{hyperref}
+%\usepackage[breaklinks=true,colorlinks=true,plainpages=false,citecolor=blue,urlcolor=blue,filecolor=blue]{hyperref}
+\usepackage{url}        % Not compatible with hyperref?
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{color}
+\usepackage{times}
+\usepackage[sort]{natbib}
+\usepackage{enumitem}
+%\usepackage{subfigure}
+\usepackage{verbatim}
+\usepackage{xspace}
+\usepackage{xfrac}
+\usepackage{algorithmic} % must come after hyperref
+\usepackage{algorithm}
+\usepackage{multirow}
+
+\usepackage{listings}
+\usepackage{microtype} %does typographical voodoo to get rid of most overfull
+                       %boxes. Ideally requires pdfTeX 1.4+, going directly
+                       %to pdf. Don't use a DVI workflow.
+\usepackage{balance}   %\balance keywork has to be included in the last page that
+                       % will not be balanced, in the first column.
+\usepackage{datetime}
+\usepackage{morefloats}
+
+\usepackage{caption}
+\usepackage{subcaption}
+
+\DeclareMathVersion{mathchartertext}
+\SetSymbolFont{letters}{normal}{OML}{mdbch}{m}{n}
+\newcommand{\gchar}[1]{\mathversion{mathchartertext}$#1$\mathversion{normal}}
+
+
+% Configure algorithmic and listings
+\renewcommand{\algorithmicrequire}{\textit{Input:}}
+\renewcommand{\algorithmicensure}{\textit{Output:}}
+\lstset{%language=Python,
+numberstyle=\footnotesize,
+basicstyle=\ttfamily\scriptsize,
+numbers=left,
+stepnumber=1,
+showstringspaces=false,
+breaklines=true}
+
+ \newcommand{\todo}[1]{\textcolor{blue}{\textbf{TODO:} #1}}
+ \newcommand{\eric}[1]{\textcolor{red}{\textbf{Eric:} #1}}
+ \newcommand{\aditya}[1]{\textcolor{red}{\textbf{Aditya:} #1}}
+ \newcommand{\keqiang}[1]{\textcolor{red}{\textbf{Keqiang:} #1}}
+\newcommand{\cut}[1]{}
+
+\newcommand{\eg}{{e.g.}\xspace}
+\newcommand{\cf}{{cf.}\xspace}
+\newcommand{\ie}{{i.e.}\xspace}
+\newcommand{\etal}{{et al.}\xspace}
+
+\hyphenation{light-weight}
+\hyphenation{meas-ure-ment}
+\newcommand{\tightparagraph}[1]{\vspace{5pt}\noindent\textbf{#1}\ }
+
+%%mazu
+\newcommand{\pollstats}[1]{{pollstats }}
+\newcommand{\packetin}{{\em packet\_in}\xspace}
+\newcommand{\packetout}{{\em packet\_out}\xspace}
+\newcommand{\flowmod}{{\em flow\_mod}\xspace}
+\newcommand{\polling}[1]{{flow statistics polling}}
+
+
+\newcommand{\Broadcom}{Broadcom\xspace}
+\newcommand{\BroadcomOne}{BCM-1.0\xspace}
+\newcommand{\BroadcomThree}{BCM-1.3\xspace}
+\newcommand{\Intel}{Intel\xspace}
+\newcommand{\IBM}{IBM\xspace}
+\newcommand{\numVendors}{three\xspace}
+\newcommand{\numCombos}{four\xspace}
+
+\newcommand{\FE}{FE\xspace}
+\newcommand{\RR}{RR\xspace}
+\newcommand{\RO}{RO\xspace}
+
+\newcommand{\tabref}[1]{{Table~\ref{#1}}}
+\newcommand{\figref}[1]{{Figure~\ref{#1}}}
+\newcommand{\figsref}[2]{{Figure~\ref{#1} and \ref{#2}}}
+\newcommand{\algref}[1]{{Algorithm~\ref{#1}}}
+\newcommand{\secref}[1]{{\S\ref{#1}}}
+\newcommand{\appref}[1]{{Appendix~\ref{#1}}}
+
+\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
+
+%%%copied from cloud measure%%%
+\newcommand{\awseast}{{ec2.us-east-1}\xspace}
+\newcommand{\awseasta}{{ec2.us-east-1a}\xspace}
+\newcommand{\awseastb}{{ec2.us-east-1b}\xspace}
+\newcommand{\awseastc}{{ec2.us-east-1c}\xspace}
+\newcommand{\awseastd}{{ec2.us-east-1d}\xspace}
+\newcommand{\awscali}{{ec2.us-west-1}\xspace}
+\newcommand{\awsoreg}{{ec2.us-west-2}\xspace}
+\newcommand{\awseuro}{{ec2.eu-west-1}\xspace}
+\newcommand{\awstokyo}{{ec2.ap-northeast-1}\xspace}
+\newcommand{\awssing}{{ec2.ap-southeast-1}\xspace}
+\newcommand{\awssyd}{{ec2.ap-southeast-2}\xspace}
+\newcommand{\awssp}{{ec2.sa-east-1}\xspace}
+
+\newcommand{\mseast}{{az.us-east}\xspace}
+\newcommand{\mswest}{{az.us-west}\xspace}
+\newcommand{\mssouth}{{az.us-south}\xspace}
+\newcommand{\msnorth}{{az.us-north}\xspace}
+\newcommand{\mswesteuro}{{az.eu-west}\xspace}
+\newcommand{\msnortheuro}{{az.eu-north}\xspace}
+\newcommand{\mssing}{{az.ap-southeast}\xspace}
+\newcommand{\mseasia}{{az.ap-east}\xspace}
+
+\newcommand{\capone}{{Capture 1}\xspace}
+\newcommand{\captwo}{{Capture 2}\xspace}
+
+\newcommand{\frontend}{{front end}\xspace}
+\newcommand{\frontends}{{front ends}\xspace}
+
+\newcommand{\calX}{{\mathcal X}}
+\newcommand{\Colon}{{:\:}}
+%\newcommand{\alexadata}{{\em Alexa subdomains}\xspace}
+\newcommand{\alexadata}{{Alexa subdomains}\xspace}
+%\newcommand{\capturedata}{{\em 2012 \textnormal{and} 2013 captures}\xspace}
+\newcommand{\capturedata}{{packet capture}\xspace}
+%\newcommand{\captureonedata}{{\em 2012 capture}\xspace}
+\newcommand{\captureonedata}{{packet capture}\xspace}
+\newcommand{\capturetwodata}{{\em 2013 capture}\xspace}
+%\newcommand{\bothfig}{[{\em Alexa subdomains} and {\em 2012 \& 2013 captures}]\xspace}
+\newcommand{\bothfig}{[{\em Alexa subdomains} and {\em packet capture}]\xspace}
+\newcommand{\alexafig}{[{\em Alexa subdomains}]\xspace}
+%\newcommand{\capturefig}{[{\em 2012 \& 2013 captures}]\xspace}
+\newcommand{\capturefig}{[{\em packet capture}]\xspace}
+%\newcommand{\captureonefig}{[{\em 2012 capture}]\xspace}
+\newcommand{\captureonefig}{[{\em packet capture}]\xspace}
+\newcommand{\capturetwofig}{[{\em 2013 capture}]\xspace}
+
+
+\newcommand{\myurl}[1]{\mbox{#1}}
+\newcommand{\deepfield}{\mathrm{d}}
+
+% <http://psl.cs.columbia.edu/phdczar/proposal.html>:
+%
+% The standard departmental thesis proposal format is the following:
+%        30 pages
+%        12 point type
+%        1 inch margins all around = 6.5   inch column
+%        (Total:  30 * 6.5   = 195 page-inches)
+%
+% For letter-size paper: 8.5 in x 11 in
+% Latex Origin is 1''/1'', so measurements are relative to this.
+
+\topmargin      0.0in
+\headheight     0.0in
+\headsep        0.0in
+\oddsidemargin  0.0in
+\evensidemargin 0.0in
+\textheight     9.0in
+\textwidth      6.5in
+
+\title{{\bf Improving Network Performance for Cloud-hosted Services} \\
+\it Thesis proposal}
+\author{ {\bf Keqiang He}  \\
+Department of Computer Science \\
+University of Wisconsin-Madison\\
+{\small keqhe@cs.wisc.edu}
+}
+\date{\today}
+
+\begin{document}
+\pagestyle{plain}
+\pagenumbering{roman}
+\maketitle
+
+\pagebreak
+\begin{abstract}
+
+In recent years, we have witnessed the strong trend of moving computing services 
+into the cloud and data centers. In the cloud computing era, customers do not 
+need to buy their own hardware, instead, they can rent elastic computing 
+resources (CPUs, memory, storage and networking) from cloud infrastructure 
+providers. Cloud computing has been shown to be a great success and it continues 
+to grow rapidly. Networking is a critical component for high performance cloud 
+computing infrastructures because network performance can affect services and 
+tasks running in data centers significantly. Therefore, understanding and 
+improving network performance for cloud-hosted services is an important and 
+timely research direction.
+
+This thesis explores several important cloud network related research questions. 
+First, 
+we designed a software edge-based load balancing scheme for 
+high speed (10G+) datacenter networks which can achieve near-perfect traffic load balancing. 
+Second, we explored the long control plane latency problem in 
+the emerging software-defined networking (SDN) 
+technique and proposed latency mitigation techniques. 
+Thrid, we characterized how today's web services are using the public clouds and 
+shed light on how to build robust and high network performance web services.
+We propose two research topics we plan to explore---1) how to perform congestion control 
+enforcement for public data centers where tenants can have customized TCP stacks 
+and 2)how we can provide near real time network congestion monitoring to 
+aid data center network debugging and help mitigate network congestion.
+\end{abstract}
+
+\pagebreak
+\tableofcontents
+\pagebreak
+
+\cleardoublepage
+\pagenumbering{arabic}
+
+\input{intro}
+\input{related}
+\input{presto}
+\input{mazu}
+\input{cloudmeasure}
+\input{plan}
+
+\pagebreak
+
+\begin{footnotesize}
+\bibliographystyle{plain}
+\bibliography{refer}
+\end{footnotesize}
+
+\end{document}
+
+

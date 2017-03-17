@@ -1,0 +1,22 @@
+Oct 23, 2015
+My usleep(20000) , retry 10 version iperf..
+
+ours16:
+dctcp16:
+dctcp_dbcheck
+ours16_reno
+ours16_reno_dbcheck
+
+::
+
+
+ours16_reno_dbcheck2: new reno, ours, with the EJR (1 sec) iperf
+
+dctcp16_dbcheck2: dctcp, officical ovs, the EJR (1 sec) iperf
+default16_cubic: cubic, official ovs, the EJR (1 sec) iperf
+
+small_default16_cubic: cubic, official ovs, the EJR (1 sec) iperf
+small_default16_cubic2: another 10runs of above, cubic, official ovs, the EJR (1 sec) iperf
+
+small_dctcp16: dctcp, official ovs, the EJR (1 sec) iperf
+

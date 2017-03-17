@@ -1,0 +1,73 @@
+Sep 24, 2015
+
+cubic_default:
+oot@ubuntu:~/repo/dctcp/acdctcp/figures/micro2flows# python get_tput_per_run.py cubic_default
+Usage: pyhton <result folder>
+root@ubuntu:~/repo/dctcp/acdctcp/figures/micro2flows# python throughput.py cubic_default_tput.out
+average tput is 4988.5
+root@ubuntu:~/repo/dctcp/acdctcp/figures/micro2flows# python jain_index.py cubic_default_tput.out 2
+exampleL: python raw_throughput_file number_of_flows
+jain index is 0.982098745716
+root@ubuntu:~/repo/dctcp/acdctcp/figures/micro2flows# python get_sockperf_per_run.py cubic_default
+python get_sockperf_per_run.py <result folder>
+root@ubuntu:~/repo/dctcp/acdctcp/figures/micro2flows# python sockperf_process.py --file cubic_default_sockperf
+root@ubuntu:~/repo/dctcp/acdctcp/figures/micro2flows# vim cubic_default_sockperf.cdf
+root@ubuntu:~/repo/dctcp/acdctcp/figures/micro2flows# python analyze_drops.py cubic_default
+python analyze_drops.py <result folder>
+0 port 64 pkts 1396657 drops 36
+0 port 64 pkts 1397096 drops 25
+0 port 64 pkts 1396742 drops 35
+0 port 64 pkts 1390164 drops 38
+0 port 64 pkts 1398093 drops 34
+total: 6978752 drops 168 rate: 0.00240730720908
+
+
+
+OURS::
+root@ubuntu:~/repo/dctcp/acdctcp/figures/micro2flows# python get_tput_per_run.py cubic_cubic_ours
+Usage: pyhton <result folder>
+root@ubuntu:~/repo/dctcp/acdctcp/figures/micro2flows# python throughput.py cubic_cubic_ours_tput.out
+average tput is 4793.65
+root@ubuntu:~/repo/dctcp/acdctcp/figures/micro2flows# python jain_index.py cubic_cubic_ours_tput.out 2
+exampleL: python raw_throughput_file number_of_flows
+jain index is 0.999593207826
+root@ubuntu:~/repo/dctcp/acdctcp/figures/micro2flows# python analyze_drops.py cubic_cubic_ours
+python analyze_drops.py <result folder>
+0 port 64 pkts 1464488 drops 0
+0 port 64 pkts 1473230 drops 0
+0 port 64 pkts 1450195 drops 0
+0 port 64 pkts 1455623 drops 0
+0 port 64 pkts 1455176 drops 0
+total: 7298712 drops 0 rate: 0.0
+root@ubuntu:~/repo/dctcp/acdctcp/figures/micro2flows# python sockperf_process.py ^C
+root@ubuntu:~/repo/dctcp/acdctcp/figures/micro2flows# python get_sockperf_per_run.py cubic_cubic_ours
+python get_sockperf_per_run.py <result folder>
+root@ubuntu:~/repo/dctcp/acdctcp/figures/micro2flows# python sockperf_process.py --file cubic_cubic_ours_sockperf
+root@ubuntu:~/repo/dctcp/acdctcp/figures/micro2flows# vim cubic_cubic_ours_sockperf.cdf
+
+
+
+DCTCP::
+root@ubuntu:~/repo/dctcp/acdctcp/figures/micro2flows# python get_tput_per_run.py dctcp_dctcp_official
+Usage: pyhton <result folder>
+root@ubuntu:~/repo/dctcp/acdctcp/figures/micro2flows# python throughput.py dctcp_dctcp_official_tput.out
+average tput is 4921.4
+root@ubuntu:~/repo/dctcp/acdctcp/figures/micro2flows# python analyze_drops.py dctcp_dctcp_official
+python analyze_drops.py <result folder>
+0 port 64 pkts 1375805 drops 0
+0 port 64 pkts 1368546 drops 0
+0 port 64 pkts 1395336 drops 0
+0 port 64 pkts 1397980 drops 0
+0 port 64 pkts 1371898 drops 0
+total: 6909565 drops 0 rate: 0.0
+root@ubuntu:~/repo/dctcp/acdctcp/figures/micro2flows# python get_sockperf_per_run.py dctcp_dctcp_official
+python get_sockperf_per_run.py <result folder>
+root@ubuntu:~/repo/dctcp/acdctcp/figures/micro2flows# python sockperf_process.py --file dctcp_dctcp_official_sockperf
+root@ubuntu:~/repo/dctcp/acdctcp/figures/micro2flows# vim dctcp_dctcp_official_sockperf.cdf
+
+
+coexitence::
+coexitence tests
+
+otherTCPs::
+show that OVS-DCTCP works with other CC schemes

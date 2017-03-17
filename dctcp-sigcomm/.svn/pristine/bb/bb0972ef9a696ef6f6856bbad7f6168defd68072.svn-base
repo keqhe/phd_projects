@@ -1,0 +1,24 @@
+\section{Background and Motivation}
+\label{background}
+
+\subsection{Why Transport Enforcement?}
+
+\subsection{TCP Windowing}
+Initially, TCP only has RWND to achieve flow control 
+(i.e., prevent sender from overflowing receiver's buffer).
+In 1988, Jacobson~\cite{jacobson1988congestion} identifed the causes of ``congestion collapse''
+and added CWND and congestion avoidance and control algorithms to fix the issue for the Internet.
+In the datacenter network environment 
+(hypervisors, containers\todo{is this correct?}, 
+and switches owned by the cloud provider; VMs rented to customers), 
+RWND can be repurposed to achieve two goals---
+flow control and ``transport enforcement'', in one single parameter.
+
+\subsection{Virtualization \& Virtual Switch}
+Open vSwitch (OVS)~\cite{ovs-website}, Cisco Application Virtual Switch~\cite{cisco-avs}, 
+and VALE~\cite{rizzo2012vale}.
+zOVN~\cite{crisan2013got} identified the packet loss problem in virtual networks and
+proposed zVALE virtual switch to achieve lossless overlay virtual networks.
+Open vSwitch (OVS) acceleration in the NIC~\cite{cavium-nic,netronome-nic}.
+
+Also, link with Microsoft's ``end-host SDN'' concept---see SIGCOMM'15 and ONS keynote..

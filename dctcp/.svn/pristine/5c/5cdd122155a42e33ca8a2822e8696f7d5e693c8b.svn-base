@@ -1,0 +1,1001 @@
+Hello from thr_func, thread id: 0
+Hello from thr_func, thread id: 6
+Hello from thr_func, thread id: 2
+Hello from thr_func, thread id: 3
+Hello from thr_func, thread id: 1
+Hello from thr_func, thread id: 7
+Hello from thr_func, thread id: 4
+Hello from thr_func, thread id: 5
+Hello from thr_func, thread id: 8
+Hello from thr_func, thread id: 11
+Hello from thr_func, thread id: 9
+Hello from thr_func, thread id: 10
+Hello from thr_func, thread id: 12
+Hello from thr_func, thread id: 13
+Hello from thr_func, thread id: 14
+Hello from thr_func, thread id: 15
+Hello from thr_func, thread id: 16
+Hello from thr_func, thread id: 19
+Hello from thr_func, thread id: 18
+Hello from thr_func, thread id: 17
+Hello from thr_func, thread id: 20
+Nano sleep1 system call failed 
+Hello from thr_func, thread id: 21
+Hello from thr_func, thread id: 22
+Hello from thr_func, thread id: 23
+Hello from thr_func, thread id: 24
+Hello from thr_func, thread id: 25
+Hello from thr_func, thread id: 26
+Hello from thr_func, thread id: 27
+Hello from thr_func, thread id: 31
+Hello from thr_func, thread id: 29
+Hello from thr_func, thread id: 30
+Hello from thr_func, thread id: 33
+Hello from thr_func, thread id: 28
+Hello from thr_func, thread id: 32
+Hello from thr_func, thread id: 34
+Hello from thr_func, thread id: 35
+Hello from thr_func, thread id: 37
+Hello from thr_func, thread id: 39
+Hello from thr_func, thread id: 36
+Hello from thr_func, thread id: 38
+Hello from thr_func, thread id: 40
+Hello from thr_func, thread id: 41
+Hello from thr_func, thread id: 42
+Hello from thr_func, thread id: 43
+Hello from thr_func, thread id: 44
+Hello from thr_func, thread id: 45
+Hello from thr_func, thread id: 46
+Hello from thr_func, thread id: 49
+Hello from thr_func, thread id: 48
+Hello from thr_func, thread id: 47
+Hello from thr_func, thread id: 50
+Hello from thr_func, thread id: 51
+Hello from thr_func, thread id: 53
+Hello from thr_func, thread id: 52
+Hello from thr_func, thread id: 55
+Hello from thr_func, thread id: 54
+Hello from thr_func, thread id: 56
+Hello from thr_func, thread id: 57
+Hello from thr_func, thread id: 58
+Hello from thr_func, thread id: 59
+Hello from thr_func, thread id: 60
+Hello from thr_func, thread id: 61
+Hello from thr_func, thread id: 62
+Hello from thr_func, thread id: 64
+Hello from thr_func, thread id: 66
+Hello from thr_func, thread id: 67
+Hello from thr_func, thread id: 63
+Hello from thr_func, thread id: 65
+Hello from thr_func, thread id: 69
+Hello from thr_func, thread id: 68
+Hello from thr_func, thread id: 70
+Hello from thr_func, thread id: 72
+Hello from thr_func, thread id: 73
+Hello from thr_func, thread id: 71
+Hello from thr_func, thread id: 75
+Hello from thr_func, thread id: 74
+Hello from thr_func, thread id: 76
+Hello from thr_func, thread id: 79
+Hello from thr_func, thread id: 81
+Hello from thr_func, thread id: 80
+Hello from thr_func, thread id: 82
+Hello from thr_func, thread id: 78
+Hello from thr_func, thread id: 77
+Hello from thr_func, thread id: 83
+Hello from thr_func, thread id: 84
+Hello from thr_func, thread id: 88
+Hello from thr_func, thread id: 89
+Hello from thr_func, thread id: 86
+Hello from thr_func, thread id: 87
+Hello from thr_func, thread id: 90
+Hello from thr_func, thread id: 85
+Hello from thr_func, thread id: 92
+Hello from thr_func, thread id: 91
+Hello from thr_func, thread id: 94
+Hello from thr_func, thread id: 93
+Hello from thr_func, thread id: 95
+Hello from thr_func, thread id: 96
+Hello from thr_func, thread id: 97
+Hello from thr_func, thread id: 98
+Hello from thr_func, thread id: 99
+Hello from thr_func, thread id: 100
+Hello from thr_func, thread id: 103
+Hello from thr_func, thread id: 102
+Hello from thr_func, thread id: 104
+Hello from thr_func, thread id: 101
+Hello from thr_func, thread id: 105
+Hello from thr_func, thread id: 106
+Hello from thr_func, thread id: 110
+Hello from thr_func, thread id: 111
+Hello from thr_func, thread id: 107
+Hello from thr_func, thread id: 109
+Hello from thr_func, thread id: 108
+Hello from thr_func, thread id: 112
+Hello from thr_func, thread id: 113
+Hello from thr_func, thread id: 115
+Hello from thr_func, thread id: 116
+Hello from thr_func, thread id: 114
+Hello from thr_func, thread id: 117
+Hello from thr_func, thread id: 118
+Hello from thr_func, thread id: 119
+Hello from thr_func, thread id: 120
+Hello from thr_func, thread id: 121
+Hello from thr_func, thread id: 123
+Hello from thr_func, thread id: 124
+Hello from thr_func, thread id: 122
+Hello from thr_func, thread id: 125
+Hello from thr_func, thread id: 126
+Hello from thr_func, thread id: 127
+Hello from thr_func, thread id: 128
+Hello from thr_func, thread id: 130
+Hello from thr_func, thread id: 131
+Hello from thr_func, thread id: 129
+Hello from thr_func, thread id: 132
+Hello from thr_func, thread id: 133
+Hello from thr_func, thread id: 134
+Hello from thr_func, thread id: 136
+Hello from thr_func, thread id: 137
+Hello from thr_func, thread id: 138
+Hello from thr_func, thread id: 135
+Hello from thr_func, thread id: 139
+Hello from thr_func, thread id: 140
+Hello from thr_func, thread id: 142
+Hello from thr_func, thread id: 143
+Hello from thr_func, thread id: 141
+Hello from thr_func, thread id: 144
+Hello from thr_func, thread id: 145
+Hello from thr_func, thread id: 146
+Hello from thr_func, thread id: 147
+Hello from thr_func, thread id: 148
+Hello from thr_func, thread id: 150
+Hello from thr_func, thread id: 151
+Hello from thr_func, thread id: 149
+Hello from thr_func, thread id: 152
+Hello from thr_func, thread id: 153
+Hello from thr_func, thread id: 154
+Hello from thr_func, thread id: 157
+Hello from thr_func, thread id: 158
+Hello from thr_func, thread id: 155
+Hello from thr_func, thread id: 156
+Hello from thr_func, thread id: 159
+Hello from thr_func, thread id: 160
+Hello from thr_func, thread id: 161
+Hello from thr_func, thread id: 162
+Hello from thr_func, thread id: 163
+Hello from thr_func, thread id: 164
+Hello from thr_func, thread id: 165
+Hello from thr_func, thread id: 166
+Hello from thr_func, thread id: 167
+Hello from thr_func, thread id: 168
+Hello from thr_func, thread id: 169
+Hello from thr_func, thread id: 170
+Hello from thr_func, thread id: 171
+Hello from thr_func, thread id: 173
+Hello from thr_func, thread id: 172
+Hello from thr_func, thread id: 174
+Hello from thr_func, thread id: 175
+Hello from thr_func, thread id: 176
+Hello from thr_func, thread id: 177
+Hello from thr_func, thread id: 178
+Hello from thr_func, thread id: 179
+Hello from thr_func, thread id: 180
+Hello from thr_func, thread id: 181
+Hello from thr_func, thread id: 182
+Hello from thr_func, thread id: 185
+Hello from thr_func, thread id: 186
+Hello from thr_func, thread id: 187
+Hello from thr_func, thread id: 183
+Hello from thr_func, thread id: 184
+Hello from thr_func, thread id: 188
+Hello from thr_func, thread id: 189
+Hello from thr_func, thread id: 190
+Hello from thr_func, thread id: 191
+Hello from thr_func, thread id: 192
+Hello from thr_func, thread id: 193
+Hello from thr_func, thread id: 194
+Hello from thr_func, thread id: 196
+Hello from thr_func, thread id: 197
+Hello from thr_func, thread id: 198
+Hello from thr_func, thread id: 195
+Hello from thr_func, thread id: 199
+Hello from thr_func, thread id: 200
+Hello from thr_func, thread id: 201
+Hello from thr_func, thread id: 202
+Hello from thr_func, thread id: 203
+Hello from thr_func, thread id: 204
+Hello from thr_func, thread id: 205
+Hello from thr_func, thread id: 206
+Hello from thr_func, thread id: 207
+Hello from thr_func, thread id: 208
+Hello from thr_func, thread id: 209
+Hello from thr_func, thread id: 210
+Hello from thr_func, thread id: 211
+Hello from thr_func, thread id: 213
+Hello from thr_func, thread id: 214
+Hello from thr_func, thread id: 212
+Hello from thr_func, thread id: 215
+Hello from thr_func, thread id: 216
+Hello from thr_func, thread id: 217
+Hello from thr_func, thread id: 218
+Hello from thr_func, thread id: 219
+Hello from thr_func, thread id: 220
+Hello from thr_func, thread id: 221
+Hello from thr_func, thread id: 222
+Hello from thr_func, thread id: 223
+Hello from thr_func, thread id: 224
+Hello from thr_func, thread id: 225
+Hello from thr_func, thread id: 226
+Hello from thr_func, thread id: 227
+Hello from thr_func, thread id: 228
+Hello from thr_func, thread id: 229
+Hello from thr_func, thread id: 230
+Hello from thr_func, thread id: 231
+Hello from thr_func, thread id: 232
+Hello from thr_func, thread id: 233
+Hello from thr_func, thread id: 234
+Hello from thr_func, thread id: 235
+Hello from thr_func, thread id: 237
+Hello from thr_func, thread id: 236
+Hello from thr_func, thread id: 238
+Hello from thr_func, thread id: 239
+Hello from thr_func, thread id: 240
+Hello from thr_func, thread id: 241
+Hello from thr_func, thread id: 242
+Hello from thr_func, thread id: 243
+Hello from thr_func, thread id: 244
+Hello from thr_func, thread id: 245
+Hello from thr_func, thread id: 246
+Hello from thr_func, thread id: 247
+Hello from thr_func, thread id: 248
+Hello from thr_func, thread id: 249
+Hello from thr_func, thread id: 250
+Hello from thr_func, thread id: 251
+Hello from thr_func, thread id: 252
+Hello from thr_func, thread id: 253
+Hello from thr_func, thread id: 255
+Hello from thr_func, thread id: 254
+Hello from thr_func, thread id: 256
+Hello from thr_func, thread id: 257
+Hello from thr_func, thread id: 258
+Hello from thr_func, thread id: 259
+Hello from thr_func, thread id: 260
+Hello from thr_func, thread id: 261
+Hello from thr_func, thread id: 262
+Hello from thr_func, thread id: 264
+Hello from thr_func, thread id: 263
+Hello from thr_func, thread id: 265
+Hello from thr_func, thread id: 266
+Hello from thr_func, thread id: 268
+Hello from thr_func, thread id: 267
+Hello from thr_func, thread id: 270
+Hello from thr_func, thread id: 271
+Hello from thr_func, thread id: 269
+Hello from thr_func, thread id: 272
+Hello from thr_func, thread id: 276
+Hello from thr_func, thread id: 277
+Hello from thr_func, thread id: 273
+Hello from thr_func, thread id: 278
+Hello from thr_func, thread id: 274
+Hello from thr_func, thread id: 275
+Hello from thr_func, thread id: 279
+Hello from thr_func, thread id: 280
+Hello from thr_func, thread id: 281
+Hello from thr_func, thread id: 283
+Hello from thr_func, thread id: 285
+Hello from thr_func, thread id: 282
+Hello from thr_func, thread id: 284
+Hello from thr_func, thread id: 286
+Hello from thr_func, thread id: 287
+Hello from thr_func, thread id: 288
+Hello from thr_func, thread id: 289
+Hello from thr_func, thread id: 290
+Hello from thr_func, thread id: 291
+Hello from thr_func, thread id: 293
+Hello from thr_func, thread id: 292
+Hello from thr_func, thread id: 294
+Hello from thr_func, thread id: 295
+Hello from thr_func, thread id: 297
+Hello from thr_func, thread id: 296
+Hello from thr_func, thread id: 299
+Hello from thr_func, thread id: 300
+Hello from thr_func, thread id: 298
+Hello from thr_func, thread id: 301
+Hello from thr_func, thread id: 302
+Hello from thr_func, thread id: 303
+Hello from thr_func, thread id: 304
+Hello from thr_func, thread id: 305
+Hello from thr_func, thread id: 306
+Hello from thr_func, thread id: 307
+Hello from thr_func, thread id: 308
+Hello from thr_func, thread id: 309
+Hello from thr_func, thread id: 310
+Hello from thr_func, thread id: 311
+Hello from thr_func, thread id: 312
+Hello from thr_func, thread id: 313
+Hello from thr_func, thread id: 314
+Hello from thr_func, thread id: 315
+Hello from thr_func, thread id: 316
+Hello from thr_func, thread id: 317
+Hello from thr_func, thread id: 318
+Hello from thr_func, thread id: 320
+Hello from thr_func, thread id: 321
+Hello from thr_func, thread id: 319
+Hello from thr_func, thread id: 322
+Hello from thr_func, thread id: 323
+Hello from thr_func, thread id: 324
+Hello from thr_func, thread id: 325
+Hello from thr_func, thread id: 327
+Hello from thr_func, thread id: 326
+Hello from thr_func, thread id: 328
+Hello from thr_func, thread id: 329
+Hello from thr_func, thread id: 331
+Hello from thr_func, thread id: 330
+Hello from thr_func, thread id: 332
+Hello from thr_func, thread id: 333
+Hello from thr_func, thread id: 334
+Hello from thr_func, thread id: 335
+Hello from thr_func, thread id: 338
+Hello from thr_func, thread id: 340
+Hello from thr_func, thread id: 336
+Hello from thr_func, thread id: 339
+Hello from thr_func, thread id: 337
+Hello from thr_func, thread id: 341
+Hello from thr_func, thread id: 342
+Hello from thr_func, thread id: 343
+Hello from thr_func, thread id: 344
+Hello from thr_func, thread id: 346
+Hello from thr_func, thread id: 345
+Hello from thr_func, thread id: 348
+Hello from thr_func, thread id: 347
+Hello from thr_func, thread id: 349
+Hello from thr_func, thread id: 350
+Hello from thr_func, thread id: 351
+Hello from thr_func, thread id: 353
+Hello from thr_func, thread id: 352
+Hello from thr_func, thread id: 356
+Hello from thr_func, thread id: 355
+Hello from thr_func, thread id: 354
+Hello from thr_func, thread id: 357
+Hello from thr_func, thread id: 358
+Hello from thr_func, thread id: 360
+Hello from thr_func, thread id: 359
+Hello from thr_func, thread id: 361
+Hello from thr_func, thread id: 362
+Hello from thr_func, thread id: 364
+Hello from thr_func, thread id: 363
+Hello from thr_func, thread id: 366
+Hello from thr_func, thread id: 365
+Hello from thr_func, thread id: 367
+Hello from thr_func, thread id: 368
+Hello from thr_func, thread id: 369
+Hello from thr_func, thread id: 370
+Hello from thr_func, thread id: 371
+Hello from thr_func, thread id: 372
+Hello from thr_func, thread id: 373
+Hello from thr_func, thread id: 374
+Hello from thr_func, thread id: 375
+Hello from thr_func, thread id: 376
+Hello from thr_func, thread id: 377
+Hello from thr_func, thread id: 378
+Hello from thr_func, thread id: 379
+Hello from thr_func, thread id: 380
+Hello from thr_func, thread id: 381
+Hello from thr_func, thread id: 383
+Hello from thr_func, thread id: 382
+Hello from thr_func, thread id: 384
+Hello from thr_func, thread id: 385
+Hello from thr_func, thread id: 386
+Hello from thr_func, thread id: 387
+Hello from thr_func, thread id: 388
+Hello from thr_func, thread id: 389
+Hello from thr_func, thread id: 390
+Hello from thr_func, thread id: 391
+Hello from thr_func, thread id: 392
+Hello from thr_func, thread id: 393
+Hello from thr_func, thread id: 394
+Hello from thr_func, thread id: 396
+Hello from thr_func, thread id: 395
+Hello from thr_func, thread id: 397
+Hello from thr_func, thread id: 398
+Hello from thr_func, thread id: 399
+Hello from thr_func, thread id: 401
+Hello from thr_func, thread id: 402
+Hello from thr_func, thread id: 400
+Hello from thr_func, thread id: 403
+Hello from thr_func, thread id: 404
+Hello from thr_func, thread id: 405
+Hello from thr_func, thread id: 407
+Hello from thr_func, thread id: 408
+Hello from thr_func, thread id: 409
+Hello from thr_func, thread id: 406
+Hello from thr_func, thread id: 410
+Hello from thr_func, thread id: 411
+Hello from thr_func, thread id: 412
+Hello from thr_func, thread id: 413
+Hello from thr_func, thread id: 415
+Hello from thr_func, thread id: 414
+Hello from thr_func, thread id: 416
+Hello from thr_func, thread id: 417
+Hello from thr_func, thread id: 419
+Hello from thr_func, thread id: 421
+Hello from thr_func, thread id: 418
+Hello from thr_func, thread id: 422
+Hello from thr_func, thread id: 423
+Hello from thr_func, thread id: 420
+Hello from thr_func, thread id: 424
+Hello from thr_func, thread id: 426
+Hello from thr_func, thread id: 427
+Hello from thr_func, thread id: 428
+Hello from thr_func, thread id: 425
+Hello from thr_func, thread id: 429
+Hello from thr_func, thread id: 430
+Hello from thr_func, thread id: 431
+Hello from thr_func, thread id: 432
+Hello from thr_func, thread id: 434
+Hello from thr_func, thread id: 435
+Hello from thr_func, thread id: 433
+Hello from thr_func, thread id: 436
+Hello from thr_func, thread id: 437
+Hello from thr_func, thread id: 438
+Hello from thr_func, thread id: 439
+Hello from thr_func, thread id: 440
+Hello from thr_func, thread id: 441
+Hello from thr_func, thread id: 442
+Hello from thr_func, thread id: 443
+Hello from thr_func, thread id: 444
+Hello from thr_func, thread id: 445
+Hello from thr_func, thread id: 446
+Hello from thr_func, thread id: 447
+Hello from thr_func, thread id: 448
+Hello from thr_func, thread id: 449
+Hello from thr_func, thread id: 450
+Hello from thr_func, thread id: 452
+Hello from thr_func, thread id: 451
+Hello from thr_func, thread id: 453
+Hello from thr_func, thread id: 454
+Hello from thr_func, thread id: 455
+Hello from thr_func, thread id: 456
+Hello from thr_func, thread id: 457
+Hello from thr_func, thread id: 459
+Hello from thr_func, thread id: 458
+Hello from thr_func, thread id: 460
+Hello from thr_func, thread id: 461
+Hello from thr_func, thread id: 462
+Hello from thr_func, thread id: 463
+Hello from thr_func, thread id: 464
+Hello from thr_func, thread id: 465
+Hello from thr_func, thread id: 466
+Hello from thr_func, thread id: 468
+Hello from thr_func, thread id: 467
+Hello from thr_func, thread id: 469
+Hello from thr_func, thread id: 470
+Hello from thr_func, thread id: 471
+Hello from thr_func, thread id: 472
+Hello from thr_func, thread id: 473
+Hello from thr_func, thread id: 474
+Hello from thr_func, thread id: 475
+Hello from thr_func, thread id: 476
+Hello from thr_func, thread id: 477
+Hello from thr_func, thread id: 478
+Hello from thr_func, thread id: 479
+Hello from thr_func, thread id: 480
+Hello from thr_func, thread id: 481
+Hello from thr_func, thread id: 482
+Hello from thr_func, thread id: 484
+Hello from thr_func, thread id: 485
+Hello from thr_func, thread id: 483
+Hello from thr_func, thread id: 486
+Hello from thr_func, thread id: 487
+Hello from thr_func, thread id: 489
+Hello from thr_func, thread id: 490
+Hello from thr_func, thread id: 488
+Hello from thr_func, thread id: 491
+Hello from thr_func, thread id: 492
+Hello from thr_func, thread id: 493
+Hello from thr_func, thread id: 494
+Hello from thr_func, thread id: 495
+Hello from thr_func, thread id: 496
+Hello from thr_func, thread id: 497
+Hello from thr_func, thread id: 498
+Hello from thr_func, thread id: 499
+thread 0 exited loop after 31 secs with 10.074839 Mbps
+thread 226 exited loop after 31 secs with 10.074839 Mbps
+thread 291 exited loop after 31 secs with 10.074839 Mbps
+thread 216 exited loop after 31 secs with 10.074839 Mbps
+thread 55 exited loop after 31 secs with 10.074839 Mbps
+thread 6 exited loop after 31 secs with 10.074839 Mbps
+thread 255 exited loop after 31 secs with 10.074839 Mbps
+thread 64 exited loop after 31 secs with 10.074839 Mbps
+thread 110 exited loop after 31 secs with 10.074839 Mbps
+thread 48 exited loop after 31 secs with 10.074839 Mbps
+thread 2 exited loop after 31 secs with 10.074839 Mbps
+thread 52 exited loop after 31 secs with 10.074839 Mbps
+thread 40 exited loop after 31 secs with 10.074839 Mbps
+thread 276 exited loop after 31 secs with 10.074839 Mbps
+thread 123 exited loop after 31 secs with 10.074839 Mbps
+thread 27 exited loop after 31 secs with 10.074839 Mbps
+thread 14 exited loop after 31 secs with 10.074839 Mbps
+thread 37 exited loop after 31 secs with 10.074839 Mbps
+thread 22 exited loop after 31 secs with 10.074839 Mbps
+thread 210 exited loop after 31 secs with 10.074839 Mbps
+thread 88 exited loop after 31 secs with 10.074839 Mbps
+thread 21 exited loop after 31 secs with 10.074839 Mbps
+thread 13 exited loop after 31 secs with 10.074839 Mbps
+thread 309 exited loop after 31 secs with 10.074839 Mbps
+thread 70 exited loop after 31 secs with 10.074839 Mbps
+thread 11 exited loop after 31 secs with 10.074839 Mbps
+thread 132 exited loop after 31 secs with 10.074839 Mbps
+thread 362 exited loop after 31 secs with 10.074839 Mbps
+thread 4 exited loop after 31 secs with 10.074839 Mbps
+thread 50 exited loop after 31 secs with 10.074839 Mbps
+thread 246 exited loop after 31 secs with 10.074839 Mbps
+thread 76 exited loop after 31 secs with 10.074839 Mbps
+thread 104 exited loop after 31 secs with 10.074839 Mbps
+thread 39 exited loop after 31 secs with 10.074839 Mbps
+thread 19 exited loop after 31 secs with 10.074839 Mbps
+thread 1 exited loop after 31 secs with 10.074839 Mbps
+thread 222 exited loop after 31 secs with 10.074839 Mbps
+thread 107 exited loop after 31 secs with 10.074839 Mbps
+thread 162 exited loop after 31 secs with 10.074839 Mbps
+thread 62 exited loop after 31 secs with 10.074839 Mbps
+thread 399 exited loop after 31 secs with 10.074839 Mbps
+thread 57 exited loop after 31 secs with 10.074839 Mbps
+thread 79 exited loop after 31 secs with 10.074839 Mbps
+thread 35 exited loop after 31 secs with 10.074839 Mbps
+thread 120 exited loop after 31 secs with 10.074839 Mbps
+thread 29 exited loop after 31 secs with 10.074839 Mbps
+thread 182 exited loop after 31 secs with 10.074839 Mbps
+thread 241 exited loop after 31 secs with 10.074839 Mbps
+thread 230 exited loop after 31 secs with 10.074839 Mbps
+thread 18 exited loop after 31 secs with 10.074839 Mbps
+thread 305 exited loop after 31 secs with 10.074839 Mbps
+thread 136 exited loop after 31 secs with 10.074839 Mbps
+thread 101 exited loop after 31 secs with 10.074839 Mbps
+thread 341 exited loop after 31 secs with 10.074839 Mbps
+thread 8 exited loop after 31 secs with 10.074839 Mbps
+thread 415 exited loop after 31 secs with 10.074839 Mbps
+thread 100 exited loop after 31 secs with 10.074839 Mbps
+thread 237 exited loop after 31 secs with 10.074839 Mbps
+thread 53 exited loop after 31 secs with 10.074839 Mbps
+thread 385 exited loop after 31 secs with 10.074839 Mbps
+thread 267 exited loop after 31 secs with 10.074839 Mbps
+thread 12 exited loop after 31 secs with 10.074839 Mbps
+thread 60 exited loop after 31 secs with 10.074839 Mbps
+thread 154 exited loop after 31 secs with 10.074839 Mbps
+thread 272 exited loop after 31 secs with 10.074839 Mbps
+thread 41 exited loop after 31 secs with 10.074839 Mbps
+thread 369 exited loop after 31 secs with 10.074839 Mbps
+thread 128 exited loop after 31 secs with 10.074839 Mbps
+thread 126 exited loop after 31 secs with 10.074839 Mbps
+thread 125 exited loop after 31 secs with 10.074839 Mbps
+thread 340 exited loop after 31 secs with 10.074839 Mbps
+thread 106 exited loop after 31 secs with 10.074839 Mbps
+thread 334 exited loop after 31 secs with 10.074839 Mbps
+thread 114 exited loop after 31 secs with 10.074839 Mbps
+thread 281 exited loop after 31 secs with 10.074839 Mbps
+thread 389 exited loop after 31 secs with 10.074839 Mbps
+thread 407 exited loop after 31 secs with 10.074839 Mbps
+thread 317 exited loop after 31 secs with 10.074839 Mbps
+thread 361 exited loop after 31 secs with 10.074839 Mbps
+thread 119 exited loop after 31 secs with 10.074839 Mbps
+thread 96 exited loop after 31 secs with 10.074839 Mbps
+thread 205 exited loop after 31 secs with 10.074839 Mbps
+thread 133 exited loop after 31 secs with 10.074839 Mbps
+thread 442 exited loop after 31 secs with 10.074839 Mbps
+thread 330 exited loop after 31 secs with 10.074839 Mbps
+thread 401 exited loop after 31 secs with 10.074839 Mbps
+thread 338 exited loop after 31 secs with 10.074839 Mbps
+thread 118 exited loop after 31 secs with 10.074839 Mbps
+thread 94 exited loop after 31 secs with 10.074839 Mbps
+thread 95 exited loop after 31 secs with 10.074839 Mbps
+thread 20 exited loop after 31 secs with 10.074839 Mbps
+thread 143 exited loop after 31 secs with 10.074839 Mbps
+thread 116 exited loop after 31 secs with 10.074839 Mbps
+thread 289 exited loop after 31 secs with 10.074839 Mbps
+thread 113 exited loop after 31 secs with 10.074839 Mbps
+thread 382 exited loop after 31 secs with 10.074839 Mbps
+thread 411 exited loop after 31 secs with 10.074839 Mbps
+thread 394 exited loop after 31 secs with 10.074839 Mbps
+thread 479 exited loop after 31 secs with 10.074839 Mbps
+thread 153 exited loop after 31 secs with 10.074839 Mbps
+thread 403 exited loop after 31 secs with 10.074839 Mbps
+thread 183 exited loop after 31 secs with 10.074839 Mbps
+thread 28 exited loop after 31 secs with 10.074839 Mbps
+thread 32 exited loop after 31 secs with 10.074839 Mbps
+thread 49 exited loop after 31 secs with 10.074839 Mbps
+thread 141 exited loop after 31 secs with 10.074839 Mbps
+thread 140 exited loop after 31 secs with 10.074839 Mbps
+thread 9 exited loop after 31 secs with 10.074839 Mbps
+thread 297 exited loop after 31 secs with 10.074839 Mbps
+thread 147 exited loop after 31 secs with 10.074839 Mbps
+thread 164 exited loop after 31 secs with 10.074839 Mbps
+thread 178 exited loop after 31 secs with 10.074839 Mbps
+thread 485 exited loop after 31 secs with 10.074839 Mbps
+thread 436 exited loop after 31 secs with 10.074839 Mbps
+thread 152 exited loop after 31 secs with 10.074839 Mbps
+thread 145 exited loop after 31 secs with 10.074839 Mbps
+thread 151 exited loop after 31 secs with 10.074839 Mbps
+thread 148 exited loop after 31 secs with 10.074839 Mbps
+thread 193 exited loop after 31 secs with 10.074839 Mbps
+thread 54 exited loop after 31 secs with 10.074839 Mbps
+thread 283 exited loop after 31 secs with 10.074839 Mbps
+thread 117 exited loop after 31 secs with 10.074839 Mbps
+thread 44 exited loop after 31 secs with 10.074839 Mbps
+thread 447 exited loop after 31 secs with 10.074839 Mbps
+thread 474 exited loop after 31 secs with 10.074839 Mbps
+thread 450 exited loop after 31 secs with 10.074839 Mbps
+thread 177 exited loop after 31 secs with 10.074839 Mbps
+thread 495 exited loop after 31 secs with 10.074839 Mbps
+thread 155 exited loop after 31 secs with 10.074839 Mbps
+thread 23 exited loop after 31 secs with 10.074839 Mbps
+thread 457 exited loop after 31 secs with 10.074839 Mbps
+thread 68 exited loop after 31 secs with 10.074839 Mbps
+thread 497 exited loop after 31 secs with 10.074839 Mbps
+thread 468 exited loop after 31 secs with 10.074839 Mbps
+thread 189 exited loop after 31 secs with 10.074839 Mbps
+thread 139 exited loop after 31 secs with 10.074839 Mbps
+thread 208 exited loop after 31 secs with 10.074839 Mbps
+thread 478 exited loop after 31 secs with 10.074839 Mbps
+thread 188 exited loop after 31 secs with 10.074839 Mbps
+thread 156 exited loop after 31 secs with 10.074839 Mbps
+thread 138 exited loop after 31 secs with 10.074839 Mbps
+thread 422 exited loop after 31 secs with 10.074839 Mbps
+thread 194 exited loop after 31 secs with 10.074839 Mbps
+thread 190 exited loop after 31 secs with 10.074839 Mbps
+thread 219 exited loop after 31 secs with 10.074839 Mbps
+thread 33 exited loop after 31 secs with 10.074839 Mbps
+thread 432 exited loop after 31 secs with 10.074839 Mbps
+thread 157 exited loop after 31 secs with 10.074839 Mbps
+thread 202 exited loop after 31 secs with 10.074839 Mbps
+thread 10 exited loop after 31 secs with 10.074839 Mbps
+thread 466 exited loop after 31 secs with 10.074839 Mbps
+thread 223 exited loop after 31 secs with 10.074839 Mbps
+thread 169 exited loop after 31 secs with 10.074839 Mbps
+thread 207 exited loop after 31 secs with 10.074839 Mbps
+thread 206 exited loop after 31 secs with 10.074839 Mbps
+thread 56 exited loop after 31 secs with 10.074839 Mbps
+thread 224 exited loop after 31 secs with 10.074839 Mbps
+thread 203 exited loop after 31 secs with 10.074839 Mbps
+thread 186 exited loop after 31 secs with 10.074839 Mbps
+thread 220 exited loop after 31 secs with 10.074839 Mbps
+thread 492 exited loop after 31 secs with 10.074839 Mbps
+thread 227 exited loop after 31 secs with 10.074839 Mbps
+thread 197 exited loop after 31 secs with 10.074839 Mbps
+thread 196 exited loop after 31 secs with 10.074839 Mbps
+thread 198 exited loop after 31 secs with 10.074839 Mbps
+thread 209 exited loop after 31 secs with 10.074839 Mbps
+thread 185 exited loop after 31 secs with 10.074839 Mbps
+thread 471 exited loop after 31 secs with 10.074839 Mbps
+thread 166 exited loop after 31 secs with 10.074839 Mbps
+thread 214 exited loop after 31 secs with 10.074839 Mbps
+thread 413 exited loop after 31 secs with 10.074839 Mbps
+thread 65 exited loop after 31 secs with 10.074839 Mbps
+thread 97 exited loop after 31 secs with 10.074839 Mbps
+thread 364 exited loop after 31 secs with 10.074839 Mbps
+thread 187 exited loop after 31 secs with 10.074839 Mbps
+thread 262 exited loop after 31 secs with 10.074839 Mbps
+thread 47 exited loop after 31 secs with 10.074839 Mbps
+thread 232 exited loop after 31 secs with 10.074839 Mbps
+thread 228 exited loop after 31 secs with 10.074839 Mbps
+thread 225 exited loop after 31 secs with 10.074839 Mbps
+thread 201 exited loop after 31 secs with 10.074839 Mbps
+thread 15 exited loop after 31 secs with 10.074839 Mbps
+thread 59 exited loop after 31 secs with 10.074839 Mbps
+thread 215 exited loop after 31 secs with 10.074839 Mbps
+thread 243 exited loop after 31 secs with 10.074839 Mbps
+thread 242 exited loop after 31 secs with 10.074839 Mbps
+thread 356 exited loop after 31 secs with 10.074839 Mbps
+thread 72 exited loop after 31 secs with 10.074839 Mbps
+thread 31 exited loop after 31 secs with 10.074839 Mbps
+thread 381 exited loop after 31 secs with 10.074839 Mbps
+thread 268 exited loop after 31 secs with 10.074839 Mbps
+thread 74 exited loop after 31 secs with 10.074839 Mbps
+thread 73 exited loop after 31 secs with 10.074839 Mbps
+thread 249 exited loop after 31 secs with 10.074839 Mbps
+thread 167 exited loop after 31 secs with 10.074839 Mbps
+thread 263 exited loop after 31 secs with 10.074839 Mbps
+thread 251 exited loop after 31 secs with 10.074839 Mbps
+thread 218 exited loop after 31 secs with 10.074839 Mbps
+thread 282 exited loop after 31 secs with 10.074839 Mbps
+thread 221 exited loop after 31 secs with 10.074839 Mbps
+thread 239 exited loop after 31 secs with 10.074839 Mbps
+thread 240 exited loop after 31 secs with 10.074839 Mbps
+thread 248 exited loop after 31 secs with 10.074839 Mbps
+thread 252 exited loop after 31 secs with 10.074839 Mbps
+thread 271 exited loop after 31 secs with 10.074839 Mbps
+thread 212 exited loop after 31 secs with 10.074839 Mbps
+thread 236 exited loop after 31 secs with 10.074839 Mbps
+thread 235 exited loop after 31 secs with 10.074839 Mbps
+thread 300 exited loop after 31 secs with 10.074839 Mbps
+thread 81 exited loop after 31 secs with 10.074839 Mbps
+thread 273 exited loop after 31 secs with 10.074839 Mbps
+thread 217 exited loop after 31 secs with 10.074839 Mbps
+thread 67 exited loop after 31 secs with 10.074839 Mbps
+thread 69 exited loop after 31 secs with 10.074839 Mbps
+thread 175 exited loop after 31 secs with 10.074839 Mbps
+thread 80 exited loop after 31 secs with 10.074839 Mbps
+thread 293 exited loop after 31 secs with 10.074839 Mbps
+thread 84 exited loop after 31 secs with 10.074839 Mbps
+thread 195 exited loop after 31 secs with 10.074839 Mbps
+thread 234 exited loop after 31 secs with 10.074839 Mbps
+thread 259 exited loop after 31 secs with 10.074839 Mbps
+thread 78 exited loop after 31 secs with 10.074839 Mbps
+thread 245 exited loop after 31 secs with 10.074839 Mbps
+thread 270 exited loop after 31 secs with 10.074839 Mbps
+thread 256 exited loop after 31 secs with 10.074839 Mbps
+thread 303 exited loop after 31 secs with 10.074839 Mbps
+thread 277 exited loop after 31 secs with 10.074839 Mbps
+thread 51 exited loop after 31 secs with 10.074839 Mbps
+thread 213 exited loop after 31 secs with 10.074839 Mbps
+thread 90 exited loop after 31 secs with 10.074839 Mbps
+thread 63 exited loop after 31 secs with 10.074839 Mbps
+thread 278 exited loop after 31 secs with 10.074839 Mbps
+thread 16 exited loop after 31 secs with 10.074839 Mbps
+thread 265 exited loop after 31 secs with 10.074839 Mbps
+thread 288 exited loop after 31 secs with 10.074839 Mbps
+thread 306 exited loop after 31 secs with 10.074839 Mbps
+thread 247 exited loop after 31 secs with 10.074839 Mbps
+thread 280 exited loop after 31 secs with 10.074839 Mbps
+thread 302 exited loop after 31 secs with 10.074839 Mbps
+thread 304 exited loop after 31 secs with 10.074839 Mbps
+thread 279 exited loop after 31 secs with 10.074839 Mbps
+thread 3 exited loop after 31 secs with 10.074839 Mbps
+thread 320 exited loop after 31 secs with 10.074839 Mbps
+thread 294 exited loop after 31 secs with 10.074839 Mbps
+thread 326 exited loop after 31 secs with 10.074839 Mbps
+thread 323 exited loop after 31 secs with 10.074839 Mbps
+thread 258 exited loop after 31 secs with 10.074839 Mbps
+thread 7 exited loop after 31 secs with 10.074839 Mbps
+thread 204 exited loop after 31 secs with 10.074839 Mbps
+thread 355 exited loop after 31 secs with 10.074839 Mbps
+thread 321 exited loop after 31 secs with 10.074839 Mbps
+thread 89 exited loop after 31 secs with 10.074839 Mbps
+thread 269 exited loop after 31 secs with 10.074839 Mbps
+thread 349 exited loop after 31 secs with 10.074839 Mbps
+thread 109 exited loop after 31 secs with 10.074839 Mbps
+thread 350 exited loop after 31 secs with 10.074839 Mbps
+thread 284 exited loop after 31 secs with 10.074839 Mbps
+thread 370 exited loop after 31 secs with 10.074839 Mbps
+thread 292 exited loop after 31 secs with 10.074839 Mbps
+thread 333 exited loop after 31 secs with 10.074839 Mbps
+thread 365 exited loop after 31 secs with 10.074839 Mbps
+thread 184 exited loop after 31 secs with 10.074839 Mbps
+thread 359 exited loop after 31 secs with 10.074839 Mbps
+thread 353 exited loop after 31 secs with 10.074839 Mbps
+thread 115 exited loop after 31 secs with 10.074839 Mbps
+thread 264 exited loop after 31 secs with 10.074839 Mbps
+thread 376 exited loop after 31 secs with 10.074839 Mbps
+thread 299 exited loop after 31 secs with 10.074839 Mbps
+thread 461 exited loop after 31 secs with 10.074839 Mbps
+thread 363 exited loop after 31 secs with 10.074839 Mbps
+thread 319 exited loop after 31 secs with 10.074839 Mbps
+thread 93 exited loop after 31 secs with 10.074839 Mbps
+thread 316 exited loop after 31 secs with 10.074839 Mbps
+thread 348 exited loop after 31 secs with 10.074839 Mbps
+thread 98 exited loop after 31 secs with 10.074839 Mbps
+thread 298 exited loop after 31 secs with 10.074839 Mbps
+thread 287 exited loop after 31 secs with 10.074839 Mbps
+thread 357 exited loop after 31 secs with 10.074839 Mbps
+thread 328 exited loop after 31 secs with 10.074839 Mbps
+thread 373 exited loop after 31 secs with 10.074839 Mbps
+thread 339 exited loop after 31 secs with 10.074839 Mbps
+thread 108 exited loop after 31 secs with 10.074839 Mbps
+thread 103 exited loop after 31 secs with 10.074839 Mbps
+thread 112 exited loop after 31 secs with 10.074839 Mbps
+thread 231 exited loop after 31 secs with 10.074839 Mbps
+thread 17 exited loop after 31 secs with 10.074839 Mbps
+thread 5 exited loop after 31 secs with 10.074839 Mbps
+thread 99 exited loop after 31 secs with 10.074839 Mbps
+thread 315 exited loop after 31 secs with 10.074839 Mbps
+thread 91 exited loop after 31 secs with 10.074839 Mbps
+thread 179 exited loop after 31 secs with 10.074839 Mbps
+thread 307 exited loop after 31 secs with 10.074839 Mbps
+thread 286 exited loop after 31 secs with 10.074839 Mbps
+thread 375 exited loop after 31 secs with 10.074839 Mbps
+thread 354 exited loop after 31 secs with 10.074839 Mbps
+thread 345 exited loop after 31 secs with 10.074839 Mbps
+thread 311 exited loop after 31 secs with 10.074839 Mbps
+thread 85 exited loop after 31 secs with 10.074839 Mbps
+thread 380 exited loop after 31 secs with 10.074839 Mbps
+thread 371 exited loop after 31 secs with 10.074839 Mbps
+thread 310 exited loop after 31 secs with 10.074839 Mbps
+thread 379 exited loop after 31 secs with 10.074839 Mbps
+thread 337 exited loop after 31 secs with 10.074839 Mbps
+thread 342 exited loop after 31 secs with 10.074839 Mbps
+thread 121 exited loop after 31 secs with 10.074839 Mbps
+thread 360 exited loop after 31 secs with 10.074839 Mbps
+thread 402 exited loop after 31 secs with 10.074839 Mbps
+thread 318 exited loop after 31 secs with 10.074839 Mbps
+thread 274 exited loop after 31 secs with 10.074839 Mbps
+thread 372 exited loop after 31 secs with 10.074839 Mbps
+thread 261 exited loop after 31 secs with 10.074839 Mbps
+thread 312 exited loop after 31 secs with 10.074839 Mbps
+thread 374 exited loop after 31 secs with 10.074839 Mbps
+thread 266 exited loop after 31 secs with 10.074839 Mbps
+thread 388 exited loop after 31 secs with 10.074839 Mbps
+thread 82 exited loop after 31 secs with 10.074839 Mbps
+thread 368 exited loop after 31 secs with 10.074839 Mbps
+thread 296 exited loop after 31 secs with 10.074839 Mbps
+thread 398 exited loop after 31 secs with 10.074839 Mbps
+thread 352 exited loop after 31 secs with 10.074839 Mbps
+thread 377 exited loop after 31 secs with 10.074839 Mbps
+thread 134 exited loop after 31 secs with 10.074839 Mbps
+thread 343 exited loop after 31 secs with 10.074839 Mbps
+thread 391 exited loop after 31 secs with 10.074839 Mbps
+thread 314 exited loop after 31 secs with 10.074839 Mbps
+thread 332 exited loop after 31 secs with 10.074839 Mbps
+thread 324 exited loop after 31 secs with 10.074839 Mbps
+thread 393 exited loop after 31 secs with 10.074839 Mbps
+thread 331 exited loop after 31 secs with 10.074839 Mbps
+thread 386 exited loop after 31 secs with 10.074839 Mbps
+thread 142 exited loop after 31 secs with 10.074839 Mbps
+thread 412 exited loop after 31 secs with 10.074839 Mbps
+thread 174 exited loop after 31 secs with 10.074839 Mbps
+thread 105 exited loop after 31 secs with 10.074839 Mbps
+thread 358 exited loop after 31 secs with 10.074839 Mbps
+thread 181 exited loop after 31 secs with 10.074839 Mbps
+thread 408 exited loop after 31 secs with 10.074839 Mbps
+thread 409 exited loop after 31 secs with 10.074839 Mbps
+thread 92 exited loop after 31 secs with 10.074839 Mbps
+thread 424 exited loop after 31 secs with 10.074839 Mbps
+thread 301 exited loop after 31 secs with 10.074839 Mbps
+thread 254 exited loop after 31 secs with 10.074839 Mbps
+thread 425 exited loop after 31 secs with 10.074839 Mbps
+thread 336 exited loop after 31 secs with 10.074839 Mbps
+thread 400 exited loop after 31 secs with 10.074839 Mbps
+thread 75 exited loop after 31 secs with 10.074839 Mbps
+thread 335 exited loop after 31 secs with 10.074839 Mbps
+thread 129 exited loop after 31 secs with 10.074839 Mbps
+thread 392 exited loop after 31 secs with 10.074839 Mbps
+thread 387 exited loop after 31 secs with 10.074839 Mbps
+thread 229 exited loop after 31 secs with 10.074839 Mbps
+thread 30 exited loop after 31 secs with 10.074839 Mbps
+thread 233 exited loop after 31 secs with 10.074839 Mbps
+thread 396 exited loop after 31 secs with 10.074839 Mbps
+thread 366 exited loop after 31 secs with 10.074839 Mbps
+thread 290 exited loop after 31 secs with 10.074839 Mbps
+thread 499 exited loop after 31 secs with 10.074839 Mbps
+thread 26 exited loop after 31 secs with 10.074839 Mbps
+thread 329 exited loop after 31 secs with 10.074839 Mbps
+thread 34 exited loop after 31 secs with 10.074839 Mbps
+thread 135 exited loop after 31 secs with 10.074839 Mbps
+thread 417 exited loop after 31 secs with 10.074839 Mbps
+thread 441 exited loop after 31 secs with 10.074839 Mbps
+thread 397 exited loop after 31 secs with 10.074839 Mbps
+thread 344 exited loop after 31 secs with 10.074839 Mbps
+thread 322 exited loop after 31 secs with 10.074839 Mbps
+thread 418 exited loop after 31 secs with 10.074839 Mbps
+thread 443 exited loop after 31 secs with 10.074839 Mbps
+thread 446 exited loop after 31 secs with 10.074839 Mbps
+thread 431 exited loop after 31 secs with 10.074839 Mbps
+thread 130 exited loop after 31 secs with 10.074839 Mbps
+thread 102 exited loop after 31 secs with 10.074839 Mbps
+thread 405 exited loop after 31 secs with 10.074839 Mbps
+thread 390 exited loop after 31 secs with 10.074839 Mbps
+thread 122 exited loop after 31 secs with 10.074839 Mbps
+thread 25 exited loop after 31 secs with 10.074839 Mbps
+thread 192 exited loop after 31 secs with 10.074839 Mbps
+thread 430 exited loop after 31 secs with 10.074839 Mbps
+thread 46 exited loop after 31 secs with 10.074839 Mbps
+thread 257 exited loop after 31 secs with 10.074839 Mbps
+thread 347 exited loop after 31 secs with 10.074839 Mbps
+thread 244 exited loop after 31 secs with 10.074839 Mbps
+thread 146 exited loop after 31 secs with 10.074839 Mbps
+thread 449 exited loop after 31 secs with 10.074839 Mbps
+thread 71 exited loop after 31 secs with 10.074839 Mbps
+thread 423 exited loop after 31 secs with 10.074839 Mbps
+thread 295 exited loop after 31 secs with 10.074839 Mbps
+thread 86 exited loop after 31 secs with 10.074839 Mbps
+thread 124 exited loop after 31 secs with 10.074839 Mbps
+thread 459 exited loop after 31 secs with 10.074839 Mbps
+thread 429 exited loop after 31 secs with 10.074839 Mbps
+thread 395 exited loop after 31 secs with 10.074839 Mbps
+thread 378 exited loop after 31 secs with 10.074839 Mbps
+thread 383 exited loop after 31 secs with 10.074839 Mbps
+thread 452 exited loop after 31 secs with 10.074839 Mbps
+thread 444 exited loop after 31 secs with 10.074839 Mbps
+thread 435 exited loop after 31 secs with 10.074839 Mbps
+thread 440 exited loop after 31 secs with 10.074839 Mbps
+thread 433 exited loop after 31 secs with 10.074839 Mbps
+thread 367 exited loop after 31 secs with 10.074839 Mbps
+thread 275 exited loop after 31 secs with 10.074839 Mbps
+thread 451 exited loop after 31 secs with 10.074839 Mbps
+thread 42 exited loop after 31 secs with 10.074839 Mbps
+thread 406 exited loop after 31 secs with 10.074839 Mbps
+thread 421 exited loop after 31 secs with 10.074839 Mbps
+thread 168 exited loop after 31 secs with 10.074839 Mbps
+thread 455 exited loop after 31 secs with 10.074839 Mbps
+thread 161 exited loop after 31 secs with 10.074839 Mbps
+thread 475 exited loop after 31 secs with 10.074839 Mbps
+thread 38 exited loop after 31 secs with 10.074839 Mbps
+thread 150 exited loop after 31 secs with 10.074839 Mbps
+thread 414 exited loop after 31 secs with 10.074839 Mbps
+thread 467 exited loop after 31 secs with 10.074839 Mbps
+thread 144 exited loop after 31 secs with 10.074839 Mbps
+thread 448 exited loop after 31 secs with 10.074839 Mbps
+thread 159 exited loop after 31 secs with 10.074839 Mbps
+thread 476 exited loop after 31 secs with 10.074839 Mbps
+thread 456 exited loop after 31 secs with 10.074839 Mbps
+thread 491 exited loop after 31 secs with 10.074839 Mbps
+thread 384 exited loop after 31 secs with 10.074839 Mbps
+thread 469 exited loop after 31 secs with 10.074839 Mbps
+thread 477 exited loop after 31 secs with 10.074839 Mbps
+thread 419 exited loop after 31 secs with 10.074839 Mbps
+thread 404 exited loop after 31 secs with 10.074839 Mbps
+thread 158 exited loop after 31 secs with 10.074839 Mbps
+thread 131 exited loop after 31 secs with 10.074839 Mbps
+thread 428 exited loop after 31 secs with 10.074839 Mbps
+thread 470 exited loop after 31 secs with 10.074839 Mbps
+thread 464 exited loop after 31 secs with 10.074839 Mbps
+thread 439 exited loop after 31 secs with 10.074839 Mbps
+thread 410 exited loop after 31 secs with 10.074839 Mbps
+thread 420 exited loop after 31 secs with 10.074839 Mbps
+thread 480 exited loop after 31 secs with 10.074839 Mbps
+thread 416 exited loop after 31 secs with 10.074839 Mbps
+thread 498 exited loop after 31 secs with 10.074839 Mbps
+thread 458 exited loop after 31 secs with 10.074839 Mbps
+thread 438 exited loop after 31 secs with 10.074839 Mbps
+thread 351 exited loop after 31 secs with 10.074839 Mbps
+thread 445 exited loop after 31 secs with 10.074839 Mbps
+thread 434 exited loop after 31 secs with 10.074839 Mbps
+thread 463 exited loop after 31 secs with 10.074839 Mbps
+thread 285 exited loop after 31 secs with 10.074839 Mbps
+thread 473 exited loop after 31 secs with 10.074839 Mbps
+thread 454 exited loop after 31 secs with 10.074839 Mbps
+thread 426 exited loop after 31 secs with 10.074839 Mbps
+thread 180 exited loop after 31 secs with 10.074839 Mbps
+thread 260 exited loop after 31 secs with 10.074839 Mbps
+thread 483 exited loop after 31 secs with 10.074839 Mbps
+thread 165 exited loop after 31 secs with 10.074839 Mbps
+thread 453 exited loop after 31 secs with 10.074839 Mbps
+thread 160 exited loop after 31 secs with 10.074839 Mbps
+thread 493 exited loop after 31 secs with 10.074839 Mbps
+thread 238 exited loop after 31 secs with 10.074839 Mbps
+thread 199 exited loop after 31 secs with 10.074839 Mbps
+thread 149 exited loop after 31 secs with 10.074839 Mbps
+thread 494 exited loop after 31 secs with 10.074839 Mbps
+thread 489 exited loop after 31 secs with 10.074839 Mbps
+thread 462 exited loop after 31 secs with 10.074839 Mbps
+thread 472 exited loop after 31 secs with 10.074839 Mbps
+thread 488 exited loop after 31 secs with 10.074839 Mbps
+thread 83 exited loop after 31 secs with 10.074839 Mbps
+thread 460 exited loop after 31 secs with 10.074839 Mbps
+thread 484 exited loop after 31 secs with 10.074839 Mbps
+thread 170 exited loop after 31 secs with 10.074839 Mbps
+thread 490 exited loop after 31 secs with 10.074839 Mbps
+thread 127 exited loop after 31 secs with 10.074839 Mbps
+thread 487 exited loop after 31 secs with 10.074839 Mbps
+thread 43 exited loop after 31 secs with 10.074839 Mbps
+thread 482 exited loop after 31 secs with 10.074839 Mbps
+thread 250 exited loop after 31 secs with 10.074839 Mbps
+thread 176 exited loop after 31 secs with 10.074839 Mbps
+thread 325 exited loop after 31 secs with 10.074839 Mbps
+thread 346 exited loop after 31 secs with 10.074839 Mbps
+thread 171 exited loop after 31 secs with 10.074839 Mbps
+thread 496 exited loop after 31 secs with 10.074839 Mbps
+thread 211 exited loop after 31 secs with 10.074839 Mbps
+thread 172 exited loop after 31 secs with 10.074839 Mbps
+thread 163 exited loop after 31 secs with 10.074839 Mbps
+thread 111 exited loop after 31 secs with 10.074839 Mbps
+thread 486 exited loop after 31 secs with 10.074839 Mbps
+thread 308 exited loop after 31 secs with 10.074839 Mbps
+thread 45 exited loop after 31 secs with 10.074839 Mbps
+thread 36 exited loop after 31 secs with 10.074839 Mbps
+thread 427 exited loop after 31 secs with 10.074839 Mbps
+thread 77 exited loop after 31 secs with 10.074839 Mbps
+thread 465 exited loop after 31 secs with 10.074839 Mbps
+thread 24 exited loop after 31 secs with 10.074839 Mbps
+thread 61 exited loop after 31 secs with 10.074839 Mbps
+thread 191 exited loop after 31 secs with 10.074839 Mbps
+thread 173 exited loop after 31 secs with 10.074839 Mbps
+thread 58 exited loop after 31 secs with 10.074839 Mbps
+thread 313 exited loop after 31 secs with 10.074839 Mbps
+thread 327 exited loop after 31 secs with 10.074839 Mbps
+thread 481 exited loop after 31 secs with 10.074839 Mbps
+thread 253 exited loop after 31 secs with 10.074839 Mbps
+thread 437 exited loop after 31 secs with 10.074839 Mbps
+thread 137 exited loop after 31 secs with 10.074839 Mbps
+thread 87 exited loop after 31 secs with 10.074839 Mbps
+thread 200 exited loop after 31 secs with 10.074839 Mbps
+thread 66 exited loop after 31 secs with 10.074839 Mbps

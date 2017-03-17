@@ -1,0 +1,18 @@
+\begin{tabular}{|c|r|c|r|c|r|c|r|} \hline
+\multicolumn{4}{|c|}{Capture 1} & \multicolumn{4}{|c|}{Capture 2}\\
+\multicolumn{2}{|c|}{EC2} & \multicolumn{2}{|c|}{Azure} & \multicolumn{2}{|c|}{EC2} & \multicolumn{2}{|c|}{Azure} \\
+\hline
+Common Name & traffic  \% & Common Name & traffic  \% & Common Name & traffic  \% & Common Name & traffic  \% \\ \hline
+*.dropbox.com &  45.99 & 	outlook.com & 4.27 & *.dropbox.com & 21.98 & view.atdmt.com & 46.54 \\
+cbp-us.nccp.netflix.com & 0.51 & *.storage.msn.com & 0.82 & api.bitcasa.com & 8.83 & mail.live.com & 20.07 \\
+*.sharefile.com &  0.28  & www.update.microsoft.com & 0.50 & *.nccp.netflix.com & 4.81 & update.microsoft.com & 3.8 \\
+www.zoolz.com & 0.25 & *.mail.services.live.com & 0.41 & cbp-us.nccp.netflix.com & 2.09 & *.blu.livefilestore.com & 1.24 \\
+*.foursquare.com & 0.19 & storage.mesh.com & 0.17 & api.p04.simcity.com & 1.73 & pop3.live.com & 1.034 \\
+*.cloud.vimeo.com & 0.17 & *.mesh.com & 0.15 & api.p01.simcity.com & 1.66 & images.partner.windowsphone.com & 0.66 \\
+support.sourcefire.com & 0.15 & *.hotmail.com & 0.11 & *.cloud.netflix.net & 0.31 & *.mesh.com & 0.64 \\
+*.copperegg.com & 0.13 & mail.live.com & 0.10 & api.p13.simcity.com & 0.2 & *.mail.services.live.com & 0.47 \\
+*.syncplicity.com & 0.06 & *.blob.core.windows.net & 0.09 & api.p09.simcity.com & 0.28 & office.microsoft.com & 0.33 \\
+*.cafe.zynga.com & 0.0 & view.atdmt.com & 0.08 & api.p03.simcity.com & 0.20 & *.gateway.messenger.live.com & 0.25 \\
+\hline
+\end{tabular}
+

@@ -1,0 +1,13 @@
+\subsubsection{Rule Reordering}
+\label{mazu:optimal}
+Our measurements show that given rules of different priorities to be inserted at
+a switch, the ``optimal'' order of rule insertion varies with switch platform
+because of the difference in architecture and the workload the hardware is
+optimized for. For example, for Intel, the optimal order is to insert
+rules in \emph{increasing} order of priority, whereas the \emph{opposite} is
+true for Broadcom chip switches. Given this observation, rule reordering controls the actual rule
+insertion using the pattern that is optimal for the switch. 
+
+We assume one-shot consistent updates~\cite{reitblatt2012abstractions} are in use. In this case, new rules will not take effect unless all of them are installed. Therefore, RR can optimize the ordering without causing temporal policy violations. 
+This technique can also be adapted for other update schemes~\cite{mahajan2013consistent}.
+

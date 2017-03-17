@@ -1,0 +1,40 @@
+Dec 29, 2015
+
+summary of "by how much" DCTCP and Ours can reduce FCTs
+
+1. concurrent stride workload
+		50th		99th		99.9th
+method   
+Default cubic   1032            3128            13119
+
+DCTCP	        237             509             1193
+
+Ours		245             474             887
+
+2. Shuffle workload
+		50th		99th		99.9th
+method
+Default cubic	806             5157            13346
+
+DCTCP           226             4155            6031
+
+Ours            234             2671            3545
+
+
+3. Trace-driven - web searching workload (from DCTCP paper)
+		50th		99th		99.9th	
+method
+Default cubic   1586            53880           99718
+
+DCTCP           362             18569           49929
+
+Ours            374             23160           45110
+
+4. Trace-driven - data mining workload (from VL2 paper and CONGA paper)
+		50th		99th		99.9th	
+method
+Default cubic	1221            69373		223357
+
+DCTCP		340		41119		142194
+
+Ours		324		36230		104197

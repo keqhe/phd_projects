@@ -1,0 +1,63 @@
+\section{Background and Motivation}
+\label{background}
+
+\subsection{Performance Isolation}
+Datacenter providers must find ways to isolate the performance of different
+tenants and applications so that one tenant or application cannot take
+an unfair share of common resources, like CPU, memory and the network. And while
+most providers (Amazon EC2, Microsoft Azure, Google Cloud Platform) provide logical
+clusters for high-bandwidth, low-latency networking and dedicated instances, there still does not 
+exist strict bandwidth guarentees over the network fabric. The absence of
+guarentees means that tenant cross-traffic can induce delays due to
+the switch's queue building up. This motivates the need for a simple, modular
+scheme to reduce congestion in the network. The scheme should work in the absence
+of any performance isolation schemes, and also with limited and even fine-grained
+performance isolation. Our scheme is designed to easily drop in to current infrastructures
+and performance isolation schemes. Say our scheme is light-weight and sits in virtual 
+switch. 
+
+Even though fine-grained network performance isolation is not widely adopted, there
+has been significant studies into how to allocate network bandwidth in datacenter networks.
+These schemes aim to either guarentee bandwidth for tenants or find ways to proportionally
+allocate network resources. Their goals are achieved by either using sophiscated queueing 
+techniques in the network switch or rate-limiting on end-hosts. Switch implementations
+are typically difficult to scale. End-host rate-limiters typically focus on throughput, but
+do not focus on latency. For example, CUBIC in incast has the same throughput as DCTCP, but the
+latencies are much different because CUBIC fills the switch queues and DCTCP can proactively
+avoid switch build-up. In order to provide low latency, such schemes usually provide 
+bandwidth headroom of 5-10\%, reduce rates when line-rate is nearing or sacriface small amount
+of bandwidth (probalby fits with first). Doing so is unnecessary if we have an appropiate
+transport congestion control algorith, as DCTCP has been shown to achieve line-rate while
+keeping queues low. Hence, our scheme of implementing congestion control in OVS is largely
+complimentary to prior bandwidth allocation schemes. The schemes can provide upper-bounds
+on the sending rates of flows or tenants in the network and the actual transport congestion
+control can be hanled by our scheme. Need to talk about how using
+rate-limiters have has high overhead and using windowing based scheme is much simpler? Provide
+a footnote about Seawall here to forward reference discussion to related works? Probably need
+to hit on fact that we don't change VMs, have tight control loop and low-cost, scalable way
+to implement rate-limiting.
+ 
+
+
+
+\subsection{Why Transport Enforcement?}
+
+\subsection{TCP Windowing}
+Initially, TCP only has \rwnd{} to achieve flow control 
+(i.e., prevent sender from overflowing receiver's buffer).
+In 1988, Jacobson~\cite{jacobson1988congestion} identifed the causes of ``congestion collapse''
+and added \cwnd{} and congestion avoidance and control algorithms to fix the issue for the Internet.
+In the datacenter network environment 
+(hypervisors, containers\todo{is this correct?}, 
+and switches owned by the cloud provider; VMs rented to customers), 
+\rwnd{} can be repurposed to achieve two goals---
+flow control and ``transport enforcement'', in one single parameter.
+
+\subsection{Virtualization \& Virtual Switch}
+Open vSwitch (OVS)~\cite{ovs-website}, Cisco Application Virtual Switch~\cite{cisco-avs}, 
+and VALE~\cite{rizzo2012vale}.
+zOVN~\cite{crisan2013got} identified the packet loss problem in virtual networks and
+proposed zVALE virtual switch to achieve lossless overlay virtual networks.
+Open vSwitch (OVS) acceleration in the NIC~\cite{cavium-nic,netronome-nic}.
+
+Also, link with Microsoft's ``end-host SDN'' concept---see SIGCOMM'15 and ONS keynote..
